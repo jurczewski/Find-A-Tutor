@@ -5,8 +5,4 @@
     <RootNamespace>Find_A_Tutor.Core</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
-
 </Project>

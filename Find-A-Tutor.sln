@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find-A-Tutor.Api", "Find-A-Tutor.Api\Find-A-Tutor.Api.csproj", "{64BD324D-567E-4F65-9644-25B516AB5A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Find-A-Tutor.Api", "Find-A-Tutor.Api\Find-A-Tutor.Api.csproj", "{64BD324D-567E-4F65-9644-25B516AB5A83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find-A-Tutor.Core", "Find-A-Tutor.Core\Find-A-Tutor.Core.csproj", "{81344484-FC17-4E0A-B385-B4745913D79E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Find-A-Tutor.Core", "Find-A-Tutor.Core\Find-A-Tutor.Core.csproj", "{81344484-FC17-4E0A-B385-B4745913D79E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find-A-Tutor.Infrastructure", "Find-A-Tutor.Infrastructure\Find-A-Tutor.Infrastructure.csproj", "{3226B958-F20B-4E63-8074-E0B9C1347A88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Find-A-Tutor.Infrastructure", "Find-A-Tutor.Infrastructure\Find-A-Tutor.Infrastructure.csproj", "{3226B958-F20B-4E63-8074-E0B9C1347A88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A7F8ABAD-E35F-457A-8DBE-78524AEB61C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{64BD324D-567E-4F65-9644-25B516AB5A83} = {A7F8ABAD-E35F-457A-8DBE-78524AEB61C1}
+		{81344484-FC17-4E0A-B385-B4745913D79E} = {A7F8ABAD-E35F-457A-8DBE-78524AEB61C1}
+		{3226B958-F20B-4E63-8074-E0B9C1347A88} = {A7F8ABAD-E35F-457A-8DBE-78524AEB61C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {852D05A9-7AC6-4497-9D74-78F6DBB140C3}
