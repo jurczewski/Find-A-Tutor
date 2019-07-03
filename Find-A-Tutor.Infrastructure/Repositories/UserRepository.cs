@@ -30,7 +30,6 @@ namespace Find_A_Tutor.Infrastructure.Repositories
 
         public async Task UpdateAsync(User user)
         {
-            //todo: Update method
             await Task.CompletedTask;
         }
 
