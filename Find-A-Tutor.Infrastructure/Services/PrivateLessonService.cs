@@ -34,7 +34,8 @@ namespace Find_A_Tutor.Infrastructure.Services
 
         public async Task<IEnumerable<PrivateLessonDTO>> BrowseAsync(string description = "")
         {
-            throw new NotImplementedException();
+            var privateLesson = await _privateLessonRepository.BrowseAsync(description);
+            return _mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson);
         }
         public async Task CreateAsync(Guid studnetId, string name, DateTime relevantTo, string description, SchoolSubjectDTO subject)
         {

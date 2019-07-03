@@ -18,12 +18,12 @@ namespace Find_A_Tutor.Core.Domain
 
         protected User() { }
 
-        public User(Guid id, string role, string name, string email, string password)
+        public User(Guid id, string role, string firstName, string lastName, string email, string password)
         {
             Id = id;
             SetRole(role);
-            SetFirstName(name);
-            SetLastName(name);
+            SetFirstName(firstName);
+            SetLastName(lastName);
             SetEmail(email);
             SetPassword(password);
             CreatedAt = DateTime.UtcNow;
