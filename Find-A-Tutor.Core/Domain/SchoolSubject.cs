@@ -15,6 +15,7 @@
         Polish = 10,
         English = 11,
         French = 12,
-        German = 13
+        German = 13,
+        Other = 99
     }
 }

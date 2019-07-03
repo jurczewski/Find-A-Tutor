@@ -41,7 +41,6 @@ namespace Find_A_Tutor.Infrastructure.Repositories
         }
         public async Task UpdateAsync(PrivateLesson privateLesson)
         {
-            //todo: Update method
             await Task.CompletedTask;
         }
 

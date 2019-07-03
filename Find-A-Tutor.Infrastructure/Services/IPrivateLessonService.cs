@@ -11,10 +11,10 @@ namespace Find_A_Tutor.Infrastructure.Services
         Task<PrivateLessonDTO> GetAsync(Guid id);
         Task<PrivateLessonDTO> GetAsyncBySubject(SchoolSubjectDTO name);
         Task<IEnumerable<PrivateLessonDTO>> BrowseAsync(string description = "");
-        Task CreateAsync(Guid studnetId, string name, DateTime relevantTo, string description, SchoolSubjectDTO subject);
+        Task CreateAsync(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubjectDTO subject);
         Task UpdateAsync(Guid id, string description);
         Task DeleteAsync(Guid id);
-        Task Take(Guid id, Guid tutor);
-        Task Cancel(Guid id);
+        Task AssignTutor(Guid id, Guid tutor);
+        Task RemoveAssignedTutor(Guid id);
     }
 }

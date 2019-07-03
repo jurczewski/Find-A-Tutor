@@ -2,7 +2,7 @@
 {
     public enum SchoolSubjectDTO
     {
-        Mathematics = 0,
+        Mathematics = 0, //Algebra, Geometry?
         Science = 1,
         Biology = 2,
         Physics = 3,
@@ -15,6 +15,7 @@
         Polish = 10,
         English = 11,
         French = 12,
-        German = 13
+        German = 13,
+        Other = 99
     }
 }
