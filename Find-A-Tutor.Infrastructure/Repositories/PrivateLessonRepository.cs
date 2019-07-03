@@ -11,7 +11,9 @@ namespace Find_A_Tutor.Infrastructure.Repositories
     {
         private static readonly ISet<PrivateLesson> _privateLessons = new HashSet<PrivateLesson>()
         {
-            new PrivateLesson(new Guid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(14), "Pilnie potrzbne korepetycje z szeregów. Poziom studiów.", SchoolSubject.Mathematics)
+            new PrivateLesson(new Guid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(14), "Pilnie potrzebne korepetycje z szeregów. Poziom studiów.", SchoolSubject.Mathematics),
+            new PrivateLesson(new Guid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(7), "Potrzebne pomoc z historią polski w wieku XVI", SchoolSubject.History),
+            new PrivateLesson(new Guid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(3), "Przygotowanie do matury - chemia", SchoolSubject.Chemistry)
     };
 
         public async Task<PrivateLesson> GetAsync(Guid id)
