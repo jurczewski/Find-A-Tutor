@@ -14,7 +14,7 @@ namespace Find_A_Tutor.Infrastructure.Services
         Task CreateAsync(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubjectDTO subject);
         Task UpdateAsync(Guid id, string description);
         Task DeleteAsync(Guid id);
-        Task AssignTutor(Guid id, Guid tutor);
+        Task AssignTutor(Guid id, Guid tutorId);
         Task RemoveAssignedTutor(Guid id);
     }
 }

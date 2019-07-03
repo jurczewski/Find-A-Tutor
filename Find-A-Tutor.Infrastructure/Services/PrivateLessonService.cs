@@ -12,11 +12,13 @@ namespace Find_A_Tutor.Infrastructure.Services
     public class PrivateLessonService : IPrivateLessonService
     {
         private readonly IPrivateLessonRepository _privateLessonRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public PrivateLessonService(IPrivateLessonRepository privateLessonRepository, IMapper mapper)
+        public PrivateLessonService(IPrivateLessonRepository privateLessonRepository, IUserRepository userRepository, IMapper mapper)
         {
             _privateLessonRepository = privateLessonRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -65,16 +67,16 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
             await _privateLessonRepository.DeleteAsync(privateLesson);
         }
-        public async Task AssignTutor(Guid id, Guid tutor)
+        public async Task AssignTutor(Guid id, Guid tutorId)
         {
-            //var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
-            //var tutor = await _userRepository.GetOrFailAsync(id);
-            //privateLesson.Take(tutor);
-            throw new NotImplementedException();
+            var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
+            var tutor = await _userRepository.GetOrFailAsync(id);
+            privateLesson.AssignTutor(tutor);
         }
         public async Task RemoveAssignedTutor(Guid id)
         {
-            throw new NotImplementedException();
+            var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
+            privateLesson.RemoveAssignedTutor();
         }
     }
 }
