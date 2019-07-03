@@ -20,10 +20,10 @@ namespace Find_A_Tutor.Core.Domain
         {
             Id = id;
             StudnetId = studnetId;
+            CreatedAt = DateTime.UtcNow;
             SetRelevantToDate(relevantTo);
             SetDesctiption(description);
             Subject = subject;
-            CreatedAt = DateTime.UtcNow;
             UpdateAt = DateTime.UtcNow;
             IsPaid = false;
             IsDone = false;
@@ -41,7 +41,7 @@ namespace Find_A_Tutor.Core.Domain
 
         public void SetRelevantToDate(DateTime relevantTo)
         {
-            if (RelevantTo >= CreatedAt)
+            if (CreatedAt >= relevantTo)
             {
                 throw new Exception($"Private lesson must have a relevent-to date greater than created date.");
             }
