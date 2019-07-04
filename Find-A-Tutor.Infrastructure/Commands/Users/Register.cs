@@ -1,13 +1,14 @@
 ﻿using System;
 
-namespace Find_A_Tutor.Infrastructure.DTO
+namespace Find_A_Tutor.Infrastructure.Commands.Users
 {
-    public class AccountDto
+    public class Register
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         public string Role { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

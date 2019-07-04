@@ -5,6 +5,7 @@ using Find_A_Tutor.Infrastructure.DTO;
 using Find_A_Tutor.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Infrastructure.Services
@@ -32,6 +33,18 @@ namespace Find_A_Tutor.Infrastructure.Services
         {
             var privateLesson = await _privateLessonRepository.GetAsyncBySubject((SchoolSubject)name);
             return _mapper.Map<PrivateLessonDTO>(privateLesson);
+        }
+
+        public async Task<IEnumerable<PrivateLessonDTO>> GetForUserAsync(Guid userId)
+        {
+            var user = await _userRepository.GetOrFailAsync(userId);
+            var allLessons = await _privateLessonRepository.BrowseAsync();
+
+            var allLessonsForUser = new List<PrivateLessonDTO>();
+
+            allLessonsForUser.AddRange(_mapper.Map<IEnumerable<PrivateLessonDTO>>(allLessons.Where(x => x.StudnetId == userId || x.TutorId == userId)));
+
+            return allLessonsForUser;
         }
 
         public async Task<IEnumerable<PrivateLessonDTO>> BrowseAsync(string description = "")
