@@ -10,10 +10,7 @@ namespace Find_A_Tutor.Infrastructure.Mappers
             => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<PrivateLesson, PrivateLessonDTO>();
-                //cfg.CreateMap<Event, EventDetailsDto>();
-                //cfg.CreateMap<Ticket, TicketDto>();
-                //cfg.CreateMap<Ticket, TicketDetailsDto>();
-                //cfg.CreateMap<User, AccountDto>();
+                cfg.CreateMap<User, AccountDto>();
             })
             .CreateMapper();
     }
