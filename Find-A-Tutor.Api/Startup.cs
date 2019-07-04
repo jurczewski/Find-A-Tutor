@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Text;
@@ -17,12 +18,11 @@ namespace Find_A_Tutor.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,18 +33,18 @@ namespace Find_A_Tutor.Api
             services.AddAuthorization(x => x.AddPolicy("HasTutorRole", p => p.RequireRole("tutor")));
             services.AddAuthorization(x => x.AddPolicy("HasStudentRole", p => p.RequireRole("student")));
 
-
+            services.AddScoped<IDataInitializer, DataInitializer>();
             services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPrivateLessonService, PrivateLessonService>();
             services.AddScoped<IUserService, UserService>();
 
+
             services.AddSingleton(AutoMapperConfig.Initialize());
-            //services.AddScoped<IDataInitializer, DataInitializer>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
 
-            //var appSettings = Configuration.GetSection("app");
-            //services.Configure<AppSettings>(appSettings);
+            var appSettings = Configuration.GetSection("app");
+            services.Configure<AppSettings>(appSettings);
 
             var jwtSettings = Configuration.GetSection("jwt");
             services.Configure<JwtSettings>(jwtSettings);
@@ -81,8 +81,18 @@ namespace Find_A_Tutor.Api
             }
 
             app.UseAuthentication();
+            SeedData(app);
             //app.UseHttpsRedirection();
             app.UseMvc();
+        }
+        private void SeedData(IApplicationBuilder app)
+        {
+            var settings = app.ApplicationServices.GetService<IOptions<AppSettings>>();
+            if (settings.Value.SeedData)
+            {
+                var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
+                dataInitializer.SeedAsync();
+            }
         }
     }
 }
