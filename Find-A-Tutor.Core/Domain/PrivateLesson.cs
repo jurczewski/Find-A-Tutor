@@ -8,7 +8,7 @@ namespace Find_A_Tutor.Core.Domain
         public Guid? TutorId { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime? TakenAt { get; protected set; }
-        public DateTime UpdateAt { get; protected set; }
+        public DateTime? UpdateAt { get; protected set; }
         public DateTime RelevantTo { get; protected set; }
         public string Description { get; protected set; }
         public SchoolSubject Subject { get; protected set; }
@@ -16,17 +16,22 @@ namespace Find_A_Tutor.Core.Domain
         public bool IsPaid { get; protected set; }
         public bool IsDone { get; protected set; }
 
-        public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubject subject)
+        public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, string subject)
         {
             Id = id;
             StudnetId = studnetId;
             CreatedAt = DateTime.UtcNow;
             SetRelevantToDate(relevantTo);
             SetDesctiption(description);
-            Subject = subject;
-            UpdateAt = DateTime.UtcNow;
+            TryParseStringToSubjectEnum(subject);
+            UpdateAt = null;
             IsPaid = false;
             IsDone = false;
+        }
+
+        public void TryParseStringToSubjectEnum(string subject)
+        {
+            Enum.TryParse(subject, true, out SchoolSubject Subject);
         }
 
         public void SetDesctiption(string description)

@@ -29,9 +29,9 @@ namespace Find_A_Tutor.Infrastructure.Services
             return _mapper.Map<PrivateLessonDTO>(privateLesson);
         }
 
-        public async Task<PrivateLessonDTO> GetAsyncBySubject(SchoolSubjectDTO name)
+        public async Task<PrivateLessonDTO> GetAsyncBySubject(string name)
         {
-            var privateLesson = await _privateLessonRepository.GetAsyncBySubject((SchoolSubject)name);
+            var privateLesson = await _privateLessonRepository.GetAsyncBySubject(name);
             return _mapper.Map<PrivateLessonDTO>(privateLesson);
         }
 
@@ -52,7 +52,8 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.BrowseAsync(description);
             return _mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson);
         }
-        public async Task CreateAsync(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubjectDTO subject)
+
+        public async Task CreateAsync(Guid id, Guid studnetId, DateTime relevantTo, string description, string subject)
         {
             var privateLesson = await _privateLessonRepository.GetAsync(id);
             if (privateLesson != null)
@@ -60,32 +61,39 @@ namespace Find_A_Tutor.Infrastructure.Services
                 throw new Exception($"Private lesson already exists.");
             }
 
-            privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, (SchoolSubject)subject);
+            privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, subject);
             await _privateLessonRepository.AddAsync(privateLesson);
         }
-        public async Task UpdateAsync(Guid id, string description)
+
+        public async Task UpdateAsync(Guid id, DateTime relevantTo, string description, string subject)
         {
             var privateLesson = await _privateLessonRepository.GetAsync(id);
-            if (privateLesson != null)
+            if (privateLesson == null)
             {
-                throw new Exception($"Private lesson already exists.");
+                throw new Exception($"Private lesson does not exist.");
             }
             privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
 
             privateLesson.SetDesctiption(description);
+            privateLesson.SetRelevantToDate(relevantTo);
+            privateLesson.TryParseStringToSubjectEnum(subject);
+
             await _privateLessonRepository.UpdateAsync(privateLesson);
         }
+
         public async Task DeleteAsync(Guid id)
         {
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
             await _privateLessonRepository.DeleteAsync(privateLesson);
         }
+
         public async Task AssignTutor(Guid id, Guid tutorId)
         {
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
             var tutor = await _userRepository.GetOrFailAsync(id);
             privateLesson.AssignTutor(tutor);
         }
+
         public async Task RemoveAssignedTutor(Guid id)
         {
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
