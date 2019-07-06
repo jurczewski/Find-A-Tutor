@@ -23,7 +23,7 @@ namespace Find_A_Tutor.Api.Controllers
             => Json(await _userService.GetAccountAsync(UserId));
 
         [HttpGet("lessons")]
-        public async Task<IActionResult> GetTickets()
+        public async Task<IActionResult> GetLessons()
             => Json(await _privateLessonService.GetForUserAsync(UserId));
 
         [HttpPost("register")]

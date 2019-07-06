@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Find_A_Tutor.Api.Controllers
 {
     [Route("[controller]")]
-    public class PrivateLessonController : Controller
+    public class PrivateLessonController : ApiControllerBase
     {
         private readonly IPrivateLessonService _privateLessonService;
         public PrivateLessonController(IPrivateLessonService privateLessonService)
@@ -37,17 +37,17 @@ namespace Find_A_Tutor.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "HasAdminRole")]
+        [Authorize(Policy = "HasStudentRole")]
         public async Task<IActionResult> Post([FromBody]CreatePrivateLesson command)
         {
             command.PrivateLessonId = Guid.NewGuid();
-            await _privateLessonService.CreateAsync(command.PrivateLessonId, command.StudnetId, command.RelevantTo, command.Description, command.Subject);
+            await _privateLessonService.CreateAsync(command.PrivateLessonId, UserId, command.RelevantTo, command.Description, command.Subject);
 
             return Created($"/PrivateLesson/{command.PrivateLessonId}", null);
         }
 
         [HttpPut("{privateLessonId}")]
-        [Authorize(Policy = "HasAdminRole")]
+        [Authorize(Policy = "HasStudentRole")]
         public async Task<IActionResult> Put(Guid privateLessonId, [FromBody]UpdatePrivateLesson command)
         {
             await _privateLessonService.UpdateAsync(privateLessonId, command.RelevantTo, command.Description, command.SchoolSubject);

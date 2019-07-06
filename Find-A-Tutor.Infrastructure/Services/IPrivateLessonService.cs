@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static Find_A_Tutor.Infrastructure.DTO.PrivateLessonDTO;
 
 namespace Find_A_Tutor.Infrastructure.Services
 {

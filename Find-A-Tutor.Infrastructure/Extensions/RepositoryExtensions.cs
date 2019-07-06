@@ -9,13 +9,13 @@ namespace Find_A_Tutor.Infrastructure.Extensions
     {
         public static async Task<PrivateLesson> GetOrFailAsync(this IPrivateLessonRepository repository, Guid id)
         {
-            var @event = await repository.GetAsync(id);
-            if (@event == null)
+            var privateLesson = await repository.GetAsync(id);
+            if (privateLesson == null)
             {
-                throw new Exception($"Event with id: '{id}' does not exist.");
+                throw new Exception($"Private lesson with id: '{id}' does not exist.");
             }
 
-            return @event;
+            return privateLesson;
         }
 
         public static async Task<User> GetOrFailAsync(this IUserRepository repository, Guid id)
