@@ -63,5 +63,23 @@ namespace Find_A_Tutor.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("/assign/{privateLessonId}")]
+        [Authorize(Policy = "HasTutorRole")]
+        public async Task<IActionResult> AssignTutor(Guid privateLessonId)
+        {
+            await _privateLessonService.AssignTutor(privateLessonId, UserId);
+
+            return NoContent();
+        }
+
+        [HttpPut("/unassign/{privateLessonId}")]
+        [Authorize(Policy = "HasTutorRole")]
+        public async Task<IActionResult> RemoveAssignedTutor(Guid privateLessonId)
+        {
+            await _privateLessonService.RemoveAssignedTutor(privateLessonId, UserId);
+
+            return NoContent();
+        }
     }
 }

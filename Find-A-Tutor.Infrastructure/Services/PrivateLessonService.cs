@@ -65,14 +65,9 @@ namespace Find_A_Tutor.Infrastructure.Services
             await _privateLessonRepository.AddAsync(privateLesson);
         }
 
-        public async Task UpdateAsync(Guid id, DateTime relevantTo, string description, string subject)
+        public async Task UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject)
         {
-            var privateLesson = await _privateLessonRepository.GetAsync(id);
-            if (privateLesson == null)
-            {
-                throw new Exception($"Private lesson does not exist.");
-            }
-            privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
+            var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
 
             privateLesson.SetDesctiption(description);
             privateLesson.SetRelevantToDate(relevantTo);
@@ -81,22 +76,30 @@ namespace Find_A_Tutor.Infrastructure.Services
             await _privateLessonRepository.UpdateAsync(privateLesson);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid privateLessonId)
         {
-            var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
+            var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
             await _privateLessonRepository.DeleteAsync(privateLesson);
         }
 
-        public async Task AssignTutor(Guid id, Guid tutorId)
+        public async Task AssignTutor(Guid privateLessonId, Guid tutorId)
         {
-            var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
-            var tutor = await _userRepository.GetOrFailAsync(id);
+            var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
+            if (privateLesson.TutorId != null)
+            {
+                throw new Exception($"Private lesson is already assigned.");
+            }
+            var tutor = await _userRepository.GetOrFailAsync(tutorId);
             privateLesson.AssignTutor(tutor);
         }
 
-        public async Task RemoveAssignedTutor(Guid id)
+        public async Task RemoveAssignedTutor(Guid privateLessonId, Guid userId)
         {
-            var privateLesson = await _privateLessonRepository.GetOrFailAsync(id);
+            var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
+            if (privateLesson.TutorId != userId && privateLesson.StudnetId != userId)
+            {
+                throw new Exception("Tutor can be unassign only by orignal student or tutor.");
+            }
             privateLesson.RemoveAssignedTutor();
         }
     }

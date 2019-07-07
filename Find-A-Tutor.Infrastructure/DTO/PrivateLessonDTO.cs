@@ -7,7 +7,8 @@ namespace Find_A_Tutor.Infrastructure.DTO
         public Guid Id { get; set; }
         public Guid StudnetId { get; protected set; }
         public Guid? TutorId { get; protected set; }
-        //public Guid CreatedAt { get; protected set; }
+        //todo: odkomentować i przetestować
+        //public Guid CreatedAt { get; protected set; } 
         public DateTime? TakenAt { get; protected set; }
         public DateTime UpdateAt { get; protected set; }
         public DateTime RelevantTo { get; protected set; }

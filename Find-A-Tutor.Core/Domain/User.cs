@@ -5,7 +5,7 @@ namespace Find_A_Tutor.Core.Domain
 {
     public class User : Entity
     {
-        private static List<string> _roles = new List<string>()
+        private readonly static List<string> _roles = new List<string>()
         {
             "student", "tutor", "admin"
         };
