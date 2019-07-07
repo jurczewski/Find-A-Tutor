@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Find_A_Tutor.Core.Domain
 {
@@ -48,10 +49,16 @@ namespace Find_A_Tutor.Core.Domain
 
         public void SetEmail(string email)
         {
-            //todo: email validation "System.Net.Mail;"
             if (string.IsNullOrWhiteSpace(email))
             {
                 throw new Exception($"User cannot have an empty email.");
+            }
+
+            var isValidMail = new Regex(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
+            if (!isValidMail.IsMatch(email))
+            {
+                throw new Exception($"Invalid email.");
             }
 
             Email = email;
@@ -73,15 +80,30 @@ namespace Find_A_Tutor.Core.Domain
 
         public void SetPassword(string password)
         {
-            //todo: regex
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasMiniMaxChars = new Regex(@".{8,32}");
+            var hasLowerChar = new Regex(@"[a-z]+");
+
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new Exception($"User cannot have an empty password.");
+                throw new Exception($"Password should not be empty.");
             }
-            if (password.Length < 8 || password.Length > 254)
+
+            if (!hasMiniMaxChars.IsMatch(password))
             {
-                throw new Exception("Password should be between 8 - 254 alphanumeric character.");
+                throw new Exception("Password should be between 8 - 32 alphanumeric character.");
             }
+
+            if (!hasLowerChar.IsMatch(password))
+            {
+                throw new Exception("Password should contain At least one lower case letter");
+            }
+
+            if (!hasNumber.IsMatch(password))
+            {
+                throw new Exception("Password should contain At least one numeric value");
+            }
+
             Password = password;
         }
     }
