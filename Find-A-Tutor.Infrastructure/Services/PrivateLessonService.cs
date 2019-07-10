@@ -14,12 +14,14 @@ namespace Find_A_Tutor.Infrastructure.Services
     {
         private readonly IPrivateLessonRepository _privateLessonRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ISchoolSubjectRepository _schoolSubjectRepository;
         private readonly IMapper _mapper;
 
-        public PrivateLessonService(IPrivateLessonRepository privateLessonRepository, IUserRepository userRepository, IMapper mapper)
+        public PrivateLessonService(IPrivateLessonRepository privateLessonRepository, IUserRepository userRepository, ISchoolSubjectRepository schoolSubjectRepository, IMapper mapper)
         {
             _privateLessonRepository = privateLessonRepository;
             _userRepository = userRepository;
+            _schoolSubjectRepository = schoolSubjectRepository;
             _mapper = mapper;
         }
 
@@ -61,17 +63,20 @@ namespace Find_A_Tutor.Infrastructure.Services
                 throw new Exception($"Private lesson already exists.");
             }
 
-            privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, subject);
+            var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(subject);
+
+            privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, schoolSubject);
             await _privateLessonRepository.AddAsync(privateLesson);
         }
 
         public async Task UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject)
         {
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
+            var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(subject);
 
             privateLesson.SetDesctiption(description);
             privateLesson.SetRelevantToDate(relevantTo);
-            privateLesson.TryParseStringToSubjectEnum(subject);
+            privateLesson.SetSchoolSubject(schoolSubject);
 
             await _privateLessonRepository.UpdateAsync(privateLesson);
         }

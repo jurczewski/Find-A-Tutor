@@ -28,5 +28,16 @@ namespace Find_A_Tutor.Infrastructure.Extensions
 
             return user;
         }
+
+        public static async Task<SchoolSubject> GetOrFailAsync(this ISchoolSubjectRepository repository, string name)
+        {
+            var schoolSubject = await repository.GetAsync(name);
+            if (schoolSubject == null)
+            {
+                throw new Exception($"School subject with name: '{name}' does not exist.");
+            }
+
+            return schoolSubject;
+        }
     }
 }

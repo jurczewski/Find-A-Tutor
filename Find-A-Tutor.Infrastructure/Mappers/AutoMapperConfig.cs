@@ -9,7 +9,8 @@ namespace Find_A_Tutor.Infrastructure.Mappers
         public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<PrivateLesson, PrivateLessonDTO>();
+                cfg.CreateMap<PrivateLesson, PrivateLessonDTO>()
+                    .ForMember(x => x.Subject, m => m.MapFrom(p => p.SchoolSubject.Name));
                 cfg.CreateMap<User, AccountDto>();
             })
             .CreateMapper();
