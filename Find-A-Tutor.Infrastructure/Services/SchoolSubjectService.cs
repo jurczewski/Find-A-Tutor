@@ -37,21 +37,27 @@ namespace Find_A_Tutor.Infrastructure.Services
                 throw new Exception($"School subject already exists.");
             }
 
-            //todo: id managment - one static sumarizator? or .Count++  ?
-            //todo: setters + validation
-
-            schoolSubject = new SchoolSubject(name);
+            schoolSubject = new SchoolSubject(-1, name);
             await _schoolSubjectRepository.AddAsync(schoolSubject);
         }
 
-        public async Task UpdateAsync(string name)
+        public async Task UpdateAsync(int id, string name)
         {
-            throw new NotImplementedException();
+            var schoolSubjectById = await _schoolSubjectRepository.GetOrFailAsync(id);
+            var schoolSubjectByName = await _schoolSubjectRepository.GetOrFailAsync(name);
+            if(schoolSubjectById.Name != null)
+            {
+                throw new Exception("School subject with that name already exists.");
+            }
+
+            schoolSubjectById.SetName(name);
+
+            await _schoolSubjectRepository.UpdateAsync(schoolSubjectById);
         }
 
-        public async Task DeleteAsync(string name)
+        public async Task DeleteAsync(int id)
         {
-            var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(name);
+            var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(id);
             await _schoolSubjectRepository.DeleteAsync(schoolSubject);
         }
     }

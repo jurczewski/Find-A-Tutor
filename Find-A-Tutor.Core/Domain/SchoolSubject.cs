@@ -9,17 +9,26 @@ namespace Find_A_Tutor.Core.Domain
 
         public SchoolSubject(int id, string name)
         {
-            Id = id;
-            Name = name;
+            SetId(id);
+            SetName(name);
         }
 
-        public void SetSubject(string subject)
+        public void SetName(string subject)
         {
             if (string.IsNullOrWhiteSpace(subject))
             {
                 throw new Exception($"School subject can not have an empty name.");
             }
             Name = subject;
+        }
+
+        public void SetId(int id)
+        {
+            if (id <= 0)
+            {
+                throw new Exception($"Id: {id} cannot be equal zero or below zero.");
+            }
+            Id = id;
         }
     }
 }

@@ -11,10 +11,9 @@ namespace Find_A_Tutor.Infrastructure.Repositories
     {
         private static readonly ISet<PrivateLesson> _privateLessons = new HashSet<PrivateLesson>()
         {
-            //todo: correct this shit
-            new PrivateLesson(new Guid("cdb68f36-1590-4667-a1fb-7977fd31fc70"), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(14), "Pilnie potrzebne korepetycje z szeregów. Poziom studiów.", "Mathematics"),
-            new PrivateLesson(Guid.NewGuid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(7), "Potrzebne pomoc z historią polski w wieku XVI", "History"),
-            new PrivateLesson(Guid.NewGuid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(3), "Przygotowanie do matury - chemia", "Chemistry")
+            new PrivateLesson(new Guid("cdb68f36-1590-4667-a1fb-7977fd31fc70"), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(14), "Pilnie potrzebne korepetycje z szeregów. Poziom studiów.", new SchoolSubject(1, "Mathematics")),
+            new PrivateLesson(Guid.NewGuid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(7), "Potrzebne pomoc z historią polski w wieku XVI", new SchoolSubject(7, "History")),
+            new PrivateLesson(Guid.NewGuid(), new Guid("57b9e370-e6ae-47fc-992d-0bf488f75957"), DateTime.UtcNow.AddDays(3), "Przygotowanie do matury - chemia", new SchoolSubject(5, "Chemistry"))
         };
 
         public async Task<PrivateLesson> GetAsync(Guid id)

@@ -27,6 +27,8 @@ namespace Find_A_Tutor.Infrastructure.Repositories
             new SchoolSubject(15, "German"),
         };
 
+        public int NextId => _schoolSubjects.Count;
+
         public async Task<SchoolSubject> GetAsync(int id)
             => await Task.FromResult(_schoolSubjects.SingleOrDefault(x => x.Id == id));
 
@@ -47,6 +49,8 @@ namespace Find_A_Tutor.Infrastructure.Repositories
 
         public async Task AddAsync(SchoolSubject schoolSubject)
         {
+            schoolSubject.SetId(NextId);
+
             _schoolSubjects.Add(schoolSubject);
             await Task.CompletedTask;
         }

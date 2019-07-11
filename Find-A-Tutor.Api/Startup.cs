@@ -33,11 +33,14 @@ namespace Find_A_Tutor.Api
             services.AddAuthorization(x => x.AddPolicy("HasTutorRole", p => p.RequireRole("tutor")));
             services.AddAuthorization(x => x.AddPolicy("HasStudentRole", p => p.RequireRole("student")));
 
-
             services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISchoolSubjectRepository, SchoolSubjectRepository>();
+
             services.AddScoped<IPrivateLessonService, PrivateLessonService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
+
 
             services.AddSingleton(AutoMapperConfig.Initialize());
             //services.AddScoped<IDataInitializer, DataInitializer>();

@@ -10,7 +10,7 @@ namespace Find_A_Tutor.Infrastructure.Services
         Task<SchoolSubject> GetAsync(string name);
         Task<IEnumerable<SchoolSubject>> BrowseAsync(string name = "");
         Task CreateAsync(string name);
-        Task UpdateAsync(string name);
-        Task DeleteAsync(string name);
+        Task UpdateAsync(int id, string name);
+        Task DeleteAsync(int id);
     }
 }
