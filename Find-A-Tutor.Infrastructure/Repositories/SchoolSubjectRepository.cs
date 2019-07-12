@@ -1,5 +1,6 @@
 ﻿using Find_A_Tutor.Core.Domain;
 using Find_A_Tutor.Core.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,26 +11,24 @@ namespace Find_A_Tutor.Infrastructure.Repositories
     {
         private static readonly ISet<SchoolSubject> _schoolSubjects = new HashSet<SchoolSubject>()
         {
-            new SchoolSubject(1, "Mathematics"),
-            new SchoolSubject(2, "Science"),
-            new SchoolSubject(3, "Biology"),
-            new SchoolSubject(4, "Physics"),
-            new SchoolSubject(5, "Chemistry"),
-            new SchoolSubject(6, "Geography"),
-            new SchoolSubject(7, "History"),
-            new SchoolSubject(8, "Citizenship"),
-            new SchoolSubject(9, "Art"),
-            new SchoolSubject(10, "Music"),
-            new SchoolSubject(11, "Polish"),
-            new SchoolSubject(12, "English"),
-            new SchoolSubject(12, "English"),
-            new SchoolSubject(14, "French"),
-            new SchoolSubject(15, "German"),
+            new SchoolSubject(new Guid("51f2080b-6685-44a6-8188-e4947ec103a8"), "Mathematics"),
+            new SchoolSubject(Guid.NewGuid(), "Science"),
+            new SchoolSubject(new Guid("5f26998e-5e9c-4224-9a37-484ef6e03d9b"), "Biology"),
+            new SchoolSubject(Guid.NewGuid(), "Physics"),
+            new SchoolSubject(new Guid("b14c0a4c-8f37-47ba-a63d-91dba7fedbe1"), "Chemistry"),
+            new SchoolSubject(Guid.NewGuid(), "Geography"),
+            new SchoolSubject(new Guid("d917539f-5fa3-4457-b785-a156155bfcbe"), "History"),
+            new SchoolSubject(Guid.NewGuid(), "Citizenship"),
+            new SchoolSubject(Guid.NewGuid(), "Art"),
+            new SchoolSubject(Guid.NewGuid(), "Music"),
+            new SchoolSubject(Guid.NewGuid(), "Polish"),
+            new SchoolSubject(Guid.NewGuid(), "English"),
+            new SchoolSubject(Guid.NewGuid(), "English"),
+            new SchoolSubject(Guid.NewGuid(), "French"),
+            new SchoolSubject(Guid.NewGuid(), "German")
         };
 
-        public int NextId => _schoolSubjects.Count;
-
-        public async Task<SchoolSubject> GetAsync(int id)
+        public async Task<SchoolSubject> GetAsync(Guid id)
             => await Task.FromResult(_schoolSubjects.SingleOrDefault(x => x.Id == id));
 
         public async Task<SchoolSubject> GetAsync(string name)
@@ -49,8 +48,6 @@ namespace Find_A_Tutor.Infrastructure.Repositories
 
         public async Task AddAsync(SchoolSubject schoolSubject)
         {
-            schoolSubject.SetId(NextId);
-
             _schoolSubjects.Add(schoolSubject);
             await Task.CompletedTask;
         }

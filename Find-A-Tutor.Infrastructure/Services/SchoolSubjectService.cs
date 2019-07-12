@@ -15,7 +15,7 @@ namespace Find_A_Tutor.Infrastructure.Services
             _schoolSubjectRepository = schoolSubjectRepository;
         }
 
-        public async Task<SchoolSubject> GetAsync(int id)
+        public async Task<SchoolSubject> GetAsync(Guid id)
         {
             return await _schoolSubjectRepository.GetAsync(id);
         }
@@ -29,7 +29,7 @@ namespace Find_A_Tutor.Infrastructure.Services
             return await _schoolSubjectRepository.BrowseAsync(name);
         }
 
-        public async Task CreateAsync(string name)
+        public async Task CreateAsync(Guid id, string name)
         {
             var schoolSubject = await _schoolSubjectRepository.GetAsync(name);
             if (schoolSubject != null)
@@ -37,15 +37,16 @@ namespace Find_A_Tutor.Infrastructure.Services
                 throw new Exception($"School subject already exists.");
             }
 
-            schoolSubject = new SchoolSubject(-1, name);
+            schoolSubject = new SchoolSubject(id, name);
             await _schoolSubjectRepository.AddAsync(schoolSubject);
         }
 
-        public async Task UpdateAsync(int id, string name)
+        public async Task UpdateAsync(Guid id, string name)
         {
-            var schoolSubjectById = await _schoolSubjectRepository.GetOrFailAsync(id);
-            var schoolSubjectByName = await _schoolSubjectRepository.GetOrFailAsync(name);
-            if(schoolSubjectById.Name != null)
+            var schoolSubjectById = await _schoolSubjectRepository.GetOrFailAsync(id); //czy jest o takim id
+            //teraz sprawdzmy czy nazwa się nie zdubluje
+            var schoolSubjectByName = await _schoolSubjectRepository.GetAsync(name);
+            if (schoolSubjectByName != null)
             {
                 throw new Exception("School subject with that name already exists.");
             }
@@ -55,7 +56,7 @@ namespace Find_A_Tutor.Infrastructure.Services
             await _schoolSubjectRepository.UpdateAsync(schoolSubjectById);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(id);
             await _schoolSubjectRepository.DeleteAsync(schoolSubject);

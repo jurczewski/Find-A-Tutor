@@ -40,7 +40,7 @@ namespace Find_A_Tutor.Infrastructure.Extensions
             return schoolSubject;
         }
 
-        public static async Task<SchoolSubject> GetOrFailAsync(this ISchoolSubjectRepository repository, int id)
+        public static async Task<SchoolSubject> GetOrFailAsync(this ISchoolSubjectRepository repository, Guid id)
         {
             var schoolSubject = await repository.GetAsync(id);
             if (schoolSubject == null)
