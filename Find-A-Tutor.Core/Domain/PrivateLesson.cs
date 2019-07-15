@@ -11,27 +11,27 @@ namespace Find_A_Tutor.Core.Domain
         public DateTime? UpdateAt { get; protected set; }
         public DateTime RelevantTo { get; protected set; }
         public string Description { get; protected set; }
-        public SchoolSubject Subject { get; protected set; }
+        public SchoolSubject SchoolSubject { get; protected set; }
         public bool IsAssigned => TutorId.HasValue;
         public bool IsPaid { get; protected set; }
         public bool IsDone { get; protected set; }
 
-        public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, string subject)
+        public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubject subject)
         {
             Id = id;
             StudnetId = studnetId;
             CreatedAt = DateTime.UtcNow;
             SetRelevantToDate(relevantTo);
             SetDesctiption(description);
-            TryParseStringToSubjectEnum(subject);
+            SchoolSubject = subject;
             UpdateAt = null;
             IsPaid = false;
             IsDone = false;
         }
 
-        public void TryParseStringToSubjectEnum(string subject)
+        public void SetSchoolSubject(SchoolSubject schoolSubject)
         {
-            Enum.TryParse(subject, true, out SchoolSubject Subject);
+            SchoolSubject = schoolSubject;
         }
 
         public void SetDesctiption(string description)

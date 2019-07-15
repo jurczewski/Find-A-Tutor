@@ -50,7 +50,7 @@ namespace Find_A_Tutor.Api.Controllers
         [Authorize(Policy = "HasStudentRole")]
         public async Task<IActionResult> Put(Guid privateLessonId, [FromBody]UpdatePrivateLesson command)
         {
-            await _privateLessonService.UpdateAsync(privateLessonId, command.RelevantTo, command.Description, command.SchoolSubject);
+            await _privateLessonService.UpdateAsync(privateLessonId, command.RelevantTo, command.Description, command.Subject);
 
             return NoContent();
         }
