@@ -16,6 +16,8 @@ namespace Find_A_Tutor.Core.Domain
         public bool IsPaid { get; protected set; }
         public bool IsDone { get; protected set; }
 
+        public PrivateLesson() { }
+
         public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubject subject)
         {
             Id = id;

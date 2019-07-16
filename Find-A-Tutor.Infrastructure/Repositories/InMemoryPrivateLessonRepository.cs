@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Infrastructure.Repositories
 {
-    public class PrivateLessonRepository : IPrivateLessonRepository
+    public class InMemoryPrivateLessonRepository : IPrivateLessonRepository
     {
         private static readonly ISet<PrivateLesson> _privateLessons = new HashSet<PrivateLesson>()
         {
