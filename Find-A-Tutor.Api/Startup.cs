@@ -1,4 +1,5 @@
 ﻿using Find_A_Tutor.Core.Repositories;
+using Find_A_Tutor.Infrastructure.EF;
 using Find_A_Tutor.Infrastructure.Mappers;
 using Find_A_Tutor.Infrastructure.Repositories;
 using Find_A_Tutor.Infrastructure.Services;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -33,17 +35,36 @@ namespace Find_A_Tutor.Api
             services.AddAuthorization(x => x.AddPolicy("HasTutorRole", p => p.RequireRole("tutor")));
             services.AddAuthorization(x => x.AddPolicy("HasStudentRole", p => p.RequireRole("student")));
 
-            services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ISchoolSubjectRepository, SchoolSubjectRepository>();
-
             services.AddScoped<IPrivateLessonService, PrivateLessonService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
 
+            var repositorySettigs = Configuration.GetSection("repositorySettigs");
+            var useRepositoriesInMemory = repositorySettigs.GetValue<bool>("inMemory");
+
+            if (useRepositoriesInMemory)
+            {
+                services.AddScoped<IPrivateLessonRepository, InMemoryPrivateLessonRepository>();
+                services.AddScoped<IUserRepository, InMemoryUserRepository>();
+                services.AddScoped<ISchoolSubjectRepository, InMemorySchoolSubjectRepository>();
+            }
+            else
+            {
+                services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
+                services.AddScoped<IUserRepository, UserRepository>();
+                services.AddScoped<ISchoolSubjectRepository, SchoolSubjectRepository>();
+            }
+
+            services.Configure<SqlSettings>(Configuration);
+            var sqlSettings = Configuration.GetSection("sql").Get<SqlSettings>();
+            services.AddSingleton<SqlSettings>(sqlSettings); //todo: Options pattern
+
+            services.AddEntityFrameworkSqlServer()
+                    .AddDbContext<FindATurorContext>(options => options.UseSqlServer(sqlSettings.ConnectionString));
 
             services.AddSingleton(AutoMapperConfig.Initialize());
-            //services.AddScoped<IDataInitializer, DataInitializer>();
+            //todo: DataInitializer
+            //services.AddScoped<IDataInitializer, DataInitializer>(); 
             services.AddSingleton<IJwtHandler, JwtHandler>();
 
             //var appSettings = Configuration.GetSection("app");
