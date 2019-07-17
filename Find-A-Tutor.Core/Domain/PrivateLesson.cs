@@ -4,11 +4,11 @@ namespace Find_A_Tutor.Core.Domain
 {
     public class PrivateLesson : Entity
     {
-        public Guid StudnetId { get; protected set; }
+        public Guid StudentId { get; protected set; }
         public Guid? TutorId { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime? TakenAt { get; protected set; }
-        public DateTime? UpdateAt { get; protected set; }
+        public DateTime? UpdatedAt { get; protected set; }
         public DateTime RelevantTo { get; protected set; }
         public string Description { get; protected set; }
         public SchoolSubject SchoolSubject { get; protected set; }
@@ -21,12 +21,12 @@ namespace Find_A_Tutor.Core.Domain
         public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubject subject)
         {
             Id = id;
-            StudnetId = studnetId;
+            StudentId = studnetId;
             CreatedAt = DateTime.UtcNow;
             SetRelevantToDate(relevantTo);
             SetDesctiption(description);
             SchoolSubject = subject;
-            UpdateAt = null;
+            UpdatedAt = null;
             IsPaid = false;
             IsDone = false;
         }
@@ -43,7 +43,7 @@ namespace Find_A_Tutor.Core.Domain
                 throw new Exception($"Private Lesson can not have an empty description.");
             }
             Description = description;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SetRelevantToDate(DateTime relevantTo)
@@ -53,7 +53,7 @@ namespace Find_A_Tutor.Core.Domain
                 throw new Exception($"Private lesson must have a relevent-to date greater than created date.");
             }
             RelevantTo = relevantTo;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void AssignTutor(User tutor)
@@ -64,7 +64,7 @@ namespace Find_A_Tutor.Core.Domain
             }
             TutorId = tutor.Id;
             TakenAt = DateTime.UtcNow;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void RemoveAssignedTutor()
@@ -75,7 +75,7 @@ namespace Find_A_Tutor.Core.Domain
             }
             TutorId = null;
             TakenAt = null;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Find_A_Tutor.Infrastructure.Services
 
             var allLessonsForUser = new List<PrivateLessonDTO>();
 
-            allLessonsForUser.AddRange(_mapper.Map<IEnumerable<PrivateLessonDTO>>(allLessons.Where(x => x.StudnetId == userId || x.TutorId == userId)));
+            allLessonsForUser.AddRange(_mapper.Map<IEnumerable<PrivateLessonDTO>>(allLessons.Where(x => x.StudentId == userId || x.TutorId == userId)));
 
             return allLessonsForUser;
         }
@@ -101,7 +101,7 @@ namespace Find_A_Tutor.Infrastructure.Services
         public async Task RemoveAssignedTutor(Guid privateLessonId, Guid userId)
         {
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
-            if (privateLesson.TutorId != userId && privateLesson.StudnetId != userId)
+            if (privateLesson.TutorId != userId && privateLesson.StudentId != userId)
             {
                 throw new Exception("Tutor can be unassign only by orignal student or tutor.");
             }
