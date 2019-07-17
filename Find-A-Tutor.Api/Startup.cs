@@ -1,4 +1,5 @@
-﻿using Find_A_Tutor.Core.Repositories;
+﻿using Find_A_Tutor.Api.Framework;
+using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Infrastructure.EF;
 using Find_A_Tutor.Infrastructure.Mappers;
 using Find_A_Tutor.Infrastructure.Repositories;
@@ -102,6 +103,7 @@ namespace Find_A_Tutor.Api
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseErrorHandler();
             }
 
             app.UseAuthentication();
