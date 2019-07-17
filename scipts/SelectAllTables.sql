@@ -1,0 +1,10 @@
+use FindATutor
+
+SELECT TOP 1000 *
+FROM PrivateLessons(NOLOCK)
+
+SELECT TOP 1000 *
+FROM SchoolSubjects(NOLOCK)
+
+SELECT TOP 1000 *
+FROM Users(NOLOCK)

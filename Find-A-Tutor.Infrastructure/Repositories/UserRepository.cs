@@ -35,7 +35,7 @@ namespace Find_A_Tutor.Infrastructure.Repositories
 
         public async Task DeleteAsync(User user)
         {
-            _context.Remove(user);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
         }
     }
