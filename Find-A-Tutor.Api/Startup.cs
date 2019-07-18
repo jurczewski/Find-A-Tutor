@@ -40,10 +40,11 @@ namespace Find_A_Tutor.Api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
 
-            var repositorySettigs = Configuration.GetSection("repositorySettigs");
-            var useRepositoriesInMemory = repositorySettigs.GetValue<bool>("inMemory");
+            services.Configure<SqlSettings>(Configuration);
+            var sqlSettings = Configuration.GetSection("sql").Get<SqlSettings>();
+            services.AddSingleton<SqlSettings>(sqlSettings); //todo: Options pattern
 
-            if (useRepositoriesInMemory)
+            if (sqlSettings.InMemory)
             {
                 services.AddScoped<IPrivateLessonRepository, InMemoryPrivateLessonRepository>();
                 services.AddScoped<IUserRepository, InMemoryUserRepository>();
@@ -54,11 +55,7 @@ namespace Find_A_Tutor.Api
                 services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<ISchoolSubjectRepository, SchoolSubjectRepository>();
-            }
-
-            services.Configure<SqlSettings>(Configuration);
-            var sqlSettings = Configuration.GetSection("sql").Get<SqlSettings>();
-            services.AddSingleton<SqlSettings>(sqlSettings); //todo: Options pattern
+            }            
 
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<FindATurorContext>(options => options.UseSqlServer(sqlSettings.ConnectionString));
@@ -102,9 +99,15 @@ namespace Find_A_Tutor.Api
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-                app.UseErrorHandler();
+                app.UseHsts();                
             }
+
+            if (env.IsProduction() || env.IsStaging())
+            {
+                //todo: env viarables working
+            }
+
+            app.UseErrorHandler();
 
             app.UseAuthentication();
             //app.UseHttpsRedirection();
