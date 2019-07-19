@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Find-A-Tutor.Infrastructure
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A7F8ABAD-E35F-457A-8DBE-78524AEB61C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find-A-Tutor.Tests.EndToEnd", "Find-A-Tutor.Tests.EndToEnd\Find-A-Tutor.Tests.EndToEnd.csproj", "{2001D57E-01BE-49E2-ABA4-2E8AD886BC07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{3226B958-F20B-4E63-8074-E0B9C1347A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3226B958-F20B-4E63-8074-E0B9C1347A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3226B958-F20B-4E63-8074-E0B9C1347A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2001D57E-01BE-49E2-ABA4-2E8AD886BC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2001D57E-01BE-49E2-ABA4-2E8AD886BC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2001D57E-01BE-49E2-ABA4-2E8AD886BC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2001D57E-01BE-49E2-ABA4-2E8AD886BC07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
