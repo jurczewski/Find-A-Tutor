@@ -64,7 +64,7 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetAsync(id);
             if (privateLesson != null)
             {
-                throw new Exception($"Private lesson already exists.");                
+                throw new RepositoryException($"Private lesson already exists.");                
             }
 
             var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(subject);
@@ -102,7 +102,7 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
             if (privateLesson.TutorId != null)
             {
-                throw new Exception($"Private lesson is already assigned.");
+                throw new RepositoryException($"Private lesson is already assigned.");
             }
             var tutor = await _userRepository.GetOrFailAsync(tutorId);
             privateLesson.AssignTutor(tutor);
@@ -115,7 +115,7 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
             if (privateLesson.TutorId != userId && privateLesson.StudentId != userId)
             {
-                throw new Exception("Tutor can be unassign only by orignal student or tutor.");
+                throw new RepositoryException("Tutor can be unassign only by orignal student or tutor.");
             }
             privateLesson.RemoveAssignedTutor();
 

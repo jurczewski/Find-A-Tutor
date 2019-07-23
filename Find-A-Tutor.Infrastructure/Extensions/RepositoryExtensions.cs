@@ -1,4 +1,5 @@
 ﻿using Find_A_Tutor.Core.Domain;
+using Find_A_Tutor.Core.Exceptions;
 using Find_A_Tutor.Core.Repositories;
 using System;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Find_A_Tutor.Infrastructure.Extensions
             var privateLesson = await repository.GetAsync(id);
             if (privateLesson == null)
             {
-                throw new Exception($"Private lesson with id: '{id}' does not exist.");
+                throw new RepositoryException($"Private lesson with id: '{id}' does not exist.");
             }
 
             return privateLesson;
@@ -23,7 +24,7 @@ namespace Find_A_Tutor.Infrastructure.Extensions
             var user = await repository.GetAsync(id);
             if (user == null)
             {
-                throw new Exception($"User with id: '{id}' does not exist.");
+                throw new RepositoryException($"User with id: '{id}' does not exist.");
             }
 
             return user;
@@ -34,7 +35,7 @@ namespace Find_A_Tutor.Infrastructure.Extensions
             var schoolSubject = await repository.GetAsync(name);
             if (schoolSubject == null)
             {
-                throw new Exception($"School subject with name: '{name}' does not exist.");
+                throw new RepositoryException($"School subject with name: '{name}' does not exist.");
             }
 
             return schoolSubject;
@@ -45,7 +46,7 @@ namespace Find_A_Tutor.Infrastructure.Extensions
             var schoolSubject = await repository.GetAsync(id);
             if (schoolSubject == null)
             {
-                throw new Exception($"School subject with id: '{id}' does not exist.");
+                throw new RepositoryException($"School subject with id: '{id}' does not exist.");
             }
 
             return schoolSubject;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Find_A_Tutor.Core.Exceptions;
+using System;
 
 namespace Find_A_Tutor.Core.Domain
 {
@@ -40,7 +41,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(description))
             {
-                throw new Exception($"Private Lesson can not have an empty description.");
+                throw new ValidationException($"Private Lesson can not have an empty description.");
             }
             Description = description;
             UpdatedAt = DateTime.UtcNow;
@@ -50,7 +51,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (CreatedAt >= relevantTo)
             {
-                throw new Exception($"Private lesson must have a relevent-to date greater than created date.");
+                throw new ValidationException($"Private lesson must have a relevent-to date greater than created date.");
             }
             RelevantTo = relevantTo;
             UpdatedAt = DateTime.UtcNow;
@@ -60,7 +61,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (IsAssigned)
             {
-                throw new Exception($"Private lesson was already taken by another tutor at: {TakenAt}.");
+                throw new ValidationException($"Private lesson was already taken by another tutor at: {TakenAt}.");
             }
             TutorId = tutor.Id;
             TakenAt = DateTime.UtcNow;
@@ -71,7 +72,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (!IsAssigned)
             {
-                throw new Exception($"You cannot untake an private lesson that was not taken before.");
+                throw new ValidationException($"You cannot untake an private lesson that was not taken before.");
             }
             TutorId = null;
             TakenAt = null;
