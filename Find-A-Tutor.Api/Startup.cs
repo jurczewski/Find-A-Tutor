@@ -12,8 +12,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using System.Text;
 
 namespace Find_A_Tutor.Api
@@ -90,8 +93,11 @@ namespace Find_A_Tutor.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddNLog();
+            env.ConfigureNLog("nlog.config");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
