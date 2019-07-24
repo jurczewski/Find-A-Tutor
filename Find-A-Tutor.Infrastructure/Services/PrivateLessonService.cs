@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Find_A_Tutor.Core.Domain;
+using Find_A_Tutor.Core.Exceptions;
 using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Infrastructure.DTO;
 using Find_A_Tutor.Infrastructure.Extensions;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace Find_A_Tutor.Infrastructure.Services
 {
     public class PrivateLessonService : IPrivateLessonService
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private readonly IPrivateLessonRepository _privateLessonRepository;
         private readonly IUserRepository _userRepository;
         private readonly ISchoolSubjectRepository _schoolSubjectRepository;
@@ -51,6 +54,7 @@ namespace Find_A_Tutor.Infrastructure.Services
 
         public async Task<IEnumerable<PrivateLessonDTO>> BrowseAsync(string description = "")
         {
+            logger.Info("Fetching events");
             var privateLesson = await _privateLessonRepository.BrowseAsync(description);
             return _mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson);
         }
@@ -60,13 +64,15 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetAsync(id);
             if (privateLesson != null)
             {
-                throw new Exception($"Private lesson already exists.");
+                throw new RepositoryException($"Private lesson already exists.");                
             }
 
             var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(subject);
 
             privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, schoolSubject);
             await _privateLessonRepository.AddAsync(privateLesson);
+
+            logger.Info($"Private lesson with id: {0}, was successfully created", id);
         }
 
         public async Task UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject)
@@ -79,12 +85,16 @@ namespace Find_A_Tutor.Infrastructure.Services
             privateLesson.SetSchoolSubject(schoolSubject);
 
             await _privateLessonRepository.UpdateAsync(privateLesson);
+
+            logger.Info($"Private lesson with id: {0}, was successfully updated", privateLessonId);
         }
 
         public async Task DeleteAsync(Guid privateLessonId)
         {
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
             await _privateLessonRepository.DeleteAsync(privateLesson);
+
+            logger.Info($"Private lesson with id: {0}, was successfully deleted", privateLessonId);
         }
 
         public async Task AssignTutor(Guid privateLessonId, Guid tutorId)
@@ -92,10 +102,12 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
             if (privateLesson.TutorId != null)
             {
-                throw new Exception($"Private lesson is already assigned.");
+                throw new RepositoryException($"Private lesson is already assigned.");
             }
             var tutor = await _userRepository.GetOrFailAsync(tutorId);
             privateLesson.AssignTutor(tutor);
+
+            logger.Info($"Tutor with id {0} was assigned to lesson with id {1}", tutorId, privateLessonId);
         }
 
         public async Task RemoveAssignedTutor(Guid privateLessonId, Guid userId)
@@ -103,9 +115,11 @@ namespace Find_A_Tutor.Infrastructure.Services
             var privateLesson = await _privateLessonRepository.GetOrFailAsync(privateLessonId);
             if (privateLesson.TutorId != userId && privateLesson.StudentId != userId)
             {
-                throw new Exception("Tutor can be unassign only by orignal student or tutor.");
+                throw new RepositoryException("Tutor can be unassign only by orignal student or tutor.");
             }
             privateLesson.RemoveAssignedTutor();
+
+            logger.Info($"Assigned tutor was removed from lesson with id {1}", privateLessonId);
         }
     }
 }
