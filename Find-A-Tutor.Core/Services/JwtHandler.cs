@@ -26,7 +26,7 @@ namespace Find_A_Tutor.Core.Services
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
                 new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString())
+                new Claim(JwtRegisteredClaimNames.Iat, ((DateTimeOffset)now).ToUnixTimeSeconds().ToString())
             };
 
             var expires = now.AddMinutes(_jwtSettings.ExpiryMinutes);
@@ -45,7 +45,7 @@ namespace Find_A_Tutor.Core.Services
             return new JwtDto
             {
                 Token = token,
-                Expires = expires.ToTimestamp()
+                Expires = ((DateTimeOffset)expires).ToUnixTimeSeconds()
             };
         }
     }
