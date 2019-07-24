@@ -27,13 +27,13 @@ namespace Find_A_Tutor.Api.Controllers
         [HttpGet("{privateLessonId}")]
         public async Task<IActionResult> Get(Guid privateLessonId)
         {
-            var privateLesson = await _privateLessonService.GetAsync(privateLessonId);
-            if (privateLesson == null)
+            var privateLessonResult = await _privateLessonService.GetAsync(privateLessonId);
+            if (!privateLessonResult.IsSuccess)
             {
                 return NotFound();
             }
 
-            return Json(privateLesson);
+            return Json(privateLessonResult);
         }
 
         [HttpPost]

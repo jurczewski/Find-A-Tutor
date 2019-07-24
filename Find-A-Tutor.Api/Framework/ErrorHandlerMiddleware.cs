@@ -34,6 +34,7 @@ namespace Find_A_Tutor.Api.Framework
             var exceptionType = exception.GetType();
             var statusCode = HttpStatusCode.InternalServerError;
 
+            //todo: decide what exception should use
             switch (exception)
             {
                 case Exception e when exceptionType == typeof(UnauthorizedAccessException):

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Find_A_Tutor.Core.Domain;
-using Find_A_Tutor.Core.Exceptions;
-using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Core.DTO;
+using Find_A_Tutor.Core.Exceptions;
 using Find_A_Tutor.Core.Extensions;
+using Find_A_Tutor.Core.Repositories;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -28,10 +28,13 @@ namespace Find_A_Tutor.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<PrivateLessonDTO> GetAsync(Guid id)
+        public async Task<Result<PrivateLessonDTO>> GetAsync(Guid id)
         {
             var privateLesson = await _privateLessonRepository.GetAsync(id);
-            return _mapper.Map<PrivateLessonDTO>(privateLesson);
+
+            return privateLesson != null ?
+                                    Result<PrivateLessonDTO>.Ok(_mapper.Map<PrivateLessonDTO>(privateLesson)) :
+                                    Result<PrivateLessonDTO>.Error($"Private lesson with id: {id}, does not exists.");
         }
 
         public async Task<PrivateLessonDTO> GetAsyncBySubject(string name)
@@ -64,7 +67,7 @@ namespace Find_A_Tutor.Core.Services
             var privateLesson = await _privateLessonRepository.GetAsync(id);
             if (privateLesson != null)
             {
-                throw new RepositoryException($"Private lesson already exists.");                
+                throw new RepositoryException($"Private lesson already exists.");
             }
 
             var schoolSubject = await _schoolSubjectRepository.GetOrFailAsync(subject);
