@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Find_A_Tutor.Infrastructure.DTO
+namespace Find_A_Tutor.Core.DTO
 {
     public class AccountDto
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Find_A_Tutor.Infrastructure.Extensions
+namespace Find_A_Tutor.Core.Extensions
 {
     public static class DateTimeExtensions
     {

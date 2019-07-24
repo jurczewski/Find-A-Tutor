@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Find_A_Tutor.Core.Domain;
-using Find_A_Tutor.Infrastructure.DTO;
+using Find_A_Tutor.Core.DTO;
 
-namespace Find_A_Tutor.Infrastructure.Mappers
+namespace Find_A_Tutor.Core.Mappers
 {
     public static class AutoMapperConfig
     {

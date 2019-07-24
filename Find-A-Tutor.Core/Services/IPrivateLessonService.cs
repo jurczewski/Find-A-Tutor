@@ -1,9 +1,9 @@
-﻿using Find_A_Tutor.Infrastructure.DTO;
+﻿using Find_A_Tutor.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Find_A_Tutor.Infrastructure.Services
+namespace Find_A_Tutor.Core.Services
 {
     public interface IPrivateLessonService
     {

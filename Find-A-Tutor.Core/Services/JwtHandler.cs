@@ -1,6 +1,6 @@
-﻿using Find_A_Tutor.Infrastructure.DTO;
-using Find_A_Tutor.Infrastructure.Extensions;
-using Find_A_Tutor.Infrastructure.Settings;
+﻿using Find_A_Tutor.Core.DTO;
+using Find_A_Tutor.Core.Extensions;
+using Find_A_Tutor.Core.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Find_A_Tutor.Infrastructure.Services
+namespace Find_A_Tutor.Core.Services
 {
     public class JwtHandler : IJwtHandler
     {

@@ -4,7 +4,7 @@ using Find_A_Tutor.Core.Repositories;
 using System;
 using System.Threading.Tasks;
 
-namespace Find_A_Tutor.Infrastructure.Extensions
+namespace Find_A_Tutor.Core.Extensions
 {
     public static class RepositoryExtensions
     {

@@ -1,10 +1,10 @@
 ﻿using Find_A_Tutor.Api.Framework;
 using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Infrastructure.EF;
-using Find_A_Tutor.Infrastructure.Mappers;
+using Find_A_Tutor.Core.Mappers;
 using Find_A_Tutor.Infrastructure.Repositories;
-using Find_A_Tutor.Infrastructure.Services;
-using Find_A_Tutor.Infrastructure.Settings;
+using Find_A_Tutor.Core.Services;
+using Find_A_Tutor.Core.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

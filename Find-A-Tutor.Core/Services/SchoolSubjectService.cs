@@ -1,11 +1,11 @@
 ﻿using Find_A_Tutor.Core.Domain;
 using Find_A_Tutor.Core.Repositories;
-using Find_A_Tutor.Infrastructure.Extensions;
+using Find_A_Tutor.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Find_A_Tutor.Infrastructure.Services
+namespace Find_A_Tutor.Core.Services
 {
     public class SchoolSubjectService : ISchoolSubjectService
     {

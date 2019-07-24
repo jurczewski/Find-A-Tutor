@@ -1,4 +1,4 @@
-﻿namespace Find_A_Tutor.Infrastructure.Settings
+﻿namespace Find_A_Tutor.Core.Settings
 {
     public class JwtSettings
     {
