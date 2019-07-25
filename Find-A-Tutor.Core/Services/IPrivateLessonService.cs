@@ -9,7 +9,7 @@ namespace Find_A_Tutor.Core.Services
     public interface IPrivateLessonService
     {
         Task<Result<PrivateLessonDTO>> GetAsync(Guid id);
-        Task<Result<PrivateLessonDTO>> GetAsyncBySubject(string name);
+        Task<Result<IEnumerable<PrivateLessonDTO>>> GetAsyncBySubject(string name);
         Task<Result<IEnumerable<PrivateLessonDTO>>> GetForUserAsync(Guid userId);
         Task<Result<IEnumerable<PrivateLessonDTO>>> BrowseAsync(string description = "");
         Task<Result> CreateAsync(Guid privateLessonId, Guid studnetId, DateTime relevantTo, string description, string subject);

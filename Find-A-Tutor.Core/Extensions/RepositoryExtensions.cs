@@ -18,16 +18,5 @@ namespace Find_A_Tutor.Core.Extensions
 
             return user;
         }
-
-        public static async Task<SchoolSubject> GetOrFailAsync(this ISchoolSubjectRepository repository, Guid id)
-        {
-            var schoolSubject = await repository.GetAsync(id);
-            if (schoolSubject == null)
-            {
-                throw new RepositoryException($"School subject with id: '{id}' does not exist.");
-            }
-
-            return schoolSubject;
-        }
     }
 }

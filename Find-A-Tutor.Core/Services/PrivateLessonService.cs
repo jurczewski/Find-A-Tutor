@@ -28,6 +28,7 @@ namespace Find_A_Tutor.Core.Services
 
         public async Task<Result<PrivateLessonDTO>> GetAsync(Guid id)
         {
+            logger.Info($"Fetching private lessons with id: {id}");
             var privateLesson = await _privateLessonRepository.GetAsync(id);
 
             return privateLesson != null ?
@@ -35,12 +36,13 @@ namespace Find_A_Tutor.Core.Services
                                     Result<PrivateLessonDTO>.Error($"Private lesson with id: {id}, does not exists.");
         }
 
-        public async Task<Result<PrivateLessonDTO>> GetAsyncBySubject(string subject)
+        public async Task<Result<IEnumerable<PrivateLessonDTO>>> GetAsyncBySubject(string subject)
         {
+            logger.Info($"Fetching private lessons with subject: {subject}");
             var privateLesson = await _privateLessonRepository.GetAsyncBySubject(subject);
             return privateLesson != null ?
-                                    Result<PrivateLessonDTO>.Ok(_mapper.Map<PrivateLessonDTO>(privateLesson)) :
-                                    Result<PrivateLessonDTO>.Error($"There are no private lessons that subject contains \"{subject}\".");
+                                    Result<IEnumerable<PrivateLessonDTO>>.Ok(_mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson)) :
+                                    Result<IEnumerable<PrivateLessonDTO>>.Error($"There are no private lessons that subject contains \"{subject}\".");
         }
 
         public async Task<Result<IEnumerable<PrivateLessonDTO>>> GetForUserAsync(Guid userId)
@@ -59,7 +61,7 @@ namespace Find_A_Tutor.Core.Services
 
         public async Task<Result<IEnumerable<PrivateLessonDTO>>> BrowseAsync(string description = "")
         {
-            logger.Info("Fetching events");
+            logger.Info("Fetching private lessons");
             var privateLesson = await _privateLessonRepository.BrowseAsync(description);
             return Result<IEnumerable<PrivateLessonDTO>>.Ok(_mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson));
         }

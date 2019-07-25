@@ -22,34 +22,41 @@ namespace Find_A_Tutor.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Get(string name)
         {
-            var schoolSubject = await _schoolSubjectService.BrowseAsync(name);
+            var schoolSubjectResult = await _schoolSubjectService.BrowseAsync(name);
 
-            return Json(schoolSubject);
+            return !schoolSubjectResult.IsSuccess ? NotFound() : (IActionResult)Json(schoolSubjectResult);
+        }
+
+        [HttpGet("{schoolSubjectId}")]
+        public async Task<IActionResult> Get(Guid schoolSubjectId)
+        {
+            var schoolSubjectResult = await _schoolSubjectService.GetAsync(schoolSubjectId);
+            return !schoolSubjectResult.IsSuccess ? NotFound() : (IActionResult)Json(schoolSubjectId);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateSchoolSubject command)
         {
             command.SchoolSubjectId = Guid.NewGuid();
-            await _schoolSubjectService.CreateAsync(command.SchoolSubjectId, command.Name);
+            var schoolSubjectResult = await _schoolSubjectService.CreateAsync(command.SchoolSubjectId, command.Name);
 
-            return Created($"/PrivateLesson/{command.Name}", null);
+            return schoolSubjectResult.IsSuccess ? Created($"/PrivateLesson/{command.Name}", null) : (IActionResult)Json(schoolSubjectResult);
         }
 
         [HttpPut("{schoolSubjectId}")]
         public async Task<IActionResult> Put(Guid schoolSubjectId, [FromBody]UpdateSchoolSubject command)
         {
-            await _schoolSubjectService.UpdateAsync(schoolSubjectId, command.Name);
+            var schoolSubjectResult = await _schoolSubjectService.UpdateAsync(schoolSubjectId, command.Name);
 
-            return NoContent();
+            return schoolSubjectResult.IsSuccess ? NoContent() : (IActionResult)Json(schoolSubjectResult);
         }
 
         [HttpDelete("{schoolSubjectId}")]
         public async Task<IActionResult> Delete(Guid schoolSubjectId)
         {
-            await _schoolSubjectService.DeleteAsync(schoolSubjectId);
+            var schoolSubjectResult = await _schoolSubjectService.DeleteAsync(schoolSubjectId);
 
-            return NoContent();
+            return schoolSubjectResult.IsSuccess ? NoContent() : (IActionResult)Json(schoolSubjectResult);
         }
 
     }
