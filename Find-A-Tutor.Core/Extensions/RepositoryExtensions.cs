@@ -8,17 +8,6 @@ namespace Find_A_Tutor.Core.Extensions
 {
     public static class RepositoryExtensions
     {
-        public static async Task<PrivateLesson> GetOrFailAsync(this IPrivateLessonRepository repository, Guid id)
-        {
-            var privateLesson = await repository.GetAsync(id);
-            if (privateLesson == null)
-            {
-                throw new RepositoryException($"Private lesson with id: '{id}' does not exist.");
-            }
-
-            return privateLesson;
-        }
-
         public static async Task<User> GetOrFailAsync(this IUserRepository repository, Guid id)
         {
             var user = await repository.GetAsync(id);
@@ -28,17 +17,6 @@ namespace Find_A_Tutor.Core.Extensions
             }
 
             return user;
-        }
-
-        public static async Task<SchoolSubject> GetOrFailAsync(this ISchoolSubjectRepository repository, string name)
-        {
-            var schoolSubject = await repository.GetAsync(name);
-            if (schoolSubject == null)
-            {
-                throw new RepositoryException($"School subject with name: '{name}' does not exist.");
-            }
-
-            return schoolSubject;
         }
 
         public static async Task<SchoolSubject> GetOrFailAsync(this ISchoolSubjectRepository repository, Guid id)

@@ -24,16 +24,20 @@ namespace Find_A_Tutor.Api.Controllers
             return Json(privateLessons);
         }
 
+        //todo: get by subject
+        //[HttpGet("/subject/{name}")]
+        //public async Task<IActionResult> GetBySubject(string name)
+        //{
+        //    var privateLessons = await _privateLessonService.GetAsyncBySubject(name);
+
+        //    return Json(privateLessons);
+        //}
+
         [HttpGet("{privateLessonId}")]
         public async Task<IActionResult> Get(Guid privateLessonId)
         {
             var privateLessonResult = await _privateLessonService.GetAsync(privateLessonId);
-            if (!privateLessonResult.IsSuccess)
-            {
-                return NotFound();
-            }
-
-            return Json(privateLessonResult);
+            return !privateLessonResult.IsSuccess ? NotFound() : (IActionResult)Json(privateLessonResult);
         }
 
         [HttpPost]
@@ -41,45 +45,45 @@ namespace Find_A_Tutor.Api.Controllers
         public async Task<IActionResult> Post([FromBody]CreatePrivateLesson command)
         {
             command.PrivateLessonId = Guid.NewGuid();
-            await _privateLessonService.CreateAsync(command.PrivateLessonId, UserId, command.RelevantTo, command.Description, command.Subject);
+            var createdResult = await _privateLessonService.CreateAsync(command.PrivateLessonId, UserId, command.RelevantTo, command.Description, command.Subject);
 
-            return Created($"/PrivateLesson/{command.PrivateLessonId}", null);
+            return createdResult.IsSuccess ? Created($"/PrivateLesson/{command.PrivateLessonId}", null) : (IActionResult)Json(createdResult);
         }
 
         [HttpPut("{privateLessonId}")]
         [Authorize(Policy = "HasStudentRole")]
         public async Task<IActionResult> Put(Guid privateLessonId, [FromBody]UpdatePrivateLesson command)
         {
-            await _privateLessonService.UpdateAsync(privateLessonId, command.RelevantTo, command.Description, command.Subject);
+            var result = await _privateLessonService.UpdateAsync(privateLessonId, command.RelevantTo, command.Description, command.Subject);
 
-            return NoContent();
+            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
         }
 
         [HttpDelete("{privateLessonId}")]
         [Authorize(Policy = "HasAdminRole")]
         public async Task<IActionResult> Delete(Guid privateLessonId)
         {
-            await _privateLessonService.DeleteAsync(privateLessonId);
+            var result = await _privateLessonService.DeleteAsync(privateLessonId);
 
-            return NoContent();
+            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
         }
 
         [HttpPut("/assign/{privateLessonId}")]
         [Authorize(Policy = "HasTutorRole")]
         public async Task<IActionResult> AssignTutor(Guid privateLessonId)
         {
-            await _privateLessonService.AssignTutor(privateLessonId, UserId);
+            var result = await _privateLessonService.AssignTutor(privateLessonId, UserId);
 
-            return NoContent();
+            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
         }
 
         [HttpPut("/unassign/{privateLessonId}")]
         [Authorize(Policy = "HasTutorRole")]
         public async Task<IActionResult> RemoveAssignedTutor(Guid privateLessonId)
         {
-            await _privateLessonService.RemoveAssignedTutor(privateLessonId, UserId);
+            var result = await _privateLessonService.RemoveAssignedTutor(privateLessonId, UserId);
 
-            return NoContent();
+            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
         }
     }
 }

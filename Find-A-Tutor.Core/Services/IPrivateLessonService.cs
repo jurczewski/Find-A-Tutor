@@ -9,13 +9,13 @@ namespace Find_A_Tutor.Core.Services
     public interface IPrivateLessonService
     {
         Task<Result<PrivateLessonDTO>> GetAsync(Guid id);
-        Task<PrivateLessonDTO> GetAsyncBySubject(string name);
-        Task<IEnumerable<PrivateLessonDTO>> GetForUserAsync(Guid userId);
-        Task<IEnumerable<PrivateLessonDTO>> BrowseAsync(string description = "");
-        Task CreateAsync(Guid privateLessonId, Guid studnetId, DateTime relevantTo, string description, string subject);
-        Task UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject);
-        Task DeleteAsync(Guid privateLessonId);
-        Task AssignTutor(Guid privateLessonId, Guid tutorId);
-        Task RemoveAssignedTutor(Guid privateLessonId, Guid userId);
+        Task<Result<PrivateLessonDTO>> GetAsyncBySubject(string name);
+        Task<Result<IEnumerable<PrivateLessonDTO>>> GetForUserAsync(Guid userId);
+        Task<Result<IEnumerable<PrivateLessonDTO>>> BrowseAsync(string description = "");
+        Task<Result> CreateAsync(Guid privateLessonId, Guid studnetId, DateTime relevantTo, string description, string subject);
+        Task<Result> UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject);
+        Task<Result> DeleteAsync(Guid privateLessonId);
+        Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId);
+        Task<Result> RemoveAssignedTutor(Guid privateLessonId, Guid userId);
     }
 }

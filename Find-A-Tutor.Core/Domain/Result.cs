@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Find_A_Tutor.Core.Domain
 {
-    public class Result<T> where T : class
+    public class Result<T> : Result//, IEquatable<Result<T>> //where T : class
     {
         private T _value;
-        public List<string> Errors { get; set; }
-        public bool IsSuccess { get; set; }
         public T Value
         {
             get { return _value; }
@@ -18,27 +17,65 @@ namespace Find_A_Tutor.Core.Domain
             }
         }
 
-
         public static Result<T> Ok(T successfulResult)
         {
-            return new Result<T>(successfulResult);
+            return new Result<T>
+            {
+                _value = successfulResult,
+                IsSuccess = true
+            };
         }
-
-        private Result(T successfulResult)
-        {
-            _value = successfulResult;
-            IsSuccess = true;
-        }
-
 
         public static Result<T> Error(params string[] errors)
         {
-            return new Result<T>(errors);
+            return new Result<T>
+            {
+                Errors = errors?.ToList(),
+                IsSuccess = false
+            };
         }
-        private Result(params string[] errors)
+
+        public bool Equals(Result<T> other)
         {
-            Errors = errors?.ToList();
-            IsSuccess = false;
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return EqualityComparer<T>.Default.Equals(_value, other._value);
+        }
+    }
+
+    public class Result
+    {
+        public List<string> Errors { get; set; }
+        public bool IsSuccess { get; set; }
+
+        public static Result Ok()
+        {
+            return new Result
+            {
+                IsSuccess = true
+            };
+        }
+
+        public static Result Error(params string[] errors)
+        {
+            return new Result
+            {
+                Errors = errors?.ToList(),
+                IsSuccess = false
+            };
+        }
+
+        public static Result Error(Exception exception, string message)
+        {
+            return new Result
+            {
+                IsSuccess = true,
+                Errors = new List<string>
+                {
+                    message,
+                    exception.ToString()
+                }
+            };
         }
     }
 }
