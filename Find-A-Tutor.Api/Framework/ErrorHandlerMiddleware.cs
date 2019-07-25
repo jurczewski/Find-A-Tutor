@@ -16,7 +16,7 @@ namespace Find_A_Tutor.Api.Framework
         {
             _next = next;
         }
-        //todo: Add Result to exceptions
+        //todo: Add Result to HandlerErrorAsync and Invoke
         public async Task Invoke(HttpContext context)
         {
             try
@@ -44,10 +44,6 @@ namespace Find_A_Tutor.Api.Framework
                     statusCode = HttpStatusCode.BadRequest;
                     break;
                 case Exception e when exceptionType == typeof(ValidationException):
-                    statusCode = HttpStatusCode.BadRequest;
-                    logger.Trace(e.GetType().Name + ": " + e.Message);
-                    break;
-                case Exception e when exceptionType == typeof(RepositoryException):
                     statusCode = HttpStatusCode.BadRequest;
                     logger.Trace(e.GetType().Name + ": " + e.Message);
                     break;

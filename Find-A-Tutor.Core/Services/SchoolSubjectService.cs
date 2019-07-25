@@ -1,5 +1,4 @@
 ﻿using Find_A_Tutor.Core.Domain;
-using Find_A_Tutor.Core.Extensions;
 using Find_A_Tutor.Core.Repositories;
 using NLog;
 using System;
@@ -59,7 +58,7 @@ namespace Find_A_Tutor.Core.Services
         public async Task<Result> UpdateAsync(Guid id, string name)
         {
             var schoolSubjectById = await _schoolSubjectRepository.GetAsync(id);
-            if(schoolSubjectById == null)
+            if (schoolSubjectById == null)
             {
                 return Result.Error($"School subject with id: '{id}' does not exist.");
             }

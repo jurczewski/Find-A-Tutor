@@ -1,5 +1,4 @@
 ﻿using Find_A_Tutor.Core.DTO;
-using Find_A_Tutor.Core.Extensions;
 using Find_A_Tutor.Core.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
