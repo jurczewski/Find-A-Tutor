@@ -9,7 +9,15 @@ namespace Find_A_Tutor.Core.Domain
         private T _value;
         public T Value
         {
-            get { return _value; }
+            get
+            {
+                if (IsSuccess)
+                {
+                    return _value;
+                }
+
+                throw new ApplicationException("Cannot download data from failure result.");
+            }
             set
             {
                 _value = value;
