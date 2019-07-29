@@ -18,6 +18,8 @@ using Newtonsoft.Json;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using System.Text;
+using AutoMapper;
+using System.Reflection;
 
 namespace Find_A_Tutor.Api
 {
@@ -63,9 +65,11 @@ namespace Find_A_Tutor.Api
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<FindATurorContext>(options => options.UseSqlServer(sqlSettings.ConnectionString));
 
-            services.AddSingleton(AutoMapperConfig.Initialize());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             //todo: DataInitializer
             //services.AddScoped<IDataInitializer, DataInitializer>(); 
+
             services.AddSingleton<IJwtHandler, JwtHandler>();
 
             //var appSettings = Configuration.GetSection("app");
