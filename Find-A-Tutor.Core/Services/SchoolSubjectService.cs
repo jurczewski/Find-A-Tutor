@@ -18,7 +18,7 @@ namespace Find_A_Tutor.Core.Services
 
         public async Task<Result<SchoolSubject>> GetAsync(Guid id)
         {
-            logger.Info($"Fetching school subjects with id: {id}");
+            logger.Info($"Fetching school subjects with id: '{id}'");
             var schoolSubject = await _schoolSubjectRepository.GetAsync(id);
             return schoolSubject != null ?
                                     Result<SchoolSubject>.Ok(schoolSubject) :
@@ -27,11 +27,11 @@ namespace Find_A_Tutor.Core.Services
 
         public async Task<Result<SchoolSubject>> GetAsync(string name)
         {
-            logger.Info($"Fetching school subjects with name: {name}");
+            logger.Info($"Fetching school subjects with name: '{name}'");
             var schoolSubject = await _schoolSubjectRepository.GetAsync(name);
             return schoolSubject != null ?
                                     Result<SchoolSubject>.Ok(schoolSubject) :
-                                    Result<SchoolSubject>.Error($"School subject with name: {name}, does not exists.");
+                                    Result<SchoolSubject>.Error($"School subject with name: '{name}', does not exists.");
         }
         public async Task<Result<IEnumerable<SchoolSubject>>> BrowseAsync(string name = "")
         {
@@ -51,7 +51,7 @@ namespace Find_A_Tutor.Core.Services
             schoolSubject = new SchoolSubject(id, name);
             await _schoolSubjectRepository.AddAsync(schoolSubject);
 
-            logger.Info($"School subject \"{name}\" with id: {id}, was successfully created");
+            logger.Info($"School subject \"{name}\" with id: '{id}', was successfully created");
             return Result.Ok();
         }
 
@@ -72,7 +72,7 @@ namespace Find_A_Tutor.Core.Services
             schoolSubjectById.SetName(name);
 
             await _schoolSubjectRepository.UpdateAsync(schoolSubjectById);
-            logger.Info($"School subject with id: {id}, was successfully updated");
+            logger.Info($"School subject with id: '{id}', was successfully updated");
             return Result.Ok();
         }
 
@@ -86,7 +86,7 @@ namespace Find_A_Tutor.Core.Services
 
             await _schoolSubjectRepository.DeleteAsync(schoolSubjectById);
 
-            logger.Info($"School subject with id: {id}, was successfully deleted");
+            logger.Info($"School subject with id: '{id}', was successfully deleted");
             return Result.Ok();
         }
     }

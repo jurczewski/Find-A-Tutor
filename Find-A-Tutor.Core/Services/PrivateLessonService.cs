@@ -28,12 +28,12 @@ namespace Find_A_Tutor.Core.Services
 
         public async Task<Result<PrivateLessonDTO>> GetAsync(Guid id)
         {
-            logger.Info($"Fetching private lessons with id: {id}");
+            logger.Info($"Fetching private lessons with id: '{id}'");
             var privateLesson = await _privateLessonRepository.GetAsync(id);
 
             return privateLesson != null ?
                                     Result<PrivateLessonDTO>.Ok(_mapper.Map<PrivateLessonDTO>(privateLesson)) :
-                                    Result<PrivateLessonDTO>.Error($"Private lesson with id: {id}, does not exists.");
+                                    Result<PrivateLessonDTO>.Error($"Private lesson with id: '{id}', does not exists.");
         }
 
         public async Task<Result<IEnumerable<PrivateLessonDTO>>> GetAsyncBySubject(string subject)
@@ -83,7 +83,7 @@ namespace Find_A_Tutor.Core.Services
             privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, schoolSubject);
             await _privateLessonRepository.AddAsync(privateLesson);
 
-            logger.Info($"Private lesson with id: {id}, was successfully created");
+            logger.Info($"Private lesson with id: '{id}', was successfully created");
             return Result.Ok();
         }
 
@@ -107,7 +107,7 @@ namespace Find_A_Tutor.Core.Services
 
             await _privateLessonRepository.UpdateAsync(privateLesson);
 
-            logger.Info($"Private lesson with id: {privateLessonId}, was successfully updated");
+            logger.Info($"Private lesson with id: '{privateLessonId}', was successfully updated");
             return Result.Ok();
         }
 
@@ -120,7 +120,7 @@ namespace Find_A_Tutor.Core.Services
             }
             await _privateLessonRepository.DeleteAsync(privateLesson);
 
-            logger.Info($"Private lesson with id: {privateLessonId}, was successfully deleted");
+            logger.Info($"Private lesson with id: '{privateLessonId}', was successfully deleted");
             return Result.Ok();
         }
 
@@ -144,7 +144,7 @@ namespace Find_A_Tutor.Core.Services
 
             privateLesson.AssignTutor(tutor);
 
-            logger.Info($"Tutor with id {tutorId} was assigned to lesson with id {privateLessonId}");
+            logger.Info($"Tutor with id '{tutorId}' was assigned to lesson with id '{privateLessonId}'");
             return Result.Ok();
         }
 
@@ -162,7 +162,7 @@ namespace Find_A_Tutor.Core.Services
             }
             privateLesson.RemoveAssignedTutor();
 
-            logger.Info($"Assigned tutor was removed from lesson with id {privateLessonId}");
+            logger.Info($"Assigned tutor was removed from lesson with id '{privateLessonId}'");
             return Result.Ok();
         }
     }

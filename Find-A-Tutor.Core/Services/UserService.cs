@@ -24,7 +24,7 @@ namespace Find_A_Tutor.Core.Services
 
         public async Task<Result<AccountDto>> GetAccountAsync(Guid userId)
         {
-            logger.Info($"Fetching user with id: {userId}");
+            logger.Info($"Fetching user with id: '{userId}'");
             var user = await _userRepository.GetAsync(userId);
             if (user == null)
             {
@@ -39,7 +39,7 @@ namespace Find_A_Tutor.Core.Services
             var user = await _userRepository.GetAsync(email);
             if (user != null)
             {
-                return Result.Error($"User with email: {email} already exists.");
+                return Result.Error($"User with email: '{email}' already exists.");
             }
             user = new User(userId, role, firstName, lastName, email, password);
             await _userRepository.AddAsync(user);
