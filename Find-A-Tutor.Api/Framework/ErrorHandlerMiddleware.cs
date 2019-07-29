@@ -1,4 +1,5 @@
-﻿using Find_A_Tutor.Core.Exceptions;
+﻿using Find_A_Tutor.Core.Domain;
+using Find_A_Tutor.Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using NLog;
@@ -16,7 +17,7 @@ namespace Find_A_Tutor.Api.Framework
         {
             _next = next;
         }
-        //todo: Add Result to HandlerErrorAsync and Invoke
+
         public async Task Invoke(HttpContext context)
         {
             try
@@ -34,14 +35,15 @@ namespace Find_A_Tutor.Api.Framework
             var exceptionType = exception.GetType();
             var statusCode = HttpStatusCode.InternalServerError;
 
-            //todo: decide what exception should use
             switch (exception)
             {
                 case Exception e when exceptionType == typeof(UnauthorizedAccessException):
                     statusCode = HttpStatusCode.Unauthorized;
+                    logger.Trace(e.GetType().Name + ": " + e.Message);
                     break;
                 case Exception e when exceptionType == typeof(ArgumentException):
                     statusCode = HttpStatusCode.BadRequest;
+                    logger.Trace(e.GetType().Name + ": " + e.Message);
                     break;
                 case Exception e when exceptionType == typeof(ValidationException):
                     statusCode = HttpStatusCode.BadRequest;
@@ -49,7 +51,7 @@ namespace Find_A_Tutor.Api.Framework
                     break;
             }
 
-            var response = new { message = exception.Message };
+            var response = Result.Error(exception.Message);
             var payLoad = JsonConvert.SerializeObject(response);
 
             context.Response.ContentType = "application/json";
