@@ -1,4 +1,5 @@
 ﻿using System;
+using Find_A_Tutor.Core.Exceptions;
 
 namespace Find_A_Tutor.Core.Domain
 {
@@ -16,7 +17,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(subject))
             {
-                throw new Exception($"School subject can not have an empty name.");
+                throw new ValidationException($"School subject can not have an empty name.");
             }
             Name = subject;
         }

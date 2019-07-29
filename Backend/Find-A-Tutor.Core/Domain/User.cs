@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Find_A_Tutor.Core.Exceptions;
 
 namespace Find_A_Tutor.Core.Domain
 {
@@ -33,7 +34,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new Exception($"User cannot have an empty first name.");
+                throw new ValidationException($"User cannot have an empty first name.");
             }
             FirstName = name;
         }
@@ -42,7 +43,7 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new Exception($"User cannot have an empty last name.");
+                throw new ValidationException($"User cannot have an empty last name.");
             }
             LastName = name;
         }
@@ -51,14 +52,14 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                throw new Exception($"User cannot have an empty email.");
+                throw new ValidationException($"User cannot have an empty email.");
             }
 
             var isValidMail = new Regex(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
             if (!isValidMail.IsMatch(email))
             {
-                throw new Exception($"Invalid email.");
+                throw new ValidationException($"Invalid email.");
             }
 
             Email = email;
@@ -68,12 +69,12 @@ namespace Find_A_Tutor.Core.Domain
         {
             if (string.IsNullOrWhiteSpace(role))
             {
-                throw new Exception($"User cannot have an empty role.");
+                throw new ValidationException($"User cannot have an empty role.");
             }
             role = role.ToLowerInvariant();
             if (!_roles.Contains(role))
             {
-                throw new Exception($"User cannot have an role: '{role}'.");
+                throw new ValidationException($"User cannot have an role: '{role}'.");
             }
             Role = role;
         }
@@ -86,22 +87,22 @@ namespace Find_A_Tutor.Core.Domain
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new Exception($"Password should not be empty.");
+                throw new ValidationException($"Password should not be empty.");
             }
 
             if (!hasMiniMaxChars.IsMatch(password))
             {
-                throw new Exception("Password should be between 8 - 32 alphanumeric character.");
+                throw new ValidationException("Password should be between 8 - 32 alphanumeric character.");
             }
 
             if (!hasLowerChar.IsMatch(password))
             {
-                throw new Exception("Password should contain At least one lower case letter");
+                throw new ValidationException("Password should contain At least one lower case letter");
             }
 
             if (!hasNumber.IsMatch(password))
             {
-                throw new Exception("Password should contain At least one numeric value");
+                throw new ValidationException("Password should contain At least one numeric value");
             }
 
             Password = password;
