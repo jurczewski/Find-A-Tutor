@@ -9,16 +9,7 @@ namespace Find_A_Tutor.Core.Domain
         private T _value;
         public T Value
         {
-            get
-            {
-                if (IsSuccess)
-                {
-                    return _value;
-                }
-
-                throw new ApplicationException("Cannot download data from failure result.");
-            }
-
+            get { return _value; }
             set
             {
                 _value = value;
@@ -35,7 +26,6 @@ namespace Find_A_Tutor.Core.Domain
             };
         }
 
-#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         public static Result<T> Error(params string[] errors)
         {
             return new Result<T>
@@ -43,6 +33,13 @@ namespace Find_A_Tutor.Core.Domain
                 Errors = errors?.ToList(),
                 IsSuccess = false
             };
+        }
+
+        public bool Equals(Result<T> other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return EqualityComparer<T>.Default.Equals(_value, other._value);
         }
     }
 
