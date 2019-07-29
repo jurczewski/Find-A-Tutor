@@ -55,7 +55,8 @@ namespace Find_A_Tutor.Core.Domain
                 throw new ValidationException($"User cannot have an empty email.");
             }
 
-            var isValidMail = new Regex(@"/.+@.+\..+/i");
+            var isValidMail = new Regex(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                            @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
             if (!isValidMail.IsMatch(email))
             {
                 throw new ValidationException($"Invalid email.");
