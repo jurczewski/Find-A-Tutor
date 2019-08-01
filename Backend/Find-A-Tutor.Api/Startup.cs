@@ -42,6 +42,7 @@ namespace Find_A_Tutor.Api
             services.AddScoped<IPrivateLessonService, PrivateLessonService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             services.Configure<SqlSettings>(Configuration);
             var sqlSettings = Configuration.GetSection("sql").Get<SqlSettings>();
@@ -70,6 +71,9 @@ namespace Find_A_Tutor.Api
 
             //var appSettings = Configuration.GetSection("app");
             //services.Configure<AppSettings>(appSettings);
+
+            var paypalSettings = Configuration.GetSection("paypal");
+            services.Configure<PayPalSettings>(paypalSettings);
 
             var jwtSettings = Configuration.GetSection("jwt");
             services.Configure<JwtSettings>(jwtSettings);
