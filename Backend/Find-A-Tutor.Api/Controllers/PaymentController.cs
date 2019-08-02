@@ -16,7 +16,7 @@ namespace Find_A_Tutor.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/create")]
+        [Route("create")]
         public async Task<IActionResult> CreatePayment()
         {
             //todo: przekazać from body jakiś obiekt 
@@ -24,18 +24,31 @@ namespace Find_A_Tutor.Api.Controllers
 
             var result = await _paymentService.CreatePayment();
 
-            logger.Info($"Created payment successfuly: '{result}' from the PayPal API.");
-
-            foreach (var link in result.links)
+            if (result.IsSuccess)
             {
-                if (link.rel.Equals("approval_url"))
+                foreach (var link in result.Value.links)
                 {
-                    logger.Info($"Found the approval URL: {link.href} from response.");
-                    return Redirect(link.href);
+                    if (link.rel.Equals("approval_url"))
+                    {
+                        return Redirect(link.href);
+                    }
                 }
             }
 
-            return NotFound();
+            return Json(result);
+        }
+
+        [HttpGet]
+        [Route("success")]
+        public async Task<IActionResult> ExecutePayment(string paymentId, string payerId)
+        {
+            logger.Info($"Executing the payment against the Paypal API.");
+
+            var result = await _paymentService.ExecutePayment(paymentId, payerId);
+
+            logger.Info($"The PayPal Controller has a new response: '{result}' from the PayPal Api.");
+
+            return Json(result);
         }
     }
 }
