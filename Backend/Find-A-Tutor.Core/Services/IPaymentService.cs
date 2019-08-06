@@ -1,5 +1,5 @@
 ﻿using Find_A_Tutor.Core.Domain;
-using PayPal.Api;
+using PayPal.v1.Payments;
 using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Core.Services

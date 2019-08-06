@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.5.2" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
-    <PackageReference Include="PayPal" Version="1.9.1" />
+    <PackageReference Include="PayPal" Version="2.0.0-rc2" />
   </ItemGroup>
 
 </Project>

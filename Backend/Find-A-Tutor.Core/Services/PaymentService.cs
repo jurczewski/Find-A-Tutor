@@ -2,9 +2,11 @@
 using Find_A_Tutor.Core.Settings;
 using Microsoft.Extensions.Options;
 using NLog;
-using PayPal.Api;
-using System;
+using PayPal.Core;
+using PayPal.v1.Payments;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Core.Services
@@ -13,103 +15,84 @@ namespace Find_A_Tutor.Core.Services
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private readonly PayPalSettings _payPalSettings;
-        private readonly Dictionary<string, string> _sdkConfig;
-        private readonly string _accessToken;
+        private readonly PayPalHttpClient client;
+        private readonly SandboxEnvironment environment;
+
         public PaymentService(IOptions<PayPalSettings> payPalSettings)
         {
             _payPalSettings = payPalSettings.Value;
-            _sdkConfig = new Dictionary<string, string> {
-               { "mode", "sandbox" },
-               { "clientId", _payPalSettings.ClientId },
-               { "clientSecret", _payPalSettings.ClientSecret }
-            };
-            _accessToken = new OAuthTokenCredential(_payPalSettings.ClientId, _payPalSettings.ClientSecret, _sdkConfig).GetAccessToken();
+            environment = new SandboxEnvironment(_payPalSettings.ClientId, _payPalSettings.ClientSecret);
+            client = new PayPalHttpClient(environment);
         }
         public async Task<Result<Payment>> CreatePayment()
         {
-
-            var apiContext = new APIContext(_accessToken)
+            var payment = new Payment()
             {
-                Config = _sdkConfig
-            };
-
-            logger.Info($"Creating payment...");
-            try
-            {
-                //todo: fulfill payment with data
-                var payment = Payment.Create(apiContext, new Payment
+                Intent = "sale",
+                Transactions = new List<Transaction>()
                 {
-                    intent = "sale",
-                    payer = new Payer
-                    {
-                        payment_method = "paypal"
-                    },
-                    transactions = new List<Transaction>
-                {
-                    new Transaction
-                    {
-                        description = "Transaction description.",
-                        invoice_number = "001",
-                        amount = new Amount
+                        new Transaction()
                         {
-                            currency = "USD",
-                            total = "100.00",
-                            details = new Details
+                            Amount = new Amount()
                             {
-                                tax = "15",
-                                shipping = "10",
-                                subtotal = "75"
-                            }
-                        },
-                        item_list = new ItemList
-                        {
-                            items = new List<Item>
-                            {
-                                new Item
-                                {
-                                    name = "Item Name",
-                                    currency = "USD",
-                                    price = "15",
-                                    quantity = "5",
-                                    sku = "sku"
-                                }
+                                Total = "10",
+                                Currency = "PLN"
                             }
                         }
-                    }
                 },
-                    redirect_urls = new RedirectUrls
-                    {
-                        return_url = "http://mysite.com/return",
-                        cancel_url = "http://mysite.com/cancel"
-                    }
-                });
+                RedirectUrls = new RedirectUrls()
+                {
+                    ReturnUrl = "https://www.example.com/",
+                    CancelUrl = "https://www.example.com"
+                },
+                Payer = new Payer()
+                {
+                    PaymentMethod = "paypal"
+                }
+            };
 
-                var createdPayment = await Task.Run(() => payment.Create(apiContext));
+            PaymentCreateRequest request = new PaymentCreateRequest();
+            request.RequestBody(payment);
 
-                logger.Info($"Payment created succesfully '{createdPayment}'");
+            HttpStatusCode statusCode;
 
-                return Result<Payment>.Ok(createdPayment);
-            }
-            catch(Exception ex)
+            try
             {
-                logger.Error(ex, "An error occurred while creating an invoice.");
-
-                return Result<Payment>.Error("An error occurred while creating an invoice.");
-            }               
+                BraintreeHttp.HttpResponse response = await client.Execute(request);
+                statusCode = response.StatusCode;
+                var result = response.Result<Payment>();
+                return Result<Payment>.Ok(result);
+            }
+            catch (BraintreeHttp.HttpException httpException)
+            {
+                statusCode = httpException.StatusCode;
+                var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
+                return Result<Payment>.Error(statusCode.ToString(), debugId);
+            }
         }
 
         public async Task<Result<Payment>> ExecutePayment(string paymentId, string payerId)
         {
-            var apiContext = new APIContext(_accessToken)
+            var request = new PaymentExecuteRequest(paymentId);
+            request.RequestBody(new PaymentExecution()
             {
-                Config = _sdkConfig
-            };
+                PayerId = payerId
+            });
 
-            var paymentExecution = new PaymentExecution() { payer_id = payerId };
-            var payment = new Payment() { id = paymentId };
-            var executedPayment = await Task.Run(() => payment.Execute(apiContext, paymentExecution));
+            try
+            {
+                BraintreeHttp.HttpResponse response = await client.Execute(request);
+                var statusCode = response.StatusCode;
+                var result = response.Result<Payment>();
+                return Result<Payment>.Ok(result);
 
-            return Result<Payment>.Ok(executedPayment);
+            }
+            catch (BraintreeHttp.HttpException httpException)
+            {
+                var statusCode = httpException.StatusCode;
+                var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
+                return Result<Payment>.Error(statusCode.ToString(), debugId);
+            }
         }
     }
 }

@@ -26,11 +26,11 @@ namespace Find_A_Tutor.Api.Controllers
 
             if (result.IsSuccess)
             {
-                foreach (var link in result.Value.links)
+                foreach (var link in result.Value.Links)
                 {
-                    if (link.rel.Equals("approval_url"))
+                    if (link.Rel.Equals("approval_url"))
                     {
-                        return Redirect(link.href);
+                        return Redirect(link.Href);
                     }
                 }
             }
