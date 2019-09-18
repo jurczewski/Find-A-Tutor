@@ -18,6 +18,10 @@ using Newtonsoft.Json;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using System.Text;
+using Microsoft.OpenApi.Models;
+using System.IO;
+using System.Reflection;
+using System;
 
 namespace Find_A_Tutor.Api
 {
@@ -27,13 +31,26 @@ namespace Find_A_Tutor.Api
         {
             Configuration = configuration;
         }
+        public const string PathBaseEnviromentVariable = "PATH_BASE";
+        public string PathBase => Configuration[PathBaseEnviromentVariable];
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x => {
+                x.SerializerSettings.Formatting = Formatting.Indented;
+                x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Find-A-Tutor Api", Version = "v1" });
+                var basePath = AppContext.BaseDirectory;
+                var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                var fileName = Path.GetFileName(assemblyName + ".xml");
+                c.IncludeXmlComments(Path.Combine(basePath, fileName), includeControllerXmlComments: true);
+            });
 
             services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
             services.AddAuthorization(x => x.AddPolicy("HasTutorRole", p => p.RequireRole("tutor")));
@@ -97,6 +114,15 @@ namespace Find_A_Tutor.Api
         {
             loggerFactory.AddNLog();
             env.ConfigureNLog("nlog.config");
+
+            app.UseSwagger()
+                .UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint(
+                        $"{ (!string.IsNullOrEmpty(PathBase) ? PathBase : string.Empty)}/swagger/v1/swagger.json",
+                        "Find-A-Tutor Api");
+                });
 
             if (env.IsDevelopment())
             {

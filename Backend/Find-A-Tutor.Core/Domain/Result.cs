@@ -34,7 +34,7 @@ namespace Find_A_Tutor.Core.Domain
             };
         }
 
-        public static Result<T> Error(params string[] errors)
+        public new static Result<T> Error(params string[] errors)
         {
             return new Result<T>
             {
