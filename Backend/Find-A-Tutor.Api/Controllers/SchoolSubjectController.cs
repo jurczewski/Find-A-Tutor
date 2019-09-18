@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Find_A_Tutor.Core.Domain;
 
 namespace Find_A_Tutor.Api.Controllers
 {
@@ -18,11 +20,18 @@ namespace Find_A_Tutor.Api.Controllers
             _schoolSubjectService = schoolSubjectService;
         }
 
+        /// <summary>
+        /// Get a SchoolSubject that contains given name.
+        /// </summary>
+        /// <param name="name">Name of a subject.</param>     
+        /// <returns>Return a list of SchoolSubjects</returns>
+        /// <response code="200">OK - request has succeeded.</response>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Get(string name)
+        [ProducesResponseType(typeof(IEnumerable<SchoolSubject>), 200)]
+        public async Task<IActionResult> Get(string name = "")
         {
-            var schoolSubjectResult = await _schoolSubjectService.BrowseAsync(name);
+            Result<IEnumerable<SchoolSubject>> schoolSubjectResult = await _schoolSubjectService.BrowseAsync(name);
 
             return !schoolSubjectResult.IsSuccess ? NotFound() : (IActionResult)Json(schoolSubjectResult);
         }
