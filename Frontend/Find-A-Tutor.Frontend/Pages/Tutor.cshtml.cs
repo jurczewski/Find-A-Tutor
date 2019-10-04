@@ -16,7 +16,7 @@ namespace Find_A_Tutor.Frontend.Pages
             _privateLessonService = privateLessonService;
         }
 
-        public async Task OnGetAsync()
+        public async Task OnGet()
         {
             privateLessons = await _privateLessonService.GetAll();
         }

@@ -1,6 +1,7 @@
 ﻿using Find_A_Tutor.Frontend.Model;
 using Find_A_Tutor.Frontend.Model.Account;
 using Find_A_Tutor.Frontend.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,7 +27,8 @@ namespace Find_A_Tutor.Frontend.Pages
             var response = await _accountService.Login(email, password);
             if (response.IsSuccess)
             {
-                ViewData["token"] = response.Value.Token;
+                HttpContext.Session.SetString("token", response.Value.Token);
+                Errors.Add(response.Value.Token);
             }
             else
             {
