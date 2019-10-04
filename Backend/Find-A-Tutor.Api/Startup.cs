@@ -41,7 +41,7 @@ namespace Find_A_Tutor.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x => {
                 x.SerializerSettings.Formatting = Formatting.Indented;
-                x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                x.SerializerSettings.NullValueHandling = NullValueHandling.Include;
             });
             services.AddSwaggerGen(c =>
             {
