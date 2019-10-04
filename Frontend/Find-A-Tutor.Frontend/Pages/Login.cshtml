@@ -1,0 +1,23 @@
+﻿@page
+@model Find_A_Tutor.Frontend.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+   <!-- <link rel="stylesheet" type="text/css" href="~/css/login.css">-->
+
+<h1>Login</h1>
+
+<div class="wrapper">
+    <div class="container">
+        <form class="form" method="post">
+            <input name="email" type="email" placeholder="Email">
+            <input name="password" type="password" placeholder="Password">
+            <button type="submit" id="login-button">Login</button>
+        </form>
+        @foreach(var msg in Model.Errors)
+        {
+            <a>@msg</a>
+        }
+    </div>
+</div>

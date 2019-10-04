@@ -37,6 +37,7 @@ namespace Find_A_Tutor.Frontend
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             ApiHelper.InitializeClient();
             services.AddSingleton<IPrivateLessonService, PrivateLessonService>();
+            services.AddSingleton<IAccountService, AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

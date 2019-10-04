@@ -11,11 +11,11 @@ namespace Find_A_Tutor.Frontend.Services
         readonly static string UrlBasePath = "http://localhost:5000";
         readonly static string Route = "/privatelesson/";
 
-        public async Task<Result<IEnumerable<PrivateLesson>>> GetAllAsync()
+        public async Task<Result<IEnumerable<PrivateLesson>>> GetAll()
         {
-            string url = UrlBasePath + Route;
+            var url = UrlBasePath + Route;
 
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            using (var response = await ApiHelper.ApiClient.GetAsync(url))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -25,7 +25,30 @@ namespace Find_A_Tutor.Frontend.Services
                 }
                 else
                 {
-                    return Result<IEnumerable<PrivateLesson>>.Error("Cannot download privete lessons from API.");
+                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
+
+                    return Result<IEnumerable<PrivateLesson>>.Error(result.Errors.ToArray());
+                }
+            }
+        }
+
+        public async Task<Result<PrivateLesson>> Get(Guid privateLessonId)
+        {
+            var url = UrlBasePath + Route + privateLessonId;
+
+            using (var response = await ApiHelper.ApiClient.GetAsync(url))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<ResultSimple<PrivateLesson>>();
+
+                    return Result<PrivateLesson>.Ok(result.Value);
+                }
+                else
+                {
+                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
+
+                    return Result<PrivateLesson>.Error(result.Errors.ToArray());
                 }
             }
         }
