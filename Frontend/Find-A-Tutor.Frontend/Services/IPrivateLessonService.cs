@@ -6,6 +6,7 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public interface IPrivateLessonService
     {
-        Task<IEnumerable<PrivateLesson>> GetAllAsync();
+        Task<Result<IEnumerable<PrivateLesson>>> GetAllAsync();
+
     }
 }

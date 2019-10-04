@@ -11,7 +11,7 @@ namespace Find_A_Tutor.Frontend.Services
         readonly static string UrlBasePath = "http://localhost:5000";
         readonly static string Route = "/privatelesson/";
 
-        public async Task<IEnumerable<PrivateLesson>> GetAllAsync()
+        public async Task<Result<IEnumerable<PrivateLesson>>> GetAllAsync()
         {
             string url = UrlBasePath + Route;
 
@@ -19,13 +19,13 @@ namespace Find_A_Tutor.Frontend.Services
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsAsync<Result<IEnumerable<PrivateLesson>>>();
+                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
 
-                    return result.Value;
+                    return Result<IEnumerable<PrivateLesson>>.Ok(result.Value);
                 }
                 else
                 {
-                    throw new Exception(response.ReasonPhrase);
+                    return Result<IEnumerable<PrivateLesson>>.Error("Cannot download privete lessons from API.");
                 }
             }
         }

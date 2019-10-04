@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Find_A_Tutor.Frontend.Pages
 {
-    public class StudentModel : PageModel
+    public class TutorModel : PageModel
     {
         private readonly IPrivateLessonService _privateLessonService;
-        public IEnumerable<PrivateLesson> privateLessons;
+        public Result<IEnumerable<PrivateLesson>> privateLessons;
 
-        public StudentModel(IPrivateLessonService privateLessonService)
+        public TutorModel(IPrivateLessonService privateLessonService)
         {
             _privateLessonService = privateLessonService;
         }
