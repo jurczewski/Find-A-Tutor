@@ -6,7 +6,7 @@
 
 <h1>Tutor</h1>
 <table>
-    @if (Model.privateLessons.IsSuccess)
+    @if (Model.privateLessons != null && Model.privateLessons.IsSuccess)
     {
         foreach (var item in Model.privateLessons.Value)
         {
@@ -25,6 +25,10 @@
                 <td>@item.IsDone</td>
             </tr>
         }
+    }
+    else
+    {
+        <p>Brak lekcji</p>
     }
 </table>
 

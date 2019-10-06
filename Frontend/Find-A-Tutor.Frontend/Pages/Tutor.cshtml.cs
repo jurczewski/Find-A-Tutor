@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Find_A_Tutor.Frontend.Model;
+﻿using Find_A_Tutor.Frontend.Model;
 using Find_A_Tutor.Frontend.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Frontend.Pages
 {
@@ -18,7 +19,21 @@ namespace Find_A_Tutor.Frontend.Pages
 
         public async Task OnGet()
         {
-            privateLessons = await _privateLessonService.GetAll();
+            var token = HttpContext.Session.GetString("token");
+            var role = HttpContext.Session.GetString("role");
+
+            if (token != null && role == "tutor")
+            {
+                privateLessons = await _privateLessonService.GetAll();
+            }
+            else if (role == "student")
+            {
+                Response.Redirect("Student");
+            }
+            else
+            {
+                Response.Redirect("Login");
+            }
         }
     }
 }

@@ -19,14 +19,19 @@ namespace Find_A_Tutor.Frontend.Pages
         public async Task OnGet()
         {
             var token = HttpContext.Session.GetString("token");
+            var role = HttpContext.Session.GetString("role");
 
-            if (token != null)
+            if (token != null && role == "student")
             {
                 privateLessons = await _accountService.GetLessonsForUser(token.ToString());
             }
+            else if (role == "tutor")
+            {
+                Response.Redirect("Tutor");
+            }
             else
             {
-                privateLessons = new Result<IEnumerable<PrivateLesson>>();
+                Response.Redirect("Login");
             }
         }
     }

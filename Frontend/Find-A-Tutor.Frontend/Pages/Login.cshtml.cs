@@ -21,14 +21,29 @@ namespace Find_A_Tutor.Frontend.Pages
         }
         public async Task OnPost()
         {
-            string email = Request.Form["email"];
-            string password = Request.Form["password"];
+            var email = Request.Form["email"];
+            var password = Request.Form["password"];
 
             var response = await _accountService.Login(email, password);
             if (response.IsSuccess)
             {
-                HttpContext.Session.SetString("token", response.Value.Token);
-                Errors.Add(response.Value.Token);
+                var data = response.Value;
+
+                HttpContext.Session.SetString("token", data.Token);
+                HttpContext.Session.SetString("role", data.Role);
+
+                if (data.Role == "student")
+                {
+                    Response.Redirect("Student");
+                }
+                if (data.Role == "tutor")
+                {
+                    Response.Redirect("Tutor");
+                }
+                if (data.Role == "admin")
+                {
+                    Response.Redirect("Index");
+                }
             }
             else
             {
