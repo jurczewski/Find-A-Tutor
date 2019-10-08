@@ -1,5 +1,6 @@
 ﻿using Find_A_Tutor.Frontend.Model;
 using Find_A_Tutor.Frontend.Model.Account;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,8 +12,13 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public class AccountService : IAccountService
     {
-        readonly static string UrlBasePath = "http://localhost:5000";
+        readonly string UrlBasePath;
         readonly static string Route = "/account/";
+
+        public AccountService(IConfiguration config)
+        {
+            UrlBasePath = config.GetValue<string>("UrlBasePath");
+        }
 
         public async Task<Result<TokenDto>> Login(string email, string password)
         {

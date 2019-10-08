@@ -1,4 +1,5 @@
 ﻿using Find_A_Tutor.Frontend.Model;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -8,8 +9,13 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public class PrivateLessonService : IPrivateLessonService
     {
-        readonly static string UrlBasePath = "http://localhost:5000";
+        readonly string UrlBasePath;
         readonly static string Route = "/privatelesson/";
+
+        public PrivateLessonService(IConfiguration config)
+        {
+            UrlBasePath = config.GetValue<string>("UrlBasePath");
+        }
 
         public async Task<Result<IEnumerable<PrivateLesson>>> GetAll()
         {

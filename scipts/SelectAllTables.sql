@@ -11,4 +11,4 @@ FROM Users(NOLOCK)
 
 select top 1000 u.FirstName, u.LastName, u.[Role], pk.[Description], pk.CreatedAt, pk.RelevantTo, s.[Name] from PrivateLessons pk
 join SchoolSubjects s on pk.SchoolSubjectId = s.Id
-join Users u on pk.StudnetId = u.Id
+join Users u on pk.StudentId = u.Id
