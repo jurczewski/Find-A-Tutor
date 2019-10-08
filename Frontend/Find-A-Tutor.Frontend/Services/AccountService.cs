@@ -12,8 +12,8 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public class AccountService : IAccountService
     {
-        readonly string UrlBasePath;
-        readonly static string Route = "/account/";
+        readonly private string UrlBasePath;
+        readonly private string Route = "/account/";
 
         public AccountService(IConfiguration config)
         {

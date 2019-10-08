@@ -9,8 +9,8 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public class PrivateLessonService : IPrivateLessonService
     {
-        readonly string UrlBasePath;
-        readonly static string Route = "/privatelesson/";
+        readonly private string UrlBasePath;
+        readonly private string Route = "/privatelesson/";
 
         public PrivateLessonService(IConfiguration config)
         {
