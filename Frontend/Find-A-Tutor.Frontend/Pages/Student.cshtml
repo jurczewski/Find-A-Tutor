@@ -4,33 +4,53 @@
     ViewData["Title"] = "Student";
 }
 
-<h1>Student</h1>
-<table>
-    @if (Model.privateLessons != null && Model.privateLessons.IsSuccess)
-    {
-        <tr>
-            <th></th>
-        </tr>
-        foreach (var item in Model.privateLessons.Value)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.StudentId</td>
-                <td>@item.TutorId</td>
-                <td>@item.CreatedAt</td>
-                <td>@item.TakenAt</td>
-                <td>@item.UpdatedAt</td>
-                <td>@item.RelevantTo</td>
-                <td>@item.Description</td>
-                <td>@item.Subject</td>
-                <td>@item.IsAssigned</td>
-                <td>@item.IsPaid</td>
-                <td>@item.IsDone</td>
-            </tr>
-        }
-    }
-    else
-    {
-        <p>Brak lekcji</p>
-    }
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Student - Panel użytkownika</h2>
+        </div>
+        <div class="col-6">
+            <a href="/NewLesson">
+              <p>Utwórz nową lekcje</p>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @if (Model.privateLessons != null && Model.privateLessons.IsSuccess)
+            {
+                <table>
+                    <tr>
+                        <th>CreatedAt</th>
+                        <th>TakenAt</th>
+                        <th>RelevantTo</th>
+                        <th>Description</th>
+                        <th>Subject</th>
+                        <th>IsAssigned</th>
+                        <th>IsPaid</th>
+                        <th>IsDone</th>
+                    </tr>
+                    @foreach (var item in Model.privateLessons.Value)
+                    {
+                        <tr>
+                            <td>@item.CreatedAt</td>
+                            <td>@item.TakenAt</td>
+                            <td>@item.RelevantTo</td>
+                            <td>@item.Description</td>
+                            <td>@item.Subject</td>
+                            <td>@item.IsAssigned</td>
+                            <td>@item.IsPaid</td>
+                            <td>@item.IsDone</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Brak lekcji</p>
+            }
+        </div>
+    </div>
+</div>

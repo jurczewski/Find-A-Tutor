@@ -23,7 +23,7 @@ namespace Find_A_Tutor.Frontend.Pages
 
             if (token != null && role == "student")
             {
-                privateLessons = await _accountService.GetLessonsForUser(token.ToString());
+                privateLessons = await _accountService.GetLessonsForUser();
             }
             else if (role == "tutor")
             {
