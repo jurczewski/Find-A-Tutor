@@ -9,6 +9,6 @@ namespace Find_A_Tutor.Frontend.Services
     public interface IAccountService
     {
         Task<Result<TokenDto>> Login(string email, string password);
-        Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser(string token);
+        Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser();
     }
 }

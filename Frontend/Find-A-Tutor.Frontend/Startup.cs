@@ -31,6 +31,7 @@ namespace Find_A_Tutor.Frontend
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             services.AddSession();
             services.AddMemoryCache();
+            services.AddHttpContextAccessor();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             ApiHelper.InitializeClient();

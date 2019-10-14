@@ -1,5 +1,6 @@
 ﻿using Find_A_Tutor.Frontend.Model;
 using Find_A_Tutor.Frontend.Model.Account;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace Find_A_Tutor.Frontend.Services
     {
         readonly private string UrlBasePath;
         readonly private string Route = "/account/";
+        readonly private IHttpContextAccessor _accessor;
 
-        public AccountService(IConfiguration config)
+        public AccountService(IConfiguration config, IHttpContextAccessor accessor)
         {
             UrlBasePath = config.GetValue<string>("UrlBasePath");
+            _accessor = accessor;
         }
 
         public async Task<Result<TokenDto>> Login(string email, string password)
@@ -48,9 +51,10 @@ namespace Find_A_Tutor.Frontend.Services
                 }
             }
         }
-        public async Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser(string token)
+        public async Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser()
         {
             var url = UrlBasePath + Route + "lessons";
+            var token = _accessor.HttpContext.Session.GetString("token");
 
             ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
