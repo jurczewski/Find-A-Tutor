@@ -1,0 +1,27 @@
+﻿@page
+@model Find_A_Tutor.Frontend.Pages.NewLessonModel
+@{
+    ViewData["Title"] = "NewLesson";
+}
+<link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
+
+<h1>Utwórz nową korepetycję</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form method="post">
+                <p>Opis</p>
+                <input type="text" name="description" placeholder="Opis" required="" />
+                <p>Nazwa przedmiotu</p>
+                <input type="text" name="subject" placeholder="Przedmiot" required="" />
+                <p>Ogłoszenie ważne do</p>
+                <input type="date" name="relevantTo" required="" />
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Wyślij</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
