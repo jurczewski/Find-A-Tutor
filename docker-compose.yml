@@ -1,0 +1,21 @@
+version: '3'
+services:
+  # db:
+  #   image: sql1
+  api:
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+    container_name: find-a-tutor.api
+    ports:
+      - 5000:80
+    # depends_on:
+    #   - db
+  # front:
+  #   image: front
+  #   build:
+  #     context: .
+  #     dockerfile: Frontend/Dockerfile
+  #   container_name: find-a-tutor.front    
+  #   ports:
+  #     - 8000:80
