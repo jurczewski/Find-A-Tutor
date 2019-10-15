@@ -7,3 +7,7 @@ before_script: cd Backend
 script:
     - dotnet restore
     - dotnet build
+    - cd ..
+    - cd Frontend
+    - dotnet restore
+    - dotnet build
