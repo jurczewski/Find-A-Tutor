@@ -7,6 +7,8 @@ services:
       context: .
       dockerfile: Backend/Dockerfile
     container_name: find-a-tutor.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 5000:80
     # depends_on:
@@ -16,6 +18,11 @@ services:
     build:
       context: .
       dockerfile: Frontend/Dockerfile
-    container_name: find-a-tutor.front    
+    container_name: find-a-tutor.front
+    environment: 
+      - UrlBasePath=http://api:80
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 8000:80
+    depends_on:
+      - api
