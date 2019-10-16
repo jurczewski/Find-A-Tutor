@@ -1,0 +1,12 @@
+/temp/
+/packages/
+/paket-files/
+/bin/
+/deploy/
+/.github/
+/.vscode/
+/.idea/
+**/.vs/
+/.fake/
+**/bin/
+**/obj/
