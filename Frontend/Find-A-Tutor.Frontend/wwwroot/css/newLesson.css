@@ -1,9 +1,15 @@
 ﻿p {
     margin-bottom: 0.1rem;
+    font-size: 1.1rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 input{
     margin-bottom: 0.6rem;
     width: 100%;
+}
+
+.msg{
+    margin-top: 1.5rem;
+    text-align: center;
 }

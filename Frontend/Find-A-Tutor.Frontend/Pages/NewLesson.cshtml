@@ -5,7 +5,7 @@
 }
 <link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
 
-<h1>Utwórz nową korepetycję</h1>
+<h2>Utwórz nową korepetycję</h2>
 
 <div class="container">
     <div class="row">
@@ -19,6 +19,10 @@
                 <input type="date" name="relevantTo" required="" />
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Wyślij</button>
             </form>
+            @foreach(var msg in Model.Messages)
+            {
+                <h3 class="msg">@msg</h3>
+            }
         </div>
     </div>
 

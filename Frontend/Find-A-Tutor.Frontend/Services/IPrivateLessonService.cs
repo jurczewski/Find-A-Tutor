@@ -9,5 +9,6 @@ namespace Find_A_Tutor.Frontend.Services
     {
         Task<Result<IEnumerable<PrivateLesson>>> GetAll();
         Task<Result<PrivateLesson>> Get(Guid privateLessonId);
+        Task<Result> Post(PrivateLesson privateLesson);
     }
 }
