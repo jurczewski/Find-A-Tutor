@@ -1,7 +1,5 @@
 version: '3'
 services:
-  # db:
-  #   image: sql1
   api:
     build:
       context: .
@@ -11,8 +9,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 5000:80
-    # depends_on:
-    #   - db
   front:
     image: front
     build:
