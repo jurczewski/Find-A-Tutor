@@ -19,7 +19,7 @@ namespace Find_A_Tutor.Frontend.Services
 
         public AccountService(IConfiguration config, IHttpContextAccessor accessor)
         {
-            ApiUrl = config.GetValue<string>("UrlBasePath");
+            ApiUrl = config.GetValue<string>("ApiUrl");
             _accessor = accessor;
         }
 
