@@ -11,19 +11,19 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public class PrivateLessonService : IPrivateLessonService
     {
-        readonly private string UrlBasePath;
+        readonly private string ApiUrl;
         readonly private string Route = "/privatelesson/";
         private readonly IHttpContextAccessor _accessor;
 
         public PrivateLessonService(IConfiguration config, IHttpContextAccessor accessor)
         {
-            UrlBasePath = config.GetValue<string>("UrlBasePath");
+            ApiUrl = config.GetValue<string>("ApiUrl");
             _accessor = accessor;
         }
 
         public async Task<Result<IEnumerable<PrivateLesson>>> GetAll()
         {
-            var url = UrlBasePath + Route;
+            var url = ApiUrl + Route;
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
             {
@@ -44,7 +44,7 @@ namespace Find_A_Tutor.Frontend.Services
 
         public async Task<Result<PrivateLesson>> Get(Guid privateLessonId)
         {
-            var url = UrlBasePath + Route + privateLessonId;
+            var url = ApiUrl + Route + privateLessonId;
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
             {
@@ -65,7 +65,7 @@ namespace Find_A_Tutor.Frontend.Services
 
         public async Task<Result> Post(PrivateLesson privateLesson)
         {
-            var url = UrlBasePath + Route;
+            var url = ApiUrl + Route;
             var token = _accessor.HttpContext.Session.GetString("token");
 
             ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

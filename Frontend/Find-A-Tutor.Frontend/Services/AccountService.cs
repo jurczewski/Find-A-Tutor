@@ -13,13 +13,13 @@ namespace Find_A_Tutor.Frontend.Services
 {
     public class AccountService : IAccountService
     {
-        readonly private string UrlBasePath;
+        readonly private string ApiUrl;
         readonly private string Route = "/account/";
         readonly private IHttpContextAccessor _accessor;
 
         public AccountService(IConfiguration config, IHttpContextAccessor accessor)
         {
-            UrlBasePath = config.GetValue<string>("UrlBasePath");
+            ApiUrl = config.GetValue<string>("UrlBasePath");
             _accessor = accessor;
         }
 
@@ -33,7 +33,7 @@ namespace Find_A_Tutor.Frontend.Services
 
             var loginJson = JsonConvert.SerializeObject(login);
 
-            var url = UrlBasePath + Route + "login";
+            var url = ApiUrl + Route + "login";
 
             using (var response = await ApiHelper.ApiClient.PostAsync(url, new StringContent(loginJson, Encoding.UTF8, "application/json")))
             {
@@ -53,7 +53,7 @@ namespace Find_A_Tutor.Frontend.Services
         }
         public async Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser()
         {
-            var url = UrlBasePath + Route + "lessons";
+            var url = ApiUrl + Route + "lessons";
             var token = _accessor.HttpContext.Session.GetString("token");
 
             ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

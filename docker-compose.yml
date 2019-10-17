@@ -1,7 +1,14 @@
 version: '3'
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server
+  # db:
+  #   image: mcr.microsoft.com/mssql/server
+  #   container_name: find-a-tutor.db
+  #   environment:
+  #       MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+  #       MYSQL_USER: 'test'
+  #       MYSQL_PASS: 'pass'
+  #   volumes:
+  #       - my-datavolume:/var/lib/mysql
   api:
     build:
       context: .
@@ -9,10 +16,9 @@ services:
     container_name: find-a-tutor.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - sql__connectionString=Server=localhost,1433;User Id=SA;Password=Abc12345678;Database=FindATutor
     ports:
       - 5000:80
-    depends_on:
-      - db
   front:
     image: front
     build:
