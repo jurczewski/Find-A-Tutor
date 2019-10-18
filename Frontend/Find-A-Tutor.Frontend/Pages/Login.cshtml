@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.LoginModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Zaloguj się";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/login.css">
@@ -14,9 +14,10 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required="" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         </form>
+        <p class="text-center">Nie masz konta? <a href="/Register">Zarejestruj się</a></p>
         @foreach (var msg in Model.Errors)
         {
-            <a>@msg</a>
+            <p>@msg</p>
         }
     </div>
 
