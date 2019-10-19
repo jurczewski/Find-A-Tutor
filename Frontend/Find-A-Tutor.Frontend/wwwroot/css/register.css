@@ -2,6 +2,21 @@
 	background: #eee !important;
 }
 
+p {
+    margin-bottom: 0.1rem;
+    font-size: 1.1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+input, select, #schoolSubjectsList {
+    margin-bottom: 0.8rem;
+    width: 100%;
+}
+
+.msg {
+    margin-top: 1.5rem;
+    text-align: center;
+}
 
 /* The switch - the box around the slider */
 .switch {

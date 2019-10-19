@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -58,15 +59,13 @@ namespace Find_A_Tutor.Frontend.Services
 
             using (var response = await ApiHelper.ApiClient.PostAsync(url, new StringContent(loginJson, Encoding.UTF8, "application/json")))
             {
-                var result = await response.Content.ReadAsAsync<ResultSimple>();
-
-                if (result.IsSuccess)
+                if(response.StatusCode != HttpStatusCode.Created)
+                {
+                    var result = await response.Content.ReadAsAsync<ResultSimple>();
+                    return Result.Error(result.Errors.ToArray());
+                }else
                 {
                     return Result.Ok();
-                }
-                else
-                {
-                    return Result.Error();
                 }
             }
         }

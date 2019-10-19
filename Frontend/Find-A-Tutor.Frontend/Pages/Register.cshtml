@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header">Register</div>
                     <div class="card-body">
-                        <form name="register">
+                        <form name="register" method="post">
                             <div class="form-group row">
                                 <label for="first-name" class="col-md-4 col-form-label text-md-right">First name</label>
                                 <div class="col-md-6">
@@ -63,10 +63,12 @@
             </div>
         </div>
         <div class="row">
-            @foreach (var msg in Model.Messages)
-            {
-                <h3 class="msg">@msg</h3>
-            }
+            <div class="col-12">
+                @foreach (var msg in Model.Messages)
+                {
+                    <p class="msg">@msg</p>
+                }
+            </div>
         </div>
     </div>
 </main>
