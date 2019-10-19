@@ -21,7 +21,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            @if (Model.privateLessons != null && Model.privateLessons.IsSuccess)
+            @if (Model.privateLessons.Value.Count() > 0 && Model.privateLessons.IsSuccess)
             {
                 <table>
                     <tr>

@@ -22,9 +22,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="surname" class="col-md-4 col-form-label text-md-right">Nazwisko</label>
+                                <label for="LastName" class="col-md-4 col-form-label text-md-right">Nazwisko</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="Surname" required>
+                                    <input type="text" class="form-control" name="LastName" required>
                                 </div>
                             </div>
 
@@ -61,6 +61,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            @foreach (var msg in Model.Messages)
+            {
+                <h3 class="msg">@msg</h3>
+            }
         </div>
     </div>
 </main>
