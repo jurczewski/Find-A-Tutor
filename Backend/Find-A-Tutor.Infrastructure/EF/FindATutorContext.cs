@@ -19,7 +19,7 @@ namespace Find_A_Tutor.Infrastructure.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;User Id=SA;Password=Abc12345678;Database=FindATutor");
+            optionsBuilder.UseSqlServer(_settings.ConnectionString); //Migration essential
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
