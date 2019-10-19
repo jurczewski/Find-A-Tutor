@@ -71,7 +71,7 @@ namespace Find_A_Tutor.Frontend.Pages
 
             if (response.IsSuccess)
             {
-                Messages.Add("Dodano lekcje 😊");
+                Messages.Add("Announcement was added 😊");
             }
             else
             {

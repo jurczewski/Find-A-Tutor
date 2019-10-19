@@ -1,18 +1,18 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.NewLessonModel
 @{
-    ViewData["Title"] = "NewLesson";
+    ViewData["Title"] = "Create new announcement";
 }
 <link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
 
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>Utwórz nową korepetycję</h2>
+            <h2>Create new announcement</h2>
         </div>
         <div class="col-6">
             <a href="/Student">
-                <p class="text-right">Powrót do panelu studenta</p>
+                <p class="text-right">Go back to student panel</p>
             </a>
         </div>
     </div>
@@ -21,13 +21,13 @@
     <div class="row">
         <div class="col-12">
             <form method="post">
-                <p>Opis</p>
+                <p>Description</p>
                 <input type="text" name="description" placeholder="Opis" required="" />
-                <p>Nazwa przedmiotu</p>
+                <p>Name of subject</p>
                 @Html.DropDownList("schoolSubjectsList", new SelectList(Model.SchoolSubjects.Select(x => new { Value = x.Id, Text = x.Name }), "Value", "Text"))
-                <p>Ogłoszenie ważne do</p>
+                <p>Announcement is relevant to</p>
                 <input type="date" name="relevantTo" required="" />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Wyślij</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
             </form>
             @foreach(var msg in Model.Messages)
             {

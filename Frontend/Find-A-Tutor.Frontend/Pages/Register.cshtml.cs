@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Find_A_Tutor.Frontend.Model.Account;
 using Find_A_Tutor.Frontend.Services;
@@ -43,7 +41,7 @@ namespace Find_A_Tutor.Frontend.Pages
 
             if (response.IsSuccess)
             {
-                Messages.Add("Utworzono nowe konto 😊");
+                Messages.Add("Your account was created 😊");
             }
             else
             {

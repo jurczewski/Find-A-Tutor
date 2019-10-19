@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.LoginModel
 @{
-    ViewData["Title"] = "Zaloguj się";
+    ViewData["Title"] = "Log in";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/login.css">
@@ -9,12 +9,12 @@
 <div class="wrapper">
     <div class="container">
         <form class="form-signin" method="post">
-            <h2 class="form-signin-heading">Zaloguj się</h2>
+            <h2 class="form-signin-heading">Log in</h2>
             <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
             <input type="password" class="form-control" name="password" placeholder="Password" required="" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         </form>
-        <p class="text-center">Nie masz konta? <a href="/Register">Zarejestruj się</a></p>
+        <p class="text-center">Youd do not have an account? <a href="/Register">Register now</a></p>
         @foreach (var msg in Model.Errors)
         {
             <p class="text-center">@msg</p>

@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.RegisterModel
 @{
-    ViewData["Title"] = "Zarejestruj się!";
+    ViewData["Title"] = "Register";
 }
    
 <link rel="stylesheet" type="text/css" href="~/css/register.css">
@@ -15,14 +15,14 @@
                     <div class="card-body">
                         <form name="register">
                             <div class="form-group row">
-                                <label for="first-name" class="col-md-4 col-form-label text-md-right">Imię</label>
+                                <label for="first-name" class="col-md-4 col-form-label text-md-right">First name</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="FirstName" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="LastName" class="col-md-4 col-form-label text-md-right">Nazwisko</label>
+                                <label for="LastName" class="col-md-4 col-form-label text-md-right">Last name</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="LastName" required>
                                 </div>
@@ -36,14 +36,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Hasło</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-6">
                                     <input type="password" class="form-control" name="Password" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Czy jesteś nauczycielem?</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Are you a tutor?</label>
                                 <div class="col-md-6">
                                     <label class="switch">
                                         <input type="checkbox" name="IsTutor">

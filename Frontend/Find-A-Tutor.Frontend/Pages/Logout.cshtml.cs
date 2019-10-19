@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading;
 
 namespace Find_A_Tutor.Frontend.Pages
 {

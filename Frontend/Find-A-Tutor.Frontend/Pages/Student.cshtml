@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.StudentModel
 @{
-    ViewData["Title"] = "Student";
+    ViewData["Title"] = "Student panel";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
@@ -9,11 +9,11 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>Student - Panel użytkownika</h2>
+            <h2>Student panel</h2>
         </div>
         <div class="col-6">
             <a href="/NewLesson">
-              <p class="text-right">Utwórz nową lekcje</p>
+                <p class="text-right">Create new announcement</p>
             </a>
         </div>
     </div>
@@ -51,7 +51,7 @@
             }
             else
             {
-                <p>Brak lekcji</p>
+                <p>No announcements</p>
             }
         </div>
     </div>
