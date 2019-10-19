@@ -27,16 +27,14 @@ namespace Find_A_Tutor.Frontend.Services
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
+                var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
 
+                if (result.IsSuccess)
+                {                  
                     return Result<IEnumerable<PrivateLesson>>.Ok(result.Value);
                 }
                 else
                 {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
-
                     return Result<IEnumerable<PrivateLesson>>.Error(result.Errors.ToArray());
                 }
             }
@@ -48,16 +46,14 @@ namespace Find_A_Tutor.Frontend.Services
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<PrivateLesson>>();
+                var result = await response.Content.ReadAsAsync<ResultSimple<PrivateLesson>>();
 
+                if (result.IsSuccess)
+                {
                     return Result<PrivateLesson>.Ok(result.Value);
                 }
                 else
                 {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
-
                     return Result<PrivateLesson>.Error(result.Errors.ToArray());
                 }
             }
@@ -72,14 +68,14 @@ namespace Find_A_Tutor.Frontend.Services
 
             using (var response = await ApiHelper.ApiClient.PostAsJsonAsync(url, privateLesson))
             {
-                if (response.IsSuccessStatusCode)
+                var result = await response.Content.ReadAsAsync<ResultSimple>();
+
+                if (result.IsSuccess)
                 {
                     return Result.Ok();
                 }
                 else
                 {
-                    var result = await response.Content.ReadAsAsync<ResultSimple>();
-
                     return Result.Error(result.Errors.ToArray());
                 }
             }

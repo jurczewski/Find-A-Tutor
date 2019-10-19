@@ -45,7 +45,7 @@ namespace Find_A_Tutor.Frontend.Model
 
         public bool Equals(Result<T> other)
         {
-            if (ReferenceEquals(null, other)) return false;
+            if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
             return EqualityComparer<T>.Default.Equals(_value, other._value);
         }

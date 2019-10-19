@@ -10,5 +10,6 @@ namespace Find_A_Tutor.Frontend.Services
     {
         Task<Result<TokenDto>> Login(string email, string password);
         Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser();
+        Task<Result> Register(Register register);
     }
 }

@@ -16,7 +16,9 @@ namespace Find_A_Tutor.Core.Domain
                     return _value;
                 }
 
-                throw new ApplicationException("Cannot download data from failure result.");
+                //todo: why wrong credentials throws an exception here?
+                //throw new ApplicationException("Cannot download data from failure result."); 
+                return default;
             }
             set
             {
@@ -45,7 +47,7 @@ namespace Find_A_Tutor.Core.Domain
 
         public bool Equals(Result<T> other)
         {
-            if (ReferenceEquals(null, other)) return false;
+            if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
             return EqualityComparer<T>.Default.Equals(_value, other._value);
         }

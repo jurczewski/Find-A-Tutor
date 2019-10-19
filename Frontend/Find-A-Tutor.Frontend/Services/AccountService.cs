@@ -37,20 +37,40 @@ namespace Find_A_Tutor.Frontend.Services
 
             using (var response = await ApiHelper.ApiClient.PostAsync(url, new StringContent(loginJson, Encoding.UTF8, "application/json")))
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<TokenDto>>();
+                var result = await response.Content.ReadAsAsync<ResultSimple<TokenDto>>();
 
+                if (result.IsSuccess)
+                {                    
                     return Result<TokenDto>.Ok(result.Value);
                 }
                 else
                 {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<TokenDto>>();
-
                     return Result<TokenDto>.Error(result.Errors.ToArray());
                 }
             }
         }
+
+        public async Task<Result> Register(Register register)
+        {
+            var loginJson = JsonConvert.SerializeObject(register);
+
+            var url = ApiUrl + Route + "register";
+
+            using (var response = await ApiHelper.ApiClient.PostAsync(url, new StringContent(loginJson, Encoding.UTF8, "application/json")))
+            {
+                var result = await response.Content.ReadAsAsync<ResultSimple>();
+
+                if (result.IsSuccess)
+                {
+                    return Result.Ok();
+                }
+                else
+                {
+                    return Result.Error();
+                }
+            }
+        }
+
         public async Task<Result<IEnumerable<PrivateLesson>>> GetLessonsForUser()
         {
             var url = ApiUrl + Route + "lessons";
@@ -60,16 +80,14 @@ namespace Find_A_Tutor.Frontend.Services
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
+                var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
 
+                if (result.IsSuccess)
+                {              
                     return Result<IEnumerable<PrivateLesson>>.Ok(result.Value);
                 }
                 else
                 {
-                    var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
-
                     return Result<IEnumerable<PrivateLesson>>.Error(result.Errors.ToArray());
                 }
             }
