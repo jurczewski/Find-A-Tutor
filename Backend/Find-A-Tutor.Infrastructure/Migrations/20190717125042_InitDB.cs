@@ -41,11 +41,11 @@ namespace Find_A_Tutor.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    StudnetId = table.Column<Guid>(nullable: false),
+                    StudentId = table.Column<Guid>(nullable: false),
                     TutorId = table.Column<Guid>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     TakenAt = table.Column<DateTime>(nullable: true),
-                    UpdateAt = table.Column<DateTime>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
                     RelevantTo = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     SchoolSubjectId = table.Column<Guid>(nullable: true),
