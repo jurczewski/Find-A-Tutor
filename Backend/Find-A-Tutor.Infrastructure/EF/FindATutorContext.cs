@@ -10,9 +10,16 @@ namespace Find_A_Tutor.Infrastructure.EF
         public DbSet<User> Users { get; set; }
         public DbSet<SchoolSubject> SchoolSubjects { get; set; }
         public DbSet<PrivateLesson> PrivateLessons { get; set; }
+
+        public FindATurorContext() { }
         public FindATurorContext(DbContextOptions<FindATurorContext> options, SqlSettings settings) : base(options)
         {
             _settings = settings;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=localhost;User Id=SA;Password=Abc12345678;Database=FindATutor");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
