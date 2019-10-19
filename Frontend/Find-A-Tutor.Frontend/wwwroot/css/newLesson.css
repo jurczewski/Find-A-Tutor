@@ -4,8 +4,8 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-input{
-    margin-bottom: 0.6rem;
+input, select, #schoolSubjectsList{
+    margin-bottom: 0.8rem;
     width: 100%;
 }
 

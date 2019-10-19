@@ -24,7 +24,7 @@
                 <p>Opis</p>
                 <input type="text" name="description" placeholder="Opis" required="" />
                 <p>Nazwa przedmiotu</p>
-                <input type="text" name="subject" placeholder="Przedmiot" required="" />
+                @Html.DropDownList("schoolSubjectsList", new SelectList(Model.SchoolSubjects.Select(x => new { Value = x.Id, Text = x.Name }), "Value", "Text"))
                 <p>Ogłoszenie ważne do</p>
                 <input type="date" name="relevantTo" required="" />
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Wyślij</button>

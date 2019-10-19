@@ -37,6 +37,7 @@ namespace Find_A_Tutor.Frontend
             ApiHelper.InitializeClient();
             services.AddSingleton<IPrivateLessonService, PrivateLessonService>();
             services.AddSingleton<IAccountService, AccountService>();
+            services.AddSingleton<ISchoolSubjectService, SchoolSubjectService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
