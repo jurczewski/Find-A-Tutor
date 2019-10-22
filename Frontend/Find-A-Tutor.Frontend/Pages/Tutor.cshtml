@@ -1,36 +1,53 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.TutorModel
 @{
-    ViewData["Title"] = "Tutor";
+    ViewData["Title"] = "Tutor panel";
 }
 
-<h1>Tutor</h1>
+<link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
 
-    @if (Model.privateLessons.Value.Count() > 0 && Model.privateLessons.IsSuccess)
-    {
-        foreach (var item in Model.privateLessons.Value)
-        {
-            <table>
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.StudentId</td>
-                    <td>@item.TutorId</td>
-                    <td>@item.CreatedAt</td>
-                    <td>@item.TakenAt</td>
-                    <td>@item.UpdatedAt</td>
-                    <td>@item.RelevantTo</td>
-                    <td>@item.Description</td>
-                    <td>@item.Subject</td>
-                    <td>@item.IsAssigned</td>
-                    <td>@item.IsPaid</td>
-                    <td>@item.IsDone</td>
-                </tr>
-            </table>
-        }
-    }
-    else
-    {
-        <p>Brak lekcji</p>
-    }
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Tutor panel</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @if (Model.privateLessons.Value.Count() > 0 && Model.privateLessons.IsSuccess)
+            {
+                <table>
+                    <tr>
+                        <th>CreatedAt</th>
+                        <th>TakenAt</th>
+                        <th>RelevantTo</th>
+                        <th>Description</th>
+                        <th>Subject</th>
+                        <th>IsAssigned</th>
+                        <th>IsPaid</th>
+                        <th>IsDone</th>
+                    </tr>
+                    @foreach (var item in Model.privateLessons.Value)
+                    {
+                        <tr>
+                            <td>@item.CreatedAt</td>
+                            <td>@item.TakenAt</td>
+                            <td>@item.RelevantTo</td>
+                            <td>@item.Description</td>
+                            <td>@item.Subject</td>
+                            <td>@item.IsAssigned</td>
+                            <td>@item.IsPaid</td>
+                            <td>@item.IsDone</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No announcements</p>
+            }
+        </div>
+    </div>
+</div>
