@@ -31,7 +31,7 @@ namespace Find_A_Tutor.Core.Services
             var schoolSubject = await _schoolSubjectRepository.GetAsync(name);
             return schoolSubject != null ?
                                     Result<SchoolSubject>.Ok(schoolSubject) :
-                                    Result<SchoolSubject>.Error($"School subject with name: '{name}', does not exists.");
+                                    Result<SchoolSubject>.Error($"School subject with name: \"{name}\", does not exists.");
         }
         public async Task<Result<IEnumerable<SchoolSubject>>> BrowseAsync(string name = "")
         {

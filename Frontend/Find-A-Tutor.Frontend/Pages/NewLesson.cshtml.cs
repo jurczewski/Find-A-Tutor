@@ -15,7 +15,7 @@ namespace Find_A_Tutor.Frontend.Pages
         [BindProperty]
         public string Description { get; set; }
         [BindProperty]
-        public string Subject { get; set; }
+        public string SelectedSubjectId { get; set; }
         [BindProperty]
         public DateTime RelevantTo { get; set;}
         public List<SchoolSubject> SchoolSubjects { get; set; }
@@ -49,29 +49,38 @@ namespace Find_A_Tutor.Frontend.Pages
                 Response.Redirect("Login");
             }
 
-            var response = await _schoolSubjectService.GetAll();
-
-            if (response.IsSuccess)
-            {
-                SchoolSubjects = response.Value.ToList();
-            }else
-            {
-                Messages.AddRange(response.Errors);
-            }
+            await FetchSchoolSubjects();
         }
 
         public async Task OnPost()
         {
+            await FetchSchoolSubjects();
+            var subjectName = SchoolSubjects.Where(s => s.Id.ToString() == SelectedSubjectId);
+
             var response = await _privateLessonService.Post(new PrivateLesson
             {
                 Description = Description,
-                Subject = Subject,
+                Subject = subjectName.FirstOrDefault().Name,
                 RelevantTo = RelevantTo
             });
 
             if (response.IsSuccess)
             {
                 Messages.Add("Announcement was added 😊");
+            }
+            else
+            {
+                Messages.AddRange(response.Errors);
+            }            
+        }
+
+        public async Task FetchSchoolSubjects()
+        {
+            var response = await _schoolSubjectService.GetAll();
+
+            if (response.IsSuccess)
+            {
+                SchoolSubjects = response.Value.ToList();
             }
             else
             {
