@@ -143,6 +143,7 @@ namespace Find_A_Tutor.Core.Services
             }
 
             privateLesson.AssignTutor(tutor);
+            await _privateLessonRepository.UpdateAsync(privateLesson);
 
             logger.Info($"Tutor with id '{tutorId}' was assigned to lesson with id '{privateLessonId}'");
             return Result.Ok();
@@ -161,6 +162,7 @@ namespace Find_A_Tutor.Core.Services
                 return Result.Error("Tutor can be unassign only by orignal student or tutor.");
             }
             privateLesson.RemoveAssignedTutor();
+            await _privateLessonRepository.UpdateAsync(privateLesson);
 
             logger.Info($"Assigned tutor was removed from lesson with id '{privateLessonId}'");
             return Result.Ok();
