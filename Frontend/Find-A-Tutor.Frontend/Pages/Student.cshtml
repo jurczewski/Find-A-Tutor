@@ -3,25 +3,23 @@
 @{
     ViewData["Title"] = "Student panel";
 }
-
-<link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
 
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>Student panel</h2>
+            <h2>Student panel 🎓</h2>
         </div>
         <div class="col-6">
             <a href="/NewLesson">
-                <p class="text-right">Create new announcement</p>
+                <p class="text-right">Create new announcement ✒️</p>
             </a>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12" style="overflow-x:auto;">
             @if (Model.privateLessons.Value.Count() > 0 && Model.privateLessons.IsSuccess)
             {
                 <table>

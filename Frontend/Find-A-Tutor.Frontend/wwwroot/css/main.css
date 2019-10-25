@@ -1,4 +1,17 @@
-﻿th, td {
+﻿p {
+    margin-bottom: 0.1rem;
+    font-size: 1.1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.msg {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* Tables*/
+
+th, td {
     border-bottom: 1px solid #ddd;
 }
 
@@ -13,4 +26,6 @@ th {
 
 table{
     width: 100%;
+    margin-top: 0.5rem;
 }
+
