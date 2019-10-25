@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            @if (Model.privateLessons.Value.Count() > 0 && Model.privateLessons.IsSuccess)
+            @if (Model.privateLessons.IsSuccess)
             {
                 <table>
                     <tr>
@@ -28,6 +28,7 @@
                         <th>IsAssigned</th>
                         <th>IsPaid</th>
                         <th>IsDone</th>
+                        <th>Take</th>
                     </tr>
                     @foreach (var item in Model.privateLessons.Value)
                     {
@@ -40,6 +41,7 @@
                             <td>@item.IsAssigned</td>
                             <td>@item.IsPaid</td>
                             <td>@item.IsDone</td>
+                            <td><a asp-page-handler="AssingPrivateLesson" asp-route-id="@item.Id">Take</a></td>
                         </tr>
                     }
                 </table>
@@ -47,6 +49,14 @@
             else
             {
                 <p>No announcements</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @foreach (var msg in Model.Messages)
+            {
+                <p class="msg">@msg</p>
             }
         </div>
     </div>

@@ -11,9 +11,11 @@ namespace Find_A_Tutor.Frontend.Pages
     {
         private readonly IAccountService _accountService;
         public Result<IEnumerable<PrivateLesson>> privateLessons;
+        public List<string> Messages;
         public StudentModel(IAccountService accountService)
         {
             _accountService = accountService;
+            Messages = new List<string>();
         }
 
         public async Task OnGet()

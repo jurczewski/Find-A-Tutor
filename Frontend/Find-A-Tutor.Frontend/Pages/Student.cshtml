@@ -30,9 +30,9 @@
                         <th>RelevantTo</th>
                         <th>Description</th>
                         <th>Subject</th>
-                        <th>IsAssigned</th>
-                        <th>IsPaid</th>
-                        <th>IsDone</th>
+                        <th>Assigned?</th>
+                        <th>Paid?</th>
+                        <th>Completed?</th>
                     </tr>
                     @foreach (var item in Model.privateLessons.Value)
                     {
@@ -52,6 +52,14 @@
             else
             {
                 <p>No announcements</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @foreach (var msg in Model.Messages)
+            {
+                <p class="msg">@msg</p>
             }
         </div>
     </div>

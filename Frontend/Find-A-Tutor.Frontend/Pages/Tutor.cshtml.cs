@@ -2,6 +2,7 @@
 using Find_A_Tutor.Frontend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,10 +12,13 @@ namespace Find_A_Tutor.Frontend.Pages
     {
         private readonly IPrivateLessonService _privateLessonService;
         public Result<IEnumerable<PrivateLesson>> privateLessons;
+        public List<string> Messages { get; set; }
+
 
         public TutorModel(IPrivateLessonService privateLessonService)
         {
             _privateLessonService = privateLessonService;
+            Messages = new List<string>();
         }
 
         public async Task OnGet()
@@ -34,6 +38,23 @@ namespace Find_A_Tutor.Frontend.Pages
             {
                 Response.Redirect("Login");
             }
+        }
+
+        public async Task OnGetAssingPrivateLesson(Guid id)
+        {
+            var result = await _privateLessonService.AssignTutor(id.ToString());
+            privateLessons = await _privateLessonService.GetAll();
+
+            if (result.IsSuccess)
+            {
+                Messages.Add("Announcement was assinged to yout account 😊");
+            }
+            else
+            {
+                Messages.AddRange(result.Errors);
+            }
+
+            //Response.Redirect("Tutor");
         }
     }
 }
