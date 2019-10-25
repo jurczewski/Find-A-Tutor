@@ -20,11 +20,11 @@ namespace Find_A_Tutor.Api.Controllers
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Get()
-            => Json(await _userService.GetAccountAsync(UserId));
+            => Ok(await _userService.GetAccountAsync(UserId));
 
         [HttpGet("lessons")]
         public async Task<IActionResult> GetLessons()
-            => Json(await _privateLessonService.GetForUserAsync(UserId));
+            => Ok(await _privateLessonService.GetForUserAsync(UserId));
 
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody]Register command)
@@ -36,6 +36,6 @@ namespace Find_A_Tutor.Api.Controllers
 
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody]Login command)
-            => Json(await _userService.LoginAsync(command.Email, command.Password));
+            => Ok(await _userService.LoginAsync(command.Email, command.Password));
     }
 }

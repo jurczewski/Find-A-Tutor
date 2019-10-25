@@ -21,7 +21,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var privateLessons = await _privateLessonService.BrowseAsync(description);
 
-            return Json(privateLessons);
+            return Ok(privateLessons);
         }
 
         //todo: get by subject
@@ -30,14 +30,14 @@ namespace Find_A_Tutor.Api.Controllers
         //{
         //    var privateLessons = await _privateLessonService.GetAsyncBySubject(name);
 
-        //    return Json(privateLessons);
+        //    return Ok(privateLessons);
         //}
 
         [HttpGet("{privateLessonId}")]
         public async Task<IActionResult> Get(Guid privateLessonId)
         {
             var privateLessonResult = await _privateLessonService.GetAsync(privateLessonId);
-            return !privateLessonResult.IsSuccess ? NotFound() : (IActionResult)Json(privateLessonResult);
+            return !privateLessonResult.IsSuccess ? NotFound() : (IActionResult)Ok(privateLessonResult);
         }
 
         [HttpPost]
@@ -47,7 +47,7 @@ namespace Find_A_Tutor.Api.Controllers
             command.PrivateLessonId = Guid.NewGuid();
             var createdResult = await _privateLessonService.CreateAsync(command.PrivateLessonId, UserId, command.RelevantTo, command.Description, command.Subject);
 
-            return createdResult.IsSuccess ? Created($"/PrivateLesson/{command.PrivateLessonId}", null) : (IActionResult)Json(createdResult);
+            return createdResult.IsSuccess ? Created($"/PrivateLesson/{command.PrivateLessonId}", null) : (IActionResult)Ok(createdResult);
         }
 
         [HttpPut("{privateLessonId}")]
@@ -56,7 +56,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var result = await _privateLessonService.UpdateAsync(privateLessonId, command.RelevantTo, command.Description, command.Subject);
 
-            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
+            return result.IsSuccess ? NoContent() : (IActionResult)Ok(result);
         }
 
         [HttpDelete("{privateLessonId}")]
@@ -65,7 +65,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var result = await _privateLessonService.DeleteAsync(privateLessonId);
 
-            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
+            return result.IsSuccess ? NoContent() : (IActionResult)Ok(result);
         }
 
         [HttpPut("/assign/{privateLessonId}")]
@@ -74,7 +74,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var result = await _privateLessonService.AssignTutor(privateLessonId, UserId);
 
-            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
+            return result.IsSuccess ? NoContent() : (IActionResult)Ok(result);
         }
 
         [HttpPut("/unassign/{privateLessonId}")]
@@ -83,7 +83,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var result = await _privateLessonService.RemoveAssignedTutor(privateLessonId, UserId);
 
-            return result.IsSuccess ? NoContent() : (IActionResult)Json(result);
+            return result.IsSuccess ? NoContent() : (IActionResult)Ok(result);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Find_A_Tutor.Api.Controllers
         public async Task<IActionResult> Get(Guid schoolSubjectId)
         {
             var schoolSubjectResult = await _schoolSubjectService.GetAsync(schoolSubjectId);
-            return !schoolSubjectResult.IsSuccess ? NotFound() : (IActionResult)Json(schoolSubjectId);
+            return !schoolSubjectResult.IsSuccess ? NotFound() : (IActionResult)Ok(schoolSubjectId);
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace Find_A_Tutor.Api.Controllers
             command.SchoolSubjectId = Guid.NewGuid();
             var schoolSubjectResult = await _schoolSubjectService.CreateAsync(command.SchoolSubjectId, command.Name);
 
-            return schoolSubjectResult.IsSuccess ? Created($"/PrivateLesson/{command.Name}", null) : (IActionResult)Json(schoolSubjectResult);
+            return schoolSubjectResult.IsSuccess ? Created($"/PrivateLesson/{command.Name}", null) : (IActionResult)Ok(schoolSubjectResult);
         }
 
         [HttpPut("{schoolSubjectId}")]
@@ -57,7 +57,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var schoolSubjectResult = await _schoolSubjectService.UpdateAsync(schoolSubjectId, command.Name);
 
-            return schoolSubjectResult.IsSuccess ? NoContent() : (IActionResult)Json(schoolSubjectResult);
+            return schoolSubjectResult.IsSuccess ? NoContent() : (IActionResult)Ok(schoolSubjectResult);
         }
 
         [HttpDelete("{schoolSubjectId}")]
@@ -65,7 +65,7 @@ namespace Find_A_Tutor.Api.Controllers
         {
             var schoolSubjectResult = await _schoolSubjectService.DeleteAsync(schoolSubjectId);
 
-            return schoolSubjectResult.IsSuccess ? NoContent() : (IActionResult)Json(schoolSubjectResult);
+            return schoolSubjectResult.IsSuccess ? NoContent() : (IActionResult)Ok(schoolSubjectResult);
         }
 
     }
