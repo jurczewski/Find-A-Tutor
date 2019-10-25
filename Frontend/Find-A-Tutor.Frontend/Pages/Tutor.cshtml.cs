@@ -14,7 +14,6 @@ namespace Find_A_Tutor.Frontend.Pages
         public Result<IEnumerable<PrivateLesson>> privateLessons;
         public List<string> Messages { get; set; }
 
-
         public TutorModel(IPrivateLessonService privateLessonService)
         {
             _privateLessonService = privateLessonService;
@@ -40,21 +39,34 @@ namespace Find_A_Tutor.Frontend.Pages
             }
         }
 
-        public async Task OnGetAssingPrivateLesson(Guid id)
+        public async Task OnGetAssignTutor(Guid id)
         {
             var result = await _privateLessonService.AssignTutor(id.ToString());
             privateLessons = await _privateLessonService.GetAll();
 
             if (result.IsSuccess)
             {
-                Messages.Add("Announcement was assinged to yout account 😊");
+                Messages.Add("Announcement was assinged to your account 😊");
             }
             else
             {
                 Messages.AddRange(result.Errors);
             }
+        }
 
-            //Response.Redirect("Tutor");
+        public async Task OnGetRemoveAssignedTutor(Guid id)
+        {
+            var result = await _privateLessonService.RemoveAssignedTutor(id.ToString());
+            privateLessons = await _privateLessonService.GetAll();
+
+            if (result.IsSuccess)
+            {
+                Messages.Add("Announcement was removed from your account 😊");
+            }
+            else
+            {
+                Messages.AddRange(result.Errors);
+            }
         }
     }
 }

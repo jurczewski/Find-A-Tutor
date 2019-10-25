@@ -101,5 +101,26 @@ namespace Find_A_Tutor.Frontend.Services
                 }
             }
         }
+
+        public async Task<Result> RemoveAssignedTutor(string privateLessonId)
+        {
+            var url = ApiUrl + "/unassign/" + privateLessonId;
+            var token = _accessor.HttpContext.Session.GetString("token");
+
+            ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            using (var response = await ApiHelper.ApiClient.PutAsync(url, new StringContent("")))
+            {
+                if (response.StatusCode != HttpStatusCode.NoContent)
+                {
+                    var result = await response.Content.ReadAsAsync<ResultSimple>();
+                    return Result.Error(result.Errors.ToArray());
+                }
+                else
+                {
+                    return Result.Ok();
+                }
+            }
+        }
     }
 }

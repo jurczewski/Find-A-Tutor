@@ -5,6 +5,7 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
+<link rel="stylesheet" type="text/css" href="~/css/main.css">
 
 <div class="container">
     <div class="row">
@@ -37,14 +38,14 @@
                     @foreach (var item in Model.privateLessons.Value)
                     {
                         <tr>
-                            <td>@item.CreatedAt</td>
-                            <td>@item.TakenAt</td>
-                            <td>@item.RelevantTo</td>
+                            <td>@item.CreatedAt.Value.ToString("dd.MM.yyyy")</td>
+                            <td>@(item.TakenAt.HasValue ? item.TakenAt.Value.ToString("dd.MM.yyyy") : null)</td>
+                            <td>@(item.RelevantTo.HasValue ? item.TakenAt : null)</td>
                             <td>@item.Description</td>
                             <td>@item.Subject</td>
-                            <td>@item.IsAssigned</td>
-                            <td>@item.IsPaid</td>
-                            <td>@item.IsDone</td>
+                            <td>@(@item.IsAssigned.Value ? "✔️" : "❌")</td>
+                            <td>@(@item.IsPaid.Value ? "✔️" : "❌")</td>
+                            <td>@(@item.IsDone.Value ? "✔️" : "❌")</td>
                         </tr>
                     }
                 </table>

@@ -11,5 +11,6 @@ namespace Find_A_Tutor.Frontend.Services
         Task<Result<PrivateLesson>> Get(Guid privateLessonId);
         Task<Result> Post(PrivateLesson privateLesson);
         Task<Result> AssignTutor(string privateLessonId);
+        Task<Result> RemoveAssignedTutor(string privateLessonId);
     }
 }

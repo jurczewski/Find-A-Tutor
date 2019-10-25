@@ -5,6 +5,7 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
+<link rel="stylesheet" type="text/css" href="~/css/main.css">
 
 <div class="container">
     <div class="row">
@@ -16,7 +17,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            @if (Model.privateLessons.IsSuccess)
+            @if (Model.privateLessons.Value.Count() > 0 && Model.privateLessons.IsSuccess)
             {
                 <table>
                     <tr>
@@ -25,23 +26,25 @@
                         <th>RelevantTo</th>
                         <th>Description</th>
                         <th>Subject</th>
-                        <th>IsAssigned</th>
-                        <th>IsPaid</th>
-                        <th>IsDone</th>
+                        <th>Assigned?</th>
+                        <th>Paid?</th>
+                        <th>Completed?</th>
                         <th>Take</th>
+                        <th>Give back</th>
                     </tr>
                     @foreach (var item in Model.privateLessons.Value)
                     {
                         <tr>
-                            <td>@item.CreatedAt</td>
-                            <td>@item.TakenAt</td>
-                            <td>@item.RelevantTo</td>
+                            <td>@item.CreatedAt.Value.ToString("dd.MM.yyyy")</td>
+                            <td>@(item.TakenAt.HasValue ? item.TakenAt.Value.ToString("dd.MM.yyyy") : null)</td>
+                            <td>@(item.RelevantTo.HasValue ? item.TakenAt : null)</td>
                             <td>@item.Description</td>
                             <td>@item.Subject</td>
-                            <td>@item.IsAssigned</td>
-                            <td>@item.IsPaid</td>
-                            <td>@item.IsDone</td>
-                            <td><a asp-page-handler="AssingPrivateLesson" asp-route-id="@item.Id">Take</a></td>
+                            <td>@(@item.IsAssigned.Value ? "✔️" : "❌")</td>
+                            <td>@(@item.IsPaid.Value ? "✔️" : "❌")</td>
+                            <td>@(@item.IsDone.Value ? "✔️" : "❌")</td>
+                            <td><a asp-page-handler="AssignTutor" asp-route-id="@item.Id">Take</a></td>
+                            <td><a asp-page-handler="RemoveAssignedTutor" asp-route-id="@item.Id">Give back</a></td>
                         </tr>
                     }
                 </table>
