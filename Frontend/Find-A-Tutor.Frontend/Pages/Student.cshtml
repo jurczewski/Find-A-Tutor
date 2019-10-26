@@ -32,6 +32,7 @@
                         <th>Assigned?</th>
                         <th>Paid?</th>
                         <th>Completed?</th>
+                        <th>Details</th>
                     </tr>
                     @foreach (var item in Model.privateLessons.Value)
                     {
@@ -44,6 +45,7 @@
                             <td>@(@item.IsAssigned.Value ? "✔️" : "❌")</td>
                             <td>@(@item.IsPaid.Value ? "✔️" : "❌")</td>
                             <td>@(@item.IsDone.Value ? "✔️" : "❌")</td>
+                            <td><a asp-page="/Details" asp-route-Id="@item.Id">Details</a></td>
                         </tr>
                     }
                 </table>

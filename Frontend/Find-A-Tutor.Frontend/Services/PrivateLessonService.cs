@@ -46,16 +46,15 @@ namespace Find_A_Tutor.Frontend.Services
             var url = ApiUrl + Route + privateLessonId;
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
-            {
-                var result = await response.Content.ReadAsAsync<ResultSimple<PrivateLesson>>();
-
-                if (result.IsSuccess)
+            {            
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
+                    var result = await response.Content.ReadAsAsync<ResultSimple<PrivateLesson>>();
                     return Result<PrivateLesson>.Ok(result.Value);
                 }
                 else
                 {
-                    return Result<PrivateLesson>.Error(result.Errors.ToArray());
+                    return Result<PrivateLesson>.Error("Announcement was not found.");
                 }
             }
         }

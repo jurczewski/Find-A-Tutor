@@ -1,4 +1,4 @@
-﻿input, select, #schoolSubjectsList{
+﻿input, select, #schoolSubjectsList, textarea{
     margin-bottom: 0.8rem;
     width: 100%;
 }
