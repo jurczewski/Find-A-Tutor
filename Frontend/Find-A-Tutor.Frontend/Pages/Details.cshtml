@@ -5,7 +5,7 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
-<link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
+<link rel="stylesheet" type="text/css" href="~/css/details.css">
 
 <div class="container">
     <div class="row">
@@ -36,6 +36,7 @@
                     <h5>Description:</h5>
                     <!--<textarea name="comment" rows="3" required="">@privateLesson.Description</textarea>-->
                     <p>@privateLesson.Description</p>
+
                     <h5>Subject:</h5>
                     <p>@privateLesson.Subject</p>
                     <h5>Assigned?</h5>
@@ -44,6 +45,7 @@
                     <p>@(privateLesson.IsPaid.Value ? "✔️" : "❌")</p>
                     <h5>Completed?</h5>
                     <p>@(privateLesson.IsDone.Value ? "✔️" : "❌")</p>
+
                 }
                 else
                 {
