@@ -22,6 +22,11 @@ using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
 using System;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.Linq;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Http;
 
 namespace Find_A_Tutor.Api
 {
@@ -39,10 +44,13 @@ namespace Find_A_Tutor.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //.NetCore
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x => {
                 x.SerializerSettings.Formatting = Formatting.Indented;
                 x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
+
+            //Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Find-A-Tutor Api", Version = "v1" });
@@ -52,14 +60,12 @@ namespace Find_A_Tutor.Api
                 c.IncludeXmlComments(Path.Combine(basePath, fileName), includeControllerXmlComments: true);
             });
 
-            services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
-            services.AddAuthorization(x => x.AddPolicy("HasTutorRole", p => p.RequireRole("tutor")));
-            services.AddAuthorization(x => x.AddPolicy("HasStudentRole", p => p.RequireRole("student")));
-
+            //Services
             services.AddScoped<IPrivateLessonService, PrivateLessonService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
 
+            //Repository + SQL
             services.Configure<SqlSettings>(Configuration);
             var sqlSettings = Configuration.GetSection("sql").Get<SqlSettings>();
             services.AddSingleton<SqlSettings>(sqlSettings); //todo: Options pattern
@@ -80,17 +86,22 @@ namespace Find_A_Tutor.Api
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<FindATurorContext>(options => options.UseSqlServer(sqlSettings.ConnectionString));
 
+            //Healthchecks
+            services.AddHealthChecks().AddSqlServer(Configuration["sql:connectionString"]);
+
+            //Automapper
             services.AddSingleton(AutoMapperConfig.Initialize());
-            //todo: DataInitializer
-            //services.AddScoped<IDataInitializer, DataInitializer>(); 
+
+            //Authorization
+            services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
+            services.AddAuthorization(x => x.AddPolicy("HasTutorRole", p => p.RequireRole("tutor")));
+            services.AddAuthorization(x => x.AddPolicy("HasStudentRole", p => p.RequireRole("student")));
+
+            //JWT
             services.AddSingleton<IJwtHandler, JwtHandler>();
-
-            //var appSettings = Configuration.GetSection("app");
-            //services.Configure<AppSettings>(appSettings);
-
             var jwtSettings = Configuration.GetSection("jwt");
-            services.Configure<JwtSettings>(jwtSettings);
 
+            services.Configure<JwtSettings>(jwtSettings);
             services.AddAuthentication().AddJwtBearer(o =>
             {
                 o.IncludeErrorDetails = true;
@@ -124,6 +135,21 @@ namespace Find_A_Tutor.Api
                         "Find-A-Tutor Api");
                 });
 
+            app.UseHealthChecks("/health", new HealthCheckOptions
+            {
+                ResponseWriter = async (context, report) =>
+                {
+                    var result = JsonConvert.SerializeObject(
+                        new
+                        {
+                            status = report.Status.ToString(),
+                            errors = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
+                        });
+                    context.Response.ContentType = MediaTypeNames.Application.Json;
+                    await context.Response.WriteAsync(result);
+                }
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -132,11 +158,6 @@ namespace Find_A_Tutor.Api
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();                
-            }
-
-            if (env.IsProduction() || env.IsStaging())
-            {
-                //todo: env viarables working
             }
 
             app.UseErrorHandler();
