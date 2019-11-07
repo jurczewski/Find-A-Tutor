@@ -1,5 +1,5 @@
-﻿using System;
-using Find_A_Tutor.Core.Exceptions;
+﻿using Find_A_Tutor.Core.Exceptions;
+using System;
 
 namespace Find_A_Tutor.Core.Domain
 {

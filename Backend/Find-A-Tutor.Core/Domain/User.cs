@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Find_A_Tutor.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Find_A_Tutor.Core.Exceptions;
 
 namespace Find_A_Tutor.Core.Domain
 {
