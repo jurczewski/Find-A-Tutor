@@ -1,5 +1,5 @@
-﻿using Find_A_Tutor.Infrastructure.Commands.PrivateLesson;
-using Find_A_Tutor.Core.Services;
+﻿using Find_A_Tutor.Core.Services;
+using Find_A_Tutor.Infrastructure.Commands.PrivateLesson;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

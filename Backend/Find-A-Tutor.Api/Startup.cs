@@ -1,32 +1,32 @@
 ﻿using Find_A_Tutor.Api.Framework;
-using Find_A_Tutor.Core.Repositories;
-using Find_A_Tutor.Infrastructure.EF;
 using Find_A_Tutor.Core.Mappers;
-using Find_A_Tutor.Infrastructure.Repositories;
+using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Core.Services;
 using Find_A_Tutor.Core.Settings;
+using Find_A_Tutor.Infrastructure.EF;
+using Find_A_Tutor.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using NLog.Extensions.Logging;
 using NLog.Web;
-using System.Text;
-using Microsoft.OpenApi.Models;
-using System.IO;
-using System.Reflection;
 using System;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.IO;
 using System.Linq;
 using System.Net.Mime;
-using Microsoft.AspNetCore.Http;
+using System.Reflection;
+using System.Text;
 
 namespace Find_A_Tutor.Api
 {
@@ -45,7 +45,8 @@ namespace Find_A_Tutor.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //.NetCore
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x => {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x =>
+            {
                 x.SerializerSettings.Formatting = Formatting.Indented;
                 x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
@@ -81,7 +82,7 @@ namespace Find_A_Tutor.Api
                 services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<ISchoolSubjectRepository, SchoolSubjectRepository>();
-            }            
+            }
 
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<FindATurorContext>(options => options.UseSqlServer(sqlSettings.ConnectionString));
@@ -157,7 +158,7 @@ namespace Find_A_Tutor.Api
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();                
+                app.UseHsts();
             }
 
             app.UseErrorHandler();

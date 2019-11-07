@@ -1,11 +1,11 @@
-﻿using Find_A_Tutor.Infrastructure.Commands.SchoolSubject;
+﻿using Find_A_Tutor.Core.Domain;
 using Find_A_Tutor.Core.Services;
+using Find_A_Tutor.Infrastructure.Commands.SchoolSubject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Find_A_Tutor.Core.Domain;
+using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Api.Controllers
 {
