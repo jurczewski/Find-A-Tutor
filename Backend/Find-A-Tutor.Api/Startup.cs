@@ -1,4 +1,5 @@
-﻿using Find_A_Tutor.Api.Framework;
+﻿using Figgle;
+using Find_A_Tutor.Api.Framework;
 using Find_A_Tutor.Core.Mappers;
 using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Core.Services;
@@ -126,6 +127,7 @@ namespace Find_A_Tutor.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            Console.WriteLine(FiggleFonts.Standard.Render("Find-A-Tutor API"));
             loggerFactory.AddNLog();
             env.ConfigureNLog("nlog.config");
 

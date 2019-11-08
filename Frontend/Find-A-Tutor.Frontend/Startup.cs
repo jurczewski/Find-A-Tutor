@@ -1,3 +1,4 @@
+using Figgle;
 using Find_A_Tutor.Frontend.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -26,6 +27,7 @@ namespace Find_A_Tutor.Frontend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Console.WriteLine(FiggleFonts.Standard.Render("Find-A-Tutor Frontend"));
             //services.Configure<CookiePolicyOptions>(options =>
             //{
             //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
