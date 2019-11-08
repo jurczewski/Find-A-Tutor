@@ -14,4 +14,4 @@ Part of my BSc thesis entitled ***"Application for tutors with Paypal transactio
 - Connect to db and exec .sql from /scripts to set up database
 
 or
-- change "sql:inMemory" to **true** in *Backend\Find-A-Tutor.Api\appsettings.json* and rerun docker-compose
+- In *Backend\Find-A-Tutor.Api\appsettings.json*, change "sql:inMemory" to **true** and rerun docker-compose
