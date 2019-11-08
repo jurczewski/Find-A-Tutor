@@ -88,7 +88,9 @@ namespace Find_A_Tutor.Api
                     .AddDbContext<FindATurorContext>(options => options.UseSqlServer(sqlSettings.ConnectionString));
 
             //Healthchecks
-            services.AddHealthChecks().AddSqlServer(Configuration["sql:connectionString"]);
+            services.AddHealthChecks()
+                    .AddSqlServer(Configuration["sql:connectionString"])
+                    .AddDbContextCheck<FindATurorContext>("FindATurorContext-HealthCheck");
 
             //Automapper
             services.AddSingleton(AutoMapperConfig.Initialize());
