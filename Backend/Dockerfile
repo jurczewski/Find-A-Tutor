@@ -7,6 +7,7 @@ COPY . .
 
 WORKDIR /src/Backend/Find-A-Tutor.Api
 RUN dotnet restore -nowarn:msb3202,nu1503
+# RUN dotnet ef database update
 RUN dotnet build -c Release -o /app
 
 

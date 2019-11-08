@@ -3,12 +3,11 @@ services:
   db:
     image: mcr.microsoft.com/mssql/server
     container_name: find-a-tutor.db
-    restart: unless-stopped
     environment:
       SA_PASSWORD: "Abc12345678"
       ACCEPT_EULA: "Y"
-    # volumes:
-    #     - ./data/mssql:/var/opt/mssql
+    volumes:
+      - c:/data/mssql/data:/var/opt/mssql/data
     ports:
       - 1433:1433
     networks:

@@ -1,3 +1,5 @@
+USE FindATutor
+
 CREATE TABLE [dbo].[NLog] (
    [ID] [int] IDENTITY(1,1) NOT NULL,
    [MachineName] [nvarchar](200) NULL,
