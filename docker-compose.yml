@@ -1,14 +1,19 @@
 version: "3.5"
 services:
-  # db:
-  #   image: mcr.microsoft.com/mssql/server
-  #   container_name: find-a-tutor.db
-  #   environment:
-  #       MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
-  #       MYSQL_USER: 'test'
-  #       MYSQL_PASS: 'pass'
-  #   volumes:
-  #       - my-datavolume:/var/lib/mysql
+  db:
+    image: mcr.microsoft.com/mssql/server
+    container_name: find-a-tutor.db
+    restart: unless-stopped
+    environment:
+      SA_PASSWORD: "Abc12345678"
+      ACCEPT_EULA: "Y"
+    # volumes:
+    #     - ./data/mssql:/var/opt/mssql
+    ports:
+      - 1433:1433
+    networks:
+      - findatutor
+
   api:
     build:
       context: .
@@ -17,7 +22,9 @@ services:
     restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - sql__connectionString=Server=localhost,1433;User Id=SA;Password=Abc12345678;Database=FindATutor
+      - sql__connectionString=Server=db,1433;User Id=SA;Password=Abc12345678;Database=FindATutor
+    depends_on:
+      - db
     ports:
       - 5000:80
     networks:
