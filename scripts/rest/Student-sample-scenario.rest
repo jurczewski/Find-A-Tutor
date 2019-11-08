@@ -1,0 +1,58 @@
+@api = http://localhost:5000
+
+### Create an student account
+POST {{api}}/account/register
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "a12345678",
+    "firstname": "test",
+    "lastname": "testowy",
+    "role": "student"
+}
+
+### Authenticate and grab the access token
+# @name sign_in
+POST {{api}}/account/login
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "a12345678"
+}
+
+@accessToken = {{sign_in.response.body.$.value.token}}
+
+### Create a private lesson
+# @name create
+POST {{api}}/privatelesson
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "relevantTo": "2020-07-19T12:41:51.297983Z",
+    "description": "Nowe ogłoszenie - potrzeba korepetycji z biologi",
+    "subject": "Biology"
+}
+
+@privateLesson = {{create.response.headers.Location}}
+
+### Get lessons for account
+GET {{api}}/account/lessons
+Authorization: Bearer {{accessToken}}
+
+### Update lesson
+PUT {{api}}{{privateLesson}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "relevantTo": "2020-10-22T12:41:51.297983Z",
+    "description": "Nowe ogłoszenie - potrzeba korepetycji z biologi - PILNE",
+    "subject": "Biology"
+}
+
+### Get lessons for account
+GET {{api}}/account/lessons
+Authorization: Bearer {{accessToken}}

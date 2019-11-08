@@ -1,0 +1,34 @@
+@api = http://localhost:5000
+
+### Create an student account
+POST {{api}}/account/register
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "a12345678",
+    "firstname": "test",
+    "lastname": "testowy",
+    "role": "student"
+}
+
+### Authenticate and grab the access token
+# @name sign_in
+POST {{api}}/account/login
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "a12345678"
+}
+
+@accessToken = {{sign_in.response.body.$.value.token}}
+
+### Get your user account details
+GET {{api}}/account/
+Authorization: Bearer {{accessToken}}
+
+### Get lessons for account
+
+GET {{api}}/account/lessons
+Authorization: Bearer {{accessToken}}
