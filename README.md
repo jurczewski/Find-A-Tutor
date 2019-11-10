@@ -11,7 +11,7 @@ Part of my BSc thesis entitled ***"Application for tutors with Paypal transactio
 # How to set up project
 - Git clone
 - docker-compose --build
-- Connect to db and exec .sql from /scripts to set up database
+- Connect to db and exec all .sql files from /scripts to set up database
 
 or
 - In *Backend\Find-A-Tutor.Api\appsettings.json*, change "sql:inMemory" to **true** and rerun docker-compose
