@@ -12,7 +12,7 @@ namespace Find_A_Tutor.Core.Services
         Task<Result<IEnumerable<PrivateLessonDTO>>> GetAsyncBySubject(string name);
         Task<Result<IEnumerable<PrivateLessonDTO>>> GetForUserAsync(Guid userId);
         Task<Result<IEnumerable<PrivateLessonDTO>>> BrowseAsync(string description = "");
-        Task<Result> CreateAsync(Guid privateLessonId, Guid studnetId, DateTime relevantTo, string description, string subject);
+        Task<Result> CreateAsync(Guid privateLessonId, Guid studnetId, DateTime relevantTo, string description, string subject, double time);
         Task<Result> UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject);
         Task<Result> DeleteAsync(Guid privateLessonId);
         Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId);

@@ -45,7 +45,7 @@ namespace Find_A_Tutor.Api.Controllers
         public async Task<IActionResult> Post([FromBody]CreatePrivateLesson command)
         {
             command.PrivateLessonId = Guid.NewGuid();
-            var createdResult = await _privateLessonService.CreateAsync(command.PrivateLessonId, UserId, command.RelevantTo, command.Description, command.Subject);
+            var createdResult = await _privateLessonService.CreateAsync(command.PrivateLessonId, UserId, command.RelevantTo, command.Description, command.Subject, command.Time);
 
             return createdResult.IsSuccess ? Created($"/PrivateLesson/{command.PrivateLessonId}", null) : (IActionResult)Ok(createdResult);
         }

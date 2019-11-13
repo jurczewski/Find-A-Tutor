@@ -32,17 +32,21 @@ namespace Find_A_Tutor.Infrastructure.Migrations
 
                     b.Property<bool>("IsPaid");
 
+                    b.Property<double>("PricePerHour");
+
                     b.Property<DateTime>("RelevantTo");
 
                     b.Property<Guid?>("SchoolSubjectId");
 
-                    b.Property<Guid>("StudnetId");
+                    b.Property<Guid>("StudentId");
 
                     b.Property<DateTime?>("TakenAt");
 
+                    b.Property<double>("Time");
+
                     b.Property<Guid?>("TutorId");
 
-                    b.Property<DateTime?>("UpdateAt");
+                    b.Property<DateTime?>("UpdatedAt");
 
                     b.HasKey("Id");
 

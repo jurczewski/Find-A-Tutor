@@ -16,10 +16,13 @@ namespace Find_A_Tutor.Core.Domain
         public bool IsAssigned => TutorId.HasValue;
         public bool IsPaid { get; protected set; }
         public bool IsDone { get; protected set; }
+        public double Time { get; protected set; }
+        public double PricePerHour { get; protected set; }
+        public double TotalPrice => Time * PricePerHour;
 
         public PrivateLesson() { }
 
-        public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubject subject)
+        public PrivateLesson(Guid id, Guid studnetId, DateTime relevantTo, string description, SchoolSubject subject, double time)
         {
             Id = id;
             StudentId = studnetId;
@@ -30,6 +33,7 @@ namespace Find_A_Tutor.Core.Domain
             UpdatedAt = null;
             IsPaid = false;
             IsDone = false;
+            SetTime(time);
         }
 
         public void SetSchoolSubject(SchoolSubject schoolSubject)
@@ -55,6 +59,15 @@ namespace Find_A_Tutor.Core.Domain
             }
             RelevantTo = relevantTo;
             UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SetTime(double time)
+        {
+            if(time == 0.0)
+            {
+                throw new ValidationException($"Time cannot be null or 0.");
+            }
+            Time = time;
         }
 
         public void AssignTutor(User tutor)

@@ -66,7 +66,7 @@ namespace Find_A_Tutor.Core.Services
             return Result<IEnumerable<PrivateLessonDTO>>.Ok(_mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson));
         }
 
-        public async Task<Result> CreateAsync(Guid id, Guid studnetId, DateTime relevantTo, string description, string subject)
+        public async Task<Result> CreateAsync(Guid id, Guid studnetId, DateTime relevantTo, string description, string subject, double time)
         {
             var privateLesson = await _privateLessonRepository.GetAsync(id);
             if (privateLesson != null)
@@ -80,7 +80,7 @@ namespace Find_A_Tutor.Core.Services
                 return Result.Error($"School subject with name: '{subject}' does not exist.");
             }
 
-            privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, schoolSubject);
+            privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, schoolSubject, time);
             await _privateLessonRepository.AddAsync(privateLesson);
 
             logger.Info($"Private lesson with id: '{id}', was successfully created");

@@ -46,9 +46,12 @@ CREATE TABLE [dbo].[PrivateLessons](
 	[UpdatedAt] [datetime2](7) NULL,
 	[RelevantTo] [datetime2](7) NOT NULL,
 	[Description] [nvarchar](max) NULL,
-	[SchoolSubjectId] [uniqueidentifier] NULL,
+	[SchoolSubjectId] [uniqueidentifier] NULL  ,
 	[IsPaid] [bit] NOT NULL,
-	[IsDone] [bit] NOT NULL
+	[IsDone] [bit] NOT NULL,
+	[Time] float NOT NULL,
+	[PricePerHour] float NULL,
+	[TotalPrice] float NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[PrivateLessons] ADD  CONSTRAINT [PK_PrivateLessons] PRIMARY KEY CLUSTERED 

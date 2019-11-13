@@ -9,5 +9,6 @@ namespace Find_A_Tutor.Infrastructure.Commands.PrivateLesson
         public DateTime RelevantTo { get; set; }
         public string Description { get; set; }
         public string Subject { get; set; }
+        public double Time { get; set; }
     }
 }
