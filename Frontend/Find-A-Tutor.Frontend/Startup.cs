@@ -1,17 +1,13 @@
 using Figgle;
 using Find_A_Tutor.Frontend.Services;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
 using System;
-using System.Linq;
-using System.Net.Mime;
 
 namespace Find_A_Tutor.Frontend
 {
@@ -65,19 +61,10 @@ namespace Find_A_Tutor.Frontend
             }
 
             //HealthChecks
-            app.UseHealthChecks("/health", new HealthCheckOptions
+            app.UseHealthChecks("/health", new HealthCheckOptions()
             {
-                ResponseWriter = async (context, report) =>
-                {
-                    var result = JsonConvert.SerializeObject(
-                        new
-                        {
-                            status = report.Status.ToString(),
-                            details = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
-                        });
-                    context.Response.ContentType = MediaTypeNames.Application.Json;
-                    await context.Response.WriteAsync(result);
-                }
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
             app.UseHttpsRedirection();

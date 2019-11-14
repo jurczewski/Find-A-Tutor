@@ -6,16 +6,15 @@ using Find_A_Tutor.Core.Services;
 using Find_A_Tutor.Core.Settings;
 using Find_A_Tutor.Infrastructure.EF;
 using Find_A_Tutor.Infrastructure.Repositories;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -24,8 +23,6 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using System;
 using System.IO;
-using System.Linq;
-using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 
@@ -140,19 +137,11 @@ namespace Find_A_Tutor.Api
                         "Find-A-Tutor Api");
                 });
 
-            app.UseHealthChecks("/health", new HealthCheckOptions
+            //HealthChecks
+            app.UseHealthChecks("/health", new HealthCheckOptions()
             {
-                ResponseWriter = async (context, report) =>
-                {
-                    var result = JsonConvert.SerializeObject(
-                        new
-                        {
-                            status = report.Status.ToString(),
-                            details = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
-                        });
-                    context.Response.ContentType = MediaTypeNames.Application.Json;
-                    await context.Response.WriteAsync(result);
-                }
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
             if (env.IsDevelopment())
