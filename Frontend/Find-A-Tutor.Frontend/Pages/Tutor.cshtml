@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.TutorModel
 @{
-    ViewData["Title"] = "Tutor panel";
+    ViewData["Title"] = "Tutor panel 👨‍🏫";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
@@ -42,7 +42,7 @@
                             <td>@(@item.IsAssigned.Value ? "✔️" : "❌")</td>
                             <td>@(@item.IsPaid.Value ? "✔️" : "❌")</td>
                             <td>@(@item.IsDone.Value ? "✔️" : "❌")</td>
-                            <td><a asp-page-handler="AssignTutor" asp-route-id="@item.Id">Take</a></td>
+                            <td><a asp-page="/Take" asp-route-Id="@item.Id">Take</a></td>
                             <td><a asp-page-handler="RemoveAssignedTutor" asp-route-id="@item.Id">Give back</a></td>
                         </tr>
                     }

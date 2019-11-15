@@ -1,6 +1,7 @@
 ﻿using Find_A_Tutor.Frontend.Model;
 using Find_A_Tutor.Frontend.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
@@ -36,21 +37,6 @@ namespace Find_A_Tutor.Frontend.Pages
             else
             {
                 Response.Redirect("Login");
-            }
-        }
-
-        public async Task OnGetAssignTutor(Guid id)
-        {
-            var result = await _privateLessonService.AssignTutor(id.ToString());
-            privateLessons = await _privateLessonService.GetAll();
-
-            if (result.IsSuccess)
-            {
-                Messages.Add("Announcement was assinged to your account 😊");
-            }
-            else
-            {
-                Messages.AddRange(result.Errors);
             }
         }
 
