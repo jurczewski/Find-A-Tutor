@@ -18,6 +18,6 @@ namespace Find_A_Tutor.Frontend.Model
         public bool? IsDone { get; set; }
         public double Time { get; set; }
         public double PricePerHour { get; set; }
-        public double TotalPrice => Time * PricePerHour;
+        public double TotalPrice { get; set; }
     }
 }
