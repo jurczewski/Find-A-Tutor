@@ -92,6 +92,7 @@ namespace Find_A_Tutor.Core.Domain
             {
                 throw new ValidationException($"You cannot untake an private lesson that was not taken before.");
             }
+            PricePerHour = 0;
             TutorId = null;
             TakenAt = null;
             UpdatedAt = DateTime.UtcNow;
