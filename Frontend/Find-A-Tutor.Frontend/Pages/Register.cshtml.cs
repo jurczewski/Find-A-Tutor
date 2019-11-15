@@ -36,7 +36,7 @@ namespace Find_A_Tutor.Frontend.Pages
                 Password = Password,
                 FirstName = FirstName,
                 LastName = LastName,
-                Role = (IsTutor ? "tutor" : "student")
+                Role = IsTutor ? "tutor" : "student"
             });
 
             if (response.IsSuccess)
