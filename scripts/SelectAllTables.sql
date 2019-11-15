@@ -14,3 +14,10 @@ join SchoolSubjects s on pk.SchoolSubjectId = s.Id
 join Users u on pk.StudentId = u.Id
 
 SELECT TOP 1000 * FROM NLog
+
+/*
+DELETE FROM Users
+DELETE FROM PrivateLessons
+DELETE FROM SchoolSubjects
+DELETE FROM NLog
+*/

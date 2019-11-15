@@ -69,3 +69,10 @@ REFERENCES [dbo].[SchoolSubjects] ([Id])
 GO
 ALTER TABLE [dbo].[PrivateLessons] CHECK CONSTRAINT [FK_PrivateLessons_SchoolSubjects_SchoolSubjectId]
 GO
+
+/*
+DROP TABLE PrivateLessons
+DROP TABLE Users
+DROP TABLE SchoolSubjects
+DROP TABLE NLog
+*/
