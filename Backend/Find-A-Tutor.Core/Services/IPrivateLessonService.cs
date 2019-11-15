@@ -15,7 +15,7 @@ namespace Find_A_Tutor.Core.Services
         Task<Result> CreateAsync(Guid privateLessonId, Guid studnetId, DateTime relevantTo, string description, string subject, double time);
         Task<Result> UpdateAsync(Guid privateLessonId, DateTime relevantTo, string description, string subject);
         Task<Result> DeleteAsync(Guid privateLessonId);
-        Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId);
+        Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId, double pricePerHour);
         Task<Result> RemoveAssignedTutor(Guid privateLessonId, Guid userId);
     }
 }

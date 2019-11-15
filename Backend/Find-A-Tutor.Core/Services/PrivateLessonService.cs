@@ -83,7 +83,7 @@ namespace Find_A_Tutor.Core.Services
             privateLesson = new PrivateLesson(id, studnetId, relevantTo, description, schoolSubject, time);
             await _privateLessonRepository.AddAsync(privateLesson);
 
-            logger.Info($"Private lesson with id: '{id}', was successfully created");
+            logger.Info($"Private lesson with id: '{id}', was successfully created.");
             return Result.Ok();
         }
 
@@ -107,7 +107,7 @@ namespace Find_A_Tutor.Core.Services
 
             await _privateLessonRepository.UpdateAsync(privateLesson);
 
-            logger.Info($"Private lesson with id: '{privateLessonId}', was successfully updated");
+            logger.Info($"Private lesson with id: '{privateLessonId}', was successfully updated.");
             return Result.Ok();
         }
 
@@ -124,7 +124,7 @@ namespace Find_A_Tutor.Core.Services
             return Result.Ok();
         }
 
-        public async Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId)
+        public async Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId, double pricePerHour)
         {
             var privateLesson = await _privateLessonRepository.GetAsync(privateLessonId);
             if (privateLesson == null)
@@ -142,7 +142,7 @@ namespace Find_A_Tutor.Core.Services
                 return Result.Error($"User with id: '{tutorId}' does not exist.");
             }
 
-            privateLesson.AssignTutor(tutor);
+            privateLesson.AssignTutor(tutor, pricePerHour);
             await _privateLessonRepository.UpdateAsync(privateLesson);
 
             logger.Info($"Tutor with id '{tutorId}' was assigned to lesson with id '{privateLessonId}'");

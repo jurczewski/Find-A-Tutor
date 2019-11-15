@@ -70,12 +70,17 @@ namespace Find_A_Tutor.Core.Domain
             Time = time;
         }
 
-        public void AssignTutor(User tutor)
+        public void AssignTutor(User tutor, double pricePerHour)
         {
             if (IsAssigned)
             {
                 throw new ValidationException($"Private lesson was already taken by another tutor at: {TakenAt}.");
             }
+            if(pricePerHour == 0.0)
+            {
+                throw new ValidationException($"Price cannot be zero.");
+            }
+            PricePerHour = pricePerHour;
             TutorId = tutor.Id;
             TakenAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;

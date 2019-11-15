@@ -68,11 +68,11 @@ namespace Find_A_Tutor.Api.Controllers
             return result.IsSuccess ? NoContent() : (IActionResult)Ok(result);
         }
 
-        [HttpPut("/assign/{privateLessonId}")]
+        [HttpPut("/assign/{privateLessonId}/{pricePerHour}")]
         [Authorize(Policy = "HasTutorRole")]
-        public async Task<IActionResult> AssignTutor(Guid privateLessonId)
+        public async Task<IActionResult> AssignTutor(Guid privateLessonId, double pricePerHour)
         {
-            var result = await _privateLessonService.AssignTutor(privateLessonId, UserId);
+            var result = await _privateLessonService.AssignTutor(privateLessonId, UserId, pricePerHour);
 
             return result.IsSuccess ? NoContent() : (IActionResult)Ok(result);
         }
