@@ -16,5 +16,8 @@ namespace Find_A_Tutor.Core.DTO
         public bool IsAssigned => TutorId.HasValue;
         public bool IsPaid { get; set; }
         public bool IsDone { get; set; }
+        public double Time { get; set; }
+        public double PricePerHour { get; set; }
+        public double TotalPrice => Time * PricePerHour;
     }
 }
