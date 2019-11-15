@@ -17,7 +17,9 @@ namespace Find_A_Tutor.Frontend.Pages
         [BindProperty]
         public string SelectedSubjectId { get; set; }
         [BindProperty]
-        public DateTime RelevantTo { get; set;}
+        public DateTime RelevantTo { get; set; }
+        [BindProperty]
+        public double Time { get; set; }
         public List<SchoolSubject> SchoolSubjects { get; set; }
 
         public List<string> Messages { get; set; }
@@ -61,7 +63,8 @@ namespace Find_A_Tutor.Frontend.Pages
             {
                 Description = Description,
                 Subject = subjectName.FirstOrDefault().Name,
-                RelevantTo = RelevantTo
+                RelevantTo = RelevantTo,
+                Time = Time
             });
 
             if (response.IsSuccess)
@@ -71,7 +74,7 @@ namespace Find_A_Tutor.Frontend.Pages
             else
             {
                 Messages.AddRange(response.Errors);
-            }            
+            }
         }
 
         public async Task FetchSchoolSubjects()

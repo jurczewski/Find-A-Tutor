@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.NewLessonModel
 @{
-    ViewData["Title"] = "Create new announcement";
+    ViewData["Title"] = "Create new announcement ✒️";
 }
 <link rel="stylesheet" type="text/css" href="~/css/newLesson.css">
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
@@ -28,6 +28,8 @@
                 @Html.DropDownListFor(m => m.SelectedSubjectId, new SelectList(Model.SchoolSubjects, "Id", "Name"), "-- Select Subject --", new { id="schoolSubjectsList", required = "required"})
                 <p>Announcement is relevant to</p>
                 <input type="date" name="relevantTo" required="" />
+                <p>How much time do you need?</p>
+                <input type="number" step="0.5" name="time" required="" />
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
             </form>
             @foreach(var msg in Model.Messages)

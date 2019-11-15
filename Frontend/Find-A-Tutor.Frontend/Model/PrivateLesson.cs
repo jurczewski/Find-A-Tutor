@@ -16,5 +16,8 @@ namespace Find_A_Tutor.Frontend.Model
         public bool? IsAssigned { get; set; }
         public bool? IsPaid { get; set; }
         public bool? IsDone { get; set; }
+        public double Time { get; set; }
+        public double PricePerHour { get; set; }
+        public double TotalPrice => Time * PricePerHour;
     }
 }
