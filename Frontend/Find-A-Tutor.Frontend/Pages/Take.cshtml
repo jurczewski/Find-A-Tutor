@@ -1,0 +1,67 @@
+﻿@page
+@model Find_A_Tutor.Frontend.Pages.TakeModel
+@{
+    ViewData["Title"] = "Take an announcement 📖";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/main.css">
+<link rel="stylesheet" type="text/css" href="~/css/details.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Take an announcement 📖</h2>
+        </div>
+        <div class="col-6">
+            <a href="/Tutor">
+                <p class="text-right">Go back to panel</p>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="overflow-x:auto;">
+            @{
+                if (Model.privateLesson.IsSuccess)
+                {
+                    var privateLesson = Model.privateLesson.Value;
+                    <h5>Created At:</h5>
+                    <p>@privateLesson.CreatedAt</p>
+                    <h5>Taken At:</h5>
+                    <p>@privateLesson.TakenAt</p>
+                    <p>@(privateLesson.TakenAt.HasValue ? privateLesson.TakenAt.ToString() : "-")</p>
+                    <h5>Relevant To:</h5>
+                    <p>@privateLesson.RelevantTo</p>
+                    <h5>Description:</h5>
+                    <!--<textarea name="comment" rows="3" required="">@privateLesson.Description</textarea>-->
+                    <p>@privateLesson.Description</p>
+
+                    <h5>Subject:</h5>
+                    <p>@privateLesson.Subject</p>
+                    <h5>Assigned?</h5>
+                    <p>@(privateLesson.IsAssigned.Value ? "✔️" : "❌")</p>
+                    <h5>Paid?</h5>
+                    <p>@(privateLesson.IsPaid.Value ? "✔️" : "❌")</p>
+                    <h5>Completed?</h5>
+                    <p>@(privateLesson.IsDone.Value ? "✔️" : "❌")</p>
+                    <h5>Time</h5>
+                    <p>@privateLesson.Time</p>
+                    <h5>Price per hour</h5>
+                    <input name="PricePerHour" />
+                    <h5>Total price</h5>
+                    <p>@privateLesson.TotalPrice</p>
+                    <a asp-page-handler="AssignTutor" asp-route-id="@privateLesson.Id">TAKE</a>
+                }
+                else
+                {
+                    @foreach (var err in Model.privateLesson.Errors)
+                    {
+                        <p class="msg">@err</p>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+

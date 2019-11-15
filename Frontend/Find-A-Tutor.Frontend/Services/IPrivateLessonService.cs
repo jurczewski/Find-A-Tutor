@@ -10,7 +10,7 @@ namespace Find_A_Tutor.Frontend.Services
         Task<Result<IEnumerable<PrivateLesson>>> GetAll();
         Task<Result<PrivateLesson>> Get(Guid privateLessonId);
         Task<Result> Post(PrivateLesson privateLesson);
-        Task<Result> AssignTutor(string privateLessonId);
+        Task<Result> AssignTutor(string privateLessonId, double pricePerHour);
         Task<Result> RemoveAssignedTutor(string privateLessonId);
     }
 }

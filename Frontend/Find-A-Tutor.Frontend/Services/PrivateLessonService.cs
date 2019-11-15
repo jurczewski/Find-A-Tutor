@@ -80,9 +80,9 @@ namespace Find_A_Tutor.Frontend.Services
             }
         }
 
-        public async Task<Result> AssignTutor(string privateLessonId)
+        public async Task<Result> AssignTutor(string privateLessonId, double pricePerHour)
         {
-            var url = ApiUrl + "/assign/" + privateLessonId;
+            var url = ApiUrl + "/assign/" + privateLessonId + '/' + pricePerHour;
             var token = _accessor.HttpContext.Session.GetString("token");
 
             ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
