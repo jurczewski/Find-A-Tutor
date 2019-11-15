@@ -1,7 +1,7 @@
 ﻿@page
 @model Find_A_Tutor.Frontend.Pages.DetailsModel
 @{
-    ViewData["Title"] = "Details of announcement";
+    ViewData["Title"] = "Details of announcement 📖";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>Details of announcement </h2>
+            <h2>Details of announcement 📖</h2>
         </div>
         <div class="col-6">
             <a href="/Student">
@@ -34,9 +34,8 @@
                     <h5>Relevant To:</h5>
                     <p>@privateLesson.RelevantTo</p>
                     <h5>Description:</h5>
-                    <!--<textarea name="comment" rows="3" required="">@privateLesson.Description</textarea>-->
+                    @*<textarea name="comment" rows="3" required="">@privateLesson.Description</textarea>*@
                     <p>@privateLesson.Description</p>
-
                     <h5>Subject:</h5>
                     <p>@privateLesson.Subject</p>
                     <h5>Assigned?</h5>
@@ -45,7 +44,12 @@
                     <p>@(privateLesson.IsPaid.Value ? "✔️" : "❌")</p>
                     <h5>Completed?</h5>
                     <p>@(privateLesson.IsDone.Value ? "✔️" : "❌")</p>
-
+                    <h5>Time</h5>
+                    <p>@privateLesson.Time</p>
+                    <h5>Price per hour</h5>
+                    <p>@privateLesson.PricePerHour</p>
+                    <h5>Total price</h5>
+                    <p>@privateLesson.TotalPrice</p>
                 }
                 else
                 {
