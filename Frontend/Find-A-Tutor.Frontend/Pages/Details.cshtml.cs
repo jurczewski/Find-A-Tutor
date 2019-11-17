@@ -26,5 +26,10 @@ namespace Find_A_Tutor.Frontend.Pages
                 Redirect("Student");
             }            
         }
+
+        public async Task OnGetPay(Guid id)
+        {
+
+        }
     }
 }

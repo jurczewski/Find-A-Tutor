@@ -46,9 +46,13 @@
                     <h5>Time</h5>
                     <p>@privateLesson.Time</p>
                     <h5>Price per hour</h5>
-                    <p>@privateLesson.PricePerHour</p>
-                    <h5>Total price</h5>
-                    <p>@privateLesson.TotalPrice</p>
+                    if (privateLesson.IsAssigned.Value)
+                    {
+                        <p>@privateLesson.PricePerHour</p>
+                        <h5>Total price</h5>
+                        <p>@privateLesson.TotalPrice</p>
+                        <button asp-page-handler="Pay" asp-route-id="@privateLesson.Id" type="submit" class="btn btn-lg btn-primary btn-block">Pay via PayPal!</button>
+                    }
                 }
                 else
                 {

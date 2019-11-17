@@ -49,16 +49,16 @@
                         <p>@privateLesson.Time</p>
                         <h5>Price per hour</h5>
                         if (privateLesson.IsAssigned.Value)
-                        {
+                        {                            
 							<p>@privateLesson.PricePerHour</p>
+                            <h5>Total price</h5>
+                            <p>@privateLesson.TotalPrice</p>
                         }
                         else
                         {
                             <input asp-for="PricePerHour" name="PricePerHour"/>
+                            <button asp-page-handler="AssignTutor" asp-route-id="@privateLesson.Id" type="submit" class="btn btn-lg btn-primary btn-block">Take!</button>
                         }
-                        <h5>Total price</h5>
-                        <p>@privateLesson.TotalPrice</p>
-                        <button asp-page-handler="AssignTutor" asp-route-id="@privateLesson.Id" type="submit" class="btn btn-lg btn-primary btn-block">Take!</button>
                     }
                     </form>
                 }
