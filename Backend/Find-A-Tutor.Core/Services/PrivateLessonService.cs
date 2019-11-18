@@ -167,5 +167,22 @@ namespace Find_A_Tutor.Core.Services
             logger.Info($"Assigned tutor was removed from lesson with id '{privateLessonId}'");
             return Result.Ok();
         }
+
+        public async Task<Result> UpdatePaymentStatusToPaid(Guid privateLessonId)
+        {
+            var privateLesson = await _privateLessonRepository.GetAsync(privateLessonId);
+            if (privateLesson == null)
+            {
+                return Result.Error($"Private lesson with id: '{privateLessonId}' does not exist.");
+            }
+
+            //todo: more logic
+            privateLesson.ChangeStatusToPaid();
+
+            await _privateLessonRepository.UpdateAsync(privateLesson);
+
+            logger.Info($"Private lesson with id: '{privateLessonId}', was successfully paid.");
+            return Result.Ok();
+        }
     }
 }

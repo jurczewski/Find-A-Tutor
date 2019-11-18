@@ -97,5 +97,10 @@ namespace Find_A_Tutor.Core.Domain
             TakenAt = null;
             UpdatedAt = DateTime.UtcNow;
         }
+
+        public void ChangeStatusToPaid()
+        {
+            IsPaid = true;
+        }
     }
 }
