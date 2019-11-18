@@ -7,6 +7,9 @@
 <link rel="stylesheet" type="text/css" href="~/css/main.css">
 <link rel="stylesheet" type="text/css" href="~/css/details.css">
 
+<script src="https://www.paypal.com/sdk/js?client-id=AX78qlQWBMJU0PIM9IEsKc0fbGRb6DNE6yJWTACOy-ww52uqn9gF0a3bAJiiHGzF4dYgT3l1JAQ2nhaf&currency=PLN">
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col-6">
@@ -51,7 +54,10 @@
                         <p>@privateLesson.PricePerHour</p>
                         <h5>Total price</h5>
                         <p>@privateLesson.TotalPrice</p>
-                        <button asp-page-handler="Pay" asp-route-id="@privateLesson.Id" type="submit" class="btn btn-lg btn-primary btn-block">Pay via PayPal!</button>
+                        if (!privateLesson.IsPaid.Value)
+                        {
+                            <div id="paypal-button-container"></div>
+                        }
                     }
                 }
                 else
@@ -66,3 +72,35 @@
     </div>
 </div>
 
+@if (!Model.privateLesson.Value.IsPaid.Value)
+{
+    <script>
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: @Model.privateLesson.Value.TotalPrice
+                        },
+                        currency: 'PLN'
+                    }]
+                });
+            },
+            onApprove: async function (data, actions) {
+                return await actions.order.capture().then(function (details) {
+                    return fetch('/pay', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID,
+                            privateLessonId: '@Model.privateLesson.Value.Id'
+                        })
+                    });
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+}
