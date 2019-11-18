@@ -161,6 +161,12 @@ namespace Find_A_Tutor.Core.Services
             {
                 return Result.Error("Tutor can be unassign only by orignal student or tutor.");
             }
+
+            if (privateLesson.IsPaid)
+            {
+                return Result.Error("Cannot remove assigned tutor from paid announcement.");
+            }
+
             privateLesson.RemoveAssignedTutor();
             await _privateLessonRepository.UpdateAsync(privateLesson);
 
