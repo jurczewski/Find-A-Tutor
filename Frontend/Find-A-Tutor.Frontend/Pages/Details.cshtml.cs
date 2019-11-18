@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Find_A_Tutor.Frontend.Model;
 using Find_A_Tutor.Frontend.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
 
 namespace Find_A_Tutor.Frontend.Pages
 {
@@ -11,12 +10,10 @@ namespace Find_A_Tutor.Frontend.Pages
     {
         private readonly IPrivateLessonService _privateLessonService;
         public Result<PrivateLesson> privateLesson;
-        public string ApiUrl { get; }
 
-        public DetailsModel(IPrivateLessonService privateLessonService, IConfiguration config)
+        public DetailsModel(IPrivateLessonService privateLessonService)
         {
             _privateLessonService = privateLessonService;
-            ApiUrl = config.GetValue<string>("ApiUrl");
         }
 
         public async Task OnGet(Guid id)

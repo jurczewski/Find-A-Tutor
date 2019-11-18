@@ -24,12 +24,6 @@ namespace Find_A_Tutor.Frontend
         public void ConfigureServices(IServiceCollection services)
         {
             Console.WriteLine(FiggleFonts.Standard.Render("Find-A-Tutor Frontend"));
-            //services.Configure<CookiePolicyOptions>(options =>
-            //{
-            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            //    options.CheckConsentNeeded = context => true;
-            //    options.MinimumSameSitePolicy = SameSiteMode.None;
-            //});
 
             services.AddSession();
             services.AddMemoryCache();
