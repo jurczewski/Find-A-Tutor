@@ -63,6 +63,7 @@ namespace Find_A_Tutor.Api
             services.AddScoped<IPrivateLessonService, PrivateLessonService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
+            services.AddScoped<IPayPalService, PayPalService>();
 
             //Repository + SQL
             services.Configure<SqlSettings>(Configuration);
