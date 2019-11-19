@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Frontend.Services
@@ -22,9 +23,9 @@ namespace Find_A_Tutor.Frontend.Services
         public async Task<Result> UpdatePaymentStatusToPaid(PaymentDetails paymentDetails)
         {
             var url = ApiUrl + Route + "paypal-transaction-complete";
-            //var token = _accessor.HttpContext.Session.GetString("token");
+            var token = _accessor.HttpContext.Session.GetString("token");
 
-            //ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             using (var response = await ApiHelper.ApiClient.PostAsJsonAsync(url, paymentDetails))
             {

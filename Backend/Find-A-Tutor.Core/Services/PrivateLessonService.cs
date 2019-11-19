@@ -174,12 +174,17 @@ namespace Find_A_Tutor.Core.Services
             return Result.Ok();
         }
 
-        public async Task<Result> UpdatePaymentStatusToPaid(Guid privateLessonId)
+        public async Task<Result> UpdatePaymentStatusToPaid(Guid privateLessonId, Guid userId)
         {
             var privateLesson = await _privateLessonRepository.GetAsync(privateLessonId);
             if (privateLesson == null)
             {
                 return Result.Error($"Private lesson with id: '{privateLessonId}' does not exist.");
+            }
+
+            if(privateLesson.StudentId != userId)
+            {
+                return Result.Error($"Logged in user id is not equal to student id in announcement.");
             }
 
             //todo: more logic

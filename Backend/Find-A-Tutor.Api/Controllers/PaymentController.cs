@@ -1,6 +1,7 @@
 ﻿using Find_A_Tutor.Core.Domain;
 using Find_A_Tutor.Core.Services;
 using Find_A_Tutor.Infrastructure.Commands.Payment;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace Find_A_Tutor.Api.Controllers
             _privateLessonService = privateLessonService;
         }
 
+        [Authorize(Policy = "HasStudentRole")]
         [HttpPost("paypal-transaction-complete")]
         public async Task<IActionResult> Post([FromBody]PaymentDetails paymentDetails)
         {
@@ -25,7 +27,7 @@ namespace Find_A_Tutor.Api.Controllers
 
             if (responsePayPal.Value.Status == "COMPLETED")
             {
-                var response = await _privateLessonService.UpdatePaymentStatusToPaid(paymentDetails.PrivateLessonId);
+                var response = await _privateLessonService.UpdatePaymentStatusToPaid(paymentDetails.PrivateLessonId, UserId);
                 return response.IsSuccess ? Created($"/PrivateLesson/{paymentDetails.PrivateLessonId}", null) : (IActionResult)Ok(response);
             }
             else
@@ -34,6 +36,7 @@ namespace Find_A_Tutor.Api.Controllers
             }
         }
 
+        [Authorize(Policy = "HasAdminRole")]
         [HttpGet("order-details/{orderID}")]
         public async Task<IActionResult> Get(string orderID)
         {

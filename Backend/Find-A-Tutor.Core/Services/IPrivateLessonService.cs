@@ -17,6 +17,6 @@ namespace Find_A_Tutor.Core.Services
         Task<Result> DeleteAsync(Guid privateLessonId);
         Task<Result> AssignTutor(Guid privateLessonId, Guid tutorId, double pricePerHour);
         Task<Result> RemoveAssignedTutor(Guid privateLessonId, Guid userId);
-        Task<Result> UpdatePaymentStatusToPaid(Guid privateLessonId);
+        Task<Result> UpdatePaymentStatusToPaid(Guid privateLessonId, Guid userId);
     }
 }
