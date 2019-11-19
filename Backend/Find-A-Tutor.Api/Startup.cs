@@ -1,6 +1,7 @@
 ﻿using Figgle;
 using Find_A_Tutor.Api.Framework;
 using Find_A_Tutor.Core.Mappers;
+using Find_A_Tutor.Core.PayPal;
 using Find_A_Tutor.Core.Repositories;
 using Find_A_Tutor.Core.Services;
 using Find_A_Tutor.Core.Settings;
@@ -60,10 +61,11 @@ namespace Find_A_Tutor.Api
             });
 
             //Services
-            services.AddScoped<IPrivateLessonService, PrivateLessonService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
-            services.AddScoped<IPayPalService, PayPalService>();
+            services.AddTransient<IPrivateLessonService, PrivateLessonService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISchoolSubjectService, SchoolSubjectService>();
+            services.AddTransient<IPayPalService, PayPalService>();
+            services.AddTransient<PayPalClient>();
 
             //Repository + SQL
             services.Configure<SqlSettings>(Configuration);
@@ -72,15 +74,15 @@ namespace Find_A_Tutor.Api
 
             if (sqlSettings.InMemory)
             {
-                services.AddScoped<IPrivateLessonRepository, InMemoryPrivateLessonRepository>();
-                services.AddScoped<IUserRepository, InMemoryUserRepository>();
-                services.AddScoped<ISchoolSubjectRepository, InMemorySchoolSubjectRepository>();
+                services.AddTransient<IPrivateLessonRepository, InMemoryPrivateLessonRepository>();
+                services.AddTransient<IUserRepository, InMemoryUserRepository>();
+                services.AddTransient<ISchoolSubjectRepository, InMemorySchoolSubjectRepository>();
             }
             else
             {
-                services.AddScoped<IPrivateLessonRepository, PrivateLessonRepository>();
-                services.AddScoped<IUserRepository, UserRepository>();
-                services.AddScoped<ISchoolSubjectRepository, SchoolSubjectRepository>();
+                services.AddTransient<IPrivateLessonRepository, PrivateLessonRepository>();
+                services.AddTransient<IUserRepository, UserRepository>();
+                services.AddTransient<ISchoolSubjectRepository, SchoolSubjectRepository>();
             }
 
             services.AddEntityFrameworkSqlServer()
