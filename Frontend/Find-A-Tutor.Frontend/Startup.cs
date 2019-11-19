@@ -35,10 +35,10 @@ namespace Find_A_Tutor.Frontend
                     .AddUrlGroup(new Uri($"{apiUrl?.Value}/ping"), "Find-A-Tutor.Api");
 
             ApiHelper.InitializeClient();
-            services.AddScoped<IPrivateLessonService, PrivateLessonService>();
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<ISchoolSubjectService, SchoolSubjectService>();
-            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddTransient<IPrivateLessonService, PrivateLessonService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ISchoolSubjectService, SchoolSubjectService>();
+            services.AddTransient<IPaymentService, PaymentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
