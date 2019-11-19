@@ -34,7 +34,7 @@
                     <h5>Taken At:</h5>
                     <p>@(privateLesson.TakenAt.HasValue ? privateLesson.TakenAt.ToString() : "-")</p>
                     <h5>Relevant To:</h5>
-                    <p>@privateLesson.RelevantTo</p>
+                    <p>@privateLesson.RelevantTo.Value.ToString("dd.MM.yyyy")</p>
                     <h5>Description:</h5>
                     @*<textarea name="comment" rows="3" required="">@privateLesson.Description</textarea>*@
                     <p>@privateLesson.Description</p>
@@ -48,9 +48,9 @@
                     <p>@(privateLesson.IsDone.Value ? "✔️" : "❌")</p>
                     <h5>Time</h5>
                     <p>@privateLesson.Time</p>
-                    <h5>Price per hour</h5>
                     if (privateLesson.IsAssigned.Value)
                     {
+                        <h5>Price per hour</h5>
                         <p>@privateLesson.PricePerHour</p>
                         <h5>Total price</h5>
                         <p>@privateLesson.TotalPrice</p>

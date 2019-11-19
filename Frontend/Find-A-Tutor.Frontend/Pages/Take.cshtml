@@ -33,7 +33,7 @@
                         <h5>Taken At:</h5>
                         <p>@(privateLesson.TakenAt.HasValue ? privateLesson.TakenAt.ToString() : "-")</p>
                         <h5>Relevant To:</h5>
-                        <p>@privateLesson.RelevantTo</p>
+                        <p>@privateLesson.RelevantTo.Value.ToString("dd.MM.yyyy")</p>
                         <h5>Description:</h5>
                         <!--<textarea name="comment" rows="3" required="">@privateLesson.Description</textarea>-->
                         <p>@privateLesson.Description</p>

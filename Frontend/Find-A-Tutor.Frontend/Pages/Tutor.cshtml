@@ -36,7 +36,7 @@
                         <tr>
                             <td>@item.CreatedAt.Value.ToString("dd.MM.yyyy")</td>
                             <td>@(item.TakenAt.HasValue ? item.TakenAt.Value.ToString("dd.MM.yyyy") : null)</td>
-                            <td>@(item.RelevantTo.HasValue ? item.TakenAt : null)</td>
+                            <td>@(item.RelevantTo.HasValue ? item.RelevantTo.Value.ToString("dd.MM.yyyy") : null)</td>
                             <td>@item.Description</td>
                             <td>@item.Subject</td>
                             <td>@(@item.IsAssigned.Value ? "✔️" : "❌")</td>
