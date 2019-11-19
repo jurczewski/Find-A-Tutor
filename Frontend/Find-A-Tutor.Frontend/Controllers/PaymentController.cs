@@ -1,7 +1,6 @@
 ﻿using Find_A_Tutor.Frontend.Model;
+using Find_A_Tutor.Frontend.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Find_A_Tutor.Frontend.Controllers
@@ -9,26 +8,19 @@ namespace Find_A_Tutor.Frontend.Controllers
     [Route("")]
     public class PaymentController : Controller
     {
-        [HttpPost("pay")]
-        public async Task<Result> UpdatePaymentStatusToPaid([FromBody]PaymentDetails paymentDetails)
+        private readonly IPaymentService _paymentService;
+
+        public PaymentController(IPaymentService paymentService)
         {
-            var url = "http://localhost:5000" + "/Payment/paypal-transaction-complete";
-            //var token = _accessor.HttpContext.Session.GetString("token");
+            _paymentService = paymentService;
+        }
 
-            //ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        [HttpPost("pay")]
+        public async Task<IActionResult> UpdatePaymentStatusToPaid([FromBody]PaymentDetails paymentDetails)
+        {
+            var responsePayPal = await _paymentService.UpdatePaymentStatusToPaid(paymentDetails);
 
-            using (var response = await ApiHelper.ApiClient.PostAsJsonAsync(url, paymentDetails))
-            {
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    var result = await response.Content.ReadAsAsync<ResultSimple>();
-                    return Result.Error(result.Errors.ToArray());
-                }
-                else
-                {
-                    return Result.Ok();
-                }
-            }
+            return Ok(responsePayPal);
         }
     }
 }
