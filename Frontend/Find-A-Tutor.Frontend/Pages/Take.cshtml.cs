@@ -36,7 +36,11 @@ namespace Find_A_Tutor.Frontend.Pages
 
         public async Task OnPostAssignTutor(Guid id)
         {
-            var result = await _privateLessonService.AssignTutor(id.ToString(), PricePerHour);
+            var result = await _privateLessonService.AssignTutor(new AssignTutor
+            { 
+                PricePerHour = PricePerHour,
+                PrivateLessonId = id
+            });
 
             if (result.IsSuccess)
             {

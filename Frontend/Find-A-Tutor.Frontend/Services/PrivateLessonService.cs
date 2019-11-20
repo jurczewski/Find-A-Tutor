@@ -80,14 +80,14 @@ namespace Find_A_Tutor.Frontend.Services
             }
         }
 
-        public async Task<Result> AssignTutor(string privateLessonId, double pricePerHour)
+        public async Task<Result> AssignTutor(AssignTutor tutor)
         {
-            var url = ApiUrl + "/assign/" + privateLessonId + '/' + pricePerHour;
+            var url = ApiUrl + Route + "assign";
             var token = _accessor.HttpContext.Session.GetString("token");
 
             ApiHelper.ApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            using (var response = await ApiHelper.ApiClient.PutAsync(url, new StringContent("")))
+            using (var response = await ApiHelper.ApiClient.PutAsJsonAsync(url, tutor))
             {
                 if (response.StatusCode != HttpStatusCode.NoContent)
                 {
