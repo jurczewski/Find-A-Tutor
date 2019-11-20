@@ -50,7 +50,10 @@ namespace Find_A_Tutor.Infrastructure.Migrations
                     Description = table.Column<string>(nullable: true),
                     SchoolSubjectId = table.Column<Guid>(nullable: true),
                     IsPaid = table.Column<bool>(nullable: false),
-                    IsDone = table.Column<bool>(nullable: false)
+                    IsDone = table.Column<bool>(nullable: false),
+                    Time = table.Column<double>(nullable: true),
+                    PricePerHour = table.Column<double>(nullable: true),
+                    TotalPrice = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
