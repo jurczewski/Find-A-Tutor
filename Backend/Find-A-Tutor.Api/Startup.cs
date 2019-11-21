@@ -12,16 +12,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
 using NLog.Extensions.Logging;
-using NLog.Web;
 using System;
 using System.IO;
 using System.Reflection;
@@ -43,12 +41,12 @@ namespace Find_A_Tutor.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //.NetCore
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x =>
-            {
-                x.SerializerSettings.Formatting = Formatting.Indented;
-                x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-            });
+            ////.NetCore
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(x =>
+            //{
+            //    x.SerializerSettings.Formatting = Formatting.Indented;
+            //    x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            //});
 
             //Swagger
             services.AddSwaggerGen(c =>
@@ -125,15 +123,14 @@ namespace Find_A_Tutor.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             Console.WriteLine(FiggleFonts.Standard.Render("Find-A-Tutor API"));
             loggerFactory.AddNLog();
-            env.ConfigureNLog("nlog.config");
+            NLog.LogManager.LoadConfiguration("nlog.config");
 
-            app.UseSwagger()
-                .UseSwagger()
-                .UseSwaggerUI(options =>
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint(
                         $"{ (!string.IsNullOrEmpty(PathBase) ? PathBase : string.Empty)}/swagger/v1/swagger.json",
@@ -161,7 +158,6 @@ namespace Find_A_Tutor.Api
 
             app.UseAuthentication();
             //app.UseHttpsRedirection();
-            app.UseMvc();
         }
     }
 }

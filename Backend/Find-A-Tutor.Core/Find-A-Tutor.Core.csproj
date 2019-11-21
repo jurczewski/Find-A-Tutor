@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>Find_A_Tutor.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="1.5.2" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
-    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.2" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Braintree" Version="4.16.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.6.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

@@ -4,9 +4,9 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 namespace Find_A_Tutor.Frontend
@@ -25,10 +25,11 @@ namespace Find_A_Tutor.Frontend
         {
             Console.WriteLine(FiggleFonts.Standard.Render("Find-A-Tutor Frontend"));
 
+            services.AddRazorPages();
+
             services.AddSession();
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var apiUrl = Configuration.GetSection("ApiUrl");
             services.AddHealthChecks()
@@ -42,7 +43,7 @@ namespace Find_A_Tutor.Frontend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -62,11 +63,17 @@ namespace Find_A_Tutor.Frontend
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
-            app.UseMvc();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
+            });
         }
     }
 }
