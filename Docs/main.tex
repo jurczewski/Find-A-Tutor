@@ -44,17 +44,6 @@
 \numberwithin{figure}{section}
 \counterwithin{table}{section}
 
-% \setlength{\emergencystretch}{10pt}
-% \usepackage{geometry}
-%  \geometry{
-%  a4paper,
-%  %total={170mm,257mm},
-%  left=25mm,
-%  top=25mm,
-%  right=25mm,
-%  bottom=25mm
-%  }
-
 \begin{document}
 %------------------------------------------------
 % Title page
@@ -316,9 +305,106 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
 \textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Dodatkowo, backend został stworzony jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcjonalnością będzie dodawanie ogłoszeń przez studentów. Całość została spięta minimalistycznym i nieprzytłaczającym designem.}
 
 \section{Techniczne aspekty „Find-A-Tutor”}
+% http://www.commint.pl/baza/wymagania-niefunkcjonalne-aplikacji-internetowej
+% http://www.commint.pl/baza/wymagania-funkcjonalne-aplikacji-internetowej
+
+
     \subsection{Wymagania}
+    W tym rozdziale autor opisuje wymagania aplikacji webowej \textit{Find-A-Tutor}, dzieląc je na funkcjonalne i niefunkcjonalne. 
         \subsubsection{Wymagania funkcjonalne}
+        Jak możemy przeczytać na \url{www.commint.pl}: "Wymagania funkcjonalne aplikacji to określenie jak ma się ona zachować po otrzymaniu określonego zapytania."\cite{funkcjonalne}. Dlatego autor skupił się na określeniu funkcji aplikacji, użytkowników (wraz z ich rolami i uprawnieniami), problemów jakie aplikacja ma rozwiązywać jak i ogólnej wizji aplikacji.\\
+        \noindent
+        \textbf{Rejestracja jako uczeń lub korepetytor}\\
+        \indent
+        Formularz rejestracji pozwala na rejestrację jako użytkownik z wyróżnieniem ucznia i użytkownika. Oba ta konta moją inne uprawnienia i funkcjonalności opisane poniżej.
+            
+        \noindent
+        \textbf{Logowanie jako uczeń, korepetytor i administrator}\\
+        \indent  
+        Dostępny panel logowania dla użytkownika (ucznia lub korepetytora). Dodatkowym rodzajem konta jest administrator, który ma pełne uprawnienia do działania na systemie. Takie konto nie posiada panelu użytkownika, ale może dokonywać wszelakich operacji opisanych w osobnym punkcie, używając zapytań do API.
+            
+        \noindent
+        \textbf{Panel ucznia}\\
+        \indent
+        Panel dostępny dla użytkownika zalogowanego jako student. Umożliwia podgląd wszystkich ogłoszeń zgłoszonych przez danego ucznia. Dodatkowo powinien on wyświetlać podstawowe dane takie jak: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
+        
+        \noindent
+        \textbf{Podgląd szczegółów ogłoszenia}\\
+        \indent
+        Uczeń powinien mieć dostęp do widoku szczegółowego ogłoszenia, który pokazuje wszystkie informacje na temat ogłoszenia.
+        
+        \noindent
+        \textbf{Dodawanie ogłoszeń}\\
+        \indent
+        Możliwość dodania ogłoszenia przez użytkownika - ucznia. Użytkownik uzupełnia następujące dane: opis, data przedawnienia ogłoszenia, przedmiot (wybrany z listy przedmiotów). 
+        
+        \noindent
+        \textbf{Płatności online za lekcje}\\
+        \indent
+        Po przypisaniu ogłoszenia do korepetytora, student ma możliwość opłacenia należności za ogłoszenie online. Po opłaceniu, ma to odzwierciedlenie w statusie. 
+        
+        \noindent
+        \textbf{Finalizacja ogłoszenia}\\
+        \indent
+        Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samej zmieniając jej status.
+        
+        \noindent
+        \textbf{Panel korepetytora}\\
+        \indent
+        Użytkownik korepetytor, po zalogowaniu ma dostęp do swojego panelu ze wszystkimi dostępnymi ogłoszeniami i ze wszystkimi podjętymi przez niego ogłoszeniami. Dostępne są na nim następujące informacje: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
+        
+        \noindent
+        \textbf{Podjęcie ogłoszenia}\\
+        \indent
+        Korepetytor ma możliwość podjęcie ogłoszenia z puli nieprzydzielonych ogłoszeń. Podaje on swoją stawkę godzinową wyrażoną w złotówkach. Stawka ta zostaje przypisana do ogłoszenia wraz z kwotą należną za całe ogłoszenie (stawka pomnożona przez liczbę godzin). Po operacji podjęcia, zmienia on swój status.
+        
+        \noindent
+        \textbf{Oddanie ogłoszenia}\\
+        \indent
+        Jeśli ogłoszenie, po podjęciu, nie zostało jeszcze opłacone, korepetytor ma możliwość zwrócenia ogłoszenia do ogólnej puli ogłoszeń., tym samym jego status wraca do stanu wejściowego. 
+        
+        \noindent
+        \textbf{Konto administratora}\\
+        \indent
+        Po zalogowaniu się zapytanie, taki użytkownik może wykonywać operacje CRUD (ang. create, read, update and delete (pol. utwórz, odczytaj, aktualizuj i usuń)) na ogłoszeniach, użytkownikach i przedmiotach. Dodatkowo ma możliwość wszystkich operacji ucznia czy korepetytora.
+        
         \subsubsection{Wymagania niefunkcjonalne}
+        
+        Jak możemy przeczytać na \url{www.commint.pl}: "Wymagania niefunkcjonalne aplikacji internetowej dotyczą obszaru jakościowego tworzonego rozwiązania."\cite{niefunkcjonalne}. Dlatego autor skupił się na przenośności, skalowalności, otwartości na rozszerzenia, kompatybilności, bezpieczeństwu, użyteczności i modularności.\\
+        \noindent
+        \textbf{Przenośność}\\
+        \indent
+        Aplikacja powinna być łatwa w zmianie lokalizacji, środowiska, eksportu danych.
+        
+        \noindent
+        \textbf{Skalowalność}\\
+        \indent
+        Aplikacja powinna móc się skalowalność pionowo (zwiększenie mocy serwera) i poziomo (zwiększenie instancji aplikacji).
+        
+        \noindent
+        \textbf{Otwartość na rozszerzenia}\\
+        \indent
+        Aplikacja powinna mieć otwarte API (backend) i być gotowa na nowe urządzenia które mogą z niej korzystać (np. mobilne).
+        
+        \noindent
+        \textbf{Kompatybilność}\\
+        \indent
+        Aplikacja powinna działać w technologiach uniwersalnych i powszechnych dla przeglądarkę na silniku Chromium (Chrome, Opera i wkrótce Edge), który na rynku polskim ma 80,65\% podziału rynku \cite{chrome}.
+        
+        \noindent
+        \textbf{Bezpieczeństwo}\\
+        \indent
+        Dane użytkowników powinny być poufne i dostępne dla danego użytkownika po zalogowaniu.
+        
+        \noindent
+        \textbf{Użyteczność }\\
+        \indent
+        Aplikacja powinna być łatwa w obsłudze i powinna być okraszona minimalistycznym designem który nie przytłacza użytkownika.
+        
+        \noindent
+        \textbf{Modularność}\\
+        Warstwa bazy danych, graficzna i aplikacji (API) powinny być od siebie oddzielone i gotowe do zastąpienia.
+        
     \subsection{Architektura aplikacji}
     % https://www.c-sharpcorner.com/article/onion-architecture-in-asp-net-core-mvc/
     % https://www.youtube.com/watch?v=_lwCVE_XgqI
@@ -389,6 +475,18 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
     \bibitem{chargeback} 
     Płatność kartą przez Internet
     \url{https://www.najlepszekonto.pl/platnosc-karta-przez-internet}, dostęp 2-12-2019
+    
+    \bibitem{funkcjonalne} 
+    Wymagania funkcjonalne aplikacji internetowej
+    \url{http://www.commint.pl/baza/wymagania-funkcjonalne-aplikacji-internetowej}, dostęp 10-12-2019
+        
+    \bibitem{niefunkcjonalne} 
+    Wymagania niefunkcjonalne aplikacji internetowej
+    \url{http://www.commint.pl/baza/wymagania-niefunkcjonalne-aplikacji-internetowej}, dostęp 10-12-2019
+    
+    \bibitem{chrome} 
+    Browser Market Share Poland
+    \url{https://gs.statcounter.com/browser-market-share/all/poland}, dostęp 10-12-2019
     
     % linki bibliograficzne do ksiazek
     % \bibitem{book1} 
