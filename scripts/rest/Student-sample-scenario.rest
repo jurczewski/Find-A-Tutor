@@ -33,7 +33,8 @@ Content-Type: application/json
 {
     "relevantTo": "2020-07-19T12:41:51.297983Z",
     "description": "Nowe ogłoszenie - potrzeba korepetycji z biologi",
-    "subject": "Biology"
+    "subject": "Biology",
+    "time": 2.0
 }
 
 @privateLesson = {{create.response.headers.Location}}
