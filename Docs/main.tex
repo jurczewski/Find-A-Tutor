@@ -10,6 +10,7 @@
 \usepackage{fancyvrb}
 \usepackage{subcaption}
 \usepackage{chngcntr}
+
 \usepackage{hyperref} % links and urls in document
 \usepackage{indentfirst} % wcięcie pierwszego akapitu
 
@@ -27,6 +28,16 @@
   linkcolor    = black, %Colour of internal links
   citecolor   = black %Colour of citations
 }
+
+% csharp cmd
+\newcommand{\Csharp}{%
+  {\settoheight{\dimen0}{C}C\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\# }}}}
+ %fsharp cmd
+\newcommand{\Fsharp}{%
+  {\settoheight{\dimen0}{F}F\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\# }}}}
+
+% line break after paragraph
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
 
 \restylefloat{table}
 \renewcommand{\contentsname}{Spis treści}
@@ -73,7 +84,8 @@
 \clearpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\setcounter{secnumdepth}{3}
+\setcounter{secnumdepth}{4}
+% \setcounter{tocdepth}{4}
 
 %------------------------------------------------
 % Main contents
@@ -81,34 +93,17 @@
 \tableofcontents
 \pagebreak
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Skróty użyte w pracy
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Skróty użyte w pracy}
-% WebAPI - (ang. Web Application Programming Interfaces) Interfejs webowy, dla uproszczenia autor przyjmuje skrót API jako tożsamy.
-% RESTful API
-% Frontend - 
-% Backend - 
-% HTML
-% CSS
-% JavaScript
-% Bootstrap
-% HTTP
-% JSON
-
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wprowadzenie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wprowadzenie}
 \textit{Otacza nas rewolucja cyfrowa. Każdy aspekt naszego życia przenosi się do internetu. Jednym z nich jest rynek usług - korepetycji. Aplikacja internetowa "Find-A-Tutor" jest odpowiedzią na tą rewolucję; pozwala na łatwe zarządzanie korepetycjami - dla ucznia i nauczyciela.}
+
 % Wraz z początkiem lat 70 ubiegłego wieku świat ekonomi nie był już tylko kierowany przez prawa rynku ale także przez otaczający go i postępujący świat cyfryzacji, który z dnia na dzień zmieniał i na nowo definiował działania jego sektorów. 
-% % Od samego początku cywilizacji Zachodniej, to niewątpliwie ekonomia jej towarzyszyła. 
-
+% Od samego początku cywilizacji Zachodniej, to niewątpliwie ekonomia jej towarzyszyła. 
 % Nauką która zawsze towarzyszyła rozwojowi cywilizacji Zachodniej była ekonomia. To właśnie produkcja, konsumpcja czy dystrybucja dóbr napędzała 
-
 % Świat ekonomii wraz z początkiem lat 70 ubiegłego wieku zaczął przechodzić transformacje.
-
 % Wraz z początkiem lat 70 ubiegłego wieku świat ekonomi nie był już tylko kierowany przez prawa rynku
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problematyka
@@ -183,9 +178,10 @@ Jak pokazują dane rynek ogłoszeń jest bardzo dobrze zagospodarowany i cieszy 
 Przykładowym portalem który posłuży mi do analizy systemu jest największy serwis ogłoszeniowy w Polsce - \url{www.olx.pl}.
 
     \begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{{images/olx-dodaj_ogloszenie.png}}
-	\caption{Dodawanie ogłoszenia na serwisie OLX}
+    	\centering
+    	\includegraphics[width=1\textwidth]{images/chapter_2/olx-add-announcement.png}
+    	\caption{Dodawanie ogłoszenia na serwisie OLX}
+    	\label{fig:olx-add-announcement}
     \end{figure}
 
 Użytkownik ma do wypełnienia następujące pola:
@@ -201,22 +197,30 @@ Użytkownik ma do wypełnienia następujące pola:
 
 Jedynym polem które wyróżnia usługę od przedmiotu jest pole "stawka za godzinę". Zgodnie z ideą tego serwisu, użytkownik nie ma możliwości dodania oceny/recenzji po skorzystaniu z jakiejkolwiek usługi, a co za tym idzie porównania ich po ocenach. Dodatkowo serwis ten, całkowicie odrzuca element płatności internetowych (w opozycji do eBaya czy Allegro) i polega wyłącznie na płatności gotówką. Płatności przelewami między użytkownikami są odradzane przez sam OLX, ale są oczywiście możliwe z teoretycznego punktu widzenia. Nie ma jednak wtedy żadnej gwarancji że do takiej wymiany dojdzie, ani możliwości reklamacji czy zwrotu po np. słabo wykonanej usłudze czy otrzymaniu produktu niezgodnego z opisem. Odpowiedzią rynku i rozwoju technologicznego są płatności przez internet.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Płatności internetowe i ich bezpieczeństwo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Płatności internetowe i ich bezpieczeństwo} \label{sec:payments}
 Rewolucja cyfrowa dotknęła nie tylko rynku usług i produktów ale także rynku płatności. W samym roku 2016 tylko 16\% kupujących w Polsce opłaciło swoje zakupy gotówką \cite{gotowka}. Liczba rozwiązań płatności internetowych rośnie z każdym rokiem. Aktualnie na rynku jest ich kilka. Każde z nich różni się pod względem komfortu użytkowania, szybkości jak i bezpieczeństwa. 
-% Najpopularniejsze z nich to:
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Zwykły przelew bankowy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Zwykły przelew bankowy}
 Jest to najprostsze i najbardziej analogowe rozwiązanie. Zaraz po złożeniu zamówienia, dostajemy potwierdzenie mailem wraz z numerem konta sprzedawcy, kwoty zamówienia i tytułem przelewu (który najczęściej jest numerem zamówienia). Na kupującym ciąży zalogowanie się na stronę banku, utworzenie nowego przelewu i co istotne wypełnienie ich danymi. Oprócz możliwości pomyłki np. przekopiujemy nie pełny numer zamówienia pomijając jeden znak, ryzykiem o którym musimy pamiętać jest obecność złośliwego oprogramowania. Przykładem może być głośna sprawa z roku 2018, w którym to firma ESET natrafiła na konia trojańskiego - BackSwap. Portal \url{www.zaufanatrzeciastrona.pl} opisuje go następująco: "Do wstrzyknięcia dochodzi w momencie, gdy klient zleca przelew. Złośliwy kod podmienia wtedy numer rachunku, na który ma zostać wysłany przelew ofiary. Na ekranie komputera tego nie widać – zmiana dotyczy informacji, które przeglądarka wysyła do banku. Przestępcy nie atakują wszystkich przelewów – definiują konkretny przedział kwotowy, który ich interesuje. Ostatnio celowali w kwoty między 10 000 a 20 000 PLN."\cite{backswap}.
 Takie ataki są niestety ciągle spotykane. Niektóre banki jak np. ING Bank Śląski, po skopiowaniu numeru rachunku bankowego usuwa dwie pierwsze cyfry i prosi klienta o uzupełnienie ich. Bank próbuje wymusić podwójne sprawdzenie numeru konta. Efektem ubocznym będzie możliwość pomyłki przy ponownym wprowadzaniu go.
 
 Szybkość takiego rozwiązania jest zależna od godziny wysłania przelewu. Jest to spowodowane godzinami sesji rozliczeniowych w danych bankach. Najczęściej jeśli przelew zostanie wysłany do południa, dotrze on pod wieczór. W przypadku późniejszych przelewów, dojdzie on kolejnego dnia roboczego. Wszystkie przelewy w święta i weekendy również dochodzą dopiero kolejnego dnia roboczego. Taka płatność opóźnia wysyłkę/realizację usługi, ponieważ zostanie ona wykonana dopiero wtedy gdy na rachunku pojawią się przelane środki. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Przelewy pay-by-link
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Przelewy pay-by-link}
 Ta forma płatności cieszy się największą popularnością w Polsce \cite{jak-placa-polacy}. Po wykonaniu zakupów, wybieramy opcję przelewu online, następnie z listy banków, pokazanych na rysunku \ref{fig:pay-by-link} wybieramy ten z którego chcemy dokonać płatności. 
 
 \begin{figure}[H] 
  	\centering
-	\includegraphics[width=1\textwidth]{{images/przelew-online.png}}
+	\includegraphics[width=1\textwidth]{images/chapter_2/pay-by-link.png}
 	\caption{Przykładowa płatność pay-by-link}
 	\label{fig:pay-by-link}
 \end{figure}
@@ -225,6 +229,9 @@ Po kliknięciu zostajemy przeniesieni na stronę logowania do danego banku. Po w
 
 Po poprawnym uwierzytelnieniu i potwierdzeniu transakcji, środki trafią niemal natychmiast do sprzedawcy, dzięki czemu od razu będzie wstanie zrealizować zamówienie.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Karta płatnicza
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Karta płatnicza} \label{sec:cards}
 W maju 1898 firma Sequoia Data Corp. wprowadziła na rynek Compumarket, pierwszy internetowy system e-commerce obsługujący płatności kartą kredytową. Od tego czasu płatności kartą zyskały wiele nowych usprawnień jednak ich rdzeń pozostał nietknięty. Aby zrealizować płatność, kupujący jest proszony o wpisanie trzech danych: numeru karty, daty jej ważności oraz trzycyfrowego kodu CVC/CVV znajdującego się na odwrocie karty. Po ich zweryfikowaniu, płatność zostaje zakończona. Ta metoda jest tak samo szybka jak pay-by-link ale mniej wygodna, ponieważ za każdym razem musimy ponownie wpisać dane karty. 
 
@@ -236,7 +243,9 @@ Odmianą fizycznej karty płatniczej jest karta wirtualna. Taka karta usłuży t
 
 Zagranicznymi serwisami które utworzenie wirtualnych kart, jest np. amerykański \url{www.privacy.com}. Portal ten pozwala na proste i nielimitowane tworzenie kart wirtualnych, jak możemy przeczytać na stronie firmy, "jednym kliknięciem". Klient ma możliwość tworzenia karty per portal (np. jedna karta do Netflixa, kolejna do opłacenia Spotify), dodatkowo może ustawić limit obciążenia dla danej strony, wstrzymać płatność lub całkowicie zablokować niechciane opłaty. 
 
-% \subsubsection{BLIK}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Portfele elektroniczne
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Portfele elektroniczne}
 
 Hybrydą wymienionych wcześniej rozwiązań są portfele elektroniczne zwane również portfelami cyfrowymi. Rozwiązanie te charakteryzuje się następującymi funkcjonalnościami: 
@@ -244,9 +253,15 @@ portfel wirtualny (rozumiany jako pula środków do wykorzystania) wraz z możli
 
 Niektóre portfele oferują też świadczenie usług bez jakikolwiek przelanych środków i potrafią służyć jako zaufany pośrednik płatności. Jeśli tylko mamy podpiętą kartę/karty pod taki portfel, możemy w dowolnym miejscu zapłacić owym portfelem, a należność zostanie ściągniętą natychmiast z naszej wybranej karty. Dzięki czemu nie jesteśmy wystawieni na potencjalne wady używania samej karty jako środka płatności opisanych w rozdziale \ref{sec:cards}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Obecne rozwiązania
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Obecne rozwiązania}
 Przez lata rozwiązania na rynku usług jak i płatności ewoluowały. Często stając się osobnym bytem, a nie dodatkiem jak na początku ich istnienia. Firmy odpowiedzialne za nie, przez lata starały się udoskonalić swój produkt i jak najlepiej go wypromować. Poniższe zestawienie zostało podzielone na dwie grupy: płatności (jako rdzeń serwisu usług) i serwisy dla korepetytorów.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Płatności
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Płatności}
 Szukając odpowiedniego rozwiązania do obsługi płatności, autor miał na celu trzy główne cechy: szybkość (jak szybko środki trafią na konto), wygodę (a w tym szybkość wykonania samej płatności) i bezpieczeństwo (transakcji jak i procesów około transakcyjnych). Każde z czterech dostępnych rozwiązań zostało szczegółowo opisane w rozdziale \ref{sec:payments}, właśnie pod kątem tych trzech cech. Stosując takie kryterium, autor uznaje portfel elektroniczny jako zwycięzce w tych trzech kategoriach. Dlatego w dalszym rozważaniu obecnych rozwiązań będzie brał tylko je pod uwagę.
 
@@ -271,7 +286,7 @@ Ponadto, VisaCheckout i Masterpass są realizowane jako zamknięte środowiska p
 
 \begin{figure}[H] 
  	\centering
-	\includegraphics[scale=1.0]{{images/paypal-button.png}}
+	\includegraphics[scale=1.0]{images/chapter_2/paypal-button.png}
 	\caption{Smart Payment Button}
 	\label{fig:paypal-button}
 \end{figure}
@@ -281,6 +296,9 @@ inteligentny przycisk do płatności), przedstawiony na rysunku \ref{fig:paypal-
 
 Podsumowując, w grupie portfeli elektronicznych, rozwiązanie PayPal wspiera wszystkie kluczowe i istotne dla mnie funkcjonalności. Dlatego też, to ono zostanie zaimplementowane w aplikacji \textit{Find-A-Tutor} w celu wspierania płatności on-line.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Serwisy dla korepetytorów
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Serwisy dla korepetytorów}
 Na rynku polskim są obecnie trzy największe serwisy dla korepetytorów. Są to www.e-korepetycje.net, 
 korepetycje.net i wspomniany już wcześniej portal, nie tylko do korepetycji - olx.pl. Poniżej zestawiono ze sobą cechy tych portali. Cechy zostały zaczerpnięte z rozdziału \ref{sec:problematyka} pokrywającego problematykę pracy.
@@ -304,71 +322,81 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
 \newline
 \textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Dodatkowo, backend został stworzony jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcjonalnością będzie dodawanie ogłoszeń przez studentów. Całość została spięta minimalistycznym i nieprzytłaczającym designem.}
 
-\section{Techniczne aspekty „Find-A-Tutor”}
-% http://www.commint.pl/baza/wymagania-niefunkcjonalne-aplikacji-internetowej
-% http://www.commint.pl/baza/wymagania-funkcjonalne-aplikacji-internetowej
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Techniczne aspekty Find-A-Tutor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Techniczne aspekty \textit{Find-A-Tutor}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Wymagania
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Wymagania}
+W tym rozdziale autor opisuje wymagania aplikacji webowej \textit{Find-A-Tutor}, dzieląc je na funkcjonalne i niefunkcjonalne. 
 
-    \subsection{Wymagania}
-    W tym rozdziale autor opisuje wymagania aplikacji webowej \textit{Find-A-Tutor}, dzieląc je na funkcjonalne i niefunkcjonalne. 
-        \subsubsection{Wymagania funkcjonalne}
-        Jak możemy przeczytać na \url{www.commint.pl}: "Wymagania funkcjonalne aplikacji to określenie jak ma się ona zachować po otrzymaniu określonego zapytania."\cite{funkcjonalne}. Dlatego autor skupił się na określeniu funkcji aplikacji, użytkowników (wraz z ich rolami i uprawnieniami), problemów jakie aplikacja ma rozwiązywać jak i ogólnej wizji aplikacji.\\
-        \noindent
-        \textbf{Rejestracja jako uczeń lub korepetytor}\\
-        \indent
-        Formularz rejestracji pozwala na rejestrację jako użytkownik z wyróżnieniem ucznia i użytkownika. Oba ta konta moją inne uprawnienia i funkcjonalności opisane poniżej.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Wymagania funkcjonalne
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Wymagania funkcjonalne}
+    Jak możemy przeczytać na \url{www.commint.pl}: "Wymagania funkcjonalne aplikacji to określenie jak ma się ona zachować po otrzymaniu określonego zapytania."\cite{funkcjonalne}. Dlatego autor skupił się na określeniu funkcji aplikacji, użytkowników (wraz z ich rolami i uprawnieniami), problemów jakie aplikacja ma rozwiązywać jak i ogólnej wizji aplikacji.\\
+    \noindent
+    \textbf{Rejestracja jako uczeń lub korepetytor}\\
+    \indent
+    Formularz rejestracji pozwala na rejestrację jako użytkownik z wyróżnieniem ucznia i użytkownika. Oba ta konta moją inne uprawnienia i funkcjonalności opisane poniżej.
             
-        \noindent
-        \textbf{Logowanie jako uczeń, korepetytor i administrator}\\
-        \indent  
-        Dostępny panel logowania dla użytkownika (ucznia lub korepetytora). Dodatkowym rodzajem konta jest administrator, który ma pełne uprawnienia do działania na systemie. Takie konto nie posiada panelu użytkownika, ale może dokonywać wszelakich operacji opisanych w osobnym punkcie, używając zapytań do API.
+    \noindent
+    \textbf{Logowanie jako uczeń, korepetytor i administrator}\\
+    \indent  
+    Dostępny panel logowania dla użytkownika (ucznia lub korepetytora). Dodatkowym rodzajem konta jest administrator, który ma pełne uprawnienia do działania na systemie. Takie konto nie posiada panelu użytkownika, ale może dokonywać wszelakich operacji opisanych w osobnym punkcie, używając zapytań do API.
             
-        \noindent
-        \textbf{Panel ucznia}\\
-        \indent
-        Panel dostępny dla użytkownika zalogowanego jako student. Umożliwia podgląd wszystkich ogłoszeń zgłoszonych przez danego ucznia. Dodatkowo powinien on wyświetlać podstawowe dane takie jak: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
+    \noindent
+    \textbf{Panel ucznia}\\
+    \indent
+    Panel dostępny dla użytkownika zalogowanego jako student. Umożliwia podgląd wszystkich ogłoszeń zgłoszonych przez danego ucznia. Dodatkowo powinien on wyświetlać podstawowe dane takie jak: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
         
-        \noindent
-        \textbf{Podgląd szczegółów ogłoszenia}\\
-        \indent
-        Uczeń powinien mieć dostęp do widoku szczegółowego ogłoszenia, który pokazuje wszystkie informacje na temat ogłoszenia.
+    \noindent
+    \textbf{Podgląd szczegółów ogłoszenia}\\
+    \indent
+    Uczeń powinien mieć dostęp do widoku szczegółowego ogłoszenia, który pokazuje wszystkie informacje na temat ogłoszenia.
         
-        \noindent
-        \textbf{Dodawanie ogłoszeń}\\
-        \indent
-        Możliwość dodania ogłoszenia przez użytkownika - ucznia. Użytkownik uzupełnia następujące dane: opis, data przedawnienia ogłoszenia, przedmiot (wybrany z listy przedmiotów). 
+    \noindent
+    \textbf{Dodawanie ogłoszeń}\\
+    \indent
+    Możliwość dodania ogłoszenia przez użytkownika - ucznia. Użytkownik uzupełnia następujące dane: opis, data przedawnienia ogłoszenia, przedmiot (wybrany z listy przedmiotów). 
         
-        \noindent
-        \textbf{Płatności online za lekcje}\\
-        \indent
-        Po przypisaniu ogłoszenia do korepetytora, student ma możliwość opłacenia należności za ogłoszenie online. Po opłaceniu, ma to odzwierciedlenie w statusie. 
+    \noindent
+    \textbf{Płatności online za lekcje}\\
+    \indent
+    Po przypisaniu ogłoszenia do korepetytora, student ma możliwość opłacenia należności za ogłoszenie online. Po opłaceniu, ma to odzwierciedlenie w statusie. 
         
-        \noindent
-        \textbf{Finalizacja ogłoszenia}\\
-        \indent
-        Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samej zmieniając jej status.
+    \noindent
+    \textbf{Finalizacja ogłoszenia}\\
+    \indent
+    Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samej zmieniając jej status.
         
-        \noindent
-        \textbf{Panel korepetytora}\\
-        \indent
-        Użytkownik korepetytor, po zalogowaniu ma dostęp do swojego panelu ze wszystkimi dostępnymi ogłoszeniami i ze wszystkimi podjętymi przez niego ogłoszeniami. Dostępne są na nim następujące informacje: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
+    \noindent
+    \textbf{Panel korepetytora}\\
+    \indent
+    Użytkownik korepetytor, po zalogowaniu ma dostęp do swojego panelu ze wszystkimi dostępnymi ogłoszeniami i ze wszystkimi podjętymi przez niego ogłoszeniami. Dostępne są na nim następujące informacje: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
         
-        \noindent
-        \textbf{Podjęcie ogłoszenia}\\
-        \indent
-        Korepetytor ma możliwość podjęcie ogłoszenia z puli nieprzydzielonych ogłoszeń. Podaje on swoją stawkę godzinową wyrażoną w złotówkach. Stawka ta zostaje przypisana do ogłoszenia wraz z kwotą należną za całe ogłoszenie (stawka pomnożona przez liczbę godzin). Po operacji podjęcia, zmienia on swój status.
+    \noindent
+    \textbf{Podjęcie ogłoszenia}\\
+    \indent
+    Korepetytor ma możliwość podjęcie ogłoszenia z puli nieprzydzielonych ogłoszeń. Podaje on swoją stawkę godzinową wyrażoną w złotówkach. Stawka ta zostaje przypisana do ogłoszenia wraz z kwotą należną za całe ogłoszenie (stawka pomnożona przez liczbę godzin). Po operacji podjęcia, zmienia on swój status.
         
-        \noindent
-        \textbf{Oddanie ogłoszenia}\\
-        \indent
-        Jeśli ogłoszenie, po podjęciu, nie zostało jeszcze opłacone, korepetytor ma możliwość zwrócenia ogłoszenia do ogólnej puli ogłoszeń., tym samym jego status wraca do stanu wejściowego. 
+    \noindent
+    \textbf{Oddanie ogłoszenia}\\
+    \indent
+    Jeśli ogłoszenie, po podjęciu, nie zostało jeszcze opłacone, korepetytor ma możliwość zwrócenia ogłoszenia do ogólnej puli ogłoszeń., tym samym jego status wraca do stanu wejściowego. 
         
-        \noindent
-        \textbf{Konto administratora}\\
-        \indent
-        Po zalogowaniu się zapytanie, taki użytkownik może wykonywać operacje CRUD (ang. create, read, update and delete (pol. utwórz, odczytaj, aktualizuj i usuń)) na ogłoszeniach, użytkownikach i przedmiotach. Dodatkowo ma możliwość wszystkich operacji ucznia czy korepetytora.
-        
-        \subsubsection{Wymagania niefunkcjonalne}
+    \noindent
+    \textbf{Konto administratora}\\
+    \indent
+    Po zalogowaniu się zapytanie, taki użytkownik może wykonywać operacje CRUD (ang. create, read, update and delete (pol. utwórz, odczytaj, aktualizuj i usuń)) na ogłoszeniach, użytkownikach i przedmiotach. Dodatkowo ma możliwość wszystkich operacji ucznia czy korepetytora.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Wymagania niefunkcjonalne
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsubsection{Wymagania niefunkcjonalne}
         
         Jak możemy przeczytać na \url{www.commint.pl}: "Wymagania niefunkcjonalne aplikacji internetowej dotyczą obszaru jakościowego tworzonego rozwiązania."\cite{niefunkcjonalne}. Dlatego autor skupił się na przenośności, skalowalności, otwartości na rozszerzenia, kompatybilności, bezpieczeństwu, użyteczności i modularności.\\
         \noindent
@@ -404,15 +432,206 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
         \noindent
         \textbf{Modularność}\\
         Warstwa bazy danych, graficzna i aplikacji (API) powinny być od siebie oddzielone i gotowe do zastąpienia.
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Narzędzia i technologie użyte w projekcie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Narzędzia i technologie użyte w projekcie}
+Autor podczas realizacji swojej aplikacji wybierał tylko te technologie i rozwiązania, które wyrobiły mocną pozycję w świecie inżynierii oprogramowania. Są to narzędzia dostępne od lat, sprawdzone w wielu aplikacjach i zalecane w projektach webowych. Dodatkowo za cel przyjął sobie takie pojęcia jak czysty kod, czysta architektura i niewynajdowanie koła na nowo - oznaczało to korzystanie z jak największe liczby gotowych rozwiązań.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% .NET Core 2.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+\subsubsection{.NET Core 2.2}
+.NET Core jest darmowym i wolnym frameworkiem dla systemów Windows, Linux i macOS. Jest wielo-platformowym następcą .NET Framework. Projekt jest rozwijany przez Microsoft i dystrybuowany na zasadach otwartego oprogramowania (ang. open source). Składa się z on narzędzi programistycznych, bibliotek oraz środowiska uruchomieniowego.
+    
+Charakteryzują go następujące cechy:
+    \begin{itemize}
+        \item Możliwość programowania i uruchamiania w systemach Windows,\\ macOS i Linux,
+        \item Zunifikowany scenariusz tworzenia interfejsu API sieci Web i internetowych sieci Web,
+        \item System konfiguracji oparty na środowisku, który jest gotowy do chmury,
+        \item Wbudowane wstrzykiwanie zależności,
+        \item Lekki, wysoko wydajny modularny potok żądań HTTP,
+        \item Otwarte i skoncentrowane na społeczności,
+        \item Obsługa wielu języków programowania: \Csharp, \Fsharp i także Visual Basic,
+        \item Obsługa menadżera pakietów NuGet,
+        \item Możliwość hostowania w następujący sposób: Docker, Kestrel, Nginx czy Apache.
+    \end{itemize}
+
+Źródło: Opracowano na podstawie \cite{dotnet-core}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% C#
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsubsection{C\#}
+\Csharp (ang. C sharp) jest językiem obiektowym, opracowanym dla firmy Microsoftu, na przełomie tysiąclecia przez zespół pod kierownictwem Andersa Hejlsberga. Jak możemy przeczytać w oficjalnej dokumentacji Microsoftu: 
+"Składnia w \Csharp jest bardzo ekspresyjna, ale jest również prosta i łatwa do nauczenia. Nawiasy klamrowe \Csharp będą natychmiast rozpoznawalne dla każdego, kto zna C, C++ lub Java. Programiści znający którykolwiek z tych języków są zazwyczaj w stanie zacząć produktywnie pracować w \Csharp w bardzo krótkim czasie. Składnia w języku \Csharp upraszcza wiele złożoności C++ i zapewnia zaawansowane funkcje, takie jak typy dopuszczające wartości zerowe, wyliczenia, delegaty, wyrażenia lambda i bezpośredni dostęp do pamięci, których nie można znaleźć w Javie." \cite{csharp} 
+    
+Podczas opracowywania go, zespołowi przyświecały poniższe cele:
+    \begin{itemize}
+        \item obiektowość,
+        \item prostota i nowoczesność,
+        \item wsparcie dla istniejących zasad Inżynierii Oprogramowania, takich jak:
+        \begin{itemize}
+            \item silne typy,
+            \item automatyczne czyszczenie śmieci z pamięci (ang. garbage collector),
+            \item wykrywanie każdej próby odniesienia się do niezainicjowanych zmiennych
+        \end{itemize}
+    \end{itemize}
+    
+Jako język obiektowy \Csharp obsługuje pojęcia enkapsulacji, dziedziczenia i polimorfizmu. Wszystkie zmienne i metody, w tym metoda Main, punkt wejścia aplikacji, są zawarte w definicjach klas. Klasa może dziedziczyć bezpośrednio od jednej klasy nadrzędnej, ale może implementować dowolną liczbę interfejsów.
+
+% Oprócz tych podstawowych zasad obiektowych \Csharp ułatwia tworzenie komponentów oprogramowania za pomocą kilku innowacyjnych konstrukcji językowych, w tym:
+    
+Źródło: Opracowano na podstawie \cite{csharp}
+    
+\subsubsection{Docker}
+\subsubsection{Kontrole kondycji}
+Celem kontroli stanu projektu jest uzyskanie niezależnej oceny, w dowolnym momencie cyklu życia projektu, tego jak dobrze program działa, czy działa zgodnie z jego celami i jak dobrze przestrzega najlepszej metodologii praktyki. Skuteczna kontrola stanu zapewni dostęp do informacji o stanie zależności owego projektu np. czy program ma połączenie z bazą lub pokaże w jakiej "kondycji" jest nasz program np. jaki czas zajmuje mu połączenie i wywołanie prostego zapytania na bazie. 
+    
+Jako modelowe, polecane przez Microsoft w swojej dokumentacji \cite{health-checks}, rozwiązanie \textbf{AspNetCore.Diagnostics.HealthChecks} dostarcza kontrole stanów prawie trzydziestu różnych komponentów \cite{health-checks-github}.
         
-    \subsection{Architektura aplikacji}
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.5\textwidth]{images/chapter_3/api-health-check.png}
+    	\caption{Kontrola kondycji aplikacji \textit{Find-A-Tutor}}
+    	\label{fig:health-check}
+    \end{figure}
+    
+Rysunek \ref{fig:health-check} pokazuje stan zależności projektu (backend), wraz z dostępem do bazy danych i czasem który potrzebował na wywołanie zapytania na bazie.
+    
+\subsubsection{Entity Framework Core}
+Entity Framework (EF) Core to rozszerzalny, lekki, otwarty (ang. open source) i wielo-platformowy mapper obiektowo-relacyjny (ang. Object-Relational Mapping ORM). Umożliwia on programistom prace z bazą danych używając obiektów .NETowych. Dodatkowo, w większości eliminuje potrzebę pisania kodu do połączenia się z bazą danych. 
+    
+Dzięki EF Core dostęp do danych odbywa się za pomocą modelu. Model EF przechowuje szczegółowe informacje na temat mapowania klas (wraz z ich polami) na tabele i kolumny bazy danych.
+    
+EF obsługuje trzy sposoby na realizacje mapowania:
+    %Model składa się z zmapowanych klas obiektów, zgodnie z ich relacyjnym odpowiednikiem w bazie danych, a także z obiektu kontekstu reprezentującego sesję z bazą danych, która umożliwiając wyszukiwanie i zapisywanie danych.
+    
+    \begin{itemize}
+        \item Code First: Programista określa model przez kod. Następnie, EF generuje odpowiedni bazodanowy model na podstawie kodu i ustawień konfiguracyjnych dostarczonych przez programistę.
+        \item Database First: tworzenie modelu z istniejącej bazy danych.
+        \item Model First: do stworzenia bazy danych z istniejącego modelu, używa się eksportu EF.
+    \end{itemize}
+    
+    Przykładowy sposób mapowania klasy na struktury bazodanowe, przedstawiono na rysunku \ref{fig:ef}.
+    
+    \begin{figure}[H]
+    \centering
+    \begin{subfigure}{.6\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{images/chapter_3/ef-code.png}
+      \caption{Kod klasy User (\Csharp)}
+      \label{fig:ef-code}
+    \end{subfigure}%
+    \begin{subfigure}{.4\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{images/chapter_3/ef-db.png}
+      \caption{Tabela Users w bazie danych}
+      \label{fig:ef-db}
+    \end{subfigure}
+    \caption{Mapowanie klas na struktury bazodanowe}
+    \label{fig:ef}
+    \end{figure}
+    
+Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przygotował on Domenę, którą następnie za pomocą migracji odwzorował na nowo utworzonej bazie danych. 
+    
+    \subsubsection{JWT Token}
+    \subsubsection{Swagger UI}
+    Swagger to otwarty framework wspierany przez duży ekosystem narzędzi który pomaga programistom projektować, budować, dokumentować i użytkować WebApi. 
+    Swagger UI pozwala na wizualizacje WebApi. Użytkownik ma możliwość zapoznać się ze wszystkimi endpointami (adresami) pod które może kierować zapytania. Widzi on jakie są dostępne kontrolery oraz jakie akcje udostępnia. Rysunek \ref{fig:swagger} pokazuje akcje dla dwóch kontrolerów (PrivateLesson i SchoolSubject). 
+    
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=1\textwidth]{images/chapter_3/swagger.png}
+    	\caption{Interfejs Swagger UI dla aplikacji \textit{Find-A-Tutor}}
+    	\label{fig:swagger}
+    \end{figure}
+    
+    Dodatkowo, użytkownik ma możliwość przetestowania każdego zapytania, a także zapoznania się z możliwymi odpowiedziami serwera (wraz z modelem), opisem i nazwą argumentów. Na rysunku \ref{fig:swagger-get}, jest to zapytanie \textbf{GET} o listę wszystkich przedmiotów szkolnych. 
+    
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=1\textwidth]{images/chapter_3/swagger-get.png}
+    	\caption{Swagger}
+    	\label{fig:swagger-get}
+    \end{figure}
+    
+    Panel Swagger UI jest dostępny pod adresem /swagger.
+    \subsubsection{NLog}
+    \subsubsection{Automapper}
+    \subsubsection{Figgle}
+    
+    \subsection{Architektura aplikacji - Backend}
+    
+    % Warto zaznaczyc ze presentaion layer to w backend WebApi, fronend to osobny projekt oparty o architekutre 
     % https://www.c-sharpcorner.com/article/onion-architecture-in-asp-net-core-mvc/
     % https://www.youtube.com/watch?v=_lwCVE_XgqI
-        \subsubsection{API}
+    
+    Aplikacje które są zgodne z \textit{Zasadą Odwrócenia Zależności} (ang. Dependency Inversion Principle), a także z zasadami projektowania opartego na domenie (ang. Domain-Driven Design - DDD) mają tendencję do uzyskiwania podobnej architektury. Ta architektura na przestrzeni lat nosiła wiele nazw. Jedną z pierwszych nazw była \textit{Architektura Heksagonalna} (ang. Hexagonal Architecture), a następnie \textit{Porty I Adaptery} (ang. Ports-and-Adapters). Co raz częściej nazywa się ją \textit{Architekturą Cebulową} (ang. Onion Architecture) lub \textit{Czystą Architekturą} (ang. Clean Architecture). Autor w swojej pracy używa właśnie tej drugiej nazwy.
+    
+    \textit{Czysta Architektura} stawia logikę biznesową i model aplikacji w środku aplikacji. Zamiast uzależniania logiki biznesowej od dostępu do danych lub innych problemów związanych z infrastrukturą, zależność ta jest odwrócona: szczegóły infrastruktury i jej implementacji zależą od rdzenia aplikacji. Osiąga się to poprzez zdefiniowanie interfejsów lub abstrakcji w rdzeniu aplikacji, które są następnie implementowane przez typy zdefiniowane w warstwie infrastruktury. Należy podkreślić że poprawnie wymodelowana domena nie posiada żadnych referencji do innych warstw aplikacji.
+    
+    Częstym sposobem wizualizacji tej architektury jest użycie szeregu koncentrycznych kół, podobnych do cebuli. Rysunek \ref{fig:clean-architecture} pokazuje \textit{Czystą Architekturę} przy użyciu tego stylu reprezentacji architektonicznej. Nazwa \textit{Cebulowa Architektura} zawdzięcza nazwę właśnie temu stylowi. 
+    
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.7\textwidth]{images/chapter_3/clean-architecture.png}
+    	\caption{Czysta Architektura \cite{clean-architecture}}
+    	\label{fig:clean-architecture}
+    \end{figure}
+    
+    Autor w swoim projekcie zastosował właśnie takie rozwiązanie, ze względu na czystość, prostotę implementacji, łatwość zmian (np. wymiany infrastruktury na zupełnie nową) i przede wszystkim czytelność \cite{clean-architecture}. 
+    
         \subsubsection{Rdzeń}
+        Centralnym elementem architektury jest rdzeń. Składa się on z \textit{Warstwy domeny} i \textit{Warstwy aplikacji}, pokazanej na rysunku \ref{fig:clean-architecture}. Obie te warstwy zawierają logikę biznesową i logikę aplikacji (wraz z zdefiniowanymi typami). 
+        
+        \paragraph{Wzorzec repozytorium}
+        
+        % Autor w swojej implementacji umieszcza tutaj
         \subsubsection{Infrastruktura}
+        
+        % \paragraph{EF Core}
+        % cos o db context, code first itp
+        
+        \subsubsection{API}
+        Warstwą odpowiedzialną za kontakt "na zewnątrz" jest warstwa prezentacji. W projekcie backendowym, zaimplementowana zostało ona jako WebApi, wraz z najpopularniejszym stylem architektury REST. Za format wymiany danych posłużył JSON.
+        \paragraph{ASPNET.CORE WebApi}
+        
+        \paragraph{Kontrolery}
+        
+        \paragraph{REST}
+        
+        \myparagraph{JSON}
+        \indent
+        \textbf{JavaScript Object Notation}, w skrócie JSON to otwarty i lekki format wymiany danych komputerowych. Charakteryzuje się tekstem czytelnym dla człowieka. Używany jest do przesyłania obiektów danych składających się z par atrybut-wartość i tablicowych typów danych (lub każdej innej wartości możliwej do serializacji).
+        
+        Sam zapis jest dokonywany tylko przy użyciu sześciu znaków: \{, \}, [, ], : (dwukropek) oraz , (przecinek). Proces ten został zwizualizowany na rysunku \ref{fig:json}.
+        
+        \begin{figure}[H] 
+         	\centering
+        	\includegraphics[width=1.0\textwidth]{images/chapter_3/json.png}
+        	\caption{Schemat zapisu danych typu obiekt w formacie JSON}
+        	\label{fig:json}
+        \end{figure}
+        
+        JSON jest niezależny od języka. Został zaczerpnięty z JavaScriptu, ale prawie wszystkie nowoczesne języki programowania zawierają funkcjonalność generowania i parsowania danych sformatowanych za pomocą JSONa. Dlatego też stał się on uniwersalnym formatem do deserializacji danych, przesyłania ich do/z WebApi, jak i nawet przechowywaniu ich na dysku.
+        
+        W \textit{Find-A-Tutor} stał się on jednym formatem wymiany danych - WebAPI, przyjmuje i zwraca dane w JSONie. 
+        
+        \begin{figure}[H] 
+         	\centering
+        	\includegraphics[width=1.0\textwidth]{images/chapter_3/json-get.png}
+        	\caption{Rezultat wysłanego zapytania do WebAPI}
+        	\label{fig:json-get}
+        \end{figure}
+        
+        Na rysunku \ref{fig:json-get} pokazany jest rezultat zapytania metodą GET do WebApi. Są to wszystkie ogłoszenia danego użytkownika (dodane z jego konta).
+        
+        Źródło: Opracowano na podstawie \cite{json}.
+        
+    \subsection{Architektura aplikacji - Frontend}
     \subsection{Warstwa bazy danych}
-    \subsection{Warstwa graficzna}
 \section{Aplikacja z poziomu użytkownika}
 \section{Wnioski}
 
@@ -439,7 +658,7 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
     \bibitem{computers} 
     Computers sold this year
     \url{https://www.worldometers.info/computers/}, dostęp 24-11-2019
-    
+     
     \bibitem{ranking} 
     Ranking sklepów internetowych 2019
     \url{http://static.opineo.pl/press/dl/ranking-sklepow-internetowych-opineo-2019.pdf}, dostęp 28-11-2019
@@ -479,7 +698,7 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
     \bibitem{funkcjonalne} 
     Wymagania funkcjonalne aplikacji internetowej
     \url{http://www.commint.pl/baza/wymagania-funkcjonalne-aplikacji-internetowej}, dostęp 10-12-2019
-        
+    
     \bibitem{niefunkcjonalne} 
     Wymagania niefunkcjonalne aplikacji internetowej
     \url{http://www.commint.pl/baza/wymagania-niefunkcjonalne-aplikacji-internetowej}, dostęp 10-12-2019
@@ -487,6 +706,31 @@ Aplikacja mobilna & \xmark & \xmark & \cmark \\ \hline
     \bibitem{chrome} 
     Browser Market Share Poland
     \url{https://gs.statcounter.com/browser-market-share/all/poland}, dostęp 10-12-2019
+    
+    \bibitem{clean-architecture} 
+    Clean Architecture with ASP.NET Core 2.2
+    \url{https://github.com/JasonGT/NorthwindTraders/blob/master/Docs/Slides.pdf}, dostęp 19-12-2019
+    \url{https://www.youtube.com/watch?v=_lwCVE_XgqI}, dostęp 20-12-2019
+    
+    \bibitem{dotnet-core} 
+    Wprowadzenie do platformy ASP.NET Core
+    \url{https://docs.microsoft.com/pl-pl/aspnet/core/?view=aspnetcore-2.1}, dostęp 21-12-2019
+    
+    \bibitem{csharp} 
+    Wprowadzenie do języka \Csharp i systemu .NET Framework
+    \url{https://docs.microsoft.com/pl-pl/dotnet/csharp/getting-started/introduction-to-the-csharp-language-and-the-net-framework}, dostęp 21-12-2019
+    
+    \bibitem{health-checks} 
+    Health checks in ASP.NET Core
+    \url{https://docs.microsoft.com/en-gb/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1}, dostęp 21-12-2019
+    
+    \bibitem{health-checks-github} 
+    AspNetCore.Diagnostics.HealthChecks
+    \url{https://github.com/xabaril/AspNetCore.Diagnostics.HealthChecks}, dostęp 21-12-2019
+    
+    \bibitem{json} 
+    Introducing JSON
+    \url{https://www.json.org/json-en.html}, dostęp 21-12-2019
     
     % linki bibliograficzne do ksiazek
     % \bibitem{book1} 
