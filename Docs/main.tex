@@ -84,7 +84,7 @@
 \clearpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\setcounter{secnumdepth}{4}
+\setcounter{secnumdepth}{3}
 % \setcounter{tocdepth}{4}
 
 %------------------------------------------------
@@ -486,6 +486,10 @@ Jako język obiektowy \Csharp obsługuje pojęcia enkapsulacji, dziedziczenia i 
 Źródło: Opracowano na podstawie \cite{csharp}
     
 \subsubsection{Docker}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Kontrole kondycji
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsubsection{Kontrole kondycji}
 Celem kontroli stanu projektu jest uzyskanie niezależnej oceny, w dowolnym momencie cyklu życia projektu, tego jak dobrze program działa, czy działa zgodnie z jego celami i jak dobrze przestrzega najlepszej metodologii praktyki. Skuteczna kontrola stanu zapewni dostęp do informacji o stanie zależności owego projektu np. czy program ma połączenie z bazą lub pokaże w jakiej "kondycji" jest nasz program np. jaki czas zajmuje mu połączenie i wywołanie prostego zapytania na bazie. 
     
@@ -499,7 +503,11 @@ Jako modelowe, polecane przez Microsoft w swojej dokumentacji \cite{health-check
     \end{figure}
     
 Rysunek \ref{fig:health-check} pokazuje stan zależności projektu (backend), wraz z dostępem do bazy danych i czasem który potrzebował na wywołanie zapytania na bazie.
-    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Entity Framework Core
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\label{EF}
 \subsubsection{Entity Framework Core}
 Entity Framework (EF) Core to rozszerzalny, lekki, otwarty (ang. open source) i wielo-platformowy mapper obiektowo-relacyjny (ang. Object-Relational Mapping ORM). Umożliwia on programistom prace z bazą danych używając obiektów .NETowych. Dodatkowo, w większości eliminuje potrzebę pisania kodu do połączenia się z bazą danych. 
     
@@ -535,8 +543,84 @@ EF obsługuje trzy sposoby na realizacje mapowania:
     \end{figure}
     
 Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przygotował on Domenę, którą następnie za pomocą migracji odwzorował na nowo utworzonej bazie danych. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% JWT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \subsubsection{JWT}
+    JSON Web Token (w skrócie JWT) to otwarty standard (RFC 7519), który odpowiada za wymianę danych pomiędzy stronami (klient-serwer) w bezpieczny sposób poprzez obiekt w formacie JSON. Informacje przekazywane w nim mogą zostać zweryfikowane przy użyciu cyfrowego podpisu, który jest zawarty w tokenie. Podpis jest generowany za pomocą algorytmu HMAC lub klucza publicznego/prywatnego RSA lub ECDSA.
     
-    \subsubsection{JWT Token}
+    JWT może zostać wykorzystany przy:
+    \begin{itemize}
+        \item Autoryzacja
+        \item Transmisja danych
+    \end{itemize}
+    
+    Struktura JWT, w swojej wynikowej postaci, składa się z trzech części obdzielonych kropkami. Są to kolejno nagłówek (ang. Header), zawartość (ang. Payload), podpis (ang. Signature). Podział ten jest pokazany na rysunku \ref{fig:jwt}
+    
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=1\textwidth]{images/chapter_3/jwt.png}
+    	\caption{Przykład podstawowego JWT \cite{sekurak-jwt}}
+    	\label{fig:jwt}
+    \end{figure}
+    
+    \myparagraph{Nagłówek}
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.4\textwidth]{images/chapter_3/jwt-header.png}
+    	\caption{Przykład nagłówka tokenu}
+    	\label{fig:jwt-header}
+    \end{figure}
+    
+    Nagłówek (pokazany na rysunku \ref{fig:jwt-header}) zawiera dwie informację: rodzaj tokena np. JWT oraz jaki algorytm został użyty do wygenerowania podpisu np. HMAC-SHA256 (zapisywany jako HS256). W postaci końcowej (token), nagłówek jest zapisywany za pomocą algorytmu BASE64URL.
+    
+    \myparagraph{Zawartość}
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.6\textwidth]{images/chapter_3/jwt-payload.png}
+    	\caption{Przykład zawartości tokenu}
+    	\label{fig:jwt-payload}
+    \end{figure}
+    
+    Środkowa cześć jest odpowiedzialna za przechowywanie danych, które chcemy zawrzeć w tokenie. Są to roszczenia (ang. claims). Specyfikacja JWT definiuje siedem zarejestrowanych roszczeń. Roszczenia niestandardowe są często wykorzystywane, w zależności od celu tokena.
+    Przykład pokazany na rysunku \ref{fig:jwt-payload} pokazuje \textit{Issued At Time, "iat"} czyli datę wydania roszczenia i roszczenie niestandardowe \textit{loggedInAs}.
+    
+    Zawartość również jest kodowana za pomocą algorytmu BASE64URL.
+    \myparagraph{Podpis}
+
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.5\textwidth]{images/chapter_3/jwt-signature.png}
+    	\caption{Sposób obliczania podpisu}
+    	\label{fig:jwt-signature}
+    \end{figure}
+    
+    Podpis cyfrowy potwierdza autentyczność danych zapisanych w tokenie. Walidacja podpisu daje nam gwarancje że nadawca wiadomości jest tym za kogo się podaje.
+    
+    Podpis haszowany jest za pomocą wybranego algorytmu (w pokazanym przykładzie - rysunek \ref{fig:jwt-header} był to HMAC-SHA256). Do tej procedury potrzebujemy trzech danych: zakodowanego nagłówka za pomocą algorytmu BASE64URL, zakodowanej zawartości za pomocą algorytmu BASE64URL i sekretu. 
+    
+    Sekret to mówiąc najprościej hasło. Serwis autoryzacyjny (w naszym przypadku serwer z API) przechowuje takie hasło i wykorzystuje przy generowaniu całego tokenu. Hasło musi być tajne, a jego kompromitacja oznacza że każdy może wygenerować taki token i przejść autoryzacje w naszym portalu.
+    
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.8\textwidth]{images/chapter_3/token-diagram.png}
+    	\caption{Działanie tokenu w praktyce \cite{token-diagram}}
+    	\label{fig:token-diagram}
+    \end{figure}
+    
+    Rysunek \ref{fig:token-diagram} pokazuje trzy akcje:
+    \begin{enumerate}
+        \item Logowanie (proces uzyskania tokenu), klient przesyła login i hasło
+        \item Serwer (\textit{Find-A-Tutor.API}) po pomyślnym zweryfikowaniu danych, generuje token JWT zgodnie z algorytmem pokazanym w tym rozdziale. Zwraca go jako odpowiedź do poprzedniego zapytania (logowanie)
+        \item Użytkownik podczas wysyłania zapytania do API przekazuje także wcześniej otrzymany token. Jeśli token jest poprawny, serwer zwróci odpowiedni dane. Jeśli nie, zwróci komunikat o nieprawidłowym tokenie (lub o jego wygaśnięciu)
+    \end{enumerate}
+    
+    Źródło: Opracowano na podstawie \cite{token-diagram}
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Swagger UI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \subsubsection{Swagger UI}
     Swagger to otwarty framework wspierany przez duży ekosystem narzędzi który pomaga programistom projektować, budować, dokumentować i użytkować WebApi. 
     Swagger UI pozwala na wizualizacje WebApi. Użytkownik ma możliwość zapoznać się ze wszystkimi endpointami (adresami) pod które może kierować zapytania. Widzi on jakie są dostępne kontrolery oraz jakie akcje udostępnia. Rysunek \ref{fig:swagger} pokazuje akcje dla dwóch kontrolerów (PrivateLesson i SchoolSubject). 
@@ -553,15 +637,18 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     \begin{figure}[H] 
      	\centering
     	\includegraphics[width=1\textwidth]{images/chapter_3/swagger-get.png}
-    	\caption{Swagger}
+    	\caption{Szczegóły zapytania GET}
     	\label{fig:swagger-get}
     \end{figure}
     
     Panel Swagger UI jest dostępny pod adresem /swagger.
-    \subsubsection{NLog}
-    \subsubsection{Automapper}
-    \subsubsection{Figgle}
-    
+    % \subsubsection{NLog}
+    % \subsubsection{Automapper}
+    % \subsubsection{Figgle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Architektura aplikacji - Backend
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \subsection{Architektura aplikacji - Backend}
     
     % Warto zaznaczyc ze presentaion layer to w backend WebApi, fronend to osobny projekt oparty o architekutre 
@@ -582,25 +669,34 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     \end{figure}
     
     Autor w swoim projekcie zastosował właśnie takie rozwiązanie, ze względu na czystość, prostotę implementacji, łatwość zmian (np. wymiany infrastruktury na zupełnie nową) i przede wszystkim czytelność \cite{clean-architecture}. 
-    
+
         \subsubsection{Rdzeń}
         Centralnym elementem architektury jest rdzeń. Składa się on z \textit{Warstwy domeny} i \textit{Warstwy aplikacji}, pokazanej na rysunku \ref{fig:clean-architecture}. Obie te warstwy zawierają logikę biznesową i logikę aplikacji (wraz z zdefiniowanymi typami). 
         
-        \paragraph{Wzorzec repozytorium}
+        Zgodnie z \textit{PI} (ang. Persistence Ignorance) i \textit{Zasadą Ignorowania Infrastruktury} (ang.  Infrastructure Ignorance) ta warstwa musi całkowicie ignorować szczegóły dotyczące trwałości danych (np. zapis i odczyt). Te zadania powinny zostać wykonane przez warstwę infrastruktury. Dlatego ta warstwa nie powinna przyjmować bezpośrednich zależności od infrastruktury, co oznacza że ważne jest aby klasy reprezentujące encję modelowe były obiektami POCO.
         
-        % Autor w swojej implementacji umieszcza tutaj
+        Domenowe encję nie powinny mieć żadnej bezpośredniej zależności (jak dziedziczenie) do frameworka służącego do dostępu danych jak np. Entity Framework (technologia szczegółowo opisana w rozdziale \ref{EF}).
+        
+        %\paragraph{Wzorzec repozytorium}
         \subsubsection{Infrastruktura}
+        Warstwa infrastruktury i utrwalenia (ang. persistence) opisuje sposób w jaki dane które są początkowo trzymane w klasach modelowych (w pamięci) są utrwalane w bazie danych lub w jakiejkolwiek innej postaci. Przykładem takiego utrwalenia (który Autor zaimplementował) jest Entity Framework Core. Napisany kod służy do połączanie się z bazą danych przez DBContext, który jest reprezentacją bazy danych jako obiekt. Dzięki temu w łatwy sposób możemy operować danymi w naszej bazie danych.
         
-        % \paragraph{EF Core}
-        % cos o db context, code first itp
+        Ta warstwa zależy od warstw niżej - aplikacji i domeny.
         
         \subsubsection{API}
         Warstwą odpowiedzialną za kontakt "na zewnątrz" jest warstwa prezentacji. W projekcie backendowym, zaimplementowana zostało ona jako WebApi, wraz z najpopularniejszym stylem architektury REST. Za format wymiany danych posłużył JSON.
-        \paragraph{ASPNET.CORE WebApi}
         
-        \paragraph{Kontrolery}
+        \myparagraph{RESTful WebAPI}
+        WebApi jest to aplikacja z którą komunikacja jest ograniczona do protokołu HTTP. Protokół ten zawiera 9 metod przy pomocy których możemy sterować WebApi. 
+        HTTP jest niezależny od platformy i jest bezstanowy - nie zachowuje żadnych informacji poprzednich transakcjach z klientem). 
         
-        \paragraph{REST}
+        Aplikacja taka wystawia na świat adresy URL, dalej zwane endpointami.
+        Endpointy są rdzeniem aplikacji WebAPI. To właśnie do nich użytkownik końcowy kieruje zapytania. Jako przykładem, Autor posłuży się następującym endpointem - \textbf{http://domena/privatelesson/3}. Użytkownika interesuje zasób "privatelesson" o ID równym 3. Korzystając z jednej metod protokołu HTTP - GET, wysyłamy owe zapytanie.
+        
+        Gdyby użytkownik skorzystał z metody PUT, mógłby on zaktualizować dane znajdujące się pod tym endpointem. Wszystkie metody są opisane przez dokument \textbf{RFC2616} \cite{http}.
+        
+        REST (ang. Representational State Transfer) jest wzorcem architektonicznym który narzuca dobre praktyki przy tworzeniu aplikacji.
+        RESTful WebAPI to WebApi które stosuje się do zasad wzorca REST i jest zaimplementowane na bazie protokołu HTTP.
         
         \myparagraph{JSON}
         \indent
@@ -621,7 +717,7 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
         
         \begin{figure}[H] 
          	\centering
-        	\includegraphics[width=1.0\textwidth]{images/chapter_3/json-get.png}
+        	\includegraphics[width=.8\textwidth]{images/chapter_3/json-get.png}
         	\caption{Rezultat wysłanego zapytania do WebAPI}
         	\label{fig:json-get}
         \end{figure}
@@ -630,7 +726,14 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
         
         Źródło: Opracowano na podstawie \cite{json}.
         
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Architektura aplikacji - Frontend
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \subsection{Architektura aplikacji - Frontend}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Warstwa bazy danych
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \subsection{Warstwa bazy danych}
 \section{Aplikacja z poziomu użytkownika}
 \section{Wnioski}
@@ -649,8 +752,12 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     
     \section{Bibliografia}
     \renewcommand{\section}[2]{}
-    \begin{thebibliography}{9}
+    \begin{thebibliography}{99}
     % linki bibliograficzne do źródeł internetowych typu link, itp
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chapter 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \bibitem{internet-users} 
     World Internet Users and 2019 Population Stats
     \url{https://www.internetworldstats.com/stats.htm}, dostęp 24-11-2019
@@ -663,6 +770,9 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     Ranking sklepów internetowych 2019
     \url{http://static.opineo.pl/press/dl/ranking-sklepow-internetowych-opineo-2019.pdf}, dostęp 28-11-2019
     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chapter 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \bibitem{allegro-wywiad} 
     Bakker o Allegro.pl: Cel był jasny. W e-commerce mógł być tylko jeden gracz
     \url{https://polskatimes.pl/bakker-o-allegropl-cel-byl-jasny-w-ecommerce-mogl-byc-tylko-jeden-gracz/ar/664791}, dostęp 28-11-2019
@@ -695,6 +805,9 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     Płatność kartą przez Internet
     \url{https://www.najlepszekonto.pl/platnosc-karta-przez-internet}, dostęp 2-12-2019
     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chapter 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \bibitem{funkcjonalne} 
     Wymagania funkcjonalne aplikacji internetowej
     \url{http://www.commint.pl/baza/wymagania-funkcjonalne-aplikacji-internetowej}, dostęp 10-12-2019
@@ -731,6 +844,18 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     \bibitem{json} 
     Introducing JSON
     \url{https://www.json.org/json-en.html}, dostęp 21-12-2019
+    
+    \bibitem{sekurak-jwt} 
+    (Nie) bezpieczeństwa JWT (JSON Web Token)
+    \url{https://sekurak.pl/jwt-security-ebook.pdf}, dostęp 25-12-2019
+    
+    \bibitem{token-diagram} 
+    JSON Web Tokens (JWT)
+    \url{https://blog.i-systems.pl/json-web-tokens-jwt/}, dostęp 27-12-2019
+    
+    \bibitem{http} 
+    Hypertext Transfer Protocol -- HTTP/1.1
+    \url{https://www.ietf.org/rfc/rfc2616.txt}, dostęp 28-12-2019
     
     % linki bibliograficzne do ksiazek
     % \bibitem{book1} 
