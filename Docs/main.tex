@@ -588,6 +588,7 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     
     Zawartość również jest kodowana za pomocą algorytmu BASE64URL.
     \myparagraph{Podpis}
+    \label{signature}
 
     \begin{figure}[H] 
      	\centering
@@ -670,7 +671,7 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     
     Autor w swoim projekcie zastosował właśnie takie rozwiązanie, ze względu na czystość, prostotę implementacji, łatwość zmian (np. wymiany infrastruktury na zupełnie nową) i przede wszystkim czytelność \cite{clean-architecture}. 
 
-        \subsubsection{Rdzeń}
+        \subsubsection{Rdzeń} \label{core}
         Centralnym elementem architektury jest rdzeń. Składa się on z \textit{Warstwy domeny} i \textit{Warstwy aplikacji}, pokazanej na rysunku \ref{fig:clean-architecture}. Obie te warstwy zawierają logikę biznesową i logikę aplikacji (wraz z zdefiniowanymi typami). 
         
         Zgodnie z \textit{PI} (ang. Persistence Ignorance) i \textit{Zasadą Ignorowania Infrastruktury} (ang.  Infrastructure Ignorance) ta warstwa musi całkowicie ignorować szczegóły dotyczące trwałości danych (np. zapis i odczyt). Te zadania powinny zostać wykonane przez warstwę infrastruktury. Dlatego ta warstwa nie powinna przyjmować bezpośrednich zależności od infrastruktury, co oznacza że ważne jest aby klasy reprezentujące encję modelowe były obiektami POCO.
@@ -730,11 +731,86 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
 %% Architektura aplikacji - Frontend
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \subsection{Architektura aplikacji - Frontend}
-
+    Najmniejsza możliwa liczba projektów dla architektury aplikacji to jeden. W takiej aplikacji, cała logika jest zawarta w jednym projekcie, kompilowana do jednego pliku wykonywalnego i wdrożona jako jedna całość. 
+    
+    Ze względu na podział backend - frontend, to właśnie API (backend) odpowiada za faktyczną logikę projektu. I to przez ten interfejs, aplikacja frontendowa porozumiewa się z serwerem czy bazą danych. 
+    
+    W praktyce każda akcja wykonana na froncie (np. logowanie, pobieranie danych) odbywa się poprzez wysłanie odpowiedniego zapytania do API. 
+    
+    \subsubsection{MVC}
+    Model–view–controller (pol. Model-Widok-Kontroler), to wzorzec architektoniczny powszechnie używany do opracowania aplikacji posiadających graficzne interfejsy użytkownika. 
+    % Został on zaprojektowany w roku 1979 przez norweskiego programistę Trygve Reenskaug pracującego wtedy nad językiem Smalltalk w laboratoriach Xerox - WIKIPEDIA
+    
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=.75\textwidth]{images/chapter_3/mvc.png}
+        \caption{ Model-Widok-Kontroler \cite{mvc}}
+        \label{fig:mvc}
+    \end{figure}
+    
+    MVC dzieli aplikacje na trzy części:
+    \begin{itemize}
+        \item Model - logika biznesowa
+        \item Widok - graficzne interfejsy dla użytkownika (UI od ang. user interface) 
+        \item Kontroler - obsługuje żądania użytkownika i konwertuje je na polecenia widoku lub modelu
+    \end{itemize}
+    
+    Wszystkie jego części są ze sobą połączone, pokazuje to rysunek \ref{fig:mvc}.
+    Aplikacja frontendowa została zaprojektowana używając właśnie tej architektury. 
+    Prześledźmy zatem pojedynczą akcję użytkownika - logowanie:
+    \begin{enumerate}
+        \item Użytkownik zostaje zwrócony odpowiedni UI (Widok)
+        \item Użytkownik wpisuje w pola login i hasło 
+        \item Aplikacja obsługuje te dane i przekazuje dalej (Kontroler)
+        \item Aplikacja opakowuje owe dane (JSON) i wysyła jako zapytanie HTTP do WebApi (Model)
+            \begin{itemize}
+                \item WebApi otrzymuje dane i je przetwarza, cały proces został opisany w rozdziale \ref{signature}
+            \end{itemize}
+        \item WebApi zwraca dane do aplikacji, są one rozpakowywane, i przekazywane dalej (Model)
+        \item Model aktualizuje Widok, co jest widoczne dla użytkownika
+    \end{enumerate}
+    
+    Przepływ danych został pokazany na rysunku \ref{fig:mvc-flow}.
+    
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=.8\textwidth]{images/chapter_3/mvc-flow.png}
+        \caption{Zasada organizacji MVC \cite{mvc-flow}}
+        \label{fig:mvc-flow}
+    \end{figure}
+    
+    Przedstawiony scenariusz pokazuje że frontend został napisany na zasadach klienta który obsługuje żądania użytkownika i usprawnia (np. przez UI) komunikacje użytkownika z serwerem. 
+    Rozdzielenie tych dwóch projektów ma następujące zalety:
+    \begin{itemize}
+        \item Modularność - w razie potrzeby jesteśmy wstanie wymienić jeden z projektów na inny
+        \item W razie zmiany popularny stylów graficznych, można w łatwy sposób napisać sam frontend od nowa, dzięki czemu cała aplikacja zostaje nietknięta
+        \item Ułatwienie w utrzymaniu i pracy nad projektem
+        \item Możliwość pracy w dwóch osobnych zespołach na obu projektach
+    \end{itemize}
+    
+    \subsubsection{Razor Pages}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Warstwa bazy danych
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \subsection{Warstwa bazy danych}
+    Ze względu na charakterystykę aplikacji, Autor zdecydował się na bazę relacyjną.
+    Zgodnie z wymodelowaną domeną opisaną w rozdziale \ref{core} i korzystając z mappera obiektowo-relacyjnego (EF Core) opisanego w rozdziale \ref{EF}, struktura bazodanowa została wygenerowana za pomocą migracji. Autor zastosował obsługiwany sposób Code First, czyli na podstawie kodu, EF wygenerował model bazodanowy.
+    
+    Dodatkowo, Autor wybrał \textit{Microsoft SQL Server} jako silnik bazodanowy, mając na uwadze że i owy silnik, jak i platforma .Net Core (wraz z \Csharp) została opracowana przez firmę Microsoft. 
+    
+    Poniżej, rysunek \ref{fig:db} przedstawia strukturę bazodanową: 
+    
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=.8\textwidth]{images/chapter_3/db.png}
+        \caption{Struktury bazodanowe aplikacji \textit{Find-A-Tutor}}
+        \label{fig:db}
+    \end{figure}
+    
+    % \textcolor{red}{Wszystko zostało po krótce opisane w rozdziale \ref{EF} dlatego nie wiem czy jest sens powielać ten opis tutaj}
+    
+    \textit{Podczas powstawania aplikacji Find-A-Tutor Autor postarał się aby była ona od samego początku dobrze zaprojektowana tak aby później modyfikacje nie komplikowały nadmiernie projektu. }
+    
 \section{Aplikacja z poziomu użytkownika}
 \section{Wnioski}
 
@@ -857,6 +933,14 @@ Autor w swoim projekcie posłużył się pierwszym podejściem: Code First. Przy
     Hypertext Transfer Protocol -- HTTP/1.1
     \url{https://www.ietf.org/rfc/rfc2616.txt}, dostęp 28-12-2019
     
+    \bibitem{mvc} 
+    ASP .Net MVC – pojęcia podstawowe
+    \url{https://www.wojciechseweryn.pl/2018/07/07/asp-net-mvc-pojecia-podstawowe/}, dostęp 30-12-2019
+    
+    \bibitem{mvc-flow} 
+    Paradygmat MVC Model-View-Controller
+    \url{https://farmastron.pl/paradygmat-mvc-model-view-controller}, dostęp 30-12-2019
+
     % linki bibliograficzne do ksiazek
     % \bibitem{book1} 
     % Amir Vahid Dastjerdi, Rajkumar Buyya.
