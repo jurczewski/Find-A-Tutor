@@ -1,5 +1,6 @@
 ﻿using Find_A_Tutor.Core.Exceptions;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Find_A_Tutor.Core.Domain
 {
@@ -12,6 +13,8 @@ namespace Find_A_Tutor.Core.Domain
         public DateTime? UpdatedAt { get; protected set; }
         public DateTime RelevantTo { get; protected set; }
         public string Description { get; protected set; }
+        [ForeignKey("SchoolSubjectId")]
+        public Guid SchoolSubjectId { get; set; }
         public SchoolSubject SchoolSubject { get; protected set; }
         public bool IsAssigned => TutorId.HasValue;
         public bool IsPaid { get; protected set; }

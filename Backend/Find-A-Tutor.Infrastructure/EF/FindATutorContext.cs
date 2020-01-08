@@ -24,8 +24,8 @@ namespace Find_A_Tutor.Infrastructure.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var itemBuilder = modelBuilder.Entity<User>();
-            itemBuilder.HasKey(x => x.Id);
+            var itemBuilder = modelBuilder.Entity<User>()
+                .HasKey(x => x.Id);
         }
     }
 }
