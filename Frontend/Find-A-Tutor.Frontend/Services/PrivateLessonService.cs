@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -15,11 +16,43 @@ namespace Find_A_Tutor.Frontend.Services
         readonly private string ApiUrl;
         readonly private string Route = "/privatelesson/";
         private readonly IHttpContextAccessor _accessor;
+        readonly private ISchoolSubjectService _schoolSubjectService;
 
-        public PrivateLessonService(IConfiguration config, IHttpContextAccessor accessor)
+        public PrivateLessonService(IConfiguration config, IHttpContextAccessor accessor, ISchoolSubjectService schoolSubjectService)
         {
             ApiUrl = config.GetValue<string>("ApiUrl");
             _accessor = accessor;
+            _schoolSubjectService = schoolSubjectService;
+        }
+
+        public void MapSchoolSubjectGuidToString(ref IEnumerable<PrivateLesson> privateLessons)
+        {
+            for (var i = 0; i < privateLessons.Count(); i++)
+            {
+                var privateLesson = privateLessons.ElementAt(i);
+                var schoolSubjects = _schoolSubjectService.GetAll().Result.Value;
+                foreach (var subject in schoolSubjects)
+                {
+                    if (subject.Id.ToString() == privateLesson.Subject)
+                    {
+                        privateLesson.Subject = subject.Name;
+                        return;
+                    }
+                }
+            }
+        }
+
+        public void MapSchoolSubjectGuidToString(ref PrivateLesson privateLesson)
+        {
+            var schoolSubjects = _schoolSubjectService.GetAll().Result.Value;
+            foreach (var subject in schoolSubjects)
+            {
+                if (subject.Id.ToString() == privateLesson.Subject)
+                {
+                    privateLesson.Subject = subject.Name;
+                    return;
+                }
+            }
         }
 
         public async Task<Result<IEnumerable<PrivateLesson>>> GetAll()
@@ -31,7 +64,9 @@ namespace Find_A_Tutor.Frontend.Services
                 var result = await response.Content.ReadAsAsync<ResultSimple<IEnumerable<PrivateLesson>>>();
 
                 if (result.IsSuccess)
-                {                  
+                {
+                    var privateLessons = result.Value;
+                    MapSchoolSubjectGuidToString(ref privateLessons);
                     return Result<IEnumerable<PrivateLesson>>.Ok(result.Value);
                 }
                 else
@@ -46,10 +81,12 @@ namespace Find_A_Tutor.Frontend.Services
             var url = ApiUrl + Route + privateLessonId;
 
             using (var response = await ApiHelper.ApiClient.GetAsync(url))
-            {            
+            {
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var result = await response.Content.ReadAsAsync<ResultSimple<PrivateLesson>>();
+                    var privateLessons = result.Value;
+                    MapSchoolSubjectGuidToString(ref privateLessons);
                     return Result<PrivateLesson>.Ok(result.Value);
                 }
                 else
