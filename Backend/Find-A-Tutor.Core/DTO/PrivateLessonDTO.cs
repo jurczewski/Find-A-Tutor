@@ -12,7 +12,7 @@ namespace Find_A_Tutor.Core.DTO
         public DateTime UpdatedAt { get; set; }
         public DateTime RelevantTo { get; set; }
         public string Description { get; set; }
-        public string Subject { get; set; }
+        public Guid Subject { get; set; }
         public bool IsAssigned => TutorId.HasValue;
         public bool IsPaid { get; set; }
         public bool IsDone { get; set; }

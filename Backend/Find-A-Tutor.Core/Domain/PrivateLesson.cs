@@ -13,8 +13,8 @@ namespace Find_A_Tutor.Core.Domain
         public DateTime? UpdatedAt { get; protected set; }
         public DateTime RelevantTo { get; protected set; }
         public string Description { get; protected set; }
-        [ForeignKey("SchoolSubjectId")]
-        public Guid SchoolSubjectId { get; set; }
+        [ForeignKey("SchoolSubjectId")] //todo: wokr around for EF and SQL, remove filed and fix mapping
+        public Guid SchoolSubjectId { get; protected set; }
         public SchoolSubject SchoolSubject { get; protected set; }
         public bool IsAssigned => TutorId.HasValue;
         public bool IsPaid { get; protected set; }

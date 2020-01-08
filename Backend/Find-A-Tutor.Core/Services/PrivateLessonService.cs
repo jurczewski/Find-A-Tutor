@@ -26,33 +26,11 @@ namespace Find_A_Tutor.Core.Services
             _mapper = mapper;
         }
 
-        public void MapSchoolSubjectGuidToName(ref IEnumerable<PrivateLesson> privateLessons)
-        {
-            if (privateLessons.Any(x => x.SchoolSubject is null))
-            {
-                for (var i = 0; i < privateLessons.Count(); i++)
-                {
-                    var privateLesson = privateLessons.ElementAt(i);
-                    var newName = _schoolSubjectRepository.GetAsync(privateLesson.SchoolSubjectId);
-                    privateLesson.SchoolSubject.SetName(newName.Result.Name);
-                }
-            }
-        }
-
-        public void MapSchoolSubjectGuidToName(ref PrivateLesson privateLesson)
-        {
-            if (privateLesson.SchoolSubject is null)
-            {
-                var newName = _schoolSubjectRepository.GetAsync(privateLesson.SchoolSubjectId);
-                privateLesson.SchoolSubject.SetName(newName.Result.Name);
-            }
-        }
-
         public async Task<Result<PrivateLessonDTO>> GetAsync(Guid id)
         {
             logger.Info($"Fetching private lessons with id: '{id}'");
             var privateLesson = await _privateLessonRepository.GetAsync(id);
-            MapSchoolSubjectGuidToName(ref privateLesson);
+
             return privateLesson != null ?
                                     Result<PrivateLessonDTO>.Ok(_mapper.Map<PrivateLessonDTO>(privateLesson)) :
                                     Result<PrivateLessonDTO>.Error($"Private lesson with id: '{id}', does not exists.");
@@ -62,7 +40,7 @@ namespace Find_A_Tutor.Core.Services
         {
             logger.Info($"Fetching private lessons with subject: {subject}");
             var privateLesson = await _privateLessonRepository.GetAsyncBySubject(subject);
-            MapSchoolSubjectGuidToName(ref privateLesson);
+
             return privateLesson != null ?
                                     Result<IEnumerable<PrivateLessonDTO>>.Ok(_mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson)) :
                                     Result<IEnumerable<PrivateLessonDTO>>.Error($"There are no private lessons that subject contains \"{subject}\".");
@@ -79,17 +57,6 @@ namespace Find_A_Tutor.Core.Services
 
             var allLessonsForUser = allLessons.Where(x => x.StudentId == userId || x.TutorId == userId);
 
-            //MapSchoolSubjectGuidToName(ref allLessonsForUser);
-            //if (allLessonsForUser.Any(x => x.SchoolSubject is null))
-            //{
-            //    for (var i = 0; i < allLessonsForUser.Count(); i++)
-            //    {
-            //        var privateLesson = allLessonsForUser.ElementAt(i);
-            //        var newName = _schoolSubjectRepository.GetAsync(privateLesson.SchoolSubjectId);
-            //        privateLesson.SchoolSubject.SetName(newName.Result.Name);
-            //    }
-            //}
-
             var allLessonsForUserDTO = _mapper.Map<IEnumerable<PrivateLessonDTO>>(allLessonsForUser);
 
             return Result<IEnumerable<PrivateLessonDTO>>.Ok(allLessonsForUserDTO);
@@ -99,7 +66,7 @@ namespace Find_A_Tutor.Core.Services
         {
             logger.Info("Fetching private lessons");
             var privateLesson = await _privateLessonRepository.BrowseAsync(description);
-            MapSchoolSubjectGuidToName(ref privateLesson);
+
             return Result<IEnumerable<PrivateLessonDTO>>.Ok(_mapper.Map<IEnumerable<PrivateLessonDTO>>(privateLesson));
         }
 

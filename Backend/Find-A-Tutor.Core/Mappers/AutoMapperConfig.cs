@@ -10,7 +10,7 @@ namespace Find_A_Tutor.Core.Mappers
             => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<PrivateLesson, PrivateLessonDTO>()
-                    .ForMember(x => x.Subject, m => m.MapFrom(p => p.SchoolSubject.Name));
+                    .ForMember(x => x.Subject, m => m.MapFrom(p => p.SchoolSubjectId));
                 cfg.CreateMap<User, AccountDto>();
             })
             .CreateMapper();
