@@ -11,6 +11,7 @@
 \usepackage{subcaption}
 \usepackage{chngcntr}
 
+\usepackage[hyphens]{url}
 \usepackage{hyperref} % links and urls in document
 \usepackage{indentfirst} % wcięcie pierwszego akapitu
 
@@ -23,10 +24,10 @@
 
 %kolor linków
 \hypersetup{
-  colorlinks   = true, %Colours links instead of ugly boxes
-  urlcolor     = black, %Colour for external hyperlinks
-  linkcolor    = black, %Colour of internal links
-  citecolor   = black %Colour of citations
+  colorlinks = true, %Colours links instead of ugly boxes
+  urlcolor = black, %Colour for external hyperlinks
+  linkcolor = black, %Colour of internal links
+  citecolor = black %Colour of citations
 }
 
 % csharp cmd
@@ -179,7 +180,7 @@ Przykładowym portalem który posłuży mi do analizy systemu jest największy s
 
     \begin{figure}[H]
     	\centering
-    	\includegraphics[width=1\textwidth]{images/chapter_2/olx-add-announcement.png}
+    	\includegraphics[width=.8\textwidth]{images/chapter_2/olx-add-announcement.png}
     	\caption{Dodawanie ogłoszenia na serwisie OLX}
     	\label{fig:olx-add-announcement}
     \end{figure}
@@ -377,7 +378,7 @@ Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samej zm
 \textbf{Panel korepetytora}\\
 \indent
 Użytkownik korepetytor, po zalogowaniu ma dostęp do swojego panelu ze wszystkimi dostępnymi ogłoszeniami i ze wszystkimi podjętymi przez niego ogłoszeniami. Dostępne są na nim następujące informacje: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
-
+\clearpage
 \noindent
 \textbf{Podjęcie ogłoszenia}\\
 \indent
@@ -404,6 +405,7 @@ Wymagania niefunkcjonalne określają obszar jakości aplikacji. Wynikają częs
 \indent
 Aplikacja powinna być łatwa w zmianie lokalizacji, środowiska, eksportu danych.
 
+\clearpage
 \noindent
 \textbf{Skalowalność}\\
 \indent
@@ -580,6 +582,7 @@ Struktura JWT, w swojej wynikowej postaci, składa się z trzech części oddzie
     Przykład pokazany na rysunku \ref{fig:jwt-payload} pokazuje \textit{Issued At Time, "iat"} czyli datę wydania roszczenia i roszczenie niestandardowe \textit{loggedInAs}.
     
     Zawartość również jest kodowana za pomocą algorytmu BASE64URL.
+    \clearpage
     \myparagraph{Podpis}
     \label{signature}
 
@@ -644,15 +647,15 @@ Panel Swagger UI jest dostępny pod adresem /swagger.
 \subsection{Architektura aplikacji - Backend}
     
 Aplikacje które są zgodne z \textit{Zasadą Odwrócenia Zależności} (ang. Dependency Inversion Principle), a także z zasadami projektowania opartego na domenie (ang. Domain-Driven Design - DDD) mają tendencję do uzyskiwania podobnej architektury. Ta architektura na przestrzeni lat nosiła wiele nazw. Jedną z pierwszych nazw była \textit{Architektura Heksagonalna} (ang. Hexagonal Architecture), a następnie \textit{Porty I Adaptery} (ang. Ports-and-Adapters). Co raz częściej nazywa się ją \textit{Architekturą Cebulową} (ang. Onion Architecture) lub \textit{Czystą Architekturą} (ang. Clean Architecture). Autor w swojej pracy używa właśnie tej drugiej nazwy.
-    
+
 \textit{Czysta Architektura} stawia logikę biznesową i model aplikacji w środku aplikacji. Zamiast uzależniania logiki biznesowej od dostępu do danych lub innych problemów związanych z infrastrukturą, zależność ta jest odwrócona: szczegóły infrastruktury i jej implementacji zależą od rdzenia aplikacji. Osiąga się to poprzez zdefiniowanie interfejsów lub abstrakcji w rdzeniu aplikacji, które są następnie implementowane przez typy zdefiniowane w warstwie infrastruktury. Należy podkreślić że poprawnie wymodelowana domena nie posiada żadnych referencji do innych warstw aplikacji.
     
-Częstym sposobem wizualizacji tej architektury jest użycie szeregu koncentrycznych kół, podobnych do cebuli. Rysunek \ref{fig:clean-architecture} pokazuje \textit{Czystą Architekturę} przy użyciu tego stylu reprezentacji architektonicznej. Nazwa \textit{Cebulowa Architektura} zawdzięcza nazwę właśnie temu stylowi. 
+Częstym sposobem wizualizacji tej architektury jest użycie szeregu koncentrycznych kół, podobnych do cebuli. Rysunek \ref{fig:clean-architecture} pokazuje \textit{Czystą Architekturę} przy użyciu tego stylu reprezentacji architektonicznej. Nazwa \textit{Cebulowa Architektura} zawdzięcza nazwę właśnie takiemu ułożeniu warstw.
     
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.7\textwidth]{images/chapter_3/clean-architecture.png}
-    \caption{Czysta Architektura \cite{clean-architecture}}
+    \caption{Czysta Architektura \cite{clean-architecture}. Każda warstwa jest zależna od warstwy bliżej centrum - aż do domeny która nie ma żadnych zależności. Warstwa aplikacji zależy od warstwy domeny, a pozostałe trzy (prezentacji, infrastruktury i utrwalenia) zależy od warstwy aplikacji.}
     \label{fig:clean-architecture}
 \end{figure}
     
@@ -715,6 +718,7 @@ Autor w swoim projekcie zastosował właśnie takie rozwiązanie, ze względu na
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Architektura aplikacji - Frontend
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\clearpage
 \subsection{Architektura aplikacji - Frontend}
 Najmniejsza możliwa liczba projektów dla architektury aplikacji to jeden. W takiej aplikacji, cała logika jest zawarta w jednym projekcie, kompilowana do jednego pliku wykonywalnego i wdrożona jako jedna całość. 
     
@@ -727,7 +731,7 @@ Model–view–controller (pol. Model-Widok-Kontroler), to wzorzec architektonic
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=.75\textwidth]{images/chapter_3/mvc.png}
+    \includegraphics[width=.5\textwidth]{images/chapter_3/mvc.png}
     \caption{ Model-Widok-Kontroler \cite{mvc}}
     \label{fig:mvc}
 \end{figure}
@@ -758,7 +762,7 @@ Przepływ danych został pokazany na rysunku \ref{fig:mvc-flow}.
     
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=.8\textwidth]{images/chapter_3/mvc-flow.png}
+    \includegraphics[width=.5\textwidth]{images/chapter_3/mvc-flow.png}
     \caption{Zasada organizacji MVC \cite{mvc-flow}}
     \label{fig:mvc-flow}
 \end{figure}
@@ -972,26 +976,32 @@ Pierwszym etapem pracy była analiza dwóch rynków: usług i płatności intern
 
 Bezpośrednim celem pracy było dostarczenie aplikacji webowej która w łatwy sposób pozwoli na zarządzanie korepetycjami ze strony ucznia jak i nauczyciela. Rozwiązanie takie zostało wykonane w sposób modularny, zgodnie z \textit{Czystą Architekturą}. Aplikacja ta jest otwarta na modyfikację w przyszłości, jak i na wymianę poszczególnych elementów. Ponadto, struktura aplikacji pozwoli w przyszłości zastosować implementację innych systemów płatności. Rzutuje to przede wszystkim na cykl życia aplikacji, która przez kolejne lata może nie być dalej rozwijana, ale same płatności portfelem elektronicznym będą aktualizowane. Od strony frontendowej, oferuje przejrzysty i czytelny interfejs który ułatwi użytkowanie tego portalu. 
 
-Zaimplementowany system PayPal, który zwyciężył w analizie rynkowej, jest liderem płatności online. Inne firmy technologiczne, nawet te największe, takie jak Facebook czy Google są ze swoimi rozwiązaniami daleko za PayPalem, mimo tego że implementacja i testy nowych portfeli elektronicznych mogą być gotowe w niedalekiej przyszłości to dogonienie konkurencji pod względem przekonania do siebie użytkowników i utwierdzenie ich w rewolucyjności ich rozwiązania może zająć lata.
+Zaimplementowany system PayPal, który zwyciężył w analizie rynkowej, jest liderem płatności online. Inne firmy technologiczne, nawet te największe, takie jak Facebook czy Google są ze swoimi rozwiązaniami daleko za PayPalem. Pomimo tego że implementacja i testy nowych portfeli elektronicznych mogą być gotowe w niedalekiej przyszłości to dogonienie konkurencji pod względem przekonania do siebie użytkowników i utwierdzenie ich w rewolucyjności ich rozwiązania może zająć lata.
 
 W przyszłości rynek usług będzie z pewnością ewoluował wchłaniając kolejne gałęzie przemysłu. Będzie to oznaczało zwiększenie agregatów ogłoszeń (np. \url{www.olx.pl}) jak i powstanie zupełnie nowych aplikacji takich jak \textit{Find-A-Tutor}. Udostępniona aplikacja może stanowić ciekawe rozwiązanie dla osób próbujących stworzyć autorską implemenetacje.
 
     \clearpage
-    
-     % lista obrazków - generuje się automatycznie
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Indeks rysunków
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     
     \section{Indeks rysunków}
         \listoffigures
     \clearpage    
     
-    % lista tabel - generuje się automatycznie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Indeks tabel
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     \section{Indeks tabel}
         \listoftables
     \clearpage
     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     
     \section{Bibliografia}
     \renewcommand{\section}[2]{}
     \begin{thebibliography}{99}
-    % linki bibliograficzne do źródeł internetowych typu link, itp
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Chapter 1
@@ -1102,12 +1112,7 @@ W przyszłości rynek usług będzie z pewnością ewoluował wchłaniając kole
     \bibitem{mvc-flow} 
     Paradygmat MVC Model-View-Controller
     \url{https://farmastron.pl/paradygmat-mvc-model-view-controller}, dostęp 30-12-2019
-
-    % linki bibliograficzne do ksiazek
-    % \bibitem{book1} 
-    % Amir Vahid Dastjerdi, Rajkumar Buyya.
-    % \textit
-    % Internet of Things. Morgan Kaufmann, 2016.
+    
     \end{thebibliography}
 \end{sloppypar}
 \end{document}
