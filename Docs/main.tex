@@ -67,8 +67,7 @@
   \vspace{3cm}
   \large
     PRACA DYPLOMOWA INŻYNIERSKA\\
-  \vspace{5cm}
-
+  \vspace{4cm}
   \Huge
     Aplikacja dla korepetytorów z płatnościami PayPal w technologii .NET Core\\
   \large
@@ -79,7 +78,8 @@
   Wydział Fizyki Technicznej, Informatyki i Matematyki Stosowanej\\
   Rok akademicki 2019/2020\\
   \bigbreak
-   dr hab inż Aneta Poniszewska-Marańda \\
+   Promotor: dr hab. inż. Aneta Poniszewska-Marańda \\
+   Współpromotor: mgr inż. Krzysztof Stępień\\
  \end{center}
 \end{titlepage}
 
@@ -100,7 +100,7 @@
 %% Wprowadzenie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wprowadzenie}
-\textit{Otacza nas rewolucja cyfrowa. Każdy aspekt naszego życia przenosi się do internetu. Jednym z nich jest rynek usług - korepetycji. Aplikacja internetowa "Find-A-Tutor" jest odpowiedzią na tę rewolucję; pozwala na łatwe zarządzanie korepetycjami - dla ucznia i nauczyciela.}
+\textit{Otacza nas rewolucja cyfrowa. Każdy aspekt naszego życia przenosi się do Internetu. Jednym z nich jest rynek usług - korepetycji. Aplikacja internetowa "Find-A-Tutor" jest odpowiedzią na tę rewolucję; pozwala na łatwe zarządzanie korepetycjami - dla ucznia i nauczyciela.}
 % Wraz z początkiem lat 70 ubiegłego wieku świat ekonomi nie był już tylko kierowany przez prawa rynku ale także przez otaczający go i postępujący świat cyfryzacji, który z dnia na dzień zmieniał i na nowo definiował działania jego sektorów. 
 % Od samego początku cywilizacji Zachodniej, to niewątpliwie ekonomia jej towarzyszyła. 
 % Nauką która zawsze towarzyszyła rozwojowi cywilizacji Zachodniej była ekonomia. To właśnie produkcja, konsumpcja czy dystrybucja dóbr napędzała 
@@ -110,33 +110,34 @@
 %% Problematyka
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Problematyka} \label{sec:problematyka}
-Niewątpliwie czynnikiem który kształtował ekonomie, rynek czy cywilizacje zachodnią jako ogół była zawsze technologia. To ona bezpowrotnie zmieniła oblicze życia w latach 1780–1840 podczas rewolucji przemysłowej i to właśnie ona na nowo definiuje działania naszego świata podczas rewolucji cyfrowej. Początek tej rewolucji datowany jest na lata 70 XX wieku, ale jej koniec nie został jeszcze wyznaczony, ponieważ przyjmuje się, że trwa ona do dziś.
+Niewątpliwie czynnikiem, który kształtował ekonomię, rynek lub cywilizację zachodnią jako ogół była zawsze technologia. To ona bezpowrotnie zmieniła oblicze życia w latach 1780–1840 podczas rewolucji przemysłowej i to właśnie ona na nowo definiuje działania naszego świata podczas rewolucji cyfrowej. Początek tej rewolucji datowany jest na lata 70-te XX wieku, ale jej koniec nie został jeszcze wyznaczony, ponieważ przyjmuje się, że trwa ona do dziś.
 
-W roku 2019 prawie 60\% populacji świata miała dostęp do komputera \cite{internet-users}, a w samym 2019 zostało ich sprzedane prawie 230 tysięcy jednostek\cite{computers}. Obie te liczby przez ostatnie dekady miały tendencję wzrostową, co tylko jeszcze bardziej umacnia obecność technologi w naszym życiu. Niebywałą trudność może sprawić nam znalezienie takiej dziedziny życia która jeszcze nie została zmodyfikowana przedrostkiem "e" jako jednoznaczny sygnał cyfryzacji.
+W 2019 roku prawie 60\% populacji świata miała dostęp do komputera \cite{internet-users}, a w samym 2019 zostało ich sprzedanych prawie 230 tysięcy jednostek \cite{computers}. Obie te liczby przez ostatnie dekady miały tendencję wzrostową, co tylko jeszcze bardziej umacnia obecność technologii w naszym życiu. Niebywałą trudność może sprawić nam znalezienie takiej dziedziny życia, która jeszcze nie została zmodyfikowana przedrostkiem "e" jako jednoznaczny sygnał cyfryzacji.
 
-Pojęcie otaczającego nas wolnego rynku obejmuje również konkurencje. W warunkach idealnych, jest to model "konkurencji doskonałej", w którym to każdy z dostawców, swoją jakością produktu może rywalizować o pieniądze konsumenta. W dzisiejszych czasach konsument którego np. interesuje wybranie i zakup książki będzie miał do wyboru ponad 10 portali, takich jak \url{www.taniaksiazka.pl}, \url{swiatksiazki.pl}, \url{bonito.pl} czy \url{aros.pl}. Każdy z tych portali oferuje ponad 400 tysięcy pozycji jak i wiele udogodnień np. bezpłatny odbiór w jednej z 125 księgarni w Polsce \cite{ranking}. 
+Pojęcie otaczającego nas wolnego rynku obejmuje również konkurencję. W warunkach idealnych jest to model "konkurencji doskonałej", w którym to każdy z dostawców swoją jakością produktu może rywalizować o pieniądze konsumenta. W dzisiejszych czasach konsument, którego interesuje na przykład wybranie i zakup książki będzie miał do wyboru ponad 10 portali, takich jak \url{www.taniaksiazka.pl}, \url{swiatksiazki.pl}, \url{bonito.pl} lub \url{aros.pl}. Każdy z tych portali oferuje ponad 400 tysięcy pozycji, jak i wiele udogodnieńm, na przykład bezpłatny odbiór w jednej z 125 księgarni w Polsce \cite{ranking}. 
 
-Przyglądając się innym branżom stosującym e-commerce (ang. handel elektroniczny) takim jak: AGD/RTV, artykuły medyczne, zoologiczne, dom i wnętrze, mililitra, motoryzacja, odzież i obuwie, sport, telefony, zdrowie i uroda, zegarki i biżuteria czy nawet żywność widzimy bogatość tych rozwiązań wraz z setkami udogodnień dla potencjalnego klienta. 
+Przyglądając się innym branżom stosującym e-commerce, czyli handel elektroniczny, takim jak: AGD/RTV, artykuły medyczne, zoologiczne, dom i wnętrze, mililitra, motoryzacja, odzież i obuwie, sport, telefony, zdrowie i uroda, zegarki i biżuteria, a nawet żywność, widzimy bogactwo tych rozwiązań wraz z setkami udogodnień dla potencjalnego klienta. 
 
-Obok rynku produktów znajduje się rynek usług. Najczęściej reprezentowany przez serwis aukcyjny lub ogłoszeniowy w którym to dany specjalista może zaoferować swój czas i umiejętności za określoną kwotę. Popularnymi i największymi portalami używanymi do tego są między innymi \url{olx.pl} lub \url{allegro.pl}.
-Ze względu na specyfikę usługi, która nie jest namacalna tak jak produkt, przedstawienie jej w sposób dokładny może wiązać się z pewnymi trudnościami. Np. brak zdjęcia, brak możliwości zmierzenia jej jak produktu czy też po po prostu mniejsza ilość sposobów na opisanie jej. Sprawia to, że są one najczęściej dostępne jako dodatkowo opcja do serwisu handlowego. 
+Obok rynku produktów znajduje się rynek usług. Najczęściej reprezentowany jest przez serwis aukcyjny lub ogłoszeniowy, w którym dany specjalista może zaoferować swój czas i umiejętności za określoną kwotę. Popularnymi i największymi portalami używanymi do tego celu są między innymi \url{olx.pl} lub \url{allegro.pl}.
+Ze względu na specyfikę usługi, która nie jest namacalna tak, jak produkt, przedstawienie jej w sposób dokładny może wiązać się z pewnymi trudnościami, przykładowo brak zdjęcia, brak możliwości zmierzenia jej jak produktu lub po prostu mniejsza liczba sposobów na jej opisanie. Sprawia to, że usługi są najczęściej dostępne jako dodatkowa opcja do serwisu handlowego. 
 
-Specyficzną niszą są korepetycje. Oferowane nie tylko przez nauczycieli akademickich lub innych szkół, ale także studentów lub po prostu znawców danej dziedziny. Tradycyjnym sposobem znalezienia korepetytora było szukanie go przez polecenie lub znalezienie papierowego ogłoszenia. Kształt jak i długość lekcji były najczęściej dostosowywane dopiero przy spotkaniu z daną osobą.
+Specyficzną niszą są korepetycje. Oferowane są nie tylko przez nauczycieli akademickich lub nauczycieli innych szkół, ale także przez studentów lub po prostu przez znawców danej dziedziny. Tradycyjnym sposobem znalezienia korepetytora jest szukanie go przez polecenie lub przez papierowe ogłoszenia. Kształt, jak i długość lekcji są najczęściej dostosowywane dopiero przy spotkaniu z daną osobą.
 
-Ostatnim analogowym aspektem korepetycji są oczywiście płatności - dokonywane gotówką. Płatność taka zajmuje zawsze więcej czasu, wiąże się często z wydawaniem reszty i jest nienamierzalna (zależnie od sytuacji jest to zaleta lub wada). Od strony płacącego wiążę się to z brakiem jakiekolwiek historii płatności, a od strony odbiorcy płatności związane jest z jakimkolwiek brakiem historii wpływów który np. pozbawia go możliwości analizowania jego działalności od strony finansowej. 
+Ostatnim analogowym aspektem korepetycji są oczywiście płatności - dokonywane gotówką. Płatność taka zajmuje zawsze więcej czasu, wiąże się często z wydawaniem reszty i jest nienamierzalna (zależnie od sytuacji jest to zaleta lub wada). Od strony płacącego wiążę się to z brakiem jakiekolwiek historii płatności, a od strony odbiorcy płatności związane jest z jakimkolwiek brakiem historii wpływów, który pozbawia go na przykład możliwości analizowania jego działalności od strony finansowej. 
 
-W tradycyjnym modelu korepetycji to nauczyciel ogłasza się jako osobo świadcząca te usługi. Brakuje jednak rozwiązań, a w szczególności w świecie cyfrowym, które pozwoliłby ogłaszać się uczniom jako poszukującym korepetycji. Takie rozwiązanie niewątpliwie powinno łączyć zalety serwisów ogłoszeniowych, odwrócony model ogłaszania się (jako ucznia która tych korepetycji poszukuje) i popularnych płatności on-line. Całość oczywiście powinna być spięta w prosty i intuicyjny interfejs który swoim minimalizmem nie przytłoczy użytkownika. Co często ma miejsce w serwisach powstałych kilka lat temu i zbyt bogatych w treść.
+W tradycyjnym modelu korepetycji to nauczyciel ogłasza się jako osobo świadcząca te usługi. Brakuje jednak rozwiązań, w szczególności w świecie cyfrowym, które pozwoliłby ogłaszać się uczniom jako poszukującym korepetycji. Takie rozwiązanie niewątpliwie powinno łączyć zalety serwisów ogłoszeniowych, odwróconego modelu ogłaszania się (jako ucznia, który tych korepetycji poszukuje) i popularnych płatności on-line. Całość oczywiście powinna być spięta w prosty i intuicyjny interfejs, który swoim minimalizmem nie przytłoczy użytkownika, co często ma miejsce w serwisach powstałych kilka lat temu i zbyt bogatych w treść.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Cel i założenia projektu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cel i założenia projektu}
-Bezpośrednim celem pracy jest dostarczenie aplikacji webowej która w łatwy sposób pozwoli na zarządzanie korepetycjami ze strony ucznia jak i nauczyciela. Aplikacja pozwoli nie tylko na ogłaszanie się i podejmowanie tych ogłoszeń, ale również na płatności internetowe PayPalem - jako uniwersalne rozwiązanie płatności on-line. 
+Celem niniejszej pracy dyplomowej jest stworzenie aplikacji webowej, która w łatwy sposób pozwoli na zarządzanie korepetycjami ze strony ucznia, jak i ze strony nauczyciela. Aplikacja pozwoli nie tylko na ogłaszanie się i podejmowanie tych ogłoszeń, ale również na płatności internetowe usługą PayPal, jako uniwersalnym rozwiązaniem płatności on-line. 
 
-Projekt składa się z dwóch warstw: Backend i Frontend.
-Frontend został napisany w technologi ASP.NET Razor (generujące dynamiczne strony internetowe po stronie serwera) i fundamentalnych technologi frontendowych takich jak: HTML, CSS, JavaScript i Bootstrap. Wszelkie dane i operacje są wysyłane do Backendu przez protokół HTTP, za pośrednictwem JSONa. 
-Backend to RESTful WebApi które zostało napisane w najnowszym obecnym czasie frameworku .NET Core 2.2.
+Stworzony projekt składa się z dwóch warstw: 
+aplikacji po stronie serwera (backend) i aplikacji po stronie klienta (frontend).
+Frontend został napisany w technologii ASP.NET Razor (generujące dynamiczne strony internetowe po stronie serwera) i fundamentalnych technologiach frontendowych, takich jak HTML, CSS, JavaScript i Bootstrap. Wszelkie dane i operacje są wysyłane do backendu przez protokół HTTP, za pośrednictwem JSONa. 
+Backend to RESTful WebApi które zostało napisane w najnowszej obecnie wersji aplikacji szkieletowej .NET Core 2.2.
 
-Funkcjonalność rejestracji i logowania do konta, została napisana wykorzystując JWT (Json Web Token) do uwierzytelnienia użytkownika.
+Funkcje rejestracji i logowania do konta zostały napisane przy wykorzystaniu JWT do uwierzytelnienia użytkownika.
 
 Aby zapewnić bezstanowość API, dane są przechowywane w bazie relacyjnej Microsoft SQL Server.
 
@@ -146,10 +147,10 @@ Dla skalowalności rozwiązania wszystkie usługi zostały zamknięte w kontener
 %% Struktura pracy inżynierskiej
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Struktura pracy inżynierskiej}
-Pierwszy rozdział jest wstępem do opisanego problemu. Drugi opisuje ogólną idee ogłoszeń internetowych, skupia się także nad płatnościami internetowymi, jak i opisuje ich bezpieczeństwo. Na końcu przedstawia obecne rozwiązania. Rozdział trzeci skupia się na technicznych aspektach projektu. Jest to dokumentacja techniczna opisująca architekturę aplikacji (backend) i przedstawienie warstwy bazy danych jak i graficznej (frontend). Czwarty rozdział jest opisem działania aplikacji z poziomu użytkownika. Koniec pracy to rozdział piąty który jest podsumowaniem całego projektu.
-\newline
-\newline
-\textit{Rynek usług sprzedawanych za pomocą internetu nie jest rynkiem w całości zagospodarowanym. Ciągle istnieją w niej niższe takie jak rynek korepetycji. Aplikacja Find-A-Turor została przygotowana z myślą o tej niższy.}
+Pierwszy rozdział pracy jest wstępem do opisanego problemu. Drugi prezentuje ogólną idee ogłoszeń internetowych, skupia się także na płatnościach internetowych oraz opisuje ich bezpieczeństwo. Na końcu przedstawia obecne systemy płatności. Rozdział trzeci pracy skupia się na technicznych aspektach projektu. Opisuje architekturę aplikacji serwerowej (backend) i interfejsu użytkownika (frontend). Czwarty rozdział jest opisem działania stworzonej aplikacji z punktu widzenia użytkownika. 
+% \newline
+% \newline
+% \textit{Rynek usług sprzedawanych za pomocą internetu nie jest rynkiem w całości zagospodarowanym. Ciągle istnieją w niej niższe takie jak rynek korepetycji. Aplikacja Find-A-Turor została przygotowana z myślą o tej niższy.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Idea ogłoszeń internetowych
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -324,9 +325,9 @@ korepetycje.net i wspomniany już wcześniej portal, nie tylko do korepetycji - 
 \textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Dodatkowo, backend został stworzony jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcjonalnością będzie dodawanie ogłoszeń przez studentów. Całość została spięta minimalistycznym i nieprzytłaczającym designem.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Techniczne aspekty Find-A-Tutor
+%% Techniczne aspekty aplikacji Find-A-Tutor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Techniczne aspekty \textit{Find-A-Tutor}} \label{tech-aspect}
+\section{Techniczne aspekty aplikacji \textit{Find-A-Tutor}} \label{tech-aspect}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wymagania
