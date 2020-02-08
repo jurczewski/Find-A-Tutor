@@ -15,6 +15,11 @@
 \usepackage{hyperref} % links and urls in document
 \usepackage{indentfirst} % wcięcie pierwszego akapitu
 
+% podpisy nad tabelami
+\floatstyle{plaintop}
+\restylefloat{table}
+% end
+
 %begin tick and X emojis
 \usepackage{pifont}
 \usepackage{xcolor}
@@ -155,125 +160,132 @@ Pierwszy rozdział pracy jest wstępem do opisanego problemu. Drugi prezentuje o
 %% Idea ogłoszeń internetowych
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Idea ogłoszeń internetowych}
-W czasach przed internetowych, jeśli dana osoba chciała umieścić ogłoszenie lub też przejrzeć listę ogłoszeń miała do wyboru następujące opcje:
+W czasach przedinternetowych, jeśli dana osoba chciała umieścić ogłoszenie lub też przejrzeć listę ogłoszeń miała do wyboru następujące opcje:
 \begin{itemize}
-    \item gazeta/czasopismo
-    \item książka telefoniczna
-    \item lokalny bazar (rynek produktów)
-    \item ogłoszenie na słupie ogłoszeniowym
-    \item opowiedzieć/zapytać o to znajomych
+    \item gazeta/czasopismo,
+    \item książka telefoniczna,
+    \item lokalny bazar (rynek produktów),
+    \item ogłoszenie na słupie ogłoszeniowym,
+    \item opowiedzieć/zapytać o przedmiot ogłoszenia znajomych.
 \end{itemize}
 
-Wszystkie opcje mimo swojej prostoty w użytkowaniu, łączyły pewne wady. Podstawową wadą był brak współdzielenia listy ogłoszeń między sobą (np. sekcja ogłoszeń jednej gazety z inną gazetą) lub z innym medium (np. gazeta z czasopismem). Ponad to: brak możliwości wyszukiwania po słowach kluczowych, bezpiecznych płatności na odległość czy też sprawdzenia opinii o danym sprzedawcy.
+Wszystkie opcje mimo swojej prostoty w użytkowaniu, łączyły pewne wady. Podstawową wadą był brak współdzielenia listy ogłoszeń między sobą (na przykład sekcja ogłoszeń jednej gazety z inną gazetą) lub z innym medium (na przykład gazeta z czasopismem), a ponadto brak możliwości wyszukiwania po słowach kluczowych, brak bezpiecznych płatności na odległość lub też sprawdzenia opinii o danym sprzedawcy.
 
-Po nadejściu rewolucji cyfrowej wszystkie analogowe rozwiązania ogłoszeń zaczęły odchodzić w niepamięć. Należy tutaj wspomnieć o eBayu - największy serwis aukcji internetowych na świecie, który był inspiracją dla autorów - \url{www.allegro.pl} \cite{allegro-wywiad}. Jest to serwis e-commerance (rozszerzony o ogłoszenia i tablice usług), który swoją ofertą dociera do 57,9\% polskich internautów \cite{allegro-liczby}. 
+Po nadejściu rewolucji cyfrowej wszystkie analogowe rozwiązania ogłoszeń zaczęły odchodzić w niepamięć. Należy tutaj wspomnieć o eBayu, największym serwisie aukcji internetowych na świecie, który był inspiracją dla autorów \url{www.allegro.pl} \cite{allegro-wywiad}. Allegro to serwis e-commerance (rozszerzony o ogłoszenia i tablice usług), który swoją ofertą dociera do 57,9\% polskich internautów \cite{allegro-liczby}. 
 
-Jednym z największym serwisem ogłoszeniowym na świecie, a największym na rynku indyjskim, brazylijskim i \textbf{polskim} jest serwis \url{www.olx.pl} \cite{olx-wywiad}, który jest częścią grupy OLX Sp. z o.o. W Polsce, w styczniu 2019, olx.pl zanotował 14,4 mln użytkowników, którzy wygenerowali 1,8 miliarda odsłon \cite{olx-liczby}.
+Jednym z największych serwisów ogłoszeniowych na świecie, a największym na rynku indyjskim, brazylijskim i \textbf{polskim} jest serwis \url{www.olx.pl} \cite{olx-wywiad}, który jest częścią grupy OLX Sp. z o.o. W Polsce, w styczniu 2019, olx.pl zanotował 14,4 mln użytkowników, którzy wygenerowali 1,8 miliarda odsłon \cite{olx-liczby}.
 
-Jak pokazują dane rynek ogłoszeń jest bardzo dobrze zagospodarowany i cieszy się ogromną popularnością.
+Jak pokazują powyższe dane rynek ogłoszeń jest bardzo dobrze zagospodarowany i cieszy się ogromną popularnością.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Usługa jako przedmiot ogłoszenia
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Usługa jako przedmiot ogłoszenia}
 % Obszerny opis jak wygląda ogłoszenie, co tam można napisać, jak się prezentuje produkt a jak usługa
 % Korzystając z najpopularniejszego portalu ogłoszeń - olx.pl
-Przykładowym portalem który posłuży mi do analizy systemu jest największy serwis ogłoszeniowy w Polsce - \url{www.olx.pl}.
+Przykładowym portalem, który posłużył do analizy jest największy serwis ogłoszeniowy w Polsce czyli \url{www.olx.pl}.
 
-    \begin{figure}[H]
+    \begin{figure}[!htbp]
     	\centering
-    	\includegraphics[width=.8\textwidth]{images/chapter_2/olx-add-announcement.png}
+    	\includegraphics[width=0.95\textwidth]{images/chapter_2/olx-add-announcement.png}
     	\caption{Dodawanie ogłoszenia na serwisie OLX}
     	\label{fig:olx-add-announcement}
     \end{figure}
 
-Użytkownik ma do wypełnienia następujące pola:
+Rysunek \ref{fig:olx-add-announcement} pokazuje panel dodawania nowych ogłoszeń. 
+Użytkownik tego serwisu ma do wypełnianie następujące pola:
 \begin{itemize}
-    \item Tytuł
-    \item Kategoria (w tym przypadku Usługi)
-    \item Stawka za godzinę
-    \item Jakim jest podmiotem gospodarczym
-    \item Opis
-    \item Dodanie zdjęć
-    \item Dane kontaktowe (lokalizacja, imię, nazwisko, adres e-mail, numer telefonu)
+    \item tytuł ogłoszenia,
+    \item kategoria ogłoszenia(w tym przypadku Usługi),
+    \item stawka za godzinę,
+    \item jakim jest podmiotem gospodarczym,
+    \item opis ogłoszenia,
+    \item dodanie zdjęć przedmiotu ogłoszenia,
+    \item dane kontaktowe (lokalizacja, imię, nazwisko, adres e-mail, numer telefonu).
 \end{itemize}
 
-Jedynym polem które wyróżnia usługę od przedmiotu jest pole "stawka za godzinę". Zgodnie z ideą tego serwisu, użytkownik nie ma możliwości dodania oceny/recenzji po skorzystaniu z jakiejkolwiek usługi, a co za tym idzie porównania ich po ocenach. Dodatkowo serwis ten, całkowicie odrzuca element płatności internetowych (w opozycji do eBaya czy Allegro) i polega wyłącznie na płatności gotówką. Płatności przelewami między użytkownikami są odradzane przez sam OLX, ale są oczywiście możliwe z teoretycznego punktu widzenia. Nie ma jednak wtedy żadnej gwarancji że do takiej wymiany dojdzie, ani możliwości reklamacji czy zwrotu po np. słabo wykonanej usłudze czy otrzymaniu produktu niezgodnego z opisem. Odpowiedzią rynku i rozwoju technologicznego są płatności przez internet.
+Jedynym polem, które wyróżnia usługę od przedmiotu jest pole "stawka za godzinę". Zgodnie z ideą tego serwisu, użytkownik nie ma możliwości dodania oceny/recenzji po skorzystaniu z jakiejkolwiek usługi, a co za tym idzie porównania wykonawców usług według ocen. Dodatkowo serwis ten, całkowicie odrzuca element płatności internetowych (w przeciwieństwie do eBaya lub Allegro) i opiera się na płatnościach w świecie rzeczywistym. Płatności przelewami między użytkownikami są odradzane przez sam OLX, ale są oczywiście możliwe z teoretycznego punktu widzenia. Nie ma jednak wtedy żadnej gwarancji, że do takiej wymiany dojdzie ani możliwości reklamacji lub zwrotu po przykładowo słabo wykonanej usłudze lub otrzymaniu produktu niezgodnego z opisem. Odpowiedzią rynku i rozwoju technologicznego są płatności przez Internet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Płatności internetowe i ich bezpieczeństwo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Płatności internetowe i ich bezpieczeństwo} \label{sec:payments}
-Rewolucja cyfrowa dotknęła nie tylko rynku usług i produktów ale także rynku płatności. W samym roku 2016 tylko 16\% kupujących w Polsce opłaciło swoje zakupy gotówką \cite{gotowka}. Liczba rozwiązań płatności internetowych rośnie z każdym rokiem. Aktualnie na rynku jest ich kilka. Każde z nich różni się pod względem komfortu użytkowania, szybkości jak i bezpieczeństwa. 
+Rewolucja cyfrowa dotknęła nie tylko rynku usług i produktów, ale także rynku płatności. W samym 2016 roku tylko 16\% kupujących w Polsce opłaciło swoje zakupy gotówką \cite{gotowka}. Liczba rozwiązań płatności internetowych rośnie z każdym rokiem. Aktualnie na rynku jest ich kilka. Każde z nich różni się pod względem komfortu użytkowania, szybkości i bezpieczeństwa. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Zwykły przelew bankowy
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Zwykły przelew bankowy}
-Jest to najprostsze i najbardziej analogowe rozwiązanie. Zaraz po złożeniu zamówienia, dostajemy potwierdzenie mailem wraz z numerem konta sprzedawcy, kwoty zamówienia i tytułem przelewu (który najczęściej jest numerem zamówienia). Na kupującym ciąży zalogowanie się na stronę banku, utworzenie nowego przelewu i co istotne wypełnienie ich danymi. Oprócz możliwości pomyłki np. przekopiujemy nie pełny numer zamówienia pomijając jeden znak, ryzykiem o którym musimy pamiętać jest obecność złośliwego oprogramowania. Przykładem może być głośna sprawa z roku 2018, w którym to firma ESET natrafiła na konia trojańskiego - BackSwap. Portal \url{www.zaufanatrzeciastrona.pl} opisuje go następująco: "Do wstrzyknięcia dochodzi w momencie, gdy klient zleca przelew. Złośliwy kod podmienia wtedy numer rachunku, na który ma zostać wysłany przelew ofiary. Na ekranie komputera tego nie widać – zmiana dotyczy informacji, które przeglądarka wysyła do banku. Przestępcy nie atakują wszystkich przelewów – definiują konkretny przedział kwotowy, który ich interesuje. Ostatnio celowali w kwoty między 10 000 a 20 000 PLN."\cite{backswap}.
-Takie ataki są niestety ciągle spotykane. Niektóre banki jak np. ING Bank Śląski, po skopiowaniu numeru rachunku bankowego usuwa dwie pierwsze cyfry i prosi klienta o uzupełnienie ich. Bank próbuje wymusić podwójne sprawdzenie numeru konta. Efektem ubocznym będzie możliwość pomyłki przy ponownym wprowadzaniu go.
+Przelew bankowy jest najprostszym i najbardziej analogowym rozwiązaniem. Zaraz po złożeniu zamówienia, dostajemy potwierdzenie zakupu wiadomością e-mail wraz z numerem konta sprzedawcy, kwotą zamówienia i tytułem przelewu (który najczęściej jest numerem zamówienia). Na kupującym ciąży zalogowanie się na stronę banku, utworzenie nowego przelewu i co istotne wypełnienie danymi. Oprócz możliwości pomyłki, na przykład przekopiujemy niepełny numer zamówienia, pomijając jeden znak, ryzykiem, o którym musimy pamiętać jest obecność złośliwego oprogramowania na naszym urządzeniu. Przykładem takiego oprogramowania może być głośna sprawa z 2018 roku, w którym to firma \textit{ESET} natrafiła na konia trojańskiego \textit{BackSwap}. Portal \url{www.zaufanatrzeciastrona.pl} opisuje to oprogramowanie następująco: "Do wstrzyknięcia dochodzi w momencie, gdy klient zleca przelew. Złośliwy kod podmienia wtedy numer rachunku, na który ma zostać wysłany przelew ofiary. Na ekranie komputera tego nie widać – zmiana dotyczy informacji, które przeglądarka wysyła do banku. Przestępcy nie atakują wszystkich przelewów – definiują konkretny przedział kwotowy, który ich interesuje. Ostatnio celowali w kwoty między 10 000 a 20 000 PLN." \cite{backswap}.
+Takie ataki są niestety ciągle spotykane. Niektóre banki jak na przykład ING Bank Śląski, po skopiowaniu numeru rachunku bankowego usuwają dwie pierwsze cyfry i proszą klienta o uzupełnienie ich. Bank próbuje wymusić podwójne sprawdzenie numeru konta. Efektem ubocznym będzie możliwość pomyłki przy ponownym wprowadzaniu numeru.
 
-Szybkość takiego rozwiązania jest zależna od godziny wysłania przelewu. Jest to spowodowane godzinami sesji rozliczeniowych w danych bankach. Najczęściej jeśli przelew zostanie wysłany do południa, dotrze on pod wieczór. W przypadku późniejszych przelewów, dojdzie on kolejnego dnia roboczego. Wszystkie przelewy w święta i weekendy również dochodzą dopiero kolejnego dnia roboczego. Taka płatność opóźnia wysyłkę/realizację usługi, ponieważ zostanie ona wykonana dopiero wtedy gdy na rachunku pojawią się przelane środki. 
+Szybkość przelewu jest zależna od godziny wysłania przelewu. Jest to spowodowane godzinami sesji rozliczeniowych w danych bankach. Najczęściej, jeśli przelew zostanie wysłany do południa, dotrze on popołudniu. W przypadku późniejszych przelewów, dotrze do odbiorcy kolejnego dnia roboczego. Wszystkie przelewy wysyłane w święta i weekendy są dostarczone dopiero kolejnego dnia roboczego. Taka płatność opóźnia wysyłkę/realizację usługi, ponieważ zostanie ona wykonana dopiero wtedy, gdy na rachunku pojawią się przelane środki. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Przelewy pay-by-link
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Przelewy pay-by-link}
-Ta forma płatności cieszy się największą popularnością w Polsce \cite{jak-placa-polacy}. Po wykonaniu zakupów, wybieramy opcję przelewu online, następnie z listy banków, pokazanych na rysunku \ref{fig:pay-by-link} wybieramy ten z którego chcemy dokonać płatności. 
+Przelewy pay-by-link to forma płatności, która cieszy się największą popularnością w Polsce \cite{jak-placa-polacy}. Po wykonaniu zakupów, wybieramy opcję przelewu online, a następnie z listy banków, pokazanych na rysunku \ref{fig:pay-by-link} wybieramy ten z którego chcemy dokonać płatności. 
 
-\begin{figure}[H] 
+\begin{figure}[!htbp] 
  	\centering
 	\includegraphics[width=1\textwidth]{images/chapter_2/pay-by-link.png}
 	\caption{Przykładowa płatność pay-by-link}
 	\label{fig:pay-by-link}
 \end{figure}
 
-Po kliknięciu zostajemy przeniesieni na stronę logowania do danego banku. Po wpisaniu loginu i hasła, pojawi się uzupełniony szablon przelewu który kupujący musi tylko zatwierdzić. Ostatnim krokiem, kluczowym od strony bezpieczeństwa jest SMS z kodem autoryzacyjnym który otrzymamy. Klient musi przepisać owy kod aby potwierdzić przelew. Dzięki temu nawet, jeśli ktoś poznał nasze dane logowania, nie będzie ich mógł użyć do płatności bez posiadania naszego telefonu. Alternatywnym i co raz bardziej popularnym rozwiązaniem jest potwierdzenie przelewu przez aplikację banku. Za nim jednak będzie to możliwe, użytkownik musi się do niej zalogować, co oznacza dodatkowy etap bezpieczeństwa.
+Po kliknięciu na guzik z logiem banku zostajemy przeniesieni na stronę logowania do danego banku. Po wpisaniu loginu i hasła, pojawi się uzupełniony szablon przelewu, który kupujący musi tylko zatwierdzić. Ostatnim krokiem, kluczowym od strony bezpieczeństwa jest SMS z kodem autoryzacyjnym który otrzymamy. Klient musi przepisać owy kod, aby potwierdzić realizację przelewu. Dzięki temu nawet, jeśli ktoś pozna nasze dane logowania, nie będzie mógł ich użyć do płatności bez posiadania naszego telefonu. Alternatywnym i coraz bardziej popularnym rozwiązaniem jest potwierdzenie przelewu przez aplikację banku. Zanim jednak będzie to możliwe, użytkownik musi się do niej zalogować, co oznacza dodatkowy etap bezpieczeństwa.
 
-Po poprawnym uwierzytelnieniu i potwierdzeniu transakcji, środki trafią niemal natychmiast do sprzedawcy, dzięki czemu od razu będzie wstanie zrealizować zamówienie.
+Po poprawnym uwierzytelnieniu i potwierdzeniu transakcji, środki trafią niemal natychmiast do sprzedawcy, dzięki czemu od razu będzie on w stanie zrealizować dane zamówienie.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Karta płatnicza
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Karta płatnicza} \label{sec:cards}
-W maju 1898 firma Sequoia Data Corp. wprowadziła na rynek Compumarket, pierwszy internetowy system e-commerce obsługujący płatności kartą kredytową. Od tego czasu płatności kartą zyskały wiele nowych usprawnień jednak ich rdzeń pozostał nietknięty. Aby zrealizować płatność, kupujący jest proszony o wpisanie trzech danych: numeru karty, daty jej ważności oraz trzycyfrowego kodu CVC/CVV znajdującego się na odwrocie karty. Po ich zweryfikowaniu, płatność zostaje zakończona. Ta metoda jest tak samo szybka jak pay-by-link ale mniej wygodna, ponieważ za każdym razem musimy ponownie wpisać dane karty. 
+W maju 1998 roku firma \textit{Sequoia Data Corp.} wprowadziła na rynek Compumarket, pierwszy internetowy system e-commerce obsługujący płatności kartą kredytową. Od tego czasu płatności kartą zyskały wiele nowych usprawnień, jednak ich rdzeń pozostał nietknięty. Aby zrealizować płatność, kupujący jest proszony o wpisanie trzech danych: numeru karty, daty jej ważności oraz trzycyfrowego kodu CVC/CVV, znajdującego się na odwrocie karty. Po ich poprawnym zweryfikowaniu, płatność zostaje zakończona. Ta metoda jest tak samo szybka, jak \textit{pay-by-link}, ale mniej wygodna, ponieważ za każdym razem musimy ponownie wpisać dane karty. 
 
-Tradycyjny model zakładał nasze zaufanie do portalu w którym dokonujemy zakupów, ponieważ osoba posiadająca owe dany karty mogła samodzielnie dokonać płatności bez naszej zgody. Odpowiedzią na to jest coraz częściej obecna usługa bankowa 3D Secure. Polega ona na dodatkowym etapie weryfikacji. Po poprawnym wpisaniu danych karty i ich zweryfikowaniu, klient otrzymuje SMSa z kodem weryfikacyjnym. Dopiero po wprowadzeniu go, transakcja jest finalizowana.
+Tradycyjny model płatności zakładał nasze zaufanie do portalu, w którym dokonujemy zakupów, ponieważ osoba posiadająca dane karty mogła samodzielnie dokonać płatności bez naszej zgody. Odpowiedzią na to jest obecna coraz częściej usługa bankowa \textit{3D Secure}. Polega ona na dodatkowym etapie weryfikacji. Po poprawnym wpisaniu danych karty i ich zweryfikowaniu, klient otrzymuje SMSa z kodem weryfikacyjnym. Dopiero po wprowadzeniu go, transakcja jest finalizowana.
 
-Zaletą która wyróżnia ten rodzaj płatności jest usługa chargeback. Portal \url{www.najlepszekonto.pl} opisuje ją następująco: "Chargeback, czyli obciążenie zwrotne, to usługa dostępna tylko dla kart płatniczych. Polega ona na zwrocie środków z konta sprzedawcy, jeśli kupiony przez Ciebie towar nie spełnił Twoich oczekiwań: miał wady, różnił się od tego, co obiecywał sprzedawca, lub w ogóle go nie otrzymałeś. Jeśli próby wymiany towaru w sklepie nie powiodą się, możesz zwrócić się z prośbą o rozstrzygnięcie sprawy przez bank, który jest wystawcą Twojej karty."\cite{chargeback}.
+Zaletą, która wyróżnia ten rodzaj płatności jest usługa \textit{chargeback}. Portal \url{www.najlepszekonto.pl} opisuje ją następująco: "Chargeback, czyli obciążenie zwrotne, to usługa dostępna tylko dla kart płatniczych. Polega ona na zwrocie środków z konta sprzedawcy, jeśli kupiony przez Ciebie towar nie spełnił Twoich oczekiwań: miał wady, różnił się od tego, co obiecywał sprzedawca, lub w ogóle go nie otrzymałeś. Jeśli próby wymiany towaru w sklepie nie powiodą się, możesz zwrócić się z prośbą o rozstrzygnięcie sprawy przez bank, który jest wystawcą Twojej karty." \cite{chargeback}.
 
-Odmianą fizycznej karty płatniczej jest karta wirtualna. Taka karta usłuży tylko do płatności internetowych. Nie użyjemy jej np. podczas zakupów w sklepie. Po jej wyrobieniu, bank nie przesyła nam jej pocztą, a po prostu podaje nam ich dane (numer, data ważności i kod CVC/CVV). Niewątpliwą zaletą jest bezpieczeństwo - nie padniemy ofiarą skimmingu (nielegalne skopiowanie zawartości paska magnetycznego w celu utworzenia kopii). Główną wadą takie rozwiązania jest dostępność w Polsce. Aktualnie tylko dwa banki udostępniają taką usługę - i to za miesięczną opłatą. 
+Odmianą fizycznej karty płatniczej jest \textit{karta wirtualna}. Taka karta służy tylko do płatności internetowych. Nie użyjemy jej na przykład podczas zakupów w sklepie stacjonarnym. Po jej wyrobieniu, bank nie przesyła nam jej pocztą, a jedynie podaje nam ich dane, czyli numer, datę ważności i kod CVC/CVV. Niewątpliwą zaletą jest bezpieczeństwo - nie padniemy ofiarą \textit{skimmingu} (nielegalne skopiowanie zawartości paska magnetycznego w celu utworzenia kopii). Główną wadą takie rozwiązania jest dostępność w Polsce. Aktualnie tylko dwa banki udostępniają taką usługę i to za miesięczną opłatą. 
 
-Zagranicznymi serwisami które utworzenie wirtualnych kart, jest np. amerykański \url{www.privacy.com}. Portal ten pozwala na proste i nielimitowane tworzenie kart wirtualnych, jak możemy przeczytać na stronie firmy, "jednym kliknięciem". Klient ma możliwość tworzenia karty per portal (np. jedna karta do Netflixa, kolejna do opłacenia Spotify), dodatkowo może ustawić limit obciążenia dla danej strony, wstrzymać płatność lub całkowicie zablokować niechciane opłaty. 
+Zagranicznymi serwisami, które  proponują utworzenie \textit{kart wirtualnych}, jest np. amerykański \url{www.privacy.com}. Portal ten pozwala na proste i nielimitowane tworzenie kart wirtualnych, jak możemy przeczytać na stronie firmy, "jednym kliknięciem". Klient ma możliwość tworzenia karty per portal, czyli na przykład jedna karta do \textit{Netflixa}, kolejna do opłacenia \textit{Spotify} itd. Dodatkowo można ustawić limit obciążenia dla danej strony, wstrzymać płatność lub całkowicie zablokować niechciane opłaty.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Portfele elektroniczne
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Portfele elektroniczne}
 
-Hybrydą wymienionych wcześniej rozwiązań są portfele elektroniczne zwane również portfelami cyfrowymi. Rozwiązanie te charakteryzuje się następującymi funkcjonalnościami: 
-portfel wirtualny (rozumiany jako pula środków do wykorzystania) wraz z możliwością przelania ich bezpośrednio na rachunek bankowy, płatność wieloma podpiętymi kartami (kredytowymi jak i debetowymi), także w innych walutach, możliwość określenia adresu dostawy klienta i innych informacji ułatwiających sfinalizowanie zamówienia. Kolejnym udogodnieniem jest przechowywanie środków w różnych walutach, dzięki czemu użytkownik nie jest obciążony podwójnym przewalutowaniem.
+Hybrydą wymienionych wcześniej rozwiązań są \textit{portfele elektroniczne} zwane również \textit{portfelami cyfrowymi}. Rozwiązanie te charakteryzuje się następującymi funkcjami: 
+\begin{itemize}
+    \item portfel wirtualny (rozumiany jako pula środków do wykorzystania) wraz z możliwością przelania ich bezpośrednio na rachunek bankowy,
+    \item płatność wieloma podpiętymi kartami (kredytowymi i debetowymi), także w innych walutach,
+    \item możliwość określenia adresu dostawy klienta i innych informacji ułatwiających sfinalizowanie zamówienia.
+\end{itemize}
 
-Niektóre portfele oferują też świadczenie usług bez jakikolwiek przelanych środków i potrafią służyć jako zaufany pośrednik płatności. Jeśli tylko mamy podpiętą kartę/karty pod taki portfel, możemy w dowolnym miejscu zapłacić owym portfelem, a należność zostanie ściągniętą natychmiast z naszej wybranej karty. Dzięki czemu nie jesteśmy wystawieni na potencjalne wady używania samej karty jako środka płatności opisanych w rozdziale \ref{sec:cards}.
+Kolejnym udogodnieniem płatności jest przechowywanie środków w różnych walutach, dzięki czemu użytkownik nie jest obciążony podwójnym przewalutowaniem.
+
+Niektóre portfele oferują też świadczenie usług bez jakikolwiek "przelanych" środków i potrafią służyć jako zaufany pośrednik płatności. Jeśli tylko mamy podpiętą kartę/karty pod taki portfel, możemy w dowolnym miejscu zapłacić owym portfelem, a należność zostanie pobrana natychmiast z naszej wybranej karty. Dzięki temu nie jesteśmy narażeni na potencjalne wady używania samej karty jako środka płatności, opisanych w sekcji \ref{sec:cards}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Obecne rozwiązania
+%% Analiza istniejących płatności i portali dla korepetytorów}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Obecne rozwiązania}
-Przez lata rozwiązania na rynku usług jak i płatności ewoluowały. Często stając się osobnym bytem, a nie dodatkiem jak na początku ich istnienia. Firmy odpowiedzialne za nie, przez lata starały się udoskonalić swój produkt i jak najlepiej go wypromować. Poniższe zestawienie zostało podzielone na dwie grupy: płatności (jako rdzeń serwisu usług) i serwisy dla korepetytorów.
+\subsection{Analiza istniejących płatności i portali dla korepetytorów}
+Przez lata rozwiązania na rynku usług jak i płatności ewoluowały, często stając się osobnym bytem, a nie dodatkiem do portalu, jak na początku ich istnienia. Firmy odpowiedzialne za nie, przez lata starały się udoskonalić swój produkt i jak najlepiej go wypromować. Poniższa analiza rozwiązań została podzielona na dwie grupy: płatności (jako rdzeń serwisu usług) i serwisów dla korepetytorów.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Płatności
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Płatności}
-Szukając odpowiedniego rozwiązania do obsługi płatności, autor miał na celu trzy główne cechy: szybkość (jak szybko środki trafią na konto), wygodę (a w tym szybkość wykonania samej płatności) i bezpieczeństwo (transakcji jak i procesów około transakcyjnych). Każde z czterech dostępnych rozwiązań zostało szczegółowo opisane w rozdziale \ref{sec:payments}, właśnie pod kątem tych trzech cech. Stosując takie kryterium, autor uznaje portfel elektroniczny jako zwycięzce w tych trzech kategoriach. Dlatego w dalszym rozważaniu obecnych rozwiązań będzie brał tylko je pod uwagę.
+Szukając odpowiedniego rozwiązania do obsługi płatności, zdecydowano mieć na uwadze trzy główne cechy: szybkość (jak szybko środki trafią na konto), wygodę (a w tym szybkość wykonania samej płatności) i bezpieczeństwo (transakcji i procesów około-transakcyjnych). Każde z czterech dostępnych rozwiązań zostało szczegółowo opisane w podrozdziale \ref{sec:payments}, właśnie pod kątem tych trzech cech. Stosując takie kryterium, można uznać portfel elektroniczny jako przodownika w tych trzech kategoriach. Dlatego w dalszym rozważaniu jest on tylko brany pod uwagę.
 
 \begin{table}[H]
     \begin{tabular}{|p{5cm}|c|c|c|}
     \hline
      & \multicolumn{1}{l|}{\textbf{PayPal}} & \multicolumn{1}{l|}{\textbf{Visa Checkout}} & \multicolumn{1}{l|}{\textbf{Masterpass}} \\ \hline
     Język polski & \cmark & \cmark & \cmark \\ \hline
-    Podpięcie adresu dostawy & \cmark & \cmark & \cmark \\ \hline
-    Uwierzytelnianie mailem & \cmark & \cmark & \xmark \\ \hline
+    Przypisanie adresu dostawy do konta & \cmark & \cmark & \cmark \\ \hline
+    Uwierzytelnianie wiadomością e-mail & \cmark & \cmark & \xmark \\ \hline
     Używanie kart różnych firm & \cmark & \xmark & \xmark \\ \hline
     Możliwość dwustopniowego uwierzytelniania & \cmark & \xmark & \cmark \\ \hline
     Możliwość przechowywania środków w portfelu & \cmark & \xmark & \xmark \\ \hline
@@ -282,9 +294,9 @@ Szukając odpowiedniego rozwiązania do obsługi płatności, autor miał na cel
     \label{tab:portfele}
 \end{table}
 
-Zestawienie pokazane w tabeli \ref{tab:portfele} pokazuje, że PayPal wygrywa w dwóch funkcjonalnościach z Visa Checkout i Masterpassem: użycie kart różnych firm i możliwość przechowywania środków w portfelu.
+Zestawienie pokazane w tabeli \ref{tab:portfele} pokazuje, że PayPal wygrywa pod względem dwóch funkcji z Visa Checkout i Masterpass - kryterium użycia kart różnych firm i możliwość przechowywania środków w portfelu.
 
-Ponadto, VisaCheckout i Masterpass są realizowane jako zamknięte środowiska płatnicze. Po kliknięciu na przycisk oznaczony ich logiem, zostajemy przeniesieni do realizacji płatności. PayPal zdecydował się na inne rozwiązanie. Ich rozwiązanie daje klientowi możliwość zapłaty kartą (Visa, MasterCard i Amex), polskim portalem Przelewy24 (który agreguje płatności pay-by-link i kartą - omówione w rozdziale \ref{sec:payments}) i portfelem cyfrowym PayPal. 
+Ponadto, VisaCheckout i Masterpass są realizowane jako zamknięte środowiska płatnicze. Po kliknięciu na przycisk oznaczony ich logiem, użytkownik zostaje przeniesiony do realizacji płatności. PayPal zdecydował się na inne rozwiązanie, które daje klientowi możliwość zapłaty kartą (Visa, MasterCard i Amex), polskim portalem Przelewy24 (agreguje płatności pay-by-link i kartą omówione w podrozdziale \ref{sec:payments}) i portfelem cyfrowym PayPal. 
 
 \begin{figure}[H] 
  	\centering
@@ -293,17 +305,15 @@ Ponadto, VisaCheckout i Masterpass są realizowane jako zamknięte środowiska p
 	\label{fig:paypal-button}
 \end{figure}
 
-PayPal określa swój przycisk jako \textbf{Smart Payment Button} (ang. 
-inteligentny przycisk do płatności), przedstawiony na rysunku \ref{fig:paypal-button}. Oprócz łączenia kilku sposobów płatności, może różnić się on w każdym kraju. Np. w Polsce wspiera on portal Przelewy24. Dzięki elastyczności \textit{smart payment button} możemy być pewni że zostanie on dostosowany do kraju z którego zostaje dokonywane zamówienie, co potencjalnie może zwiększyć zyski ze względu na bogactwo opcji płatności. 
+PayPal określa swój przycisk jako \textbf{Smart Payment Button} (inteligentny przycisk do płatności), przedstawiony na rysunku \ref{fig:paypal-button}. Oprócz łączenia kilku sposobów płatności, może różnić się on w każdym kraju. Na przykład w Polsce wspiera on portal Przelewy24. Dzięki elastyczności \textit{smart payment button} można być pewnym, że zostanie on dostosowany do kraju, z którego zostaje dokonywane zamówienie, co potencjalnie może zwiększyć zyski ze względu na bogactwo opcji płatności. 
 
-Podsumowując, w grupie portfeli elektronicznych, rozwiązanie PayPal wspiera wszystkie kluczowe i istotne dla mnie funkcjonalności. Dlatego też, to ono zostanie zaimplementowane w aplikacji \textit{Find-A-Tutor} w celu wspierania płatności on-line.
+Podsumowując, w grupie portfeli elektronicznych, rozwiązanie PayPal wspiera wszystkie kluczowe i istotne funkcjonalności. Dlatego też, to ono zostało zaimplementowane w aplikacji \textit{Find-A-Tutor} w celu wspierania płatności on-line.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Serwisy dla korepetytorów
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Serwisy dla korepetytorów}
-Na rynku polskim są obecnie trzy największe serwisy dla korepetytorów. Są to www.e-korepetycje.net, 
-korepetycje.net i wspomniany już wcześniej portal, nie tylko do korepetycji - olx.pl. Poniżej zestawiono ze sobą cechy tych portali. Cechy zostały zaczerpnięte z rozdziału \ref{sec:problematyka} pokrywającego problematykę pracy.
+Na rynku polskim są obecnie dostępne trzy największe serwisy dla korepetytorów. Są to \url{www.e-korepetycje.net}, \url{www.korepetycje.net} i wspomniany już wcześniej portal, nie tylko do korepetycji \url{www.olx.pl}. W tabeli \ref{tab:korepetycje} zestawiono ze sobą cechy tych portali. Cechy zostały pobrane z podrozdziału \ref{sec:problematyka} pokrywającego problematykę pracy.
 
 \begin{table}[H]
     \begin{tabular}{|p{5cm}|c|c|c|c|}
@@ -319,10 +329,10 @@ korepetycje.net i wspomniany już wcześniej portal, nie tylko do korepetycji - 
     \label{tab:korepetycje}
 \end{table}
 
-Żaden z portali zestawionych powyżej nie obsługuje funkcjonalności tak podstawowej w dzisiejszym świecie jak płatności elektroniczne. Tylko jeden z nich oferuje przyjazny dla oka i wpisujący się w obecne trendy - minimalisty design. Dodatkowo e-korepetycje.net i korepetycje.net nie posiadają otwartego API, które może posłużyć do stworzenia w przyszłości aplikacji mobilnych. Jednym portalem który ją dostarcza, jest OLX.pl.
+Żaden z portali zestawionych powyżej nie obsługuje funkcji tak podstawowej w dzisiejszym świecie, jak płatności elektroniczne. Tylko jeden z nich oferuje przyjazny dla oka i wpisujący się w obecne trendy minimalisty design. Dodatkowo \textit{e-korepetycje.net} i \textit{korepetycje.net} nie posiadają otwartego API, które może posłużyć do stworzenia w przyszłości aplikacji mobilnych. Jednym portalem, który ją dostarcza, jest \textit{OLX.pl}.
 \newline
 \newline
-\textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Dodatkowo, backend został stworzony jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcjonalnością będzie dodawanie ogłoszeń przez studentów. Całość została spięta minimalistycznym i nieprzytłaczającym designem.}
+\textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Dodatkowo, backend został stworzony jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcją będzie dodawanie ogłoszeń przez studentów. Całość została okraszona minimalistycznym i nieprzytłaczającym designem.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Techniczne aspekty aplikacji Find-A-Tutor
