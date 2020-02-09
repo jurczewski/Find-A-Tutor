@@ -105,6 +105,12 @@
 \tableofcontents
 \pagebreak
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Abstract
+
+
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wprowadzenie
@@ -349,67 +355,67 @@ Dla skalowalności rozwiązania wszystkie usługi zostały zamknięte w kontener
 %% Wymagania
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Wymagania}
-W tym rozdziale autor opisuje wymagania aplikacji webowej \textit{Find-A-Tutor}, dzieląc je na funkcjonalne i niefunkcjonalne. 
+W poniższym podrozdziale opisano wymagania stworzonej aplikacji webowej \textit{Find-A-Tutor}, dzieląc je na funkcjonalne i niefunkcjonalne. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wymagania funkcjonalne
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Wymagania funkcjonalne}
-Wymagania funkcjonalne to spisane zasady, jak aplikacja ma się zachować po wystąpieniu danego zdarzenia/zapytania. Wymagania te jasno określają funkcje jakie ma mieć aplikacja, problemów jakie ma ona rozwiązywać, a także opisują jej ogólną wizję \cite{funkcjonalne}. \\
+Wymagania funkcjonalne to założenia według, których aplikacja ma się zachować w określony sposób po wystąpieniu danego zdarzenia/zapytania. Wymagania te jasno określają funkcje, jakie ma mieć aplikacja, problemy jakie ma ona rozwiązywać, a także opisują jej ogólną wizję \cite{funkcjonalne}. \\
 \noindent
 \textbf{Rejestracja jako uczeń lub korepetytor}\\
 \indent
-Formularz rejestracji pozwala na rejestrację jako użytkownik z wyróżnieniem ucznia i użytkownika. Oba ta konta moją inne uprawnienia i funkcjonalności opisane poniżej.
+Formularz rejestracji umożliwia rejestrację jako użytkownik z rolą ucznia i nauczyciela. Obie te role posiadają odrębne uprawnienia i funkcje opisane poniżej.
 
 \noindent
 \textbf{Logowanie jako uczeń, korepetytor i administrator}\\
 \indent  
-Dostępny panel logowania dla użytkownika (ucznia lub korepetytora). Dodatkowym rodzajem konta jest administrator, który ma pełne uprawnienia do działania na systemie. Takie konto nie posiada panelu użytkownika, ale może dokonywać wszelakich operacji opisanych w osobnym punkcie, używając zapytań do API.
+Dostępne są dwa odrębne panele logowania dla użytkownika (ucznia lub korepetytora). Dodatkowym typem konta jest konto administratora, które ma pełne uprawnienia do działania na systemie. Takie konto nie posiada panelu użytkownika, ale może dokonywać wszelakich operacji opisanych w osobnym punkcie, używając zapytań do API.
 
 \noindent
 \textbf{Panel ucznia}\\
 \indent
-Panel dostępny dla użytkownika zalogowanego jako student. Umożliwia podgląd wszystkich ogłoszeń zgłoszonych przez danego ucznia. Dodatkowo powinien on wyświetlać podstawowe dane takie jak: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
+Panel ucznia jest dostępny dla użytkownika zalogowanego jako student. Użytkownik ma dostęp do listy wszystkich dodanych przez siebie ogłoszeń. W panelu widnieją następujące dane: data utworzenia ogłoszenia, data podjęcia ogłoszenia, opis ogłoszenia, data wygaśnięcia ogłoszenia, nazwa przedmiotu, status płatności i status ogłoszenia.
 
 \noindent
 \textbf{Podgląd szczegółów ogłoszenia}\\
 \indent
-Uczeń powinien mieć dostęp do widoku szczegółowego ogłoszenia, który pokazuje wszystkie informacje na temat ogłoszenia.
+Panel ucznia umożliwia widok szczegółowy ogłoszenia, który pokazuje informacje dodatkowe takie jak: czas trwania lekcji, cenę za godzinę i całkowitą kwotę do zapłaty. 
 
 \noindent
 \textbf{Dodawanie ogłoszeń}\\
 \indent
-Możliwość dodania ogłoszenia przez użytkownika - ucznia. Użytkownik uzupełnia następujące dane: opis, data przedawnienia ogłoszenia, przedmiot (wybrany z listy przedmiotów). 
+Ogłoszenia mogą być dodawane przez ucznia. Użytkownik wypełnia formularz zawierający następujące dane: opis ogłoszenia, data przedawnienia ogłoszenia oraz przedmiot (wybrany z listy przedmiotów). 
 
 \noindent
 \textbf{Płatności online za lekcje}\\
 \indent
-Po przypisaniu ogłoszenia do korepetytora, student ma możliwość opłacenia należności za ogłoszenie online. Po opłaceniu, ma to odzwierciedlenie w statusie. 
+Po podjęciu ogłoszenia przez korepetytora uczeń ma możliwość opłacenia online należności za ogłoszenie. Po opłaceniu następuje zmiana statusu płatności. 
 
 \noindent
 \textbf{Finalizacja ogłoszenia}\\
 \indent
-Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samej zmieniając jej status.
+Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samym zmieniając jej status.
 
 \noindent
 \textbf{Panel korepetytora}\\
 \indent
-Użytkownik korepetytor, po zalogowaniu ma dostęp do swojego panelu ze wszystkimi dostępnymi ogłoszeniami i ze wszystkimi podjętymi przez niego ogłoszeniami. Dostępne są na nim następujące informacje: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
+Użytkownik z rolą nauczyciela ma dostęp do panelu korepetytora. W panelu widnieją wszystkie dostępne ogłoszenia i wszystkie zrealizowane ogłoszenia przez zalogowanego nauczyciela. Panel korepetytora zawiera następujące informacje: data utworzenia ogłoszenia, data podjęcia ogłoszenia, opis ogłoszenia, data wygaśnięcia ogłoszenia, nazwa przedmiotu, status płatności i ogłoszenia.
 
 \noindent
 \textbf{Podjęcie ogłoszenia}\\
 \indent
-Korepetytor ma możliwość podjęcie ogłoszenia z puli nieprzydzielonych ogłoszeń. Podaje on swoją stawkę godzinową wyrażoną w złotówkach. Stawka ta zostaje przypisana do ogłoszenia wraz z kwotą należną za całe ogłoszenie (stawka pomnożona przez liczbę godzin). Po operacji podjęcia, zmienia on swój status.
+Korepetytor ma możliwość podjęcia ogłoszenia z puli dostępnych ogłoszeń. Użytkownik zalogowany jako nauczyciel wprowadza stawkę godzinową wyrażoną w złotówkach. Stawka ta zostaje przypisana do ogłoszenia wraz z kwotą należną za całe ogłoszenie (stawka pomnożona przez liczbę godzin). Po operacji podjęcia, ogłoszenie zmienia status na "podjęte".
 
 \noindent
 \textbf{Oddanie ogłoszenia}\\
 \indent
-Jeśli ogłoszenie, po podjęciu, nie zostało jeszcze opłacone, korepetytor ma możliwość zwrócenia ogłoszenia do ogólnej puli ogłoszeń., tym samym jego status wraca do stanu wejściowego. 
+Jeśli ogłoszenie, po podjęciu, nie zostało jeszcze opłacone, korepetytor ma możliwość zwrócenia ogłoszenia do ogólnej puli ogłoszeń, tym samym status zmienia się na "niepodjęte".\\
 
 \noindent
 \textbf{Konto administratora}\\
 \indent
-Po zalogowaniu się zapytanie, taki użytkownik może wykonywać operacje CRUD (ang. create, read, update and delete (pol. utwórz, odczytaj, aktualizuj i usuń)) na ogłoszeniach, użytkownikach i przedmiotach. Dodatkowo ma możliwość wszystkich operacji ucznia czy korepetytora.
+Po zalogowaniu się z rolą administratora, użytkownik może wykonywać operacje CRUD (ang. \textit{create, read, update and delete}) na ogłoszeniach, użytkownikach i liście przedmiotów. Ma możliwość tworzenia, odczytywania, aktualizowania i usuwania rekordów. Użytkownik zalogowany jako administrator może wykonywać wszystkie operacje dostępne dla ucznia czy korepetytora.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wymagania niefunkcjonalne
