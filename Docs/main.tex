@@ -63,9 +63,9 @@
 
 \begin{document}
 \begin{sloppypar}
-%------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page
-%------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{titlepage}
  \thispagestyle{empty}
  \begin{center}
@@ -94,9 +94,9 @@
 \setcounter{secnumdepth}{3}
 % \setcounter{tocdepth}{4}
 
-%------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main contents
-%------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
 \pagebreak
 
@@ -105,7 +105,7 @@
 %% Wprowadzenie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wprowadzenie}
-\textit{Otacza nas rewolucja cyfrowa. Każdy aspekt naszego życia przenosi się do Internetu. Jednym z nich jest rynek usług - korepetycji. Aplikacja internetowa "Find-A-Tutor" jest odpowiedzią na tę rewolucję; pozwala na łatwe zarządzanie korepetycjami - dla ucznia i nauczyciela.}
+\textit{Otacza nas rewolucja cyfrowa. Każdy aspekt naszego życia przenosi się do Internetu. Jednym z nich jest rynek usług -- korepetycji. Aplikacja internetowa "Find-A-Tutor" jest odpowiedzią na tę rewolucję; pozwala na łatwe zarządzanie korepetycjami -- dla ucznia i nauczyciela.}
 % Wraz z początkiem lat 70 ubiegłego wieku świat ekonomi nie był już tylko kierowany przez prawa rynku ale także przez otaczający go i postępujący świat cyfryzacji, który z dnia na dzień zmieniał i na nowo definiował działania jego sektorów. 
 % Od samego początku cywilizacji Zachodniej, to niewątpliwie ekonomia jej towarzyszyła. 
 % Nauką która zawsze towarzyszyła rozwojowi cywilizacji Zachodniej była ekonomia. To właśnie produkcja, konsumpcja czy dystrybucja dóbr napędzała 
@@ -128,25 +128,17 @@ Ze względu na specyfikę usługi, która nie jest namacalna tak, jak produkt, p
 
 Specyficzną niszą są korepetycje. Oferowane są nie tylko przez nauczycieli akademickich lub nauczycieli innych szkół, ale także przez studentów lub po prostu przez znawców danej dziedziny. Tradycyjnym sposobem znalezienia korepetytora jest szukanie go przez polecenie lub przez papierowe ogłoszenia. Kształt, jak i długość lekcji są najczęściej dostosowywane dopiero przy spotkaniu z daną osobą.
 
-Ostatnim analogowym aspektem korepetycji są oczywiście płatności - dokonywane gotówką. Płatność taka zajmuje zawsze więcej czasu, wiąże się często z wydawaniem reszty i jest nienamierzalna (zależnie od sytuacji jest to zaleta lub wada). Od strony płacącego wiążę się to z brakiem jakiekolwiek historii płatności, a od strony odbiorcy płatności związane jest z jakimkolwiek brakiem historii wpływów, który pozbawia go na przykład możliwości analizowania jego działalności od strony finansowej. 
+Ostatnim analogowym aspektem korepetycji są oczywiście płatności -- dokonywane gotówką. Płatność taka zajmuje zawsze więcej czasu, wiąże się często z wydawaniem reszty i jest nienamierzalna (zależnie od sytuacji jest to zaleta lub wada). Od strony płacącego wiążę się to z brakiem jakiekolwiek historii płatności, a od strony odbiorcy płatności związane jest z jakimkolwiek brakiem historii wpływów, który pozbawia go na przykład możliwości analizowania jego działalności od strony finansowej. 
 
 W tradycyjnym modelu korepetycji to nauczyciel ogłasza się jako osobo świadcząca te usługi. Brakuje jednak rozwiązań, w szczególności w świecie cyfrowym, które pozwoliłby ogłaszać się uczniom jako poszukującym korepetycji. Takie rozwiązanie niewątpliwie powinno łączyć zalety serwisów ogłoszeniowych, odwróconego modelu ogłaszania się (jako ucznia, który tych korepetycji poszukuje) i popularnych płatności on-line. Całość oczywiście powinna być spięta w prosty i intuicyjny interfejs, który swoim minimalizmem nie przytłoczy użytkownika, co często ma miejsce w serwisach powstałych kilka lat temu i zbyt bogatych w treść.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Cel i założenia projektu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cel i założenia projektu}
-Celem niniejszej pracy dyplomowej jest stworzenie aplikacji webowej, która w łatwy sposób pozwoli na zarządzanie korepetycjami ze strony ucznia, jak i ze strony nauczyciela. Aplikacja pozwoli nie tylko na ogłaszanie się i podejmowanie tych ogłoszeń, ale również na płatności internetowe usługą PayPal, jako uniwersalnym rozwiązaniem płatności on-line. 
+Celem niniejszej pracy dyplomowej jest stworzenie aplikacji webowej, która w łatwy sposób pozwoli na zarządzanie korepetycjami ze strony ucznia, jak i ze strony nauczyciela. Aplikacja ma pozwolać nie tylko na ogłaszanie się i podejmowanie tych ogłoszeń, ale również na płatności internetowe usługą PayPal, jako uniwersalnym rozwiązaniem płatności on-line. 
 
-Stworzony projekt składa się z dwóch warstw: 
-aplikacji po stronie serwera (backend) i aplikacji po stronie klienta (frontend).
-Frontend został napisany w technologii ASP.NET Razor (generujące dynamiczne strony internetowe po stronie serwera) i fundamentalnych technologiach frontendowych, takich jak HTML, CSS, JavaScript i Bootstrap. Wszelkie dane i operacje są wysyłane do backendu przez protokół HTTP, za pośrednictwem JSONa. 
-Backend to RESTful WebApi które zostało napisane w najnowszej obecnie wersji aplikacji szkieletowej .NET Core 2.2.
-
-Funkcje rejestracji i logowania do konta zostały napisane przy wykorzystaniu JWT do uwierzytelnienia użytkownika.
-
-Aby zapewnić bezstanowość API, dane są przechowywane w bazie relacyjnej Microsoft SQL Server.
-
-Dla skalowalności rozwiązania wszystkie usługi zostały zamknięte w kontenerach Docker, bazujących na systemie operacyjnym Linux.
+%%% TUTAJ RZECZY
+%Zakres obejume implementacje wyzej wymienionej aplikacji w dotnet core aplikacji takiej i takiej
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Struktura pracy inżynierskiej
@@ -156,6 +148,7 @@ Pierwszy rozdział pracy jest wstępem do opisanego problemu. Drugi prezentuje o
 % \newline
 % \newline
 % \textit{Rynek usług sprzedawanych za pomocą internetu nie jest rynkiem w całości zagospodarowanym. Ciągle istnieją w niej niższe takie jak rynek korepetycji. Aplikacja Find-A-Turor została przygotowana z myślą o tej niższy.}
+\pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Idea ogłoszeń internetowych
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -247,7 +240,7 @@ Tradycyjny model płatności zakładał nasze zaufanie do portalu, w którym dok
 
 Zaletą, która wyróżnia ten rodzaj płatności jest usługa \textit{chargeback}. Portal \url{www.najlepszekonto.pl} opisuje ją następująco: "Chargeback, czyli obciążenie zwrotne, to usługa dostępna tylko dla kart płatniczych. Polega ona na zwrocie środków z konta sprzedawcy, jeśli kupiony przez Ciebie towar nie spełnił Twoich oczekiwań: miał wady, różnił się od tego, co obiecywał sprzedawca, lub w ogóle go nie otrzymałeś. Jeśli próby wymiany towaru w sklepie nie powiodą się, możesz zwrócić się z prośbą o rozstrzygnięcie sprawy przez bank, który jest wystawcą Twojej karty." \cite{chargeback}.
 
-Odmianą fizycznej karty płatniczej jest \textit{karta wirtualna}. Taka karta służy tylko do płatności internetowych. Nie użyjemy jej na przykład podczas zakupów w sklepie stacjonarnym. Po jej wyrobieniu, bank nie przesyła nam jej pocztą, a jedynie podaje nam ich dane, czyli numer, datę ważności i kod CVC/CVV. Niewątpliwą zaletą jest bezpieczeństwo - nie padniemy ofiarą \textit{skimmingu} (nielegalne skopiowanie zawartości paska magnetycznego w celu utworzenia kopii). Główną wadą takie rozwiązania jest dostępność w Polsce. Aktualnie tylko dwa banki udostępniają taką usługę i to za miesięczną opłatą. 
+Odmianą fizycznej karty płatniczej jest \textit{karta wirtualna}. Taka karta służy tylko do płatności internetowych. Nie użyjemy jej na przykład podczas zakupów w sklepie stacjonarnym. Po jej wyrobieniu, bank nie przesyła nam jej pocztą, a jedynie podaje nam ich dane, czyli numer, datę ważności i kod CVC/CVV. Niewątpliwą zaletą jest bezpieczeństwo -- nie padniemy ofiarą \textit{skimmingu} (nielegalne skopiowanie zawartości paska magnetycznego w celu utworzenia kopii). Główną wadą takie rozwiązania jest dostępność w Polsce. Aktualnie tylko dwa banki udostępniają taką usługę i to za miesięczną opłatą. 
 
 Zagranicznymi serwisami, które  proponują utworzenie \textit{kart wirtualnych}, jest np. amerykański \url{www.privacy.com}. Portal ten pozwala na proste i nielimitowane tworzenie kart wirtualnych, jak możemy przeczytać na stronie firmy, "jednym kliknięciem". Klient ma możliwość tworzenia karty per portal, czyli na przykład jedna karta do \textit{Netflixa}, kolejna do opłacenia \textit{Spotify} itd. Dodatkowo można ustawić limit obciążenia dla danej strony, wstrzymać płatność lub całkowicie zablokować niechciane opłaty.
 
@@ -294,7 +287,7 @@ Szukając odpowiedniego rozwiązania do obsługi płatności, zdecydowano mieć 
     \label{tab:portfele}
 \end{table}
 
-Zestawienie pokazane w tabeli \ref{tab:portfele} pokazuje, że PayPal wygrywa pod względem dwóch funkcji z Visa Checkout i Masterpass - kryterium użycia kart różnych firm i możliwość przechowywania środków w portfelu.
+Zestawienie pokazane w tabeli \ref{tab:portfele} pokazuje, że PayPal wygrywa pod względem dwóch funkcji z Visa Checkout i Masterpass -- kryterium użycia kart różnych firm i możliwość przechowywania środków w portfelu.
 
 Ponadto, VisaCheckout i Masterpass są realizowane jako zamknięte środowiska płatnicze. Po kliknięciu na przycisk oznaczony ich logiem, użytkownik zostaje przeniesiony do realizacji płatności. PayPal zdecydował się na inne rozwiązanie, które daje klientowi możliwość zapłaty kartą (Visa, MasterCard i Amex), polskim portalem Przelewy24 (agreguje płatności pay-by-link i kartą omówione w podrozdziale \ref{sec:payments}) i portfelem cyfrowym PayPal. 
 
@@ -332,12 +325,22 @@ Na rynku polskim są obecnie dostępne trzy największe serwisy dla korepetytor�
 Żaden z portali zestawionych powyżej nie obsługuje funkcji tak podstawowej w dzisiejszym świecie, jak płatności elektroniczne. Tylko jeden z nich oferuje przyjazny dla oka i wpisujący się w obecne trendy minimalisty design. Dodatkowo \textit{e-korepetycje.net} i \textit{korepetycje.net} nie posiadają otwartego API, które może posłużyć do stworzenia w przyszłości aplikacji mobilnych. Jednym portalem, który ją dostarcza, jest \textit{OLX.pl}.
 \newline
 \newline
-\textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Dodatkowo, backend został stworzony jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcją będzie dodawanie ogłoszeń przez studentów. Całość została okraszona minimalistycznym i nieprzytłaczającym designem.}
+\textit{Obserwując rynek korepetycji, brakuje na nim rozwiązania które wspiera płatności online. Taką aplikacją jest Find-A-Tutor. Aplikacja serwerowa została stworzona jako otwarte API, dzięki czemu w przyszłości serwis będzie otwarty na powstanie aplikacji mobilnych. Fundamentalną funkcją będzie dodawanie ogłoszeń przez studentów. Ponadto aplikacja kliencka została zrealizowana z minimalistycznym i nieprzytłaczającym designem.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Techniczne aspekty aplikacji Find-A-Tutor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Techniczne aspekty aplikacji \textit{Find-A-Tutor}} \label{tech-aspect}
+Stworzony projekt składa się z dwóch warstw: 
+aplikacji po stronie serwera (backend) i aplikacji po stronie klienta (frontend).
+Frontend został napisany w technologii ASP.NET Razor (generujące dynamiczne strony internetowe po stronie serwera) i fundamentalnych technologiach frontendowych, takich jak HTML, CSS, JavaScript i Bootstrap. Wszelkie dane i operacje są wysyłane do backendu przez protokół HTTP, za pośrednictwem JSONa. 
+Backend to RESTful WebApi które zostało napisane w najnowszej obecnie wersji aplikacji szkieletowej .NET Core 2.2.
+
+Funkcje rejestracji i logowania do konta zostały napisane przy wykorzystaniu JWT do uwierzytelnienia użytkownika.
+
+Aby zapewnić bezstanowość API, dane są przechowywane w bazie relacyjnej Microsoft SQL Server.
+
+Dla skalowalności rozwiązania wszystkie usługi zostały zamknięte w kontenerach Docker, bazujących na systemie operacyjnym Linux.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wymagania
@@ -389,7 +392,7 @@ Po odbytej lekcji, użytkownik zaznacza zakończenie takiej lekcji, tym samej zm
 \textbf{Panel korepetytora}\\
 \indent
 Użytkownik korepetytor, po zalogowaniu ma dostęp do swojego panelu ze wszystkimi dostępnymi ogłoszeniami i ze wszystkimi podjętymi przez niego ogłoszeniami. Dostępne są na nim następujące informacje: data utworzenia, datę podjęcia ogłoszenia, opis, datę wygaśnięcia ogłoszenia, przedmiot, status płatności i status ogłoszenia. Logowanie następuje przez przeglądarkę internetową. 
-\clearpage
+
 \noindent
 \textbf{Podjęcie ogłoszenia}\\
 \indent
@@ -410,13 +413,12 @@ Po zalogowaniu się zapytanie, taki użytkownik może wykonywać operacje CRUD (
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsubsection{Wymagania niefunkcjonalne}
 
-Wymagania niefunkcjonalne określają obszar jakości aplikacji. Wynikają często z wymagań funkcjonalnych lub architektonicznych. Źródłem tych wymagań są przyszli użytkownicy oraz klienci. Są to np. skalowalność, kompatybilność czy bezpieczeństwo \cite{niefunkcjonalne}.\\
+Wymagania niefunkcjonalne określają obszar jakości aplikacji. Wynikają często z wymagań funkcjonalnych lub architektonicznych. Źródłem tych wymagań są przyszli użytkownicy oraz klienci. Do tych wymagań należą skalowalność, kompatybilność, bezpieczeństwo \cite{niefunkcjonalne}.\\
 \noindent
 \textbf{Przenośność}\\
 \indent
-Aplikacja powinna być łatwa w zmianie lokalizacji, środowiska, eksportu danych.
+Aplikacja powinna być dostosowana do zmiany lokalizacji, środowiska, eksportu danych.
 
-\clearpage
 \noindent
 \textbf{Skalowalność}\\
 \indent
@@ -425,71 +427,73 @@ Aplikacja powinna móc się skalowalność pionowo (zwiększenie mocy serwera) i
 \noindent
 \textbf{Otwartość na rozszerzenia}\\
 \indent
-Aplikacja powinna mieć otwarte API (backend) i być gotowa na nowe urządzenia które mogą z niej korzystać (np. mobilne).
+Aplikacja powinna mieć otwarte API (aplikacje po stronie serwera) i być gotowa na nowe urządzenia, które mogą z niej korzystać (urządzenia mobilne).
 
 \noindent
 \textbf{Kompatybilność}\\
 \indent
-Aplikacja powinna działać w technologiach uniwersalnych i powszechnych dla przeglądarkę na silniku Chromium (Chrome, Opera i wkrótce Edge), który na rynku polskim ma 80,65\% podziału rynku \cite{chrome}.
+Aplikacja powinna działać w technologiach uniwersalnych i powszechnych dla przeglądarek na silniku Chromium (Chrome, Opera i wkrótce Edge), który na rynku polskim ma 80,65\% udziału w rynku \cite{chrome}.
 
 \noindent
 \textbf{Bezpieczeństwo}\\
 \indent
-Dane użytkowników powinny być poufne i dostępne dla danego użytkownika po zalogowaniu.
+Dane użytkowników powinny być poufne i dostępne tylko dla danego użytkownika po zalogowaniu.
 
 \noindent
 \textbf{Użyteczność }\\
 \indent
-Aplikacja powinna być łatwa w obsłudze i powinna być okraszona minimalistycznym designem który nie przytłacza użytkownika.
+Aplikacja powinna być łatwa w obsłudze i powinna zostać zrealizowana z minimalistycznym designem, który nie przytłacza użytkownika.
 
 \noindent
 \textbf{Modularność}\\
-Warstwa bazy danych, graficzna i aplikacji (API) powinny być od siebie oddzielone i gotowe do zastąpienia.
+\indent
+Warstwy bazy danych, warstwa graficzna i warstwa  aplikacji (API) powinny być od siebie oddzielone i gotowe do zastąpienia.
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Narzędzia i technologie użyte w projekcie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsection{Narzędzia i technologie użyte w projekcie}
-Podczas realizacji aplikacji zostały wybrane tylko te technologie i rozwiązania, które wyrobiły mocną pozycję w świecie inżynierii oprogramowania. Są to narzędzia dostępne od lat, sprawdzone w wielu aplikacjach i zalecane w projektach webowych. Dodatkowo za cel przyjął sobie takie pojęcia jak czysty kod, czysta architektura oraz korzystanie z jak największej liczby gotowych rozwiązań - tak aby nie rozwiązywać po raz kolejny tych samych problemów.
+Do realizacji aplikacji zostały wybrane tylko te technologie i rozwiązania, które są w pełni darmowe do użytkowania, nawet w projektach komercyjnych, oferują stabilne wersje, które zostały wielokrotnie sprawdzone w setkach innych projektach webowych i są ciągle wspierane i rozwijane do najnowszych standardów. 
+%które wyrobiły mocną pozycję w świecie inżynierii oprogramowania. Są to narzędzia dostępne od lat, sprawdzone w wielu aplikacjach i zalecane w projektach webowych. Dodatkowo za cel przyjął sobie takie pojęcia jak czysty kod, czysta architektura oraz korzystanie z jak największej liczby gotowych rozwiązań - tak aby nie rozwiązywać po raz kolejny tych samych problemów.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% .NET Core 2.2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 \subsubsection{.NET Core 2.2}
-.NET Core jest darmowym i otwartym frameworkiem dla systemów Windows, Linux i macOS. Jest wielo-platformowym następcą .NET Framework. Projekt jest rozwijany przez Microsoft i dystrybuowany na zasadach otwartego oprogramowania (ang. open source). Składa się z on narzędzi programistycznych, bibliotek oraz środowiska uruchomieniowego \cite{dotnet-core}. 
+.NET Core jest darmowym i otwartym \textit{frameworkiem} dla systemów Windows, Linux i macOS. Jest wielo-platformowym następcą .NET Framework. Projekt jest rozwijany przez Microsoft i dystrybuowany na zasadach otwartego oprogramowania (ang. \textit{open source}). Składa się z narzędzi programistycznych, bibliotek oraz środowiska uruchomieniowego \cite{dotnet-core}. 
     
 Charakteryzują go następujące cechy:
 \begin{itemize}
-    \item Możliwość programowania i uruchamiania w systemach Windows,\\ macOS i Linux,
-    \item Zunifikowany scenariusz tworzenia interfejsu API sieci Web i internetowych sieci Web,
-    \item System konfiguracji oparty na środowisku, który jest gotowy do chmury,
-    \item Wbudowane wstrzykiwanie zależności,
-    \item Lekki, wysoko wydajny modularny potok żądań HTTP,
-    \item Otwarte i skoncentrowane na społeczności,
-    \item Obsługa wielu języków programowania: \Csharp, \Fsharp i także Visual Basic,
-    \item Obsługa menadżera pakietów NuGet,
-    \item Elastyczny w wdrożeniu, np. kontereryzacja za pomocą Dockera
+    \item możliwość programowania i uruchamiania w systemach Windows,\\ macOS i Linux,
+    \item zunifikowany scenariusz tworzenia interfejsu API sieci Web i internetowych sieci Web,
+    \item system konfiguracji oparty na środowisku, dostosowany do pracy w chmurze,
+    \item wbudowane wstrzykiwanie zależności,
+    \item lekki, wysoko wydajny modularny potok żądań HTTP,
+    \item publicznie dostępny kod i możliwość kontrybucji
+    \item obsługa kilku języków programowania: \Csharp, \Fsharp i także Visual Basic,
+    \item obsługa menadżera pakietów \textit{NuGet},
+    \item elastyczny w wdrożeniu, na przykład poprzez kontereryzacje za pomocą Dockera.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% C#
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsubsection{C\#}
-\Csharp (ang. C sharp) jest językiem obiektowym, opracowanym dla firmy Microsoftu, na przełomie tysiąclecia przez zespół pod kierownictwem Andersa Hejlsberga. Jak możemy przeczytać w oficjalnej dokumentacji Microsoftu: 
+Jeżyk \Csharp jest językiem obiektowym, opracowanym dla firmy Microsoft, na przełomie tysiąclecia przez zespół pod kierownictwem Andersa Hejlsberga. Jak można przeczytać w oficjalnej dokumentacji języka: 
 "Programiści znający którykolwiek z tych języków (C, C++, Java) są zazwyczaj w stanie zacząć produktywnie pracować w \Csharp w bardzo krótkim czasie. Składnia w języku \Csharp upraszcza wiele złożoności C++ i zapewnia zaawansowane funkcje, takie jak typy dopuszczające wartości zerowe, wyliczenia, delegaty, wyrażenia lambda i bezpośredni dostęp do pamięci, których nie można znaleźć w Javie." \cite{csharp} 
     
-Podczas opracowywania go, zespołowi przyświecały poniższe cele:
+Podczas opracowywania języka, zespołowi przyświecały następujące założenia projektowe:
 \begin{itemize}
     \item obiektowość,
     \item prostota i nowoczesność,
-    \item wsparcie dla istniejących zasad Inżynierii Oprogramowania, takich jak:
+    \item wsparcie dla istniejących zasad inżynierii oprogramowania, takich jak:
     \begin{itemize}
        \item silne typy,
-       \item automatyczne czyszczenie śmieci z pamięci (ang. garbage collector),
+       \item automatyczne czyszczenie śmieci z pamięci (ang. \textit{garbage collector}),
        \item wykrywanie każdej próby odniesienia się do niezainicjowanych zmiennych
     \end{itemize}
 \end{itemize}
     
-Jako język obiektowy \Csharp obsługuje pojęcia enkapsulacji, dziedziczenia i polimorfizmu. Wszystkie zmienne i metody, w tym metoda Main, punkt wejścia aplikacji, są zawarte w definicjach klas. Klasa może dziedziczyć bezpośrednio od jednej klasy nadrzędnej, ale może implementować dowolną liczbę interfejsów.
+Jako język obiektowy \Csharp obsługuje pojęcia enkapsulacji, dziedziczenia i polimorfizmu. Wszystkie zmienne i metody, w tym metoda \textit{Main} czyli punkt wejścia aplikacji, są zawarte w definicjach klas. Klasa może dziedziczyć bezpośrednio z jednej klasy nadrzędnej, ale może implementować dowolną liczbę interfejsów.
 
 % \subsubsection{Docker}
 
@@ -497,9 +501,9 @@ Jako język obiektowy \Csharp obsługuje pojęcia enkapsulacji, dziedziczenia i 
 %% Kontrola dostępności serwisu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsubsection{Kontrola dostępności serwisu}
-Celem kontroli stanu projektu jest uzyskanie niezależnej oceny, w dowolnym momencie cyklu życia projektu, tego jak dobrze program działa, czy działa zgodnie z jego celami i jak dobrze przestrzega najlepszej metodologii praktyki. Skuteczna kontrola stanu (ang. health check) zapewni dostęp do informacji o stanie zależności owego projektu np. czy program ma połączenie z bazą lub pokaże w jakiej "kondycji" jest nasz program np. jaki czas zajmuje mu połączenie i wywołanie prostego zapytania na bazie. 
+Celem kontroli stanu projektu jest uzyskanie niezależnej oceny, w dowolnym momencie cyklu życia projektu, na temat tego jak dobrze program działa lub czy działa zgodnie z jego założeniami. Skuteczna kontrola stanu (ang. \textit{health check}) zapewnia dostęp do informacji o stanie zależności projektu. Jest to na przykład sprawdzenie czy aplikacja ma połączenie z bazą lub pokazanie w jakiej "kondycji" jest nasz program, na przykład jaki czas zajmuje mu połączenie i wywołanie prostego zapytania do bazy danych.
     
-Rozwiązaniem które dostarcza kontrole stanów prawie trzydziestu różnych komponentów jest \textbf{AspNetCore.Diagnostics.HealthChecks} \cite{health-checks-github}.
+Rozwiązaniem, które dostarcza kontrolę stanów prawie trzydziestu różnych komponentów jest \textbf{AspNetCore.Diagnostics.HealthChecks} \cite{health-checks-github}.
         
 \begin{figure}[H] 
     \centering
@@ -508,24 +512,24 @@ Rozwiązaniem które dostarcza kontrole stanów prawie trzydziestu różnych kom
     \label{fig:health-check}
 \end{figure}
     
-Rysunek \ref{fig:health-check} pokazuje stan zależności projektu (backend), wraz z dostępem do bazy danych i czasem który potrzebował na wywołanie zapytania na bazie.
+Rysunek \ref{fig:health-check} pokazuje stan zależności projektu \textit{Find-A-Tutor (backend)}, wraz z dostępem do bazy danych i czasem który potrzebował na wywołanie zapytania na bazie.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Entity Framework Core
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \label{EF}
 \subsubsection{Entity Framework Core}
-Entity Framework (EF) Core to rozszerzalny, lekki, otwarty (ang. open source) i wielo-platformowy mapper obiektowo-relacyjny (ang. Object-Relational Mapping ORM). Umożliwia on programistom prace z bazą danych używając obiektów .NETowych. Dodatkowo, w większości eliminuje potrzebę pisania kodu do połączenia się z bazą danych. 
+\textit{Entity Framework (EF) Core} to rozszerzalny, lekki, otwarty (ang. \textit{open source}) i wielo-platformowy \textit{mapper obiektowo-relacyjny} (ang. \textit{Object-Relational Mapping ORM}). Umożliwia on programistom pracę z bazą danych przy użyciu obiektów .NET. Dodatkowo, w większości eliminuje potrzebę pisania kodu do połączenia się z bazą danych. 
     
-Dzięki EF Core dostęp do danych odbywa się za pomocą modelu. Model EF przechowuje szczegółowe informacje na temat mapowania klas (wraz z ich polami) na tabele i kolumny bazy danych.
+Dzięki \textit{EF Core} dostęp do danych odbywa się za pomocą modelu. Model EF przechowuje szczegółowe informacje na temat mapowania klas (wraz z ich polami) na tabele i kolumny bazy danych.
     
-EF obsługuje trzy sposoby na realizacje mapowania:
+\textit{EF Core} obsługuje trzy sposoby realizacji mapowania obiektowo-relacyjnego:
 %Model składa się z zmapowanych klas obiektów, zgodnie z ich relacyjnym odpowiednikiem w bazie danych, a także z obiektu kontekstu reprezentującego sesję z bazą danych, która umożliwiając wyszukiwanie i zapisywanie danych.
     
 \begin{itemize}
-    \item Code First: Programista określa model przez kod. Następnie, EF generuje odpowiedni bazodanowy model na podstawie kodu i ustawień konfiguracyjnych dostarczonych przez programistę.
-    \item Database First: tworzenie modelu z istniejącej bazy danych.
-    \item Model First: do stworzenia bazy danych z istniejącego modelu, używa się eksportu EF.
+    \item \textit{Code First}: programista określa model obiektów przez kod. Następnie, EF generuje odpowiedni bazodanowy model na podstawie kodu i ustawień konfiguracyjnych dostarczonych przez programistę.
+    \item \textit{Database First}: tworzenie modelu obiektów z istniejącej bazy danych.
+    \item \textit{Model First}: do stworzenia bazy danych z istniejącego modelu używa się eksportu modelu stworzonego przez \textit{EF}.
 \end{itemize}
     
 Przykładowy sposób mapowania klasy na struktury bazodanowe, przedstawiono na rysunku \ref{fig:ef}.
@@ -534,81 +538,80 @@ Przykładowy sposób mapowania klasy na struktury bazodanowe, przedstawiono na r
     \centering
     \begin{subfigure}{.6\textwidth}
       \centering
-      \includegraphics[width=.9\linewidth]{images/chapter_3/ef-code.png}
-      \caption{Kod klasy User (\Csharp)}
+      \includegraphics[width=1\linewidth]{images/chapter_3/ef-code.png}
+      \caption{Kod klasy \textit{User} (\Csharp)}
       \label{fig:ef-code}
     \end{subfigure}%
     \begin{subfigure}{.4\textwidth}
       \centering
-      \includegraphics[width=.9\linewidth]{images/chapter_3/ef-db.png}
-      \caption{Tabela Users w bazie danych}
+      \includegraphics[width=1\linewidth]{images/chapter_3/ef-db.png}
+      \caption{Tabela \textit{Users} w bazie danych}
       \label{fig:ef-db}
     \end{subfigure}
     \caption{Mapowanie klas na struktury bazodanowe}
     \label{fig:ef}
 \end{figure}
     
-Projekt został zrealizowany według pierwszego podejścia: Code First. Przygotował on Domenę, którą następnie za pomocą migracji odwzorował na nowo utworzonej bazie danych. 
+Projekt \textit{Find-A-Tutor} został zrealizowany według pierwszego podejścia, czyli \textit{Code First}. Przygotowano domenę, którą następnie za pomocą migracji została odwzorowana na nowo utworzonej bazie danych. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% JWT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsubsection{JWT}
-JSON Web Token (w skrócie JWT) to otwarty standard (RFC 7519), który odpowiada za wymianę danych pomiędzy stronami (klient-serwer) w bezpieczny sposób poprzez obiekt w formacie JSON. Informacje przekazywane w nim mogą zostać zweryfikowane przy użyciu cyfrowego podpisu, który jest zawarty w tokenie. Podpis jest generowany za pomocą algorytmu HMAC lub klucza publicznego/prywatnego RSA lub ECDSA.
+\textit{JSON Web Token} (w skrócie JWT) to otwarty standard (RFC 7519), który odpowiada za wymianę danych pomiędzy stronami (klient-serwer) w bezpieczny sposób poprzez obiekt w formacie JSON. Informacje przekazywane w nim mogą zostać zweryfikowane przy użyciu cyfrowego podpisu, który jest zawarty w tokenie. Podpis jest generowany za pomocą algorytmu HMAC (\textit{Hash-based Message Authentication Code} czyli kod uwierzytelnienia wiadomości oparty na skrócie) lub klucza publicznego/prywatnego RSA (Rivesta-Shamira-Adlemana) lub ECDSA (\textit{Elliptic Curve Digital Signature Algorithm} czyli algorytm elektronicznego podpisu poprzez kryptografia krzywych eliptycznych).
     
-JWT może zostać wykorzystany przy:
+JWT może zostać wykorzystany do:
 \begin{itemize}
-    \item Autoryzacji
-    \item Transmisji danych
+    \item autoryzacji,
+    \item transmisji danych.
 \end{itemize}
     
-Struktura JWT, w swojej wynikowej postaci, składa się z trzech części oddzielonych kropkami. Są to kolejno nagłówek (ang. Header), zawartość (ang. Payload), podpis (ang. Signature). Podział ten jest pokazany na rysunku \ref{fig:jwt}
+Struktura JWT w swojej wynikowej postaci składa się z trzech części, oddzielonych kropkami. Są to kolejno nagłówek (ang. \textit{header}), zawartość (ang. \textit{payload}) oraz podpis (ang. \textit{signature}). Podział ten jest pokazany na rysunku \ref{fig:jwt}.
     
 \begin{figure}[H] 
     \centering
     \includegraphics[width=1\textwidth]{images/chapter_3/jwt.png}
-    \caption{Przykład podstawowego JWT \cite{sekurak-jwt}}
+    \caption{Przykład podstawowej struktury JWT \cite{sekurak-jwt}}
     \label{fig:jwt}
 \end{figure}
     
-    \myparagraph{Nagłówek}
+    \myparagraph{Nagłówek w standardzie JWT}
     \begin{figure}[H] 
      	\centering
-    	\includegraphics[width=0.4\textwidth]{images/chapter_3/jwt-header.png}
-    	\caption{Przykład nagłówka tokenu}
+    	\includegraphics[width=0.35\textwidth]{images/chapter_3/jwt-header.png}
+    	\caption{Przykład nagłówka tokenu dla standardu JWT}
     	\label{fig:jwt-header}
     \end{figure}
     
-    Nagłówek (pokazany na rysunku \ref{fig:jwt-header}) zawiera dwie informację: rodzaj tokena np. JWT oraz jaki algorytm został użyty do wygenerowania podpisu np. HMAC-SHA256 (zapisywany jako HS256). W postaci końcowej (token), nagłówek jest zapisywany za pomocą algorytmu BASE64URL.
+    Nagłówek (pokazany na rysunku \ref{fig:jwt-header}) zawiera dwie informację: rodzaj tokenu na przykład JWT oraz jaki algorytm został użyty do wygenerowania podpisu, na przykład HMAC-SHA256 (zapisywany jako HS256). W postaci końcowej (token), nagłówek jest zapisywany za pomocą algorytmu BASE64URL.
     
-    \myparagraph{Zawartość}
-    \begin{figure}[H] 
-     	\centering
-    	\includegraphics[width=0.6\textwidth]{images/chapter_3/jwt-payload.png}
-    	\caption{Przykład zawartości tokenu}
-    	\label{fig:jwt-payload}
-    \end{figure}
-    
-    Środkowa cześć jest odpowiedzialna za przechowywanie danych, które chcemy zawrzeć w tokenie. Są to roszczenia (ang. claims). Specyfikacja JWT definiuje siedem zarejestrowanych roszczeń. Roszczenia niestandardowe są często wykorzystywane, w zależności od celu tokena.
+    \myparagraph{Zawartość w standardzie JWT}
+    Środkowa cześć zawartości tokenu jest odpowiedzialna za przechowywanie danych, które chcemy zawrzeć w tokenie. Są to \textit{roszczenie} (ang. \textit{claims}). Specyfikacja JWT definiuje siedem zarejestrowanych roszczeń. Roszczenia niestandardowe są wykorzystywane w zależności od przeznaczenia tokena.
     Przykład pokazany na rysunku \ref{fig:jwt-payload} pokazuje \textit{Issued At Time, "iat"} czyli datę wydania roszczenia i roszczenie niestandardowe \textit{loggedInAs}.
     
     Zawartość również jest kodowana za pomocą algorytmu BASE64URL.
-    \clearpage
-    \myparagraph{Podpis}
-    \label{signature}
-
     \begin{figure}[H] 
      	\centering
-    	\includegraphics[width=0.5\textwidth]{images/chapter_3/jwt-signature.png}
-    	\caption{Sposób obliczania podpisu}
+    	\includegraphics[width=0.5\textwidth]{images/chapter_3/jwt-payload.png}
+    	\caption{Przykład zawartości tokenu dla standardu JWT}
+    	\label{fig:jwt-payload}
+    \end{figure}
+    
+    \myparagraph{Podpis w standardzie JWT}
+    \label{signature}
+    
+    Podpis cyfrowy potwierdza autentyczność danych zapisanych w tokenie. Walidacja podpisu daje gwarancję, że nadawca wiadomości jest tym, za kogo się podaje.
+    
+    Podpis haszowany jest za pomocą wybranego algorytmu (w przykładzie na rysunku \ref{fig:jwt-header} jest to HMAC-SHA256). Do tej procedury potrzeba trzech danych: zakodowanego nagłówka za pomocą algorytmu BASE64URL, zakodowanej zawartości za pomocą algorytmu BASE64URL i sekretu. 
+    
+    \begin{figure}[H] 
+     	\centering
+    	\includegraphics[width=0.55\textwidth]{images/chapter_3/jwt-signature.png}
+    	\caption{Sposób obliczania podpisu w standardzie JWT}
     	\label{fig:jwt-signature}
     \end{figure}
     
-    Podpis cyfrowy potwierdza autentyczność danych zapisanych w tokenie. Walidacja podpisu daje nam gwarancje że nadawca wiadomości jest tym za kogo się podaje.
-    
-    Podpis haszowany jest za pomocą wybranego algorytmu (w pokazanym przykładzie - rysunek \ref{fig:jwt-header} był to HMAC-SHA256). Do tej procedury potrzebujemy trzech danych: zakodowanego nagłówka za pomocą algorytmu BASE64URL, zakodowanej zawartości za pomocą algorytmu BASE64URL i sekretu. 
-    
-    Sekret to mówiąc najprościej hasło. Serwis autoryzacyjny (w naszym przypadku serwer z API) przechowuje takie hasło i wykorzystuje przy generowaniu całego tokenu. Hasło musi być tajne, a jego kompromitacja oznacza że każdy może wygenerować taki token i przejść autoryzacje w naszym portalu.
+    \textit{Sekret} to mówiąc najprościej hasło. Serwis autoryzacyjny (w naszym przypadku serwer z API) przechowuje takie hasło i wykorzystuje je przy generowaniu całego tokenu. Hasło musi być tajne, a jego ujawnienie oznacza że każdy może wygenerować taki token i przejść autoryzację w naszym portalu.
     
     \begin{figure}[H] 
      	\centering
@@ -617,32 +620,32 @@ Struktura JWT, w swojej wynikowej postaci, składa się z trzech części oddzie
     	\label{fig:token-diagram}
     \end{figure}
     
-    Rysunek \ref{fig:token-diagram} pokazuje trzy akcje:
+    Rysunek \ref{fig:token-diagram} pokazuje proces logowania i wysłania zapytania do API:
     \begin{enumerate}
-        \item Logowanie (proces uzyskania tokenu), klient przesyła login i hasło
-        \item Serwer (\textit{Find-A-Tutor.API}) po pomyślnym zweryfikowaniu danych, generuje token JWT zgodnie z algorytmem pokazanym w tym rozdziale. Zwraca go jako odpowiedź do poprzedniego zapytania (logowanie)
-        \item Użytkownik podczas wysyłania zapytania do API przekazuje także wcześniej otrzymany token. Jeśli token jest poprawny, serwer zwróci odpowiedni dane. Jeśli nie, zwróci komunikat o nieprawidłowym tokenie (lub o jego wygaśnięciu)
+        \item Logowanie (proces uzyskania tokenu) klient przesyła login i hasło.
+        \item Serwer (\textit{Find-A-Tutor.API}) po pomyślnym zweryfikowaniu danych, generuje token JWT, zgodnie z algorytmem opisanym w tej sekcji. Zwraca go jako odpowiedź do poprzedniego zapytania (logowanie).
+        \item Użytkownik podczas wysyłania zapytania do API przekazuje także wcześniej otrzymany token. Jeśli token jest poprawny, serwer zwróci odpowiedni dane. Jeśli nie, zwróci komunikat o nieprawidłowym tokenie (lub o jego wygaśnięciu).
     \end{enumerate}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Swagger UI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsubsection{Swagger UI}
-Swagger to otwarty framework wspierany przez duży ekosystem narzędzi który pomaga programistom projektować, budować, dokumentować i użytkować WebApi. 
-Swagger UI pozwala na wizualizacje WebApi. Użytkownik ma możliwość zapoznać się ze wszystkimi endpointami (adresami) pod które może kierować zapytania. Widzi on jakie są dostępne kontrolery oraz jakie akcje udostępnia. Rysunek \ref{fig:swagger} pokazuje akcje dla dwóch kontrolerów (PrivateLesson i SchoolSubject). 
+\textit{Swagger UI} to otwarty framework wspierany przez duży ekosystem narzędzi, który pomaga programistom projektować, budować, dokumentować i użytkować \textit{WebApi}. 
+Swagger UI pozwala na wizualizacje WebApi. Użytkownik ma możliwość zapoznać się ze wszystkimi \textit{endpointami} (adresami), pod które może kierować zapytania. Widzi on, jakie są dostępne kontrolery oraz jakie akcje on udostępnia. Rysunek \ref{fig:swagger} pokazuje akcje dla dwóch kontrolerów (\textit{PrivateLesson} i \textit{SchoolSubject}). 
     
-\begin{figure}[H] 
+\begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_3/swagger.png}
+    \includegraphics[width=0.9\textwidth]{images/chapter_3/swagger.png}
     \caption{Interfejs Swagger UI dla aplikacji \textit{Find-A-Tutor}}
     \label{fig:swagger}
 \end{figure}
     
-Dodatkowo, użytkownik ma możliwość przetestowania każdego zapytania, a także zapoznania się z możliwymi odpowiedziami serwera (wraz z modelem), opisem i nazwą argumentów. Na rysunku \ref{fig:swagger-get}, jest to zapytanie \textbf{GET} o listę wszystkich przedmiotów szkolnych. 
+Dodatkowo, użytkownik ma możliwość przetestowania każdego zapytania, a także zapoznania się z możliwymi odpowiedziami serwera (wraz z modelem), opisem i nazwą argumentów -- na rysunku \ref{fig:swagger-get} jest to zapytanie \textbf{GET} o listę wszystkich przedmiotów szkolnych. 
     
-\begin{figure}[H] 
+\begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_3/swagger-get.png}
+    \includegraphics[width=0.9\textwidth]{images/chapter_3/swagger-get.png}
     \caption{Szczegóły zapytania GET}
     \label{fig:swagger-get}
 \end{figure}
@@ -653,138 +656,136 @@ Panel Swagger UI jest dostępny pod adresem /swagger.
 % \subsubsection{Figgle}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Architektura aplikacji - Backend
+%% Architektura aplikacji -- Backend
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\subsection{Architektura aplikacji - Backend}
+\subsection{Architektura aplikacji -- Backend}
     
-Aplikacje które są zgodne z \textit{Zasadą Odwrócenia Zależności} (ang. Dependency Inversion Principle), a także z zasadami projektowania opartego na domenie (ang. Domain-Driven Design - DDD) mają tendencję do uzyskiwania podobnej architektury. Ta architektura na przestrzeni lat nosiła wiele nazw. Jedną z pierwszych nazw była \textit{Architektura Heksagonalna} (ang. Hexagonal Architecture), a następnie \textit{Porty I Adaptery} (ang. Ports-and-Adapters). Co raz częściej nazywa się ją \textit{Architekturą Cebulową} (ang. Onion Architecture) lub \textit{Czystą Architekturą} (ang. Clean Architecture). Autor w swojej pracy używa właśnie tej drugiej nazwy.
+Aplikacje, które są zgodne z \textit{Zasadą Odwrócenia Zależności} (ang. \textit{Dependency Inversion Principle}), a także z zasadami projektowania opartego na domenie (ang. \textit{Domain-Driven Design}, DDD) mają tendencję do uzyskiwania podobnej architektury. Ta architektura na przestrzeni lat nosiła wiele nazw. Jedną z pierwszych nazw była \textit{Architektura Heksagonalna} (ang. \textit{Hexagonal Architecture}), następnie \textit{Porty i Adaptery} (ang. \textit{Ports-and-Adapters}). Coraz częściej nazywa się ją \textit{Architekturą Cebulową} (ang. \textit{Onion Architecture}) lub \textit{Czystą Architekturą} (ang. \textit{Clean Architecture}). W niniejszej pracy używa się właśnie tej drugiej nazwy.
 
-\textit{Czysta Architektura} stawia logikę biznesową i model aplikacji w środku aplikacji. Zamiast uzależniania logiki biznesowej od dostępu do danych lub innych problemów związanych z infrastrukturą, zależność ta jest odwrócona: szczegóły infrastruktury i jej implementacji zależą od rdzenia aplikacji. Osiąga się to poprzez zdefiniowanie interfejsów lub abstrakcji w rdzeniu aplikacji, które są następnie implementowane przez typy zdefiniowane w warstwie infrastruktury. Należy podkreślić że poprawnie wymodelowana domena nie posiada żadnych referencji do innych warstw aplikacji.
+\textit{Czysta Architektura} stawia logikę biznesową i model aplikacji w jej środku. Zamiast uzależniania logiki biznesowej od dostępu do danych lub innych problemów związanych z infrastrukturą, zależność ta jest odwrócona: \textit{szczegóły infrastruktury i jej implementacji zależą od rdzenia aplikacji}. Osiąga się to poprzez zdefiniowanie interfejsów lub abstrakcji w rdzeniu aplikacji, które są następnie implementowane przez typy zdefiniowane w warstwie infrastruktury. Każda warstwa jest zależna od warstwy bliżej centrum -- aż do domeny, która nie ma żadnych zależności. Warstwa aplikacji zależy od warstwy domeny, a pozostałe trzy (prezentacji, infrastruktury i utrwalenia) zależy od warstwy aplikacji. Należy podkreślić, że poprawnie wymodelowana domena aplikacji nie posiada żadnych referencji do innych warstw aplikacji.
     
 Częstym sposobem wizualizacji tej architektury jest użycie szeregu koncentrycznych kół, podobnych do cebuli. Rysunek \ref{fig:clean-architecture} pokazuje \textit{Czystą Architekturę} przy użyciu tego stylu reprezentacji architektonicznej. Nazwa \textit{Cebulowa Architektura} zawdzięcza nazwę właśnie takiemu ułożeniu warstw.
     
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.7\textwidth]{images/chapter_3/clean-architecture.png}
-    \caption{Czysta Architektura \cite{clean-architecture}. Każda warstwa jest zależna od warstwy bliżej centrum - aż do domeny która nie ma żadnych zależności. Warstwa aplikacji zależy od warstwy domeny, a pozostałe trzy (prezentacji, infrastruktury i utrwalenia) zależy od warstwy aplikacji.}
+    \caption{Czysta Architektura \cite{clean-architecture}.}
     \label{fig:clean-architecture}
 \end{figure}
     
-Autor w swoim projekcie zastosował właśnie takie rozwiązanie, ze względu na czystość, prostotę implementacji, łatwość zmian (np. wymiany infrastruktury na zupełnie nową) i przede wszystkim czytelność \cite{clean-architecture}. 
+W projekcie zastosowano właśnie takie rozwiązanie, ze względu na czystość, prostotę implementacji, łatwość zmian (na przykład wymiany infrastruktury na zupełnie nową), a przede wszystkim na czytelność \cite{clean-architecture}. 
 
-    \subsubsection{Rdzeń} \label{core}
-    Centralnym elementem architektury jest rdzeń. Składa się on z \textit{Warstwy domeny} i \textit{Warstwy aplikacji}, pokazanej na rysunku \ref{fig:clean-architecture}. Obie te warstwy zawierają logikę biznesową i logikę aplikacji (wraz z zdefiniowanymi typami). 
+    \subsubsection{Rdzeń aplikacji} \label{core}
+    Centralnym elementem architektury aplikacji jest \textit{rdzeń} (ang. \textit{core}). Składa się on z \textit{Warstwy domeny} i \textit{Warstwy aplikacji}, pokazanej na rysunku \ref{fig:clean-architecture}. Obie te warstwy zawierają logikę biznesową i logikę aplikacji (wraz ze zdefiniowanymi typami). 
         
-    Zgodnie z \textit{PI} (ang. Persistence Ignorance) i \textit{Zasadą Ignorowania Infrastruktury} (ang.  Infrastructure Ignorance) ta warstwa musi całkowicie ignorować szczegóły dotyczące trwałości danych (np. zapis i odczyt). Te zadania powinny zostać wykonane przez warstwę infrastruktury. Dlatego ta warstwa nie powinna przyjmować bezpośrednich zależności od infrastruktury, co oznacza że ważne jest aby klasy reprezentujące encję modelowe były obiektami POCO.
+    Zgodnie z \textit{PI} (ang. \textit{Persistence Ignorance}) i \textit{Zasadą Ignorowania Infrastruktury} (ang.  \textit{Infrastructure Ignorance}) \textit{rdzeń} musi całkowicie ignorować szczegóły dotyczące trwałości danych (na przykład zapis i odczyt danych). Te zadania powinny zostać wykonane przez warstwę infrastruktury. Dlatego \textit{rdzeń} nie powinien przyjmować bezpośrednich zależności od infrastruktury, co oznacza że ważne jest aby klasy reprezentujące encje modelowe były obiektami \textbf{POCO} (ang. \textit{Plain Old CLR Object}) czyli \textit{zwykłymi starymi obiektami CLR}, gdzie \textit{CLR} to środowisko uruchomieniowe \textit{.Net}. Termin \textbf{POCO} oznacza prosty obiekt, niezawierający logiki biznesowej i nieobciążony dziedziczeniem.
         
-    Domenowe encję nie powinny mieć żadnej bezpośredniej zależności (jak dziedziczenie) do frameworka służącego do dostępu danych jak np. Entity Framework (technologia szczegółowo opisana w rozdziale \ref{EF}).
+    Domenowe encje nie powinny mieć żadnej bezpośredniej zależności (jak dziedziczenie) od frameworka, służącego do dostępu danych, jak na przykład \textit{Entity Framework} (technologia szczegółowo opisana w sekcji \ref{EF}).
         
     %\paragraph{Wzorzec repozytorium}
-    \subsubsection{Infrastruktura}
-    Warstwa infrastruktury i utrwalenia (ang. persistence) opisuje sposób w jaki dane które są początkowo trzymane w klasach modelowych (w pamięci) są utrwalane w bazie danych lub w jakiejkolwiek innej postaci. Przykładem takiego utrwalenia (który Autor zaimplementował) jest Entity Framework Core. Napisany kod służy do połączanie się z bazą danych przez DBContext, który jest reprezentacją bazy danych jako obiekt. Dzięki temu w łatwy sposób możemy operować danymi w naszej bazie danych.
+    \subsubsection{Infrastruktura aplikacji}
+    \textit{Warstwa infrastruktury i utrwalenia} (ang. \textit{persistence}) opisuje sposób w jaki dane, które są początkowo trzymane w klasach modelowych (w pamięci) są utrwalane w bazie danych lub w jakiejkolwiek innej postaci. Przykładem takiego utrwalenia jest \textit{Entity Framework Core}. Napisany kod służy do połączanie się z bazą danych przez \textit{DBContext}, który jest reprezentacją bazy danych jako obiektu. Dzięki temu w łatwy sposób można operować na danych w bazie danych.
         
-    Ta warstwa zależy od warstw niżej - aplikacji i domeny.
+    Ta warstwa zależy od warstw leżących poniżej czyli warstw aplikacji i domeny.
         
-    \subsubsection{API}
-    Warstwą odpowiedzialną za kontakt "na zewnątrz" jest warstwa prezentacji. W projekcie backendowym, zaimplementowana zostało ona jako WebApi, wraz z najpopularniejszym stylem architektury REST. Za format wymiany danych posłużył JSON.
+    \subsubsection{API aplikacji}
+    Warstwą odpowiedzialną za kontakt z otoczeniem aplikacji jest warstwa prezentacji. W projekcie "backendowym", została zaimplementowana jako \textit{WebAPI}, wraz z najpopularniejszym stylem architektury REST. Za format wymiany danych posłużył JSON.
         
         \myparagraph{RESTful WebAPI}
-        WebApi jest to aplikacja z którą komunikacja jest ograniczona do protokołu HTTP. Protokół ten zawiera 9 metod przy pomocy których możemy sterować WebApi. 
-        HTTP jest niezależny od platformy i jest bezstanowy - nie zachowuje żadnych informacji poprzednich transakcjach z klientem). 
+        \indent
+        \textit{WebApi} jest to aplikacja, z którą komunikacja jest ograniczona do protokołu HTTP. Protokół ten zawiera 9 metod, przy pomocy których możemy sterować WebAPI. 
+        HTTP jest niezależny od platformy i jest bezstanowy - nie zachowuje żadnych informacji o poprzednich transakcjach z klientem. 
         
-        Aplikacja taka wystawia na świat adresy URL, dalej zwane endpointami.
-        Endpointy są rdzeniem aplikacji WebAPI. To właśnie do nich użytkownik końcowy kieruje zapytania. Jako przykładem, Autor posłuży się następującym endpointem - \textbf{http://domena/privatelesson/3}. Użytkownika interesuje zasób "privatelesson" o ID równym 3. Korzystając z jednej metod protokołu HTTP - GET, wysyłamy owe zapytanie.
+        Aplikacja taka wystawia na świat adresy URL, zwane \textit{endpointami}.
+        Endpointy są rdzeniem aplikacji WebAPI. To właśnie do nich użytkownik końcowy kieruje zapytania. Jako przykładem można posłużyć się następującym endpointem: \textbf{http://domena/privatelesson/3}. Użytkownika interesuje zasób "privatelesson" o ID równym 3. Korzystając z jednej metod protokołu HTTP, czyli GET wysyłamy owe zapytanie.
         
-        Gdyby użytkownik skorzystał z metody PUT, mógłby on zaktualizować dane znajdujące się pod tym endpointem. Wszystkie metody są opisane przez dokument \textbf{RFC2616} \cite{http}.
+        Gdyby użytkownik skorzystał z metody PUT, mógłby zaktualizować dane znajdujące się pod tym endpointem. Wszystkie metody są opisane przez dokument \textbf{RFC2616} \cite{http}.
         
-        REST (ang. Representational State Transfer) jest wzorcem architektonicznym który narzuca dobre praktyki przy tworzeniu aplikacji.
-        RESTful WebAPI to WebApi które stosuje się do zasad wzorca REST i jest zaimplementowane na bazie protokołu HTTP.
+        REST (ang. \textit{Representational State Transfer}) jest wzorcem architektonicznym, który narzuca dobre praktyki przy tworzeniu aplikacji.
+        RESTful WebAPI to WebAPI które stosuje się do zasad wzorca REST i jest zaimplementowane na bazie protokołu HTTP.
         
         \myparagraph{JSON}
         \indent
-        \textbf{JavaScript Object Notation}, w skrócie JSON to otwarty i lekki format wymiany danych komputerowych. Charakteryzuje się tekstem czytelnym dla człowieka. Używany jest do przesyłania obiektów danych składających się z par atrybut-wartość i tablicowych typów danych (lub każdej innej wartości możliwej do serializacji) \cite{json}.
+        \textbf{JavaScript Object Notation} (JSON) to otwarty i lekki format wymiany danych. Charakteryzuje się tekstem czytelnym dla człowieka. Używany jest do przesyłania obiektów danych, składających się z par "atrybut-wartość" i tablicowych typów danych (lub każdej innej wartości możliwej do serializacji) \cite{json}.
         
         Sam zapis jest dokonywany tylko przy użyciu sześciu znaków: \{, \}, [, ], : (dwukropek) oraz , (przecinek). Proces ten został zwizualizowany na rysunku \ref{fig:json}.
         
         \begin{figure}[H] 
          	\centering
         	\includegraphics[width=1.0\textwidth]{images/chapter_3/json.png}
-        	\caption{Schemat zapisu danych typu obiekt w formacie JSON}
+        	\caption{Schemat zapisu danych typu \textit{obiekt} w formacie JSON}
         	\label{fig:json}
         \end{figure}
         
-        JSON jest niezależny od języka. Został zaczerpnięty z JavaScriptu, ale prawie wszystkie nowoczesne języki programowania zawierają funkcjonalność generowania i parsowania danych sformatowanych za pomocą JSONa. Dlatego też stał się on uniwersalnym formatem do deserializacji danych, przesyłania ich do/z WebApi, jak i nawet przechowywaniu ich na dysku.
+        JSON jest niezależny od języka. Wywodzi się on z języka JavaScript, ale prawie wszystkie nowoczesne języki programowania zawierają funkcję generowania i parsowania danych sformatowanych za pomocą JSONa. Dlatego też stał się uniwersalnym formatem do deserializacji danych, przesyłania ich do/z WebAPI, jak i przechowywaniu ich na dysku.
         
-        W \textit{Find-A-Tutor} stał się on jednym formatem wymiany danych - WebAPI, przyjmuje i zwraca dane w JSONie. 
+        W aplikacji \textit{Find-A-Tutor} stał się on formatem wymiany danych -- WebAPI, przyjmuje i zwraca dane w formacie JSON. 
         
         \begin{figure}[H] 
          	\centering
-        	\includegraphics[width=.8\textwidth]{images/chapter_3/json-get.png}
+        	\includegraphics[width=.9\textwidth]{images/chapter_3/json-get.png}
         	\caption{Rezultat wysłanego zapytania do WebAPI}
         	\label{fig:json-get}
         \end{figure}
         
-        Na rysunku \ref{fig:json-get} pokazany jest rezultat zapytania metodą GET do WebApi. Są to wszystkie ogłoszenia danego użytkownika (dodane z jego konta).
+        Na rysunku \ref{fig:json-get} pokazany jest rezultat zapytania metodą GET do WebAPI -- zwracane są wszystkie ogłoszenia danego użytkownika (dodane z jego konta).
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Architektura aplikacji - Frontend
+%% Architektura aplikacji -- frontend
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \clearpage
-\subsection{Architektura aplikacji - Frontend}
-Najmniejsza możliwa liczba projektów dla architektury aplikacji to jeden. W takiej aplikacji, cała logika jest zawarta w jednym projekcie, kompilowana do jednego pliku wykonywalnego i wdrożona jako jedna całość. 
+\subsection{Architektura aplikacji -- frontend}
+Najmniejsza możliwa liczba projektów dla architektury aplikacji to jeden. W takiej aplikacji, cała logika jest zawarta w jednym projekcie, kompilowana jest do jednego pliku wykonywalnego i wdrożona jako jedna całość. 
     
-Ze względu na podział backend - frontend, to właśnie API (backend) odpowiada za faktyczną logikę projektu. I to przez ten interfejs, aplikacja frontendowa porozumiewa się z serwerem czy bazą danych. 
+Ze względu na podział backend -- frontend, to właśnie API (\textit{backend}) odpowiada za faktyczną logikę projektu. I to przez ten interfejs, aplikacja frontendowa porozumiewa się z serwerem lub z bazą danych. 
     
-W praktyce każda akcja wykonana na froncie (np. logowanie, pobieranie danych) odbywa się poprzez wysłanie odpowiedniego zapytania do API. 
+W praktyce każda akcja wykonana na frontendzie (na przykład logowanie, pobieranie danych) odbywa się poprzez wysłanie odpowiedniego zapytania do API. 
     
 \subsubsection{MVC}
-Model–view–controller (pol. Model-Widok-Kontroler), to wzorzec architektoniczny powszechnie używany do opracowania aplikacji posiadających graficzne interfejsy użytkownika. 
+\textit{Model–view–controller} (\textit{Model-Widok-Kontroler}) to wzorzec architektoniczny powszechnie używany do opracowania aplikacji, posiadających graficzny interfejs użytkownika (Rys. \ref{fig:mvc}). 
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=.5\textwidth]{images/chapter_3/mvc.png}
-    \caption{ Model-Widok-Kontroler \cite{mvc}}
+    \includegraphics[width=.48\textwidth]{images/chapter_3/mvc.png}
+    \caption{Schemat wzorca Model-Widok-Kontroler \cite{mvc}}
     \label{fig:mvc}
 \end{figure}
     
-MVC dzieli aplikacje na trzy części:
+MVC dzieli aplikację na trzy części:
 \begin{itemize}
-    \item Model - logika biznesowa
-    \item Widok - graficzne interfejsy dla użytkownika (UI od ang. user interface) 
-    \item Kontroler - obsługuje żądania użytkownika i konwertuje je na polecenia widoku lub modelu
+    \item Model -- logika biznesowa.
+    \item Widok -- graficzny interfejs dla użytkownika.
+    \item Kontroler -- obsługuje żądania użytkownika i konwertuje je na polecenia widoku lub modelu.
 \end{itemize}
     
-Wszystkie jego części są ze sobą połączone, pokazuje to rysunek \ref{fig:mvc}.
-Aplikacja frontendowa została zaprojektowana używając właśnie tej architektury. 
-Prześledźmy zatem pojedynczą akcję użytkownika - logowanie:
+Wszystkie części wzorca MVC są ze sobą połączone (Eysunek \ref{fig:mvc}).
+Aplikacja frontendowa, projektu \textit{Find-A-Tutor}, została zaprojektowana przy użyciu właśnie tej architektury. 
+Prześledźmy zatem pojedynczą akcję użytkownika, na przykład logowanie:
 \begin{enumerate}
-    \item Użytkownik zostaje zwrócony odpowiedni UI (Widok)
-    \item Użytkownik wpisuje w pola login i hasło 
-    \item Aplikacja obsługuje te dane i przekazuje dalej (Kontroler)
-    \item Aplikacja opakowuje owe dane (JSON) i wysyła jako zapytanie HTTP do WebApi (Model)
-        \begin{itemize}
-            \item WebApi otrzymuje dane i je przetwarza, cały proces został opisany w rozdziale \ref{signature}
-        \end{itemize}
-    \item WebApi zwraca dane do aplikacji, są one rozpakowywane, i przekazywane dalej (Model)
-    \item Model aktualizuje Widok, co jest widoczne dla użytkownika
+    \item Użytkownikowi zostaje zwrócony odpowiedni UI (\textit{Widok}).
+    \item Użytkownik wpisuje w odpowiednie pola login i hasło .
+    \item Aplikacja obsługuje te dane i przekazuje je dalej (\textit{Kontroler}).
+    \item Aplikacja opakowuje te dane (JSON) i wysyła jako zapytanie HTTP do WebAPI (\textit{Model}). WebAPI otrzymuje dane i je przetwarza.
+    \item WebAPI zwraca dane do aplikacji --są one rozpakowywane i przekazywane dalej (\textit{Model}).
+    \item Model aktualizuje Widok, co jest widoczne dla użytkownika.
 \end{enumerate}
     
-Przepływ danych został pokazany na rysunku \ref{fig:mvc-flow}.
+Przepływ danych między częściamy wzorca \textit{MVC} został pokazany na rysunku \ref{fig:mvc-flow}.
     
 \begin{figure}[H] 
     \centering
     \includegraphics[width=.5\textwidth]{images/chapter_3/mvc-flow.png}
-    \caption{Zasada organizacji MVC \cite{mvc-flow}}
+    \caption{Zasada organizacji wzorca projektowego MVC \cite{mvc-flow}}
     \label{fig:mvc-flow}
 \end{figure}
     
-Przedstawiony scenariusz pokazuje że frontend został napisany na zasadach klienta który obsługuje żądania użytkownika i usprawnia (np. przez UI) komunikacje użytkownika z serwerem. 
-Rozdzielenie tych dwóch projektów ma następujące zalety:
+Przedstawiony scenariusz pokazuje że "frontend" został napisany jako aplikacji klienckiej który obsługuje żądania użytkownika i usprawnia (poprzez UI) komunikacje użytkownika z serwerem. 
+Rozdzielenie tych dwóch aplikacji, czyli serwer(\textit{backend) i klient (\textit{frontend}}, ma następujące zalety:
 \begin{itemize}
-    \item Modularność - w razie potrzeby jesteśmy wstanie wymienić jeden z projektów na inny
-    \item W razie zmiany popularny stylów graficznych, można w łatwy sposób napisać sam frontend od nowa, dzięki czemu cała aplikacja zostaje nietknięta
-    \item Ułatwienie w utrzymaniu i pracy nad projektem
-    \item Możliwość pracy w dwóch osobnych zespołach na obu projektach
+    \item \textit{Modularność} - w razie potrzeby jesteśmy w stanie wymienić jedną z aplikacji na nową.
+    \item W razie potrzeby zmiany szaty graficznej aplikacji można w łatwy sposób napisać sam "frontend" od nowa. Dzięki temu cała aplikacja zostaje niezmieniona.
+    \item Ułatwienie w utrzymaniu aplikacji i pracy nad projektem.
+    \item Możliwość pracy w dwóch osobnych zespołach nad dwoma projektami.
 \end{itemize}
     
 % \subsubsection{Razor Pages}
@@ -793,20 +794,20 @@ Rozdzielenie tych dwóch projektów ma następujące zalety:
 %% Warstwa bazy danych
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsection{Warstwa bazy danych}
-Ze względu na charakterystykę aplikacji, Autor zdecydował się na bazę relacyjną.
-Zgodnie z wymodelowaną domeną opisaną w rozdziale \ref{core} i korzystając z mappera obiektowo-relacyjnego (EF Core) opisanego w rozdziale \ref{EF}, struktura bazodanowa została wygenerowana za pomocą migracji. Autor zastosował obsługiwany sposób Code First, czyli na podstawie kodu, EF wygenerował model bazodanowy.
+Ze względu na charakterystykę aplikacji, zdecydowano się na relacyjną bazę danych.
+Zgodnie z wymodelowaną domeną opisaną w sekcji \ref{core} i korzystając z mappera obiektowo-relacyjnego (\textit{EF Core}) opisanego w sekcji \ref{EF}, struktura bazodanowa została wygenerowana za pomocą migracji. Zastosowano obsługiwany sposób \textit{Code First}, czyli na podstawie kodu, EF wygenerował model bazodanowy.
     
-Dodatkowo, Autor wybrał \textit{Microsoft SQL Server} jako silnik bazodanowy, mając na uwadze że i owy silnik, jak i platforma .Net Core (wraz z \Csharp) została opracowana przez firmę Microsoft. 
+Wybrano \textit{Microsoft SQL Server} jako silnik bazodanowy, mając na uwadze, że silnik i platforma \textit{.Net Core} (wraz z \Csharp) została opracowana przez firmę Microsoft. 
     
-Poniżej, rysunek \ref{fig:db} przedstawia strukturę bazodanową: 
+Rysunek \ref{fig:db} przedstawia strukturę bazy danych dla aplikacji \textit{Find-A-Tutor}: 
 \begin{figure}[H] 
     \centering
     \includegraphics[width=.8\textwidth]{images/chapter_3/db.png}
-    \caption{Struktury bazodanowe aplikacji \textit{Find-A-Tutor}}
+    \caption{Struktura bazy danych dla aplikacji \textit{Find-A-Tutor}}
     \label{fig:db}
 \end{figure}
     
-\textit{Podczas powstawania aplikacji Find-A-Tutor Autor postarał się aby była ona od samego początku dobrze zaprojektowana tak aby później modyfikacje nie komplikowały nadmiernie projektu. }
+\textit{Podczas powstawania aplikacji Find-A-Tutor starano się aby była ona od samego początku dobrze zaprojektowana tak, by później wszelkie zmiany nie komplikowały nadmiernie stworzonego projektu.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Aplikacja z poziomu użytkownika
