@@ -20,6 +20,11 @@
 \restylefloat{table}
 % end
 
+% frame around figures
+\fboxsep=0mm%padding thickness
+\fboxrule=0.5pt%border thickness
+%end
+
 %begin tick and X emojis
 \usepackage{pifont}
 \usepackage{xcolor}
@@ -810,16 +815,16 @@ Rysunek \ref{fig:db} przedstawia strukturę bazy danych dla aplikacji \textit{Fi
 \textit{Podczas powstawania aplikacji Find-A-Tutor starano się aby była ona od samego początku dobrze zaprojektowana tak, by później wszelkie zmiany nie komplikowały nadmiernie stworzonego projektu.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Aplikacja z poziomu użytkownika
+%% Aplikacja z punktu widzenia użytkownika
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Aplikacja z poziomu użytkownika}
-W tym rozdziale pokazane zostało działanie aplikacji webowej \textit{Find-A-Tutor}. Zrzuty ekranu zostały wykonane w przeglądarce Chrome w wersji 79. Na rysunku \ref{fig:home} pokazany jest ekran startowy aplikacji.
+\section{Aplikacja z punktu widzenia użytkownika}
+W poniższym rozdziale pokazano działanie aplikacji webowej \textit{Find-A-Tutor}. Zaprezentowane widoki aplikacji zostały wykonane w przeglądarce Chrome w wersji 79. Na rysunku \ref{fig:home} pokazano ekran startowy aplikacji.
 
 \begin{figure}[!htbp] 
     \centering
     \includegraphics[width=1\textwidth]{images/chapter_4/home.png}
-    \caption{Strona startowa aplikacji}
+    \caption{Strona startowa aplikacji \textit{Find-A-Tutor}}
     \label{fig:home}
 \end{figure}
 
@@ -827,17 +832,19 @@ W tym rozdziale pokazane zostało działanie aplikacji webowej \textit{Find-A-Tu
 %% Uwierzytelnianie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Uwierzytelnianie}
-Po kliknięciu "Login", użytkownikowi ukazuje się panel logowania (Rys. \ref{fig:login}
+Po kliknięciu na "Login", użytkownikowi ukazuje się panel logowania (Rys. \ref{fig:login}). 
+
 \begin{figure}[!htbp] 
     \centering
     \includegraphics[width=0.7\textwidth]{images/chapter_4/login.png}
-    \caption{Panel logowania}
+    \caption{Panel logowania do panelu użytkownika}
     \label{fig:login}
 \end{figure}
 
-Po uzupełnieniu pól (mail i hasło) i wciśnięciu guzika "Login", dane są wysyłane do API. Jeśli uwierzytelnienie się powiodło, użytkownik jest przekierowywany do panelu użytkownika.
+Po uzupełnieniu pól (e-mail i hasło) i wciśnięciu przycisku "Login", dane są wysyłane do API. Jeśli uwierzytelnienie się powiedzie, to użytkownik jest przekierowywany do panelu użytkownika.
 
-Jeśli użytkownik nie ma założonego konta, może to wykonać za pomocą linku "Register now", który przekierowuje go do podstrony z rejestracją - pokazaną na rysunku \ref{fig:register}.
+Jeśli użytkownik nie ma założonego konta, może je założyć za pomocą linku "Register now", który przekierowuje go do podstrony z rejestracją, pokazaną na rysunku \ref{fig:register}.
+
 \begin{figure}[!htbp] 
     \centering
     \includegraphics[width=1\textwidth]{images/chapter_4/register.png}
@@ -845,43 +852,45 @@ Jeśli użytkownik nie ma założonego konta, może to wykonać za pomocą linku
     \label{fig:register}
 \end{figure}
 
-Użytkownik ma do wypełnienia następujące pola: imię, nazwisko, adres email, hasło i typ konta (uczeń czy korepetytor). Poprawność danych sprawdzana jest w locie dzięki zastosowanym standardom (HTML 5) i po stronie serwera po kliknięciu guzika "Register".
+Użytkownik ma do wypełnienia następujące pola: imię, nazwisko, adres email, hasło i typ konta (uczeń lub korepetytor). Poprawność danych sprawdzana jest w locie, dzięki zastosowanym standardom (HTML 5) i po stronie serwera po kliknięciu przycisku "Register".
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Panel użytkownika
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Panel użytkownika}
+W tej sekcji pokazano panel użytkownika i opisano akcje które użytkownik może wykonać za jego pomocą.
+
 \subsubsection{Dodanie nowego ogłoszenia}
-Po pomyślnej uwierzytelnieniu użytkownika jako uczeń, wyświetlany jest mu panel użytkownika (Rysunek \ref{fig:student-empty}).
+Po pomyślnym uwierzytelnieniu użytkownika w roli ucznia, wyświetlany jest panel jego użytkownika (Rys. \ref{fig:student-empty}).
+
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/student-empty.png}
-    \caption{Pusty panel użytkownika}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/student-empty.png}}
+    \caption{Pusty panel ucznia w aplikacji \textit{Find-A-Tutor}}
     \label{fig:student-empty}
 \end{figure}
 
-Panel ten jest pusty. Aby dodać ogłoszenie, klikamy w link "Create new announcement" i zostajemy przekierowani do panelu dodawania nowego ogłoszenia, pokazany na rysunku \ref{fig:create-new}.
+Panel ten jest pusty. Aby dodać ogłoszenie, klikamy na link "Create new announcement" i zostajemy przekierowani do panelu dodawania nowego ogłoszenia, pokazanego na rysunku \ref{fig:create-new}.
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/create-new.png}
-    \caption{Formularz do dodania nowego ogłoszenia}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/create-new.png}}
+    \caption{Formularz do dodania nowego ogłoszenia w aplikacji \textit{Find-A-Tutor}}
     \label{fig:create-new}
 \end{figure}
 
-Użytkownik wypełnia tam następujące informacje: opis, datę ważności ogłoszenia i ile czasu będziemy potrzebować. Ponad to wybieramy przedmiot z listy. Kiedy dane są wpisane, użytkownik klika "Submit". Następuje ich wysłanie do API. Jeśli wszystko zostało poprawnie zwalidowane (np. data ważności nie jest datą historyczną), użytkownikowi pokaże się komunikat widoczny na rysunku \ref{fig:added}.
+Użytkownik wprowadza tam następujące informacje: opis, datę ważności ogłoszenia i długość lekcji. Ponadto wybiera przedmiot nauczania z rozwijanej listy. Kiedy dane są wprowadzone, użytkownik klika przycisk "Submit". Następuje wysłanie danych do API. Jeśli wszystko zostanie poprawnie zwalidowane (na przykład data ważności nie jest datą historyczną), użytkownikowi pokaże się komunikat widoczny na rysunku \ref{fig:added}.
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/added.png}
-    \caption{Komunikat po dodaniu nowego ogłoszenia}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/added.png}}
+    \caption{Komunikat po dodaniu nowego ogłoszenia przez ucznia w aplikacji \textit{Find-A-Tutor}}
     \label{fig:added}
 \end{figure}
 
-Po wróceniu do panelu użytkownika, widoczne jest w nim dodane ogłoszenie (Rysunek \ref{fig:student}).
-Widoczne są następujące informacje o nim: data utworzenia, datę podjęcia (na razie pustą), datę ważności, przedmiot, trzy flagi stanu (czy podjęta, czy zapłacona i czy wykonana) i link do podstrony z wszystkimi szczegółami ogłoszenia.
+Po powrocie do panelu użytkownika, widoczne jest w nim dodane ogłoszenie (Rys. \ref{fig:student}), wraz z odpowiednimi informacjami o nim: datę utworzenia, datę podjęcia (na razie pusta), datę ważności, przedmiot nauczania, trzy flagi stanu (podjęte, zapłacone i wykonane) i link do podstrony z wszystkimi szczegółami ogłoszenia.
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/student.png}
-    \caption{Panel po dodaniu nowego ogłoszenia}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/student.png}}
+    \caption{Panel ucznia po dodaniu nowego ogłoszenia w aplikacji \textit{Find-A-Tutor}}
     \label{fig:student}
 \end{figure}
 
@@ -889,39 +898,39 @@ Widoczne są następujące informacje o nim: data utworzenia, datę podjęcia (n
 %% Podjęcie ogłoszenia
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Podjęcie ogłoszenia}
-Po pomyślnej uwierzytelnieniu użytkownika jako nauczyciel, jest mu wyświetlany panel nauczyciela (Rysunek \ref{fig:tutor-empty}).
+Po pomyślnym uwierzytelnieniu użytkownika w roli nauczyciela, jest wyświetlany panel nauczyciela (Rys. \ref{fig:tutor-empty}).
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/tutor-empty.png}
-    \caption{Pusty panel nauczyciela}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/tutor-empty.png}}
+    \caption{Pusty panel nauczyciela w aplikacji \textit{Find-A-Tutor}}
     \label{fig:tutor-empty}
 \end{figure}
 
-Jeśli którykolwiek z uczniów dodał nowe ogłoszenie, jest ono tutaj wyświetlane (Rysunek \ref{fig:tutor}).
+Jeśli którykolwiek z uczniów dodał nowe ogłoszenie, to jest ono tutaj wyświetlane (Rys. \ref{fig:tutor}).
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/tutor.png}
-    \caption{Panel nauczyciela}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/tutor.png}}
+    \caption{Panel nauczyciela w aplikacji \textit{Find-A-Tutor}}
     \label{fig:tutor}
 \end{figure}
-Użytkownik może wykonać dwie akcje na ogłoszeniu - podjąć je lub oddać. Po naciśnięciu "Take", użytkownik zostaje przekierowany do podstrony ze szczegółami ogłoszenia (Rysunek \ref{fig:take}).
+Użytkownik może wykonać dwie akcje na ogłoszeniu: podjąć je lub oddać je do ogólno dostępnej puli wolnych ogłoszeń. Po naciśnięciu przycisku "Take", użytkownik zostaje przekierowany do podstrony ze szczegółami ogłoszenia (Rys. \ref{fig:take}).
 
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/take.png}
-    \caption{Podjęcie ogłoszenia}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/take.png}}
+    \caption{Podjęcie ogłoszenia przez nauczyciela w aplikacji \textit{Find-A-Tutor}}
     \label{fig:take}
 \end{figure}
 
-W polu "Price per hour" użytkownik wpisuje stawkę godzinową. Po naciśnięciu guzika "Take", dana jest walidowana, przesłana, a ogłoszenie zostaje przypisane do konta nauczyciela.
+W polu "Price per hour" użytkownik wpisuje stawkę godzinową. Po naciśnięciu przyciska "Take", dana ta jest walidowana, i przesłana do API, a ogłoszenie zostaje przypisane do danego konta nauczyciela.
 
-Podjęcie może nastąpić tylko wtedy kiedy ogłoszenie jest wolne. Oddanie tylko wtedy kiedy jest przypisany do niego (użytkownik) i ogłoszenie nie zostało jeszcze opłacone.
+Podjęcie może nastąpić tylko wtedy, kiedy ono jest wolne. Oddanie ogłoszenia następuje tylko wtedy, kiedy nie jest przypisany do niego nauczyciel i ogłoszenie nie zostało jeszcze opłacone.
 
-Po powrocie do panelu użytkownika, widoczne jest w nim podjęte ogłoszenie wraz z oznaczeniem \cmark w polu "Czy przypisane" (Rysunek \ref{fig:tutor-assigned}).
+Po powrocie do panelu użytkownika, widoczne jest w nim podjęte ogłoszenie wraz z oznaczeniem \cmark w polu "Czy przypisane" (Rys. \ref{fig:tutor-assigned}).
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/tutor-assigned.png}
-    \caption{Panel nauczyciela}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/tutor-assigned.png}}
+    \caption{Panel nauczyciela w aplikacji \textit{Find-A-Tutor}}
     \label{fig:tutor-assigned}
 \end{figure}
 
@@ -929,23 +938,23 @@ Po powrocie do panelu użytkownika, widoczne jest w nim podjęte ogłoszenie wra
 %% Płatność
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Płatność}
-Po ponownym zalogowaniu użytkownika (ucznia) widoczna jest zmiana w ogłoszeniu - zostało ono podjęte (Rysunek \ref{fig:student-assigned}).
+Po ponownym zalogowaniu w roli ucznia widoczna jest zmiana w ogłoszeniu - zostało ono podjęte (Rysunek \ref{fig:student-assigned}).
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/student-assigned.png}
-    \caption{Panel ucznia}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/student-assigned.png}}
+    \caption{Panel ucznia w aplikacji \textit{Find-A-Tutor}}
     \label{fig:student-assigned}
 \end{figure}
 
-Link "Details" przekierowuje użytkownika do szczegółów ogłoszenia, wraz z możliwością zapłacenia (Rysunek \ref{fig:details}). 
+Link "Details" przekierowuje użytkownika do szczegółów ogłoszenia, wraz z możliwością jego opłacenia (Rys. \ref{fig:details}). 
 \begin{figure}[!htbp] 
     \centering
-    \includegraphics[width=1\textwidth]{images/chapter_4/details.png}
-    \caption{Szczegóły ogłoszenia}
+    \fcolorbox{black}{black}{\includegraphics[width=1\textwidth]{images/chapter_4/details.png}}
+    \caption{Szczegóły ogłoszenia w aplikacji \textit{Find-A-Tutor} w widoku ucznia}
     \label{fig:details}
 \end{figure}
 
-"Total price" jest wynikiem mnożenia "Time" i "Price per hour". W celu zapłacenia, użytkownik wybiera sposób płatności, np. portfelem elektronicznym PayPal.
+Kwota "Total price" jest wynikiem mnożenia "Time" i "Price per hour". W celu opłacenia, użytkownik wybiera sposób płatności, na przykład przy użyciu portfela elektronicznego PayPal.
 
 \begin{figure}[h]
     \centering
@@ -961,28 +970,29 @@ Link "Details" przekierowuje użytkownika do szczegółów ogłoszenia, wraz z m
       \caption{Potwierdzenie szczegółów płatności}
       \label{fig:paypal2}
     \end{subfigure}
-    \caption{Płatność PayPalem}
+    \caption{Płatność przy użyciu PayPal}
     \label{fig:paypal}
 \end{figure}
 
 Dokonanie płatności zostało pokazane na rysunku \ref{fig:paypal}.
 
-Po zapłaceniu, status ogłoszenia zostaje zaktualizowany. Został on pokazany na rysunku \ref{fig:details-paid}.
+Po przetworzeniu płatności, status ogłoszenia zostaje zaktualizowany. Został on pokazany na rysunku \ref{fig:details-paid}.
 \begin{figure}[!htbp] 
     \centering
     \includegraphics[width=1\textwidth]{images/chapter_4/details-paid.png}
-    \caption{Szczegóły ogłoszenia po zapłaceniu}
+    \caption{Szczegóły zapłaconego ogłoszenia w aplikacji \textit{Find-A-Tutor} w widoku ucznia i studenta}
     \label{fig:details-paid}
 \end{figure}
 
 \subsection{Wylogowanie}
 Po naciśnięciu przycisku "Logout", na każdej z podstron, następuję zamknięcie sesji i wylogowanie z aplikacji. \newline
 
-\textit{Aplikacja Find-A-Tutor zapewnia wszystkie potrzebne funkcjonalności dostarczając łatwy w obsłudze i wygodny portal do obsługi korepetycji.}
+\textit{Aplikacja Find-A-Tutor zapewnia wszystkie potrzebne funkcje dostarczając łatwy w obsłudze i wygodny portal do obsługi korepetycji.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Wnioski
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Podsumowanie}
 Pierwszym etapem pracy była analiza dwóch rynków: usług i płatności internetowych. Analiza rynku usług dowiodła że dostępne rozwiązania, takie jak \url{www.olx.pl}, oferują tylko podstawowe funkcjonalności. Przede wszystkim brakuje w nich płatność cyfrowych (w jakiekolwiek formie). Dodatkowo pomogła ona dostrzec nisze - rynek korepetycji, który mimo podstawowego zagospodarowania, popełnia błędy całego rynku usług. W dalszej części pracy została dokonana analiza rynku płatności cyfrowych w celu dostarczenia jak najlepszego systemu dla użytkownika końcowego. W analizie zostały nie tylko porównane obecne rozwiązania (przelewy tradycyjne, pay-by-link, karta płatnicza i portfele elektroniczne), ale także spośród zwycięzcy na tym polu - portfeli elektronicznych - zostało przeprowadzone zestawienie obecnych liderów na tym rynku. Zwycięskim rozwiązaniem okazał się PayPal. 
 
