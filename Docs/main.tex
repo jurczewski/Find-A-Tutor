@@ -14,6 +14,7 @@
 \usepackage[hyphens]{url}
 \usepackage{hyperref} % links and urls in document
 \usepackage{indentfirst} % wcięcie pierwszego akapitu
+\usepackage{pdfpages} % include pdf in document - title page
 
 % podpisy nad tabelami
 \floatstyle{plaintop}
@@ -71,27 +72,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{titlepage}
- \thispagestyle{empty}
- \begin{center}
-  \vspace{3cm}
-  \large
-    PRACA DYPLOMOWA INŻYNIERSKA\\
-  \vspace{4cm}
-  \Huge
-    Aplikacja dla korepetytorów z płatnościami PayPal w technologii .NET Core\\
-  \large
-  \vspace{2cm}
-  Bartosz Jurczewski, album 210209\\
-  \bigbreak
-  Politechnika Łódzka\\
-  Wydział Fizyki Technicznej, Informatyki i Matematyki Stosowanej\\
-  Rok akademicki 2019/2020\\
-  \bigbreak
-   Promotor: dr hab. inż. Aneta Poniszewska-Marańda \\
-   Współpromotor: mgr inż. Krzysztof Stępień\\
- \end{center}
-\end{titlepage}
+\includepdf{title-page.pdf}
+% \begin{titlepage}
+%  \thispagestyle{empty}
+%  \begin{center}
+%   \vspace{3cm}
+%   \large
+%     PRACA DYPLOMOWA INŻYNIERSKA\\
+%   \vspace{4cm}
+%   \Huge
+%     Aplikacja dla korepetytorów z płatnościami PayPal w technologii .NET Core\\
+%   \large
+%   \vspace{2cm}
+%   Bartosz Jurczewski, album 210209\\
+%   \bigbreak
+%   Politechnika Łódzka\\
+%   Wydział Fizyki Technicznej, Informatyki i Matematyki Stosowanej\\
+%   Rok akademicki 2019/2020\\
+%   \bigbreak
+%   Promotor: dr hab. inż. Aneta Poniszewska-Marańda \\
+%   Współpromotor: mgr inż. Krzysztof Stępień\\
+%  \end{center}
+% \end{titlepage}
 
 \clearpage
 \pagenumbering{arabic}
