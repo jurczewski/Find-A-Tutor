@@ -1,11 +1,11 @@
 # 👨‍🏫 Find-A-Tutor [![Build Status](https://travis-ci.org/jurczewski/Find-A-Tutor.svg?branch=master)](https://travis-ci.org/jurczewski/Find-A-Tutor)
 .NET Core Web application for tutors and students.  
-Part of my BSc thesis entitled ***"Application for tutors with Paypal transactions in .Net Core technology".***
+Part of my BSc thesis entitled ***"Application for tutors with Paypal transactions in .NET Core technology".***
 
 # Technology Stack
 - Backend (WebAPI): .NET Core 2.2
 - Front: ASP.NET Razor
-- Database: MSSQL image (docker)
+- Database: MSSQL (docker image)
 
 # How to set up project
 - Git clone
